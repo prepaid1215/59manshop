@@ -4,203 +4,573 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>59만모바일 | 휴대폰 막혔을 때 바로 개통</title>
-  <meta name="description" content="휴대폰이 막혔거나 본인인증이 안될 때, 편의점 유심과 간편인증으로 당일 개통 가능합니다." />
+  <title>59만모바일 | 휴대폰 정지됐을 때 선불폰 당일개통</title>
+  <meta name="description" content="휴대폰 정지, 본인인증 불가, 연락 가능한 새 번호가 필요할 때 편의점 유심과 간편인증으로 선불폰 개통을 시작하세요." />
 
-  <!-- OG -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="휴대폰 막혔을 때 바로 개통" />
-  <meta property="og:description" content="편의점 유심 + 간편인증으로 당일 개통 가능합니다." />
+  <meta property="og:title" content="휴대폰 정지됐나요? 오늘 쓸 번호부터 만드세요" />
+  <meta property="og:description" content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다." />
   <meta property="og:url" content="https://59man.shop/" />
   <meta property="og:image" content="https://59man.shop/og-image.png" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="휴대폰 막혔을 때 바로 개통" />
-  <meta name="twitter:description" content="편의점 유심 + 간편인증으로 당일 개통 가능합니다." />
+  <meta name="twitter:title" content="휴대폰 정지됐나요? 오늘 쓸 번호부터 만드세요" />
+  <meta name="twitter:description" content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다." />
   <meta name="twitter:image" content="https://59man.shop/og-image.png" />
 
-  <!-- favicon -->
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f7f8fa;
-      color: #111;
-    }
-
-    .container {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .hero {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      text-align: center;
-    }
-
-    .brand {
-      font-size: 12px;
-      color: #888;
-      margin-bottom: 6px;
-    }
-
-    .hero h1 {
-      font-size: 22px;
-      line-height: 1.4;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      margin-bottom: 10px;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      text-decoration: none;
-      text-align: center;
+    * {
       box-sizing: border-box;
     }
 
-    .btn-primary {
-      background: #111;
-      color: #fff;
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 34%),
+        linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+      color: #0f172a;
     }
 
-    .btn-secondary {
-      background: #e9eef5;
-      color: #111;
+    a {
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 18px 16px 34px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #111827, #2563eb);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 28px 22px 24px;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.1);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 160px;
+      height: 160px;
+      background: rgba(37, 99, 235, 0.12);
+      border-radius: 999px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      position: relative;
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.24;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+      color: #020617;
+    }
+
+    .hero h1 strong {
+      color: #2563eb;
+    }
+
+    .hero-desc {
+      margin: 14px 0 18px;
+      color: #475569;
+      font-size: 15px;
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .warning-box {
+      margin: 18px 0;
+      padding: 14px;
+      border-radius: 16px;
+      background: #fff7ed;
+      color: #9a3412;
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 800;
+      border: 1px solid #fed7aa;
+    }
+
+    .btn {
+      display: flex;
+      width: 100%;
+      min-height: 58px;
+      border-radius: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 16px;
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 900;
+      border: 0;
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.985);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #020617, #111827);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.24);
+    }
+
+    .btn-blue {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.26);
+    }
+
+    .btn-kakao {
+      background: #fee500;
+      color: #181600;
+    }
+
+    .btn-light {
+      background: #eef2f7;
+      color: #0f172a;
+    }
+
+    .btn-line {
+      background: #fff;
+      color: #0f172a;
+      border: 1px solid #dbe3ef;
+    }
+
+    .quick {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .quick-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 13px;
+    }
+
+    .quick-card b {
+      display: block;
+      font-size: 13px;
+      color: #020617;
+      margin-bottom: 4px;
+    }
+
+    .quick-card span {
+      display: block;
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.45;
     }
 
     .section {
-      margin-top: 20px;
+      margin-top: 16px;
       background: #fff;
-      padding: 20px;
-      border-radius: 16px;
+      border-radius: 22px;
+      padding: 22px 18px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(226, 232, 240, 0.9);
     }
 
     .section h2 {
-      font-size: 16px;
-      margin-bottom: 10px;
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: -0.04em;
+      color: #020617;
     }
 
     .list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
       font-size: 14px;
-      color: #444;
+      line-height: 1.55;
+      color: #334155;
+      font-weight: 650;
+    }
+
+    .dot {
+      flex: 0 0 22px;
+      width: 22px;
+      height: 22px;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #2563eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      counter-reset: step;
+    }
+
+    .step {
+      counter-increment: step;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 13px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .step:before {
+      content: counter(step);
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      border-radius: 10px;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .dark-cta {
+      margin-top: 16px;
+      padding: 22px 18px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.28), transparent 30%),
+        #020617;
+      color: #fff;
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.22);
+    }
+
+    .dark-cta h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -0.05em;
+    }
+
+    .dark-cta p {
+      margin: 0 0 14px;
+      color: #cbd5e1;
+      font-size: 14px;
       line-height: 1.6;
+      font-weight: 600;
     }
 
     .footer {
       text-align: center;
       font-size: 12px;
-      color: #999;
-      margin-top: 20px;
+      color: #64748b;
+      margin: 18px 0 12px;
+      font-weight: 700;
     }
 
     .policy-footer {
-      margin-top: 30px;
-      background: #f1f3f5;
-      padding: 20px;
-      border-radius: 12px;
+      margin-top: 14px;
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 18px;
       font-size: 12px;
-      color: #444;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+      line-height: 1.65;
     }
 
     .policy-links {
       margin-bottom: 10px;
+      display: flex;
+      gap: 12px;
+      font-weight: 800;
     }
 
     .policy-links a {
-      color: #333;
-      text-decoration: none;
-      margin-right: 10px;
+      color: #334155;
     }
 
     .company-info {
-      border-top: 1px solid #ddd;
+      border-top: 1px solid #e2e8f0;
       padding-top: 10px;
-      line-height: 1.6;
     }
 
     .consent-wrap {
+      margin-top: 12px;
       text-align: right;
-      margin-top: 10px;
     }
 
     .consent-wrap img {
-      width: 80px;
+      width: 84px;
+      max-width: 100%;
       cursor: pointer;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      background: rgba(15, 23, 42, 0.62);
+      backdrop-filter: blur(5px);
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 430px;
+      background: #fff;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 26px 70px rgba(0,0,0,0.28);
+      animation: pop .16s ease-out;
+    }
+
+    @keyframes pop {
+      from { transform: translateY(10px) scale(.98); opacity: .6; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -0.05em;
+      color: #020617;
+    }
+
+    .modal p {
+      margin: 0 0 14px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.65;
+      font-weight: 650;
+    }
+
+    .modal-small {
+      padding: 13px;
+      border-radius: 15px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #334155;
+      margin-bottom: 12px;
+      font-weight: 650;
+    }
+
+    .close-btn {
+      width: 100%;
+      margin-top: 10px;
+      border: 0;
+      background: transparent;
+      color: #64748b;
+      font-weight: 800;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .floating-call {
+      position: sticky;
+      bottom: 12px;
+      z-index: 30;
+      margin-top: 14px;
+      display: none;
+    }
+
+    @media (max-width: 360px) {
+      .hero h1 {
+        font-size: 27px;
+      }
+
+      .quick {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
+  <main class="page">
 
-  <div class="container">
+    <div class="top-bar">
+      <div class="logo">
+        <div class="logo-mark">59</div>
+        59만모바일
+      </div>
+      <div class="pill">당일개통 신청</div>
+    </div>
 
-    <div class="hero">
-      <div class="brand">59만모바일 선불폰 개통</div>
+    <section class="hero">
+      <div class="hero-badge">편의점 유심 · 비대면 선불폰</div>
 
       <h1>
-        휴대폰 막혔다면<br>
-        지금 바로 해결 가능합니다
+        휴대폰 정지됐나요?<br>
+        <strong>오늘 쓸 번호부터</strong><br>
+        만드세요
       </h1>
 
-      <p>
-        편의점 유심 + 간편인증만 있으면<br>
-        당일 개통 가능합니다
+      <p class="hero-desc">
+        본인인증이 막히면 은행앱, 카톡, 배달앱, 업무 연락까지 같이 막힙니다.<br>
+        기다리지 말고 새 번호부터 준비하세요.
       </p>
 
-      <a href="https://preplan.site?from=59man_ads" class="btn btn-primary">
-        지금 바로 개통 시작하기
-      </a>
-
-      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_chat" class="btn btn-secondary">
-        카톡으로 바로 문의하기
-      </a>
-    </div>
-
-    <div class="section">
-      <h2>이런 상황이면 가능합니다</h2>
-      <div class="list">
-        · 요금 연체로 휴대폰이 막힌 상태<br>
-        · 본인인증이 안 돼서 로그인 불가<br>
-        · 당장 연락 가능한 번호가 필요한 상황<br>
-        · 대리점 방문이 어려운 경우
+      <div class="warning-box">
+        유심번호가 있어야 신청이 됩니다.<br>
+        유심이 없으면 먼저 구매 방법부터 확인하세요.
       </div>
-    </div>
 
-    <div class="section">
+      <button class="btn btn-primary" onclick="openSimCheck()">
+        새 번호 바로 신청하기
+      </button>
+
+      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_hero_chat" class="btn btn-kakao" target="_blank">
+        카톡으로 지금 문의하기
+      </a>
+
+      <div class="quick">
+        <div class="quick-card">
+          <b>준비물 2개</b>
+          <span>편의점 유심 + 본인인증 수단</span>
+        </div>
+        <div class="quick-card">
+          <b>방문 없이 진행</b>
+          <span>유심 구매 후 온라인 신청</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>이런 분은 지금 신청하세요</h2>
+      <div class="list">
+        <div class="item"><span class="dot">!</span><span>휴대폰 정지로 전화·문자가 안 되는 분</span></div>
+        <div class="item"><span class="dot">!</span><span>본인인증이 막혀 앱 로그인이 안 되는 분</span></div>
+        <div class="item"><span class="dot">!</span><span>후불 개통이 어려워 새 번호가 필요한 분</span></div>
+        <div class="item"><span class="dot">!</span><span>가족 명의 말고 본인 명의 번호가 필요한 분</span></div>
+        <div class="item"><span class="dot">!</span><span>오늘 바로 연락 받을 번호가 필요한 분</span></div>
+      </div>
+    </section>
+
+    <section class="section">
       <h2>개통은 이렇게 진행됩니다</h2>
-      <div class="list">
-        1. 편의점에서 유심 구매<br>
-        2. 개통 페이지 접속<br>
-        3. 간편인증 진행<br>
-        4. 유심번호 입력 후 신청<br>
-        5. 충전 후 바로 사용 가능
+      <div class="steps">
+        <div class="step">편의점에서 유심을 준비합니다</div>
+        <div class="step">개통 페이지로 이동합니다</div>
+        <div class="step">간편인증을 진행합니다</div>
+        <div class="step">유심번호 입력 후 신청합니다</div>
+        <div class="step">개통 완료 후 충전하고 사용합니다</div>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <a href="https://preplan.site?from=59man_bottom" class="btn btn-primary">
-        5분 안에 개통 시작하기
+    <section class="section">
+      <h2>유심은 어디서 사나요?</h2>
+      <div class="list">
+        <div class="item"><span class="dot">K</span><span>KT바로유심: CU, GS25, 이마트24에서 확인</span></div>
+        <div class="item"><span class="dot">L</span><span>모두의 원칩: 이마트24, 일부 편의점, 온라인몰에서 확인</span></div>
+        <div class="item"><span class="dot">?</span><span>KT 사용 중 정지된 분은 LG망 유심이 더 나을 수 있습니다. 헷갈리면 카톡으로 먼저 물어보세요.</span></div>
+      </div>
+
+      <button class="btn btn-light" onclick="openSimGuide()">
+        유심 구매 방법 자세히 보기
+      </button>
+    </section>
+
+    <section class="dark-cta">
+      <h2>지금 미루면 인증부터 계속 막힙니다</h2>
+      <p>
+        유심이 준비됐다면 바로 신청하세요.<br>
+        유심이 없다면 구매 방법부터 보고 진행하면 됩니다.
+      </p>
+
+      <button class="btn btn-blue" onclick="openSimCheck()">
+        개통 신청으로 이동하기
+      </button>
+
+      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_bottom_chat" class="btn btn-kakao" target="_blank">
+        카톡 상담 바로가기
       </a>
-    </div>
+    </section>
 
     <div class="footer">
       59만모바일 | 앤텔레콤 공식 파트너
@@ -220,51 +590,135 @@
 
       <div class="consent-wrap">
         <a href="https://info.n-telecom.co.kr/customers/event_view.jsp?idx=418" target="_blank">
-          <img src="https://preplan.site/wp-content/uploads/2026/01/앤텔레콤인증대리점-1.png">
+          <img src="https://preplan.site/wp-content/uploads/2026/01/앤텔레콤인증대리점-1.png" alt="앤텔레콤 인증대리점">
         </a>
       </div>
     </div>
+  </main>
 
+  <div id="simCheckModal" class="modal-overlay">
+    <div class="modal">
+      <h3>유심을 준비하셨나요?</h3>
+      <p>
+        개통 신청에는 유심번호가 필요합니다.<br>
+        유심이 없으면 신청 도중 멈춥니다.
+      </p>
+
+      <div class="modal-small">
+        유심이 있다면 바로 신청하세요.<br>
+        유심이 없다면 먼저 가까운 편의점에서 구매하면 됩니다.
+      </div>
+
+      <a href="https://preplan.site?from=59man_apply_modal" class="btn btn-primary">
+        유심 있어요, 신청하기
+      </a>
+
+      <button class="btn btn-light" onclick="switchToSimGuide()">
+        유심 없어요, 구매방법 보기
+      </button>
+
+      <button class="close-btn" onclick="closeModals()">닫기</button>
+    </div>
+  </div>
+
+  <div id="simGuideModal" class="modal-overlay">
+    <div class="modal">
+      <h3>유심 구매 방법</h3>
+      <p>
+        오늘 개통하려면 유심부터 준비하세요.<br>
+        유심번호가 있어야 신청할 수 있습니다.
+      </p>
+
+      <div class="modal-small">
+        <b>KT망 개통</b><br>
+        KT바로유심 구매<br>
+        CU, GS25, 이마트24에서 확인
+      </div>
+
+      <div class="modal-small">
+        <b>LG망 개통</b><br>
+        모두의 원칩 구매<br>
+        이마트24, 일부 편의점, 온라인몰에서 확인
+      </div>
+
+      <div class="modal-small">
+        KT 사용 중 정지된 분은 LG망 유심이 더 나을 수 있습니다.<br>
+        확실하지 않으면 카톡으로 먼저 문의하세요.
+      </div>
+
+      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_sim_guide" class="btn btn-kakao" target="_blank">
+        어떤 유심 살지 카톡으로 묻기
+      </a>
+
+      <a href="https://preplan.site?from=59man_after_sim_guide" class="btn btn-primary">
+        유심 준비했어요, 신청하기
+      </a>
+
+      <button class="close-btn" onclick="closeModals()">닫기</button>
+    </div>
   </div>
 
   <script>
-(function(){
-  var w=window;
-  if(w.ChannelIO){
-    return w.console.error("ChannelIO script included twice.");
-  }
-  var ch=function(){ch.c(arguments);};
-  ch.q=[];
-  ch.c=function(args){ch.q.push(args);};
-  w.ChannelIO=ch;
-
-  function l(){
-    if(w.ChannelIOInitialized){return;}
-    w.ChannelIOInitialized=true;
-
-    var s=document.createElement("script");
-    s.type="text/javascript";
-    s.async=true;
-    s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";
-
-    var x=document.getElementsByTagName("script")[0];
-    if(x.parentNode){
-      x.parentNode.insertBefore(s,x);
+    function openSimCheck() {
+      document.getElementById('simCheckModal').classList.add('active');
     }
-  }
 
-  if(document.readyState==="complete"){
-    l();
-  }else{
-    w.addEventListener("DOMContentLoaded",l);
-    w.addEventListener("load",l);
-  }
-})();
+    function openSimGuide() {
+      document.getElementById('simGuideModal').classList.add('active');
+    }
 
-ChannelIO('boot', {
-  pluginKey: '047a22da-c1c4-4060-b54f-1d8bf97cc64f'
-});
-</script>
+    function switchToSimGuide() {
+      document.getElementById('simCheckModal').classList.remove('active');
+      document.getElementById('simGuideModal').classList.add('active');
+    }
 
+    function closeModals() {
+      document.getElementById('simCheckModal').classList.remove('active');
+      document.getElementById('simGuideModal').classList.remove('active');
+    }
+
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal-overlay')) {
+        closeModals();
+      }
+    });
+
+    (function(){
+      var w=window;
+      if(w.ChannelIO){
+        return w.console.error("ChannelIO script included twice.");
+      }
+      var ch=function(){ch.c(arguments);};
+      ch.q=[];
+      ch.c=function(args){ch.q.push(args);};
+      w.ChannelIO=ch;
+
+      function l(){
+        if(w.ChannelIOInitialized){return;}
+        w.ChannelIOInitialized=true;
+
+        var s=document.createElement("script");
+        s.type="text/javascript";
+        s.async=true;
+        s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";
+
+        var x=document.getElementsByTagName("script")[0];
+        if(x.parentNode){
+          x.parentNode.insertBefore(s,x);
+        }
+      }
+
+      if(document.readyState==="complete"){
+        l();
+      }else{
+        w.addEventListener("DOMContentLoaded",l);
+        w.addEventListener("load",l);
+      }
+    })();
+
+    ChannelIO('boot', {
+      pluginKey: '047a22da-c1c4-4060-b54f-1d8bf97cc64f'
+    });
+  </script>
 </body>
 </html>
