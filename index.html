@@ -4,26 +4,49 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>59만모바일 | 휴대폰 정지됐을 때 선불폰 당일개통</title>
-  <meta name="description" content="휴대폰 정지, 본인인증 불가, 연락 가능한 새 번호가 필요할 때 편의점 유심과 간편인증으로 선불폰 개통을 시작하세요." />
+  <!-- Google tag (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N7ZW223ESP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
+    gtag('config', 'G-N7ZW223ESP');
+  </script>
+
+  <title>59만모바일 | 휴대폰 정지됐을 때 편의점 유심으로 선불폰 개통</title>
+  <meta name="description" content="휴대폰 정지, 본인인증 불가, 새 번호가 급할 때 편의점 유심과 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다. 59man.shop에서 바로 시작하세요." />
+
+  <!-- OG -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="휴대폰 정지됐나요? 오늘 쓸 번호부터 만드세요" />
   <meta property="og:description" content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다." />
   <meta property="og:url" content="https://59man.shop/" />
-  <meta property="og:image" content="https://59man.shop/og-image.png" />
+  <meta property="og:image" content="https://59man.shop/og-image-v3.png?v=20260616" />
+  <meta property="og:image:secure_url" content="https://59man.shop/og-image-v3.png?v=20260616" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="59만모바일" />
+  <meta property="og:locale" content="ko_KR" />
 
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="휴대폰 정지됐나요? 오늘 쓸 번호부터 만드세요" />
   <meta name="twitter:description" content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다." />
-  <meta name="twitter:image" content="https://59man.shop/og-image.png" />
+  <meta name="twitter:image" content="https://59man.shop/og-image-v3.png?v=20260616" />
 
+  <!-- favicon -->
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 
   <style>
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -106,6 +129,7 @@
     }
 
     .hero-badge {
+      position: relative;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -133,6 +157,7 @@
     }
 
     .hero-desc {
+      position: relative;
       margin: 14px 0 18px;
       color: #475569;
       font-size: 15px;
@@ -141,6 +166,7 @@
     }
 
     .warning-box {
+      position: relative;
       margin: 18px 0;
       padding: 14px;
       border-radius: 16px;
@@ -166,6 +192,8 @@
       border: 0;
       cursor: pointer;
       transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      text-align: center;
+      font-family: inherit;
     }
 
     .btn:active {
@@ -192,12 +220,6 @@
     .btn-light {
       background: #eef2f7;
       color: #0f172a;
-    }
-
-    .btn-line {
-      background: #fff;
-      color: #0f172a;
-      border: 1px solid #dbe3ef;
     }
 
     .quick {
@@ -242,6 +264,14 @@
       font-size: 18px;
       letter-spacing: -0.04em;
       color: #020617;
+    }
+
+    .section-desc {
+      margin: 0 0 14px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.65;
+      font-weight: 650;
     }
 
     .list {
@@ -381,6 +411,23 @@
       cursor: pointer;
     }
 
+    .sim-card-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sim-card-box img {
+      width: 86px;
+      height: 86px;
+      object-fit: cover;
+      flex: 0 0 86px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      padding: 4px;
+    }
+
     .modal-overlay {
       display: none;
       position: fixed;
@@ -440,6 +487,10 @@
       font-weight: 650;
     }
 
+    .modal-small b {
+      color: #020617;
+    }
+
     .close-btn {
       width: 100%;
       margin-top: 10px;
@@ -449,14 +500,7 @@
       font-weight: 800;
       padding: 10px;
       cursor: pointer;
-    }
-
-    .floating-call {
-      position: sticky;
-      bottom: 12px;
-      z-index: 30;
-      margin-top: 14px;
-      display: none;
+      font-family: inherit;
     }
 
     @media (max-width: 360px) {
@@ -467,8 +511,32 @@
       .quick {
         grid-template-columns: 1fr;
       }
+
+      .sim-card-box img {
+        width: 74px;
+        height: 74px;
+        flex-basis: 74px;
+      }
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobilePhoneStore",
+    "name": "59만모바일",
+    "url": "https://59man.shop/",
+    "telephone": "010-7305-8253",
+    "description": "편의점 유심과 간편인증으로 선불폰 개통을 안내하는 59만모바일입니다.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "KR",
+      "addressRegion": "부산광역시",
+      "addressLocality": "금정구",
+      "streetAddress": "금강로 670"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -501,11 +569,15 @@
         유심이 없으면 먼저 구매 방법부터 확인하세요.
       </div>
 
-      <button class="btn btn-primary" onclick="openSimCheck()">
+      <button class="btn btn-primary" onclick="trackEvent('click_apply_top'); openSimCheck();">
         새 번호 바로 신청하기
       </button>
 
-      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_hero_chat" class="btn btn-kakao" target="_blank">
+      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_hero_chat"
+         class="btn btn-kakao"
+         target="_blank"
+         rel="noopener"
+         onclick="trackEvent('click_kakao_top');">
         카톡으로 지금 문의하기
       </a>
 
@@ -522,7 +594,11 @@
     </section>
 
     <section class="section">
-      <h2>이런 분은 지금 신청하세요</h2>
+      <h2>59만모바일 선불폰 개통 안내</h2>
+      <p class="section-desc">
+        59만모바일은 편의점 유심과 간편인증으로 선불폰을 비대면 개통할 수 있도록 안내합니다.
+        휴대폰 정지, 본인인증 불가, 새 번호 필요 상황에서 KT 또는 LG망으로 신청할 수 있습니다.
+      </p>
       <div class="list">
         <div class="item"><span class="dot">!</span><span>휴대폰 정지로 전화·문자가 안 되는 분</span></div>
         <div class="item"><span class="dot">!</span><span>본인인증이 막혀 앱 로그인이 안 되는 분</span></div>
@@ -547,11 +623,11 @@
       <h2>유심은 어디서 사나요?</h2>
       <div class="list">
         <div class="item"><span class="dot">K</span><span>KT바로유심: CU, GS25, 이마트24에서 확인</span></div>
-        <div class="item"><span class="dot">L</span><span>모두의 원칩: 이마트24, 일부 편의점, 온라인몰에서 확인</span></div>
+        <div class="item"><span class="dot">L</span><span>모두의 원칩: 이마트24, 배민B마트, StoryWay에서 확인</span></div>
         <div class="item"><span class="dot">?</span><span>KT 사용 중 정지된 분은 LG망 유심이 더 나을 수 있습니다. 헷갈리면 카톡으로 먼저 물어보세요.</span></div>
       </div>
 
-      <button class="btn btn-light" onclick="openSimGuide()">
+      <button class="btn btn-light" onclick="trackEvent('click_sim_guide_section'); openSimGuide();">
         유심 구매 방법 자세히 보기
       </button>
     </section>
@@ -563,11 +639,15 @@
         유심이 없다면 구매 방법부터 보고 진행하면 됩니다.
       </p>
 
-      <button class="btn btn-blue" onclick="openSimCheck()">
+      <button class="btn btn-blue" onclick="trackEvent('click_apply_bottom'); openSimCheck();">
         개통 신청으로 이동하기
       </button>
 
-      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_bottom_chat" class="btn btn-kakao" target="_blank">
+      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_bottom_chat"
+         class="btn btn-kakao"
+         target="_blank"
+         rel="noopener"
+         onclick="trackEvent('click_kakao_bottom');">
         카톡 상담 바로가기
       </a>
     </section>
@@ -589,7 +669,7 @@
       </div>
 
       <div class="consent-wrap">
-        <a href="https://info.n-telecom.co.kr/customers/event_view.jsp?idx=418" target="_blank">
+        <a href="https://info.n-telecom.co.kr/customers/event_view.jsp?idx=418" target="_blank" rel="noopener">
           <img src="https://preplan.site/wp-content/uploads/2026/01/앤텔레콤인증대리점-1.png" alt="앤텔레콤 인증대리점">
         </a>
       </div>
@@ -609,15 +689,17 @@
         유심이 없다면 먼저 가까운 편의점에서 구매하면 됩니다.
       </div>
 
-      <a href="https://preplan.site?from=59man_apply_modal" class="btn btn-primary">
+      <a href="https://preplan.site?from=59man_apply_modal"
+         class="btn btn-primary"
+         onclick="trackEvent('click_apply_modal');">
         유심 있어요, 신청하기
       </a>
 
-      <button class="btn btn-light" onclick="switchToSimGuide()">
+      <button class="btn btn-light" onclick="trackEvent('click_no_sim_modal'); switchToSimGuide();">
         유심 없어요, 구매방법 보기
       </button>
 
-      <button class="close-btn" onclick="closeModals()">닫기</button>
+      <button class="close-btn" onclick="trackEvent('close_sim_check_modal'); closeModals();">닫기</button>
     </div>
   </div>
 
@@ -629,16 +711,22 @@
         유심번호가 있어야 신청할 수 있습니다.
       </p>
 
-      <div class="modal-small">
-        <b>KT망 개통</b><br>
-        KT바로유심 구매<br>
-        CU, GS25, 이마트24에서 확인
+      <div class="modal-small sim-card-box">
+        <img src="/kt-sim.png" alt="KT바로유심">
+        <div>
+          <b>KT망 개통</b><br>
+          KT바로유심 구매<br>
+          CU, GS25, 이마트24에서 확인
+        </div>
       </div>
 
-      <div class="modal-small">
-        <b>LG망 개통</b><br>
-        모두의 원칩 구매<br>
-        이마트24, 일부 편의점, 온라인몰에서 확인
+      <div class="modal-small sim-card-box">
+        <img src="/lg-sim.png" alt="모두의 원칩">
+        <div>
+          <b>LG망 개통</b><br>
+          모두의 원칩 구매<br>
+          이마트24, 배민B마트, StoryWay에서 확인
+        </div>
       </div>
 
       <div class="modal-small">
@@ -646,30 +734,48 @@
         확실하지 않으면 카톡으로 먼저 문의하세요.
       </div>
 
-      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_sim_guide" class="btn btn-kakao" target="_blank">
+      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_sim_guide"
+         class="btn btn-kakao"
+         target="_blank"
+         rel="noopener"
+         onclick="trackEvent('click_kakao_sim_guide');">
         어떤 유심 살지 카톡으로 묻기
       </a>
 
-      <a href="https://preplan.site?from=59man_after_sim_guide" class="btn btn-primary">
+      <a href="https://preplan.site?from=59man_after_sim_guide"
+         class="btn btn-primary"
+         onclick="trackEvent('click_apply_after_sim_guide');">
         유심 준비했어요, 신청하기
       </a>
 
-      <button class="close-btn" onclick="closeModals()">닫기</button>
+      <button class="close-btn" onclick="trackEvent('close_sim_guide_modal'); closeModals();">닫기</button>
     </div>
   </div>
 
   <script>
+    function trackEvent(eventName) {
+      if (typeof gtag === 'function') {
+        gtag('event', eventName, {
+          event_category: 'landing',
+          event_label: '59man_shop'
+        });
+      }
+    }
+
     function openSimCheck() {
       document.getElementById('simCheckModal').classList.add('active');
+      trackEvent('open_sim_check_modal');
     }
 
     function openSimGuide() {
       document.getElementById('simGuideModal').classList.add('active');
+      trackEvent('open_sim_guide_modal');
     }
 
     function switchToSimGuide() {
       document.getElementById('simCheckModal').classList.remove('active');
       document.getElementById('simGuideModal').classList.add('active');
+      trackEvent('switch_to_sim_guide_modal');
     }
 
     function closeModals() {
@@ -679,6 +785,7 @@
 
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('modal-overlay')) {
+        trackEvent('close_modal_overlay');
         closeModals();
       }
     });
