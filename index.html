@@ -95,13 +95,6 @@
     .mascot-card {
       position: relative; margin: 18px 0 4px; border-radius: 20px; overflow: hidden;
       box-shadow: 0 12px 26px rgba(2, 28, 135, 0.22); border: 1px solid rgba(2, 28, 135, 0.18);
-      line-height: 0;
-    }
-    .mascot-card img { width: 100%; display: block; }
-
-    .mascot-card {
-      position: relative; margin: 18px 0 4px; border-radius: 20px; overflow: hidden;
-      box-shadow: 0 12px 26px rgba(2, 28, 135, 0.22); border: 1px solid rgba(2, 28, 135, 0.18);
       line-height: 0; z-index: 1;
     }
     .mascot-card img { width: 100%; display: block; }
@@ -127,7 +120,7 @@
     .btn:active { transform: scale(0.985); }
     .btn-primary { background: linear-gradient(135deg, #020617, #111827); color: #fff; box-shadow: 0 14px 28px rgba(15, 23, 42, 0.24); }
     .btn-blue { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; box-shadow: 0 14px 28px rgba(37, 99, 235, 0.26); }
-    .btn-kakao { background: #fee500; color: #181600; }
+    .btn-chat { background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22); }
     .btn-light { background: #eef2f7; color: #0f172a; }
 
     .quick { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
@@ -153,31 +146,6 @@
       font-size: 12px; font-weight: 900; margin-top: 1px;
     }
 
-    /* Trust section */
-    .trust { border: 1px solid #dbeafe; background: linear-gradient(180deg, #f8fbff, #ffffff); }
-    .trust h2 { display: flex; align-items: center; gap: 7px; }
-    .trust .shield {
-      width: 24px; height: 24px; border-radius: 7px; background: #2563eb; color: #fff;
-      display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900;
-    }
-    .trust-item {
-      display: flex; gap: 9px; align-items: flex-start; font-size: 14px;
-      line-height: 1.5; color: #1e293b; font-weight: 700; padding: 2px 0;
-    }
-    .trust-item .ck {
-      flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%; background: #16a34a; color: #fff;
-      display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; margin-top: 1px;
-    }
-    .trust-item small { display: block; font-weight: 600; color: #64748b; font-size: 12px; margin-top: 1px; }
-    .verify-badge {
-      margin-top: 14px; display: flex; align-items: center; gap: 12px;
-      background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px;
-    }
-    .verify-badge img { width: 78px; max-width: 100%; flex: 0 0 78px; }
-    .verify-badge div { font-size: 12px; color: #475569; line-height: 1.5; font-weight: 650; }
-    .verify-badge b { color: #020617; }
-    .verify-badge a { color: #2563eb; font-weight: 800; }
-
     .steps { display: grid; gap: 10px; counter-reset: step; }
     .step {
       counter-increment: step; display: flex; gap: 12px; align-items: center;
@@ -199,6 +167,7 @@
     }
     .dark-cta h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.35; letter-spacing: -0.05em; }
     .dark-cta p { margin: 0 0 14px; color: #cbd5e1; font-size: 14px; line-height: 1.6; font-weight: 600; }
+    .dark-cta .btn-chat { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
 
     .footer { text-align: center; font-size: 12px; color: #64748b; margin: 18px 0 12px; font-weight: 700; }
 
@@ -226,6 +195,7 @@
     .modal {
       width: 100%; max-width: 430px; background: #fff; border-radius: 24px; padding: 22px;
       box-shadow: 0 26px 70px rgba(0,0,0,0.28); animation: pop .16s ease-out;
+      max-height: 90vh; overflow-y: auto;
     }
     @keyframes pop { from { transform: translateY(10px) scale(.98); opacity: .6; } to { transform: translateY(0) scale(1); opacity: 1; } }
     .modal h3 { margin: 0 0 10px; font-size: 22px; line-height: 1.35; letter-spacing: -0.05em; color: #020617; }
@@ -235,6 +205,22 @@
       font-size: 13px; line-height: 1.6; color: #334155; margin-bottom: 12px; font-weight: 650;
     }
     .modal-small b { color: #020617; }
+
+    .plan-grid { display: grid; gap: 10px; margin-bottom: 12px; }
+    .plan-card {
+      padding: 14px; border-radius: 15px; background: #f8fafc; border: 1px solid #e2e8f0;
+    }
+    .plan-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .plan-name { font-size: 15px; font-weight: 900; color: #020617; }
+    .plan-tag {
+      font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 999px;
+    }
+    .plan-tag.kt { background: #fef2f2; color: #dc2626; }
+    .plan-tag.lg { background: #fdf2f8; color: #db2777; }
+    .plan-tag.both { background: #eff6ff; color: #2563eb; }
+    .plan-detail { font-size: 13px; color: #64748b; font-weight: 650; line-height: 1.5; }
+    .plan-price { font-size: 18px; font-weight: 900; color: #2563eb; margin-top: 6px; }
+
     .close-btn {
       width: 100%; margin-top: 10px; border: 0; background: transparent; color: #64748b;
       font-weight: 800; padding: 10px; cursor: pointer; font-family: inherit;
@@ -300,15 +286,13 @@
         아직 구매 전이라면 아래 구매 방법을 먼저 확인하세요!
       </div>
 
-      <button class="btn btn-primary" onclick="trackEvent('click_apply_top'); openSimCheck();">
+      <button class="btn btn-primary" onclick="trackEvent('click_apply_top'); chTrack('clicked_apply'); openSimCheck();">
         새 번호 지금 바로 개통하기
       </button>
 
-      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_hero_chat"
-         class="btn btn-kakao" target="_blank" rel="noopener"
-         onclick="trackEvent('click_kakao_top');">
-        카톡으로 1:1 채팅 문의하기
-      </a>
+      <button class="btn btn-chat" onclick="openChat('hero_chat');">
+        💬 실시간 채팅 문의하기
+      </button>
 
       <div class="quick">
         <div class="quick-card">
@@ -336,7 +320,7 @@
       <h2>셀프개통, 이렇게만 하면 10분 컷!</h2>
       <div class="steps">
         <div class="step">편의점에서 유심 준비 (구매 완료)</div>
-        <div class="step"><a href="https://preplan.site?from=59man_step2" onclick="trackEvent('click_step_link');">59만모바일 개통 페이지로 이동</a></div>
+        <div class="step"><a href="https://preplan.site?from=59man_step2" onclick="trackEvent('click_step_link'); chTrack('clicked_apply');">59만모바일 개통 페이지로 이동</a></div>
         <div class="step"><span class="step-skip">안면인증 건너뛰기</span> → 본인인증 진행</div>
         <div class="step">유심번호 입력 후 신청</div>
         <div class="step">요금 충전 후 바로 사용</div>
@@ -348,11 +332,21 @@
       <div class="list">
         <div class="item"><span class="dot">K</span><span>KT : 바로유심 — CU, GS25, 이마트24 편의점</span></div>
         <div class="item"><span class="dot">L</span><span>LG : 원칩 — 이마트24, 배민 B마트 앱, 스토리웨이</span></div>
-        <div class="item"><span class="dot">?</span><span>지금 KT 쓰다 정지된 분은 LG(원칩)가 더 잘 맞을 수 있어요. 헷갈리면 카톡으로 먼저 물어보세요!</span></div>
+        <div class="item"><span class="dot">?</span><span>지금 KT 쓰다 정지된 분은 LG(원칩)가 더 잘 맞을 수 있어요. 헷갈리면 채팅으로 먼저 물어보세요!</span></div>
       </div>
 
-      <button class="btn btn-light" onclick="trackEvent('click_sim_guide_section'); openSimGuide();">
+      <button class="btn btn-light" onclick="trackEvent('click_sim_guide_section'); chTrack('viewed_sim_guide'); openSimGuide();">
         유심 구매 방법 자세히 보기
+      </button>
+    </section>
+
+    <section class="section">
+      <h2>요금제는 얼마부터?</h2>
+      <p class="section-desc">
+        약정 없이 월 12,100원부터. 쓸 만큼만 충전하면 돼요.
+      </p>
+      <button class="btn btn-light" onclick="trackEvent('click_plan_section'); chTrack('viewed_plans'); openPlanModal();">
+        요금제 한눈에 보기
       </button>
     </section>
 
@@ -363,15 +357,13 @@
         없다면 구매 방법부터 보면 됩니다. 어렵지 않아요.
       </p>
 
-      <button class="btn btn-blue" onclick="trackEvent('click_apply_bottom'); openSimCheck();">
+      <button class="btn btn-blue" onclick="trackEvent('click_apply_bottom'); chTrack('clicked_apply'); openSimCheck();">
         새 번호 지금 바로 개통하기
       </button>
 
-      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_bottom_chat"
-         class="btn btn-kakao" target="_blank" rel="noopener"
-         onclick="trackEvent('click_kakao_bottom');">
-        카톡으로 1:1 채팅 문의하기
-      </a>
+      <button class="btn btn-chat" onclick="openChat('bottom_chat');">
+        💬 실시간 채팅 문의하기
+      </button>
     </section>
 
     <div class="footer">
@@ -398,6 +390,7 @@
     </div>
   </main>
 
+  <!-- 유심 확인 모달 -->
   <div id="simCheckModal" class="modal-overlay">
     <div class="modal">
       <h3>유심, 준비되셨어요?</h3>
@@ -411,11 +404,12 @@
         없으면 가까운 편의점에서 먼저 구매하세요.
       </div>
 
-      <a href="https://preplan.site?from=59man_apply_modal" class="btn btn-primary" onclick="trackEvent('click_apply_modal');">
+      <a href="https://preplan.site?from=59man_apply_modal" class="btn btn-primary"
+         onclick="trackEvent('click_apply_modal'); chTrack('clicked_apply_final');">
         유심 있어요, 지금 개통하기
       </a>
 
-      <button class="btn btn-light" onclick="trackEvent('click_no_sim_modal'); switchToSimGuide();">
+      <button class="btn btn-light" onclick="trackEvent('click_no_sim_modal'); chTrack('no_sim'); switchToSimGuide();">
         유심 없어요, 구매방법 보기
       </button>
 
@@ -423,6 +417,7 @@
     </div>
   </div>
 
+  <!-- 유심 구매 안내 모달 -->
   <div id="simGuideModal" class="modal-overlay">
     <div class="modal">
       <h3>유심 구매 방법</h3>
@@ -451,16 +446,15 @@
 
       <div class="modal-small">
         지금 KT 쓰다 정지된 분은 LG(원칩)가 더 잘 맞을 수 있어요.<br>
-        확실치 않으면 카톡으로 먼저 물어보세요.
+        확실치 않으면 채팅으로 먼저 물어보세요.
       </div>
 
-      <a href="http://pf.kakao.com/_akxmKn/chat?from=59man_sim_guide"
-         class="btn btn-kakao" target="_blank" rel="noopener"
-         onclick="trackEvent('click_kakao_sim_guide');">
-        어떤 유심 살지 카톡으로 묻기
-      </a>
+      <button class="btn btn-chat" onclick="openChat('sim_guide');">
+        💬 어떤 유심 살지 채팅으로 묻기
+      </button>
 
-      <a href="https://preplan.site?from=59man_after_sim_guide" class="btn btn-primary" onclick="trackEvent('click_apply_after_sim_guide');">
+      <a href="https://preplan.site?from=59man_after_sim_guide" class="btn btn-primary"
+         onclick="trackEvent('click_apply_after_sim_guide'); chTrack('clicked_apply_final');">
         유심 준비했어요, 개통하기
       </a>
 
@@ -468,19 +462,101 @@
     </div>
   </div>
 
+  <!-- 요금제 모달 -->
+  <div id="planModal" class="modal-overlay">
+    <div class="modal">
+      <h3>선불폰 요금제</h3>
+      <p>약정·위약금 없이, 충전해서 쓰는 선불 요금제예요.</p>
+
+      <div class="plan-grid">
+        <div class="plan-card">
+          <div class="plan-top">
+            <span class="plan-name">464 요금제</span>
+            <span class="plan-tag lg">L망</span>
+          </div>
+          <div class="plan-detail">5G · 데이터 20GB+3Mbps · 통화/문자 기본제공</div>
+          <div class="plan-price">월 46,400원</div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-top">
+            <span class="plan-name">459 요금제</span>
+            <span class="plan-tag kt">K망</span>
+          </div>
+          <div class="plan-detail">LTE · 데이터 20.3GB+3Mbps · 통화/문자 기본제공</div>
+          <div class="plan-price">월 45,900원</div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-top">
+            <span class="plan-name">396 요금제</span>
+            <span class="plan-tag both">K/L망</span>
+          </div>
+          <div class="plan-detail">LTE · 데이터 10.3GB+3Mbps · 통화/문자 기본제공</div>
+          <div class="plan-price">월 39,600원</div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-top">
+            <span class="plan-name">기본1 요금제</span>
+            <span class="plan-tag both">K/L망</span>
+          </div>
+          <div class="plan-detail">LTE · 데이터 300MB · 통화 50분 · 문자 30건</div>
+          <div class="plan-price">월 12,100원</div>
+        </div>
+      </div>
+
+      <button class="btn btn-chat" onclick="openChat('plan_detail');">
+        💬 요금제 더 알아보기
+      </button>
+
+      <button class="btn btn-primary" onclick="trackEvent('click_apply_from_plan'); chTrack('clicked_apply'); closeModals(); openSimCheck();">
+        개통하기
+      </button>
+
+      <button class="close-btn" onclick="trackEvent('close_plan_modal'); closeModals();">닫기</button>
+    </div>
+  </div>
+
   <script>
+    /* ── GA4 이벤트 ── */
     function trackEvent(eventName) {
       if (typeof gtag === 'function') {
         gtag('event', eventName, { event_category: 'landing', event_label: '59man_shop' });
       }
     }
+
+    /* ── 채널톡 이벤트 (마케팅 자동화 트리거용) ── */
+    function chTrack(eventName) {
+      if (typeof ChannelIO === 'function') {
+        ChannelIO('track', eventName);
+      }
+    }
+
+    /* ── 채널톡 채팅 열기 ── */
+    function openChat(from) {
+      trackEvent('click_chat_' + from);
+      chTrack('clicked_chat');
+      if (typeof ChannelIO === 'function') {
+        ChannelIO('showMessenger');
+      }
+    }
+
+    /* ── 모달 ── */
     function openSimCheck() {
       document.getElementById('simCheckModal').classList.add('active');
       trackEvent('open_sim_check_modal');
+      chTrack('opened_sim_check');
     }
     function openSimGuide() {
       document.getElementById('simGuideModal').classList.add('active');
       trackEvent('open_sim_guide_modal');
+      chTrack('viewed_sim_guide');
+    }
+    function openPlanModal() {
+      document.getElementById('planModal').classList.add('active');
+      trackEvent('open_plan_modal');
+      chTrack('viewed_plans');
     }
     function switchToSimGuide() {
       document.getElementById('simCheckModal').classList.remove('active');
@@ -490,6 +566,7 @@
     function closeModals() {
       document.getElementById('simCheckModal').classList.remove('active');
       document.getElementById('simGuideModal').classList.remove('active');
+      document.getElementById('planModal').classList.remove('active');
     }
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('modal-overlay')) {
@@ -498,6 +575,7 @@
       }
     });
 
+    /* ── 채널톡 부트 ── */
     (function(){
       var w=window;
       if(w.ChannelIO){ return w.console.error("ChannelIO script included twice."); }
@@ -515,6 +593,9 @@
       else{ w.addEventListener("DOMContentLoaded",l); w.addEventListener("load",l); }
     })();
     ChannelIO('boot', { pluginKey: '047a22da-c1c4-4060-b54f-1d8bf97cc64f' });
+
+    /* ── 페이지 진입 트래킹 ── */
+    chTrack('page_viewed');
   </script>
 </body>
 </html>
