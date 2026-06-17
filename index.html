@@ -60,12 +60,7 @@
       margin-bottom: 14px; font-size: 13px; color: #64748b;
     }
     .logo { display: flex; align-items: center; gap: 8px; font-weight: 900; color: #0f172a; }
-    .logo-mark {
-      width: 28px; height: 28px; border-radius: 9px;
-      background: linear-gradient(135deg, #111827, #2563eb);
-      color: #fff; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 900;
-    }
+    .logo-mark { width: 30px; height: 30px; border-radius: 50%; display: block; flex: 0 0 30px; }
     .pill {
       padding: 6px 10px; border-radius: 999px; background: #e0f2fe;
       color: #0369a1; font-weight: 800; font-size: 12px;
@@ -80,6 +75,11 @@
     .hero:before {
       content: ""; position: absolute; right: -60px; top: -60px;
       width: 160px; height: 160px; background: rgba(37, 99, 235, 0.12); border-radius: 999px;
+    }
+    .hero-mascot {
+      position: absolute; top: 4px; right: -6px; width: 104px;
+      z-index: 0; pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(2, 28, 135, 0.16));
     }
     .hero-badge {
       position: relative; display: inline-flex; align-items: center; gap: 6px;
@@ -96,6 +96,13 @@
       position: relative; margin: 18px 0 4px; border-radius: 20px; overflow: hidden;
       box-shadow: 0 12px 26px rgba(2, 28, 135, 0.22); border: 1px solid rgba(2, 28, 135, 0.18);
       line-height: 0;
+    }
+    .mascot-card img { width: 100%; display: block; }
+
+    .mascot-card {
+      position: relative; margin: 18px 0 4px; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 12px 26px rgba(2, 28, 135, 0.22); border: 1px solid rgba(2, 28, 135, 0.18);
+      line-height: 0; z-index: 1;
     }
     .mascot-card img { width: 100%; display: block; }
 
@@ -235,6 +242,7 @@
 
     @media (max-width: 360px) {
       .hero h1 { font-size: 26px; }
+      .hero-mascot { width: 86px; }
       .quick { grid-template-columns: 1fr; }
       .sim-card-box img { width: 74px; height: 74px; flex-basis: 74px; }
     }
@@ -264,13 +272,14 @@
 
     <div class="top-bar">
       <div class="logo">
-        <div class="logo-mark">59</div>
+        <img class="logo-mark" src="/mascot_logo.png" alt="">
         59만모바일
       </div>
       <div class="pill">당일개통 신청</div>
     </div>
 
     <section class="hero">
+      <img class="hero-mascot" src="/mascot_peek.png" alt="">
       <div class="hero-badge">편의점 유심 · 비대면 개통</div>
 
       <h1>
