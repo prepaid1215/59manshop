@@ -8,21 +8,38 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N7ZW223ESP"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
     gtag('config', 'G-N7ZW223ESP');
   </script>
 
   <title>59만모바일 | 휴대폰 정지됐을 때 편의점 유심으로 선불폰 개통</title>
-  <meta name="description" content="휴대폰 정지, 본인인증 불가, 새 번호가 급할 때 편의점 유심과 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다. 59man.shop에서 바로 시작하세요." />
+
+  <meta
+    name="description"
+    content="휴대폰 정지, 본인인증 불가, 새 번호가 급할 때 편의점 유심과 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다. 59man.shop에서 바로 시작하세요."
+  />
 
   <!-- OG -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="휴대폰 끊겼어도, 오늘 쓸 번호는 만들 수 있어요" />
-  <meta property="og:description" content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다." />
+  <meta
+    property="og:description"
+    content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다."
+  />
   <meta property="og:url" content="https://59man.shop/" />
-  <meta property="og:image" content="https://59man.shop/og-image-v5.png?v=20260616" />
-  <meta property="og:image:secure_url" content="https://59man.shop/og-image-v5.png?v=20260616" />
+  <meta
+    property="og:image"
+    content="https://59man.shop/og-image-v5.png?v=20260616"
+  />
+  <meta
+    property="og:image:secure_url"
+    content="https://59man.shop/og-image-v5.png?v=20260616"
+  />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1080" />
   <meta property="og:image:height" content="1080" />
@@ -31,250 +48,684 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="휴대폰 끊겼어도, 오늘 쓸 번호는 만들 수 있어요" />
-  <meta name="twitter:description" content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다." />
-  <meta name="twitter:image" content="https://59man.shop/og-image-v5.png?v=20260616" />
+  <meta
+    name="twitter:title"
+    content="휴대폰 끊겼어도, 오늘 쓸 번호는 만들 수 있어요"
+  />
+  <meta
+    name="twitter:description"
+    content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다."
+  />
+  <meta
+    name="twitter:image"
+    content="https://59man.shop/og-image-v5.png?v=20260616"
+  />
 
-  <link rel="icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
 
   <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        "Apple SD Gothic Neo",
+        "Noto Sans KR",
+        sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 34%),
+        radial-gradient(
+          circle at top left,
+          rgba(37, 99, 235, 0.16),
+          transparent 34%
+        ),
         linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
       color: #0f172a;
     }
 
-    a { text-decoration: none; }
+    a {
+      text-decoration: none;
+    }
 
-    .page { max-width: 520px; margin: 0 auto; padding: 18px 16px 34px; }
+    .page {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 18px 16px 34px;
+    }
 
     .top-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 14px; font-size: 13px; color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: #64748b;
     }
-    .logo { display: flex; align-items: center; gap: 8px; font-weight: 900; color: #0f172a; }
-    .logo-mark { width: 30px; height: 30px; border-radius: 50%; display: block; flex: 0 0 30px; }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: block;
+      flex: 0 0 30px;
+    }
+
     .pill {
-      padding: 6px 10px; border-radius: 999px; background: #e0f2fe;
-      color: #0369a1; font-weight: 800; font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 800;
+      font-size: 12px;
     }
 
     .hero {
-      position: relative; overflow: hidden; background: #ffffff;
-      border-radius: 26px; padding: 26px 22px 24px;
+      position: relative;
+      overflow: hidden;
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 26px 22px 24px;
       box-shadow: 0 18px 44px rgba(15, 23, 42, 0.1);
       border: 1px solid rgba(226, 232, 240, 0.9);
     }
-    .hero:before {
-      content: ""; position: absolute; right: -60px; top: -60px;
-      width: 160px; height: 160px; background: rgba(37, 99, 235, 0.12); border-radius: 999px;
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 160px;
+      height: 160px;
+      background: rgba(37, 99, 235, 0.12);
+      border-radius: 999px;
     }
+
     .hero-mascot {
-      position: absolute; top: 4px; right: -6px; width: 104px;
-      z-index: 0; pointer-events: none;
+      position: absolute;
+      top: 4px;
+      right: -6px;
+      width: 104px;
+      z-index: 0;
+      pointer-events: none;
       filter: drop-shadow(0 6px 12px rgba(2, 28, 135, 0.16));
     }
+
     .hero-badge {
-      position: relative; display: inline-flex; align-items: center; gap: 6px;
-      padding: 7px 11px; border-radius: 999px; background: #f1f5f9; color: #334155;
-      font-size: 12px; font-weight: 800; margin-bottom: 14px;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
     }
+
     .hero h1 {
-      position: relative; margin: 0; font-size: 29px; line-height: 1.26;
-      letter-spacing: -0.06em; font-weight: 950; color: #020617;
+      position: relative;
+      margin: 0;
+      font-size: 29px;
+      line-height: 1.26;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+      color: #020617;
     }
-    .hero h1 strong { color: #2563eb; }
+
+    .hero h1 strong {
+      color: #2563eb;
+    }
 
     .mascot-card {
-      position: relative; margin: 18px 0 4px; border-radius: 20px; overflow: hidden;
-      box-shadow: 0 12px 26px rgba(2, 28, 135, 0.22); border: 1px solid rgba(2, 28, 135, 0.18);
-      line-height: 0; z-index: 1;
+      position: relative;
+      margin: 18px 0 4px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 26px rgba(2, 28, 135, 0.22);
+      border: 1px solid rgba(2, 28, 135, 0.18);
+      line-height: 0;
+      z-index: 1;
     }
-    .mascot-card img { width: 100%; display: block; }
+
+    .mascot-card img {
+      width: 100%;
+      display: block;
+    }
 
     .hero-desc {
-      position: relative; margin: 16px 0 16px; color: #475569;
-      font-size: 15px; line-height: 1.65; font-weight: 650;
+      position: relative;
+      margin: 16px 0;
+      color: #475569;
+      font-size: 15px;
+      line-height: 1.65;
+      font-weight: 650;
     }
 
     .warning-box {
-      position: relative; margin: 16px 0; padding: 14px; border-radius: 16px;
-      background: #fff7ed; color: #9a3412; font-size: 14px; line-height: 1.55;
-      font-weight: 800; border: 1px solid #fed7aa;
+      position: relative;
+      margin: 16px 0;
+      padding: 14px;
+      border-radius: 16px;
+      background: #fff7ed;
+      color: #9a3412;
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 800;
+      border: 1px solid #fed7aa;
     }
 
     .btn {
-      display: flex; width: 100%; min-height: 58px; border-radius: 16px;
-      align-items: center; justify-content: center; padding: 15px 16px; margin-top: 10px;
-      font-size: 16px; font-weight: 900; border: 0; cursor: pointer;
-      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-      text-align: center; font-family: inherit;
+      display: flex;
+      width: 100%;
+      min-height: 58px;
+      border-radius: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 16px;
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 900;
+      border: 0;
+      cursor: pointer;
+      transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        opacity 0.12s ease;
+      text-align: center;
+      font-family: inherit;
     }
-    .btn:active { transform: scale(0.985); }
-    .btn-primary { background: linear-gradient(135deg, #020617, #111827); color: #fff; box-shadow: 0 14px 28px rgba(15, 23, 42, 0.24); }
-    .btn-blue { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; box-shadow: 0 14px 28px rgba(37, 99, 235, 0.26); }
-    .btn-chat { background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22); }
-    .btn-light { background: #eef2f7; color: #0f172a; }
 
-    .quick { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
-    .quick-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 13px; }
-    .quick-card b { display: block; font-size: 13px; color: #020617; margin-bottom: 4px; }
-    .quick-card span { display: block; font-size: 12px; color: #64748b; line-height: 1.45; }
+    .btn:active {
+      transform: scale(0.985);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #020617, #111827);
+      color: #ffffff;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.24);
+    }
+
+    .btn-blue {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.26);
+    }
+
+    .btn-chat {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #ffffff;
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-light {
+      background: #eef2f7;
+      color: #0f172a;
+    }
+
+    .quick {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .quick-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 13px;
+    }
+
+    .quick-card b {
+      display: block;
+      font-size: 13px;
+      color: #020617;
+      margin-bottom: 4px;
+    }
+
+    .quick-card span {
+      display: block;
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.45;
+    }
 
     .section {
-      margin-top: 16px; background: #fff; border-radius: 22px; padding: 22px 18px;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06); border: 1px solid rgba(226, 232, 240, 0.9);
+      margin-top: 16px;
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 22px 18px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(226, 232, 240, 0.9);
     }
-    .section h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: -0.04em; color: #020617; }
-    .section-desc { margin: 0 0 14px; color: #475569; font-size: 14px; line-height: 1.65; font-weight: 650; }
 
-    .list { display: grid; gap: 9px; }
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: -0.04em;
+      color: #020617;
+    }
+
+    .section-desc {
+      margin: 0 0 14px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.65;
+      font-weight: 650;
+    }
+
+    .list {
+      display: grid;
+      gap: 9px;
+    }
+
     .item {
-      display: flex; gap: 9px; align-items: flex-start; font-size: 14px;
-      line-height: 1.55; color: #334155; font-weight: 650;
-    }
-    .dot {
-      flex: 0 0 22px; width: 22px; height: 22px; border-radius: 8px; background: #eff6ff;
-      color: #2563eb; display: inline-flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 900; margin-top: 1px;
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #334155;
+      font-weight: 650;
     }
 
-    .steps { display: grid; gap: 10px; counter-reset: step; }
+    .dot {
+      flex: 0 0 22px;
+      width: 22px;
+      height: 22px;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #2563eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      counter-reset: step;
+    }
+
     .step {
-      counter-increment: step; display: flex; gap: 12px; align-items: center;
-      padding: 13px; border-radius: 16px; background: #f8fafc; border: 1px solid #e2e8f0;
-      color: #334155; font-size: 14px; font-weight: 750;
+      counter-increment: step;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 13px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 750;
     }
-    .step:before {
-      content: counter(step); width: 28px; height: 28px; flex: 0 0 28px; border-radius: 10px;
-      background: #0f172a; color: #fff; display: flex; justify-content: center; align-items: center;
-      font-size: 13px; font-weight: 900;
+
+    .step::before {
+      content: counter(step);
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      border-radius: 10px;
+      background: #0f172a;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 900;
     }
-    .step-skip { color: #2563eb; }
-    .step a { color: #2563eb; font-weight: 900; text-decoration: underline; }
+
+    .step-skip {
+      color: #2563eb;
+    }
+
+    .step a {
+      color: #2563eb;
+      font-weight: 900;
+      text-decoration: underline;
+    }
 
     .dark-cta {
-      margin-top: 16px; padding: 22px 18px; border-radius: 24px;
-      background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.28), transparent 30%), #020617;
-      color: #fff; box-shadow: 0 18px 38px rgba(15, 23, 42, 0.22);
+      margin-top: 16px;
+      padding: 22px 18px;
+      border-radius: 24px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(96, 165, 250, 0.28),
+          transparent 30%
+        ),
+        #020617;
+      color: #ffffff;
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.22);
     }
-    .dark-cta h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.35; letter-spacing: -0.05em; }
-    .dark-cta p { margin: 0 0 14px; color: #cbd5e1; font-size: 14px; line-height: 1.6; font-weight: 600; }
-    .dark-cta .btn-chat { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
 
-    .footer { text-align: center; font-size: 12px; color: #64748b; margin: 18px 0 12px; font-weight: 700; }
+    .dark-cta h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -0.05em;
+    }
+
+    .dark-cta p {
+      margin: 0 0 14px;
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .dark-cta .btn-chat {
+      background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+      margin: 18px 0 12px;
+      font-weight: 700;
+    }
 
     .policy-footer {
-      margin-top: 14px; background: #ffffff; padding: 18px; border-radius: 18px;
-      font-size: 12px; color: #475569; border: 1px solid #e2e8f0; line-height: 1.65;
+      margin-top: 14px;
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 12px;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+      line-height: 1.65;
     }
-    .policy-links { margin-bottom: 10px; display: flex; gap: 12px; font-weight: 800; }
-    .policy-links a { color: #334155; }
-    .company-info { border-top: 1px solid #e2e8f0; padding-top: 10px; }
-    .consent-wrap { margin-top: 12px; text-align: right; }
-    .consent-wrap img { width: 84px; max-width: 100%; cursor: pointer; }
 
-    .sim-card-box { display: flex; align-items: center; gap: 12px; }
+    .policy-links {
+      margin-bottom: 10px;
+      display: flex;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .policy-links a {
+      color: #334155;
+    }
+
+    .company-info {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 10px;
+    }
+
+    .consent-wrap {
+      margin-top: 12px;
+      text-align: right;
+    }
+
+    .consent-wrap img {
+      width: 84px;
+      max-width: 100%;
+      cursor: pointer;
+    }
+
+    .sim-card-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .sim-card-box img {
-      width: 86px; height: 86px; object-fit: cover; flex: 0 0 86px; border-radius: 14px;
-      background: #fff; border: 1px solid #e2e8f0; padding: 4px;
+      width: 86px;
+      height: 86px;
+      object-fit: cover;
+      flex: 0 0 86px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 4px;
     }
 
     .modal-overlay {
-      display: none; position: fixed; inset: 0; z-index: 9998; background: rgba(15, 23, 42, 0.62);
-      backdrop-filter: blur(5px); padding: 20px; align-items: center; justify-content: center;
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      background: rgba(15, 23, 42, 0.62);
+      backdrop-filter: blur(5px);
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
     }
-    .modal-overlay.active { display: flex; }
-    .modal {
-      width: 100%; max-width: 430px; background: #fff; border-radius: 24px; padding: 22px;
-      box-shadow: 0 26px 70px rgba(0,0,0,0.28); animation: pop .16s ease-out;
-      max-height: 90vh; overflow-y: auto;
-    }
-    @keyframes pop { from { transform: translateY(10px) scale(.98); opacity: .6; } to { transform: translateY(0) scale(1); opacity: 1; } }
-    .modal h3 { margin: 0 0 10px; font-size: 22px; line-height: 1.35; letter-spacing: -0.05em; color: #020617; }
-    .modal p { margin: 0 0 14px; color: #475569; font-size: 14px; line-height: 1.65; font-weight: 650; }
-    .modal-small {
-      padding: 13px; border-radius: 15px; background: #f8fafc; border: 1px solid #e2e8f0;
-      font-size: 13px; line-height: 1.6; color: #334155; margin-bottom: 12px; font-weight: 650;
-    }
-    .modal-small b { color: #020617; }
 
-    .plan-grid { display: grid; gap: 10px; margin-bottom: 12px; }
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 430px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
+      animation: pop 0.16s ease-out;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes pop {
+      from {
+        transform: translateY(10px) scale(0.98);
+        opacity: 0.6;
+      }
+
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -0.05em;
+      color: #020617;
+    }
+
+    .modal p {
+      margin: 0 0 14px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.65;
+      font-weight: 650;
+    }
+
+    .modal-small {
+      padding: 13px;
+      border-radius: 15px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #334155;
+      margin-bottom: 12px;
+      font-weight: 650;
+    }
+
+    .modal-small b {
+      color: #020617;
+    }
+
+    .plan-grid {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
     .plan-card {
-      padding: 14px; border-radius: 15px; background: #f8fafc; border: 1px solid #e2e8f0;
+      padding: 14px;
+      border-radius: 15px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
     }
-    .plan-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .plan-name { font-size: 15px; font-weight: 900; color: #020617; }
+
+    .plan-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .plan-name {
+      font-size: 15px;
+      font-weight: 900;
+      color: #020617;
+    }
+
     .plan-tag {
-      font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
     }
-    .plan-tag.kt { background: #fef2f2; color: #dc2626; }
-    .plan-tag.lg { background: #fdf2f8; color: #db2777; }
-    .plan-tag.both { background: #eff6ff; color: #2563eb; }
-    .plan-detail { font-size: 13px; color: #64748b; font-weight: 650; line-height: 1.5; }
-    .plan-price { font-size: 18px; font-weight: 900; color: #2563eb; margin-top: 6px; }
+
+    .plan-tag.kt {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+
+    .plan-tag.lg {
+      background: #fdf2f8;
+      color: #db2777;
+    }
+
+    .plan-tag.both {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .plan-detail {
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    .plan-price {
+      font-size: 18px;
+      font-weight: 900;
+      color: #2563eb;
+      margin-top: 6px;
+    }
 
     .close-btn {
-      width: 100%; margin-top: 10px; border: 0; background: transparent; color: #64748b;
-      font-weight: 800; padding: 10px; cursor: pointer; font-family: inherit;
+      width: 100%;
+      margin-top: 10px;
+      border: 0;
+      background: transparent;
+      color: #64748b;
+      font-weight: 800;
+      padding: 10px;
+      cursor: pointer;
+      font-family: inherit;
     }
 
     @media (max-width: 360px) {
-      .hero h1 { font-size: 26px; }
-      .hero-mascot { width: 86px; }
-      .quick { grid-template-columns: 1fr; }
-      .sim-card-box img { width: 74px; height: 74px; flex-basis: 74px; }
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .hero-mascot {
+        width: 86px;
+      }
+
+      .quick {
+        grid-template-columns: 1fr;
+      }
+
+      .sim-card-box img {
+        width: 74px;
+        height: 74px;
+        flex-basis: 74px;
+      }
     }
   </style>
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MobilePhoneStore",
-    "name": "59만모바일",
-    "url": "https://59man.shop/",
-    "telephone": "010-7305-8253",
-    "description": "편의점 유심과 간편인증으로 선불폰 개통을 안내하는 59만모바일입니다.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "KR",
-      "addressRegion": "부산광역시",
-      "addressLocality": "금정구",
-      "streetAddress": "금강로 670"
+    {
+      "@context": "https://schema.org",
+      "@type": "MobilePhoneStore",
+      "name": "59만모바일",
+      "url": "https://59man.shop/",
+      "telephone": "010-7305-8253",
+      "description": "편의점 유심과 간편인증으로 선불폰 개통을 안내하는 59만모바일입니다.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "KR",
+        "addressRegion": "부산광역시",
+        "addressLocality": "금정구",
+        "streetAddress": "금강로 670"
+      }
     }
-  }
   </script>
 </head>
 
 <body>
   <main class="page">
-
     <div class="top-bar">
       <div class="logo">
-        <img class="logo-mark" src="/mascot_logo_v2.png" alt="">
+        <img
+          class="logo-mark"
+          src="/mascot_logo_v2.png"
+          alt="59만모바일 로고"
+        />
         59만모바일
       </div>
+
       <div class="pill">당일개통 신청</div>
     </div>
 
     <section class="hero">
-      <img class="hero-mascot" src="/mascot_peek_v2.png" alt="">
+      <img
+        class="hero-mascot"
+        src="/mascot_peek_v2.png"
+        alt=""
+      />
+
       <div class="hero-badge">편의점 유심 · 비대면 개통</div>
 
       <h1>
-        끊긴 번호 붙잡지 말고<br>
+        끊긴 번호 붙잡지 말고<br />
         오늘 쓸 번호 <strong>지금 만드세요!</strong>
       </h1>
 
       <div class="mascot-card">
-        <img src="/mascots_card_v2.png" alt="59만모바일 캐릭터 - KT·LG 정식망 선불폰 개통">
+        <img
+          src="/mascots_card_v2.png"
+          alt="59만모바일 캐릭터 - KT·LG 정식망 선불폰 개통"
+        />
       </div>
 
       <p class="hero-desc">
@@ -282,16 +733,25 @@
       </p>
 
       <div class="warning-box">
-        잠깐! 개통하려면 유심을 먼저 구매해야 돼요.<br>
+        잠깐! 개통하려면 유심을 먼저 구매해야 돼요.<br />
         아직 구매 전이라면 아래 구매 방법을 먼저 확인하세요!
       </div>
 
-      <button class="btn btn-primary" onclick="trackEvent('click_apply_top'); chTrack('clicked_apply'); openSimCheck();">
+      <!-- 상단 개통 버튼: 팝업 없이 바로 이동 -->
+      <a
+        href="https://preplan.site?from=59man_apply_top"
+        class="btn btn-primary"
+        onclick="trackEvent('click_apply_top'); chTrack('clicked_apply_final');"
+      >
         새 번호 지금 바로 개통하기
-      </button>
+      </a>
 
-      <button class="btn btn-chat" onclick="openChat('hero_chat');">
-        💬 실시간 채팅 문의하기
+      <button
+        type="button"
+        class="btn btn-chat"
+        onclick="openChat('hero_chat');"
+      >
+        실시간 채팅 문의하기
       </button>
 
       <div class="quick">
@@ -299,6 +759,7 @@
           <b>준비물은 딱 2개</b>
           <span>편의점 유심 + 간편인증서 1가지</span>
         </div>
+
         <div class="quick-card">
           <b>대리점 방문 X</b>
           <span>집에서 10분 만에 셀프신청</span>
@@ -308,61 +769,129 @@
 
     <section class="section">
       <h2>혹시 이런 상황이신가요?</h2>
+
       <div class="list">
-        <div class="item"><span class="dot">1</span><span>통신비 미납으로 전화 수신·발신이 정지됨</span></div>
-        <div class="item"><span class="dot">2</span><span>본인인증이 막혀 은행 업무가 안 됨</span></div>
-        <div class="item"><span class="dot">3</span><span>대리점에서 새 번호 개통이 안 됨</span></div>
-        <div class="item"><span class="dot">4</span><span>약정 없는 세컨 번호가 필요함</span></div>
+        <div class="item">
+          <span class="dot">1</span>
+          <span>통신비 미납으로 전화 수신·발신이 정지됨</span>
+        </div>
+
+        <div class="item">
+          <span class="dot">2</span>
+          <span>본인인증이 막혀 은행 업무가 안 됨</span>
+        </div>
+
+        <div class="item">
+          <span class="dot">3</span>
+          <span>대리점에서 새 번호 개통이 안 됨</span>
+        </div>
+
+        <div class="item">
+          <span class="dot">4</span>
+          <span>약정 없는 세컨 번호가 필요함</span>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <h2>셀프개통, 이렇게만 하면 10분 컷!</h2>
+
       <div class="steps">
-        <div class="step">편의점에서 유심 준비 (구매 완료)</div>
-        <div class="step"><a href="https://preplan.site?from=59man_step2" onclick="trackEvent('click_step_link'); chTrack('clicked_apply');">59만모바일 개통 페이지로 이동</a></div>
-        <div class="step"><span class="step-skip">안면인증 건너뛰기</span> → 본인인증 진행</div>
+        <div class="step">편의점에서 유심 준비</div>
+
+        <div class="step">
+          <a
+            href="https://preplan.site?from=59man_step2"
+            onclick="trackEvent('click_step_link'); chTrack('clicked_apply');"
+          >
+            59만모바일 개통 페이지로 이동
+          </a>
+        </div>
+
+        <div class="step">
+          <span class="step-skip">안면인증 건너뛰기</span>
+          → 본인인증 진행
+        </div>
+
         <div class="step">유심번호 입력 후 신청</div>
+
         <div class="step">요금 충전 후 바로 사용</div>
       </div>
     </section>
 
     <section class="section">
       <h2>유심은 어디서 구매해야 될까요?</h2>
+
       <div class="list">
-        <div class="item"><span class="dot">K</span><span>KT : 바로유심 — CU, GS25, 이마트24 편의점</span></div>
-        <div class="item"><span class="dot">L</span><span>LG : 원칩 — 이마트24, 배민 B마트 앱, 스토리웨이</span></div>
-        <div class="item"><span class="dot">?</span><span>지금 KT 쓰다 정지된 분은 LG(원칩)가 더 잘 맞을 수 있어요. 헷갈리면 채팅으로 먼저 물어보세요!</span></div>
+        <div class="item">
+          <span class="dot">K</span>
+          <span>KT : 바로유심 — CU, GS25, 이마트24 편의점</span>
+        </div>
+
+        <div class="item">
+          <span class="dot">L</span>
+          <span>
+            LG : 원칩 — 이마트24, 배민 B마트 앱, 스토리웨이
+          </span>
+        </div>
+
+        <div class="item">
+          <span class="dot">?</span>
+          <span>
+            지금 KT 쓰다 정지된 분은 LG 원칩이 더 잘 맞을 수 있어요.
+            헷갈리면 채팅으로 먼저 물어보세요.
+          </span>
+        </div>
       </div>
 
-      <button class="btn btn-light" onclick="trackEvent('click_sim_guide_section'); chTrack('viewed_sim_guide'); openSimGuide();">
+      <button
+        type="button"
+        class="btn btn-light"
+        onclick="trackEvent('click_sim_guide_section'); chTrack('viewed_sim_guide'); openSimGuide();"
+      >
         유심 구매 방법 자세히 보기
       </button>
     </section>
 
     <section class="section">
       <h2>요금제는 얼마부터?</h2>
+
       <p class="section-desc">
         약정 없이 월 12,100원부터. 쓸 만큼만 충전하면 돼요.
       </p>
-      <button class="btn btn-light" onclick="trackEvent('click_plan_section'); chTrack('viewed_plans'); openPlanModal();">
+
+      <button
+        type="button"
+        class="btn btn-light"
+        onclick="trackEvent('click_plan_section'); chTrack('viewed_plans'); openPlanModal();"
+      >
         요금제 한눈에 보기
       </button>
     </section>
 
     <section class="dark-cta">
       <h2>지금 안 하면, 내일도 똑같이 막혀 있어요</h2>
+
       <p>
-        유심이 준비됐다면 바로 개통하세요.<br>
+        유심이 준비됐다면 바로 개통하세요.<br />
         없다면 구매 방법부터 보면 됩니다. 어렵지 않아요.
       </p>
 
-      <button class="btn btn-blue" onclick="trackEvent('click_apply_bottom'); chTrack('clicked_apply'); openSimCheck();">
+      <!-- 하단 개통 버튼: 팝업 없이 바로 이동 -->
+      <a
+        href="https://preplan.site?from=59man_apply_bottom"
+        class="btn btn-blue"
+        onclick="trackEvent('click_apply_bottom'); chTrack('clicked_apply_final');"
+      >
         새 번호 지금 바로 개통하기
-      </button>
+      </a>
 
-      <button class="btn btn-chat" onclick="openChat('bottom_chat');">
-        💬 실시간 채팅 문의하기
+      <button
+        type="button"
+        class="btn btn-chat"
+        onclick="openChat('bottom_chat');"
+      >
+        실시간 채팅 문의하기
       </button>
     </section>
 
@@ -377,88 +906,84 @@
       </div>
 
       <div class="company-info">
-        59만모바일 | 대표자: 주영돈 | 부산 금정구 금강로 670<br>
-        대표번호: 010-7305-8253 | 사업자등록번호: 7745600506<br>
+        59만모바일 | 대표자: 주영돈 | 부산 금정구 금강로 670<br />
+        대표번호: 010-7305-8253 | 사업자등록번호: 7745600506<br />
         통신판매신고번호: 2024-부산금정-0130
       </div>
 
       <div class="consent-wrap">
-        <a href="https://info.n-telecom.co.kr/customers/event_view.jsp?idx=418" target="_blank" rel="noopener">
-          <img src="https://preplan.site/wp-content/uploads/2026/01/앤텔레콤인증대리점-1.png" alt="앤텔레콤 인증대리점">
+        <a
+          href="https://info.n-telecom.co.kr/customers/event_view.jsp?idx=418"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="https://preplan.site/wp-content/uploads/2026/01/앤텔레콤인증대리점-1.png"
+            alt="앤텔레콤 인증대리점"
+          />
         </a>
       </div>
     </div>
   </main>
 
-  <!-- 유심 확인 모달 -->
-  <div id="simCheckModal" class="modal-overlay">
-    <div class="modal">
-      <h3>유심, 준비되셨어요?</h3>
-      <p>
-        개통하려면 유심번호가 꼭 필요해요.<br>
-        없으면 신청 중간에 멈춰버립니다.
-      </p>
-
-      <div class="modal-small">
-        있으면 바로 개통,<br>
-        없으면 가까운 편의점에서 먼저 구매하세요.
-      </div>
-
-      <a href="https://preplan.site?from=59man_apply_modal" class="btn btn-primary"
-         onclick="trackEvent('click_apply_modal'); chTrack('clicked_apply_final');">
-        유심 있어요, 지금 개통하기
-      </a>
-
-      <button class="btn btn-light" onclick="trackEvent('click_no_sim_modal'); chTrack('no_sim'); switchToSimGuide();">
-        유심 없어요, 구매방법 보기
-      </button>
-
-      <button class="close-btn" onclick="trackEvent('close_sim_check_modal'); closeModals();">닫기</button>
-    </div>
-  </div>
-
   <!-- 유심 구매 안내 모달 -->
   <div id="simGuideModal" class="modal-overlay">
     <div class="modal">
       <h3>유심 구매 방법</h3>
+
       <p>
-        오늘 개통하려면 유심부터 준비하세요.<br>
+        오늘 개통하려면 유심부터 준비하세요.<br />
         유심번호가 있어야 신청이 시작돼요.
       </p>
 
       <div class="modal-small sim-card-box">
-        <img src="/ba-sim.png" alt="KT 바로유심">
+        <img src="/ba-sim.png" alt="KT 바로유심" />
+
         <div>
-          <b>KT 개통</b><br>
-          바로유심 구매<br>
+          <b>KT 개통</b><br />
+          바로유심 구매<br />
           CU, GS25, 이마트24
         </div>
       </div>
 
       <div class="modal-small sim-card-box">
-        <img src="/one-sim.png" alt="LG 원칩">
+        <img src="/one-sim.png" alt="LG 원칩" />
+
         <div>
-          <b>LG 개통</b><br>
-          원칩 구매<br>
+          <b>LG 개통</b><br />
+          원칩 구매<br />
           이마트24, 배민 B마트 앱, 스토리웨이
         </div>
       </div>
 
       <div class="modal-small">
-        지금 KT 쓰다 정지된 분은 LG(원칩)가 더 잘 맞을 수 있어요.<br>
-        확실치 않으면 채팅으로 먼저 물어보세요.
+        지금 KT 쓰다 정지된 분은 LG 원칩이 더 잘 맞을 수 있어요.<br />
+        확실하지 않으면 채팅으로 먼저 물어보세요.
       </div>
 
-      <button class="btn btn-chat" onclick="openChat('sim_guide');">
-        💬 어떤 유심 살지 채팅으로 묻기
+      <button
+        type="button"
+        class="btn btn-chat"
+        onclick="openChat('sim_guide');"
+      >
+        어떤 유심 살지 채팅으로 묻기
       </button>
 
-      <a href="https://preplan.site?from=59man_after_sim_guide" class="btn btn-primary"
-         onclick="trackEvent('click_apply_after_sim_guide'); chTrack('clicked_apply_final');">
+      <a
+        href="https://preplan.site?from=59man_after_sim_guide"
+        class="btn btn-primary"
+        onclick="trackEvent('click_apply_after_sim_guide'); chTrack('clicked_apply_final');"
+      >
         유심 준비했어요, 개통하기
       </a>
 
-      <button class="close-btn" onclick="trackEvent('close_sim_guide_modal'); closeModals();">닫기</button>
+      <button
+        type="button"
+        class="close-btn"
+        onclick="trackEvent('close_sim_guide_modal'); closeModals();"
+      >
+        닫기
+      </button>
     </div>
   </div>
 
@@ -466,7 +991,10 @@
   <div id="planModal" class="modal-overlay">
     <div class="modal">
       <h3>선불폰 요금제</h3>
-      <p>약정·위약금 없이, 충전해서 쓰는 선불 요금제예요.</p>
+
+      <p>
+        약정·위약금 없이, 충전해서 쓰는 선불 요금제예요.
+      </p>
 
       <div class="plan-grid">
         <div class="plan-card">
@@ -474,7 +1002,11 @@
             <span class="plan-name">464 요금제</span>
             <span class="plan-tag lg">L망</span>
           </div>
-          <div class="plan-detail">5G · 데이터 20GB+3Mbps · 통화/문자 기본제공</div>
+
+          <div class="plan-detail">
+            5G · 데이터 20GB+3Mbps · 통화/문자 기본제공
+          </div>
+
           <div class="plan-price">월 46,400원</div>
         </div>
 
@@ -483,7 +1015,11 @@
             <span class="plan-name">459 요금제</span>
             <span class="plan-tag kt">K망</span>
           </div>
-          <div class="plan-detail">LTE · 데이터 20.3GB+3Mbps · 통화/문자 기본제공</div>
+
+          <div class="plan-detail">
+            LTE · 데이터 20.3GB+3Mbps · 통화/문자 기본제공
+          </div>
+
           <div class="plan-price">월 45,900원</div>
         </div>
 
@@ -492,7 +1028,11 @@
             <span class="plan-name">396 요금제</span>
             <span class="plan-tag both">K/L망</span>
           </div>
-          <div class="plan-detail">LTE · 데이터 10.3GB+3Mbps · 통화/문자 기본제공</div>
+
+          <div class="plan-detail">
+            LTE · 데이터 10.3GB+3Mbps · 통화/문자 기본제공
+          </div>
+
           <div class="plan-price">월 39,600원</div>
         </div>
 
@@ -501,101 +1041,173 @@
             <span class="plan-name">기본1 요금제</span>
             <span class="plan-tag both">K/L망</span>
           </div>
-          <div class="plan-detail">LTE · 데이터 300MB · 통화 50분 · 문자 30건</div>
+
+          <div class="plan-detail">
+            LTE · 데이터 300MB · 통화 50분 · 문자 30건
+          </div>
+
           <div class="plan-price">월 12,100원</div>
         </div>
       </div>
 
-      <button class="btn btn-chat" onclick="openChat('plan_detail');">
-        💬 요금제 더 알아보기
+      <button
+        type="button"
+        class="btn btn-chat"
+        onclick="openChat('plan_detail');"
+      >
+        요금제 더 알아보기
       </button>
 
-      <button class="btn btn-primary" onclick="trackEvent('click_apply_from_plan'); chTrack('clicked_apply'); closeModals(); openSimCheck();">
+      <!-- 요금제 모달 개통 버튼도 바로 이동 -->
+      <a
+        href="https://preplan.site?from=59man_plan"
+        class="btn btn-primary"
+        onclick="trackEvent('click_apply_from_plan'); chTrack('clicked_apply_final');"
+      >
         개통하기
-      </button>
+      </a>
 
-      <button class="close-btn" onclick="trackEvent('close_plan_modal'); closeModals();">닫기</button>
+      <button
+        type="button"
+        class="close-btn"
+        onclick="trackEvent('close_plan_modal'); closeModals();"
+      >
+        닫기
+      </button>
     </div>
   </div>
 
   <script>
-    /* ── GA4 이벤트 ── */
+    /* GA4 이벤트 */
     function trackEvent(eventName) {
-      if (typeof gtag === 'function') {
-        gtag('event', eventName, { event_category: 'landing', event_label: '59man_shop' });
+      if (typeof gtag === "function") {
+        gtag("event", eventName, {
+          event_category: "landing",
+          event_label: "59man_shop"
+        });
       }
     }
 
-    /* ── 채널톡 이벤트 (마케팅 자동화 트리거용) ── */
+    /* 채널톡 이벤트 */
     function chTrack(eventName) {
-      if (typeof ChannelIO === 'function') {
-        ChannelIO('track', eventName);
+      if (typeof ChannelIO === "function") {
+        ChannelIO("track", eventName);
       }
     }
 
-    /* ── 채널톡 채팅 열기 ── */
+    /* 채널톡 열기 */
     function openChat(from) {
-      trackEvent('click_chat_' + from);
-      chTrack('clicked_chat');
-      if (typeof ChannelIO === 'function') {
-        ChannelIO('showMessenger');
+      trackEvent("click_chat_" + from);
+      chTrack("clicked_chat");
+
+      if (typeof ChannelIO === "function") {
+        ChannelIO("showMessenger");
       }
     }
 
-    /* ── 모달 ── */
-    function openSimCheck() {
-      document.getElementById('simCheckModal').classList.add('active');
-      trackEvent('open_sim_check_modal');
-      chTrack('opened_sim_check');
-    }
+    /* 유심 구매 안내 모달 */
     function openSimGuide() {
-      document.getElementById('simGuideModal').classList.add('active');
-      trackEvent('open_sim_guide_modal');
-      chTrack('viewed_sim_guide');
+      const modal = document.getElementById("simGuideModal");
+
+      if (!modal) {
+        return;
+      }
+
+      modal.classList.add("active");
+      trackEvent("open_sim_guide_modal");
+      chTrack("viewed_sim_guide");
     }
+
+    /* 요금제 모달 */
     function openPlanModal() {
-      document.getElementById('planModal').classList.add('active');
-      trackEvent('open_plan_modal');
-      chTrack('viewed_plans');
+      const modal = document.getElementById("planModal");
+
+      if (!modal) {
+        return;
+      }
+
+      modal.classList.add("active");
+      trackEvent("open_plan_modal");
+      chTrack("viewed_plans");
     }
-    function switchToSimGuide() {
-      document.getElementById('simCheckModal').classList.remove('active');
-      document.getElementById('simGuideModal').classList.add('active');
-      trackEvent('switch_to_sim_guide_modal');
-    }
+
+    /* 모든 모달 닫기 */
     function closeModals() {
-      document.getElementById('simCheckModal').classList.remove('active');
-      document.getElementById('simGuideModal').classList.remove('active');
-      document.getElementById('planModal').classList.remove('active');
+      const modals = document.querySelectorAll(".modal-overlay");
+
+      modals.forEach(function (modal) {
+        modal.classList.remove("active");
+      });
     }
-    document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('modal-overlay')) {
-        trackEvent('close_modal_overlay');
+
+    /* 모달 바깥 클릭 시 닫기 */
+    document.addEventListener("click", function (event) {
+      if (event.target.classList.contains("modal-overlay")) {
+        trackEvent("close_modal_overlay");
         closeModals();
       }
     });
 
-    /* ── 채널톡 부트 ── */
-    (function(){
-      var w=window;
-      if(w.ChannelIO){ return w.console.error("ChannelIO script included twice."); }
-      var ch=function(){ch.c(arguments);};
-      ch.q=[]; ch.c=function(args){ch.q.push(args);}; w.ChannelIO=ch;
-      function l(){
-        if(w.ChannelIOInitialized){return;}
-        w.ChannelIOInitialized=true;
-        var s=document.createElement("script");
-        s.type="text/javascript"; s.async=true; s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";
-        var x=document.getElementsByTagName("script")[0];
-        if(x.parentNode){ x.parentNode.insertBefore(s,x); }
+    /* ESC 키로 모달 닫기 */
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeModals();
       }
-      if(document.readyState==="complete"){ l(); }
-      else{ w.addEventListener("DOMContentLoaded",l); w.addEventListener("load",l); }
-    })();
-    ChannelIO('boot', { pluginKey: '047a22da-c1c4-4060-b54f-1d8bf97cc64f' });
+    });
 
-    /* ── 페이지 진입 트래킹 ── */
-    chTrack('page_viewed');
+    /* 채널톡 부트 */
+    (function () {
+      var w = window;
+
+      if (w.ChannelIO) {
+        return w.console.error("ChannelIO script included twice.");
+      }
+
+      var ch = function () {
+        ch.c(arguments);
+      };
+
+      ch.q = [];
+
+      ch.c = function (args) {
+        ch.q.push(args);
+      };
+
+      w.ChannelIO = ch;
+
+      function loadChannelIO() {
+        if (w.ChannelIOInitialized) {
+          return;
+        }
+
+        w.ChannelIOInitialized = true;
+
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.async = true;
+        script.src = "https://cdn.channel.io/plugin/ch-plugin-web.js";
+
+        var firstScript = document.getElementsByTagName("script")[0];
+
+        if (firstScript.parentNode) {
+          firstScript.parentNode.insertBefore(script, firstScript);
+        }
+      }
+
+      if (document.readyState === "complete") {
+        loadChannelIO();
+      } else {
+        w.addEventListener("DOMContentLoaded", loadChannelIO);
+        w.addEventListener("load", loadChannelIO);
+      }
+    })();
+
+    ChannelIO("boot", {
+      pluginKey: "047a22da-c1c4-4060-b54f-1d8bf97cc64f"
+    });
+
+    /* 페이지 진입 트래킹 */
+    chTrack("page_viewed");
   </script>
 </body>
 </html>
