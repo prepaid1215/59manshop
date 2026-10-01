@@ -46,6 +46,13 @@ tr:last-child td{border-bottom:0}
 .links{list-style:none;padding:0;margin:0;display:grid;gap:10px}
 .links li{margin:0}
 .links a{display:block;padding:13px;border-radius:16px;background:#f8fafc;border:1px solid #e2e8f0;color:#0f172a;font-size:14px;font-weight:800;line-height:1.5}
+.topic-links{gap:12px}
+.topic-links a{padding:15px 14px;background:#fff;box-shadow:0 8px 20px rgba(15,23,42,.05);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.topic-links a:hover{transform:translateY(-1px);border-color:#bfdbfe;box-shadow:0 12px 24px rgba(37,99,235,.1)}
+.topic-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.topic-title{color:#0f172a;font-size:15px;font-weight:900}
+.topic-count{display:inline-flex;align-items:center;justify-content:center;min-width:52px;padding:4px 9px;border-radius:999px;background:#eff6ff;color:#2563eb;font-size:11px;font-weight:900;white-space:nowrap}
+.topic-desc{display:block;margin-top:7px;color:#64748b;font-size:13px;font-weight:650;line-height:1.55}
 .related>p{margin:14px 0 0;text-align:center}
 .related>p a{color:#2563eb;font-weight:850;font-size:13px}
 .faq details{border-bottom:1px solid #e2e8f0;padding:12px 0}
@@ -64,15 +71,15 @@ tr:last-child td{border-bottom:0}
 <main>
 <nav class="crumbs" aria-label="breadcrumb"><a href="/">59만선불폰</a> &gt; 안내 모음</nav>
 <section class="hero"><span class="hero-badge">59만선불폰 가이드</span><h1>선불폰 안내 모음</h1><div class="hero-desc">선불폰 개통, 유심, 요금제 등 주제별 안내를 모아 둔 목록입니다.</div></section>
-<section class="section"><h2>주제별로 찾아보기</h2><ul class="links">
-<li><a href="/guide/activation/">개통 방법</a> (17) — 선불폰 신규가입, 셀프개통 절차, 개통 가능 시간과 관련된 상세 안내를 모아 보는 허브</li>
-<li><a href="/guide/usim/">유심 안내</a> (5) — 편의점·다이소 선불유심 종류, 구매처, 입력방법과 관련된 상세 안내를 모아 보는 허브</li>
-<li><a href="/guide/kt-baro-usim/">KT 바로유심</a> (2) — KT 바로유심의 가격, 판매처, NFC, 입력방법 등 상세 정보를 모아 보는 허브</li>
-<li><a href="/guide/lg-onechip/">LG 원칩</a> (1) — LG 모두의 원칩의 가격, 판매처, NFC, 입력방법 등 상세 정보를 모아 보는 허브</li>
-<li><a href="/guide/plans/">요금제</a> (5) — 선불폰 요금제의 종류, 가격, 데이터 비교와 관련된 상세 안내를 모아 보는 허브</li>
-<li><a href="/guide/arrears-suspension/">미납·정지</a> (4) — 통신비 미납, 정지된 회선 처리와 번호이동 가능 여부를 모아 보는 허브</li>
-<li><a href="/guide/foreigner/">외국인 개통</a> (1) — 외국인의 휴대폰 개통 가능 조건과 필요 서류를 모아 보는 허브</li>
-<li><a href="/guide/device-number/">세컨번호·투폰</a> (1) — 기존 번호와 별개로 세컨번호(투폰)·영업용 번호를 만드는 방법을 모아 보는 허브</li>
+<section class="section"><h2>주제별로 찾아보기</h2><ul class="links topic-links">
+<li><a href="/guide/activation/"><span class="topic-head"><span class="topic-title">개통 방법</span><span class="topic-count">17개 안내</span></span><span class="topic-desc">선불폰 신규가입, 셀프개통 절차, 개통 가능 시간과 관련된 상세 안내를 모아 보는 허브</span></a></li>
+<li><a href="/guide/usim/"><span class="topic-head"><span class="topic-title">유심 안내</span><span class="topic-count">5개 안내</span></span><span class="topic-desc">편의점·다이소 선불유심 종류, 구매처, 입력방법과 관련된 상세 안내를 모아 보는 허브</span></a></li>
+<li><a href="/guide/kt-baro-usim/"><span class="topic-head"><span class="topic-title">KT 바로유심</span><span class="topic-count">2개 안내</span></span><span class="topic-desc">KT 바로유심의 가격, 판매처, NFC, 입력방법 등 상세 정보를 모아 보는 허브</span></a></li>
+<li><a href="/guide/lg-onechip/"><span class="topic-head"><span class="topic-title">LG 원칩</span><span class="topic-count">1개 안내</span></span><span class="topic-desc">LG 모두의 원칩의 가격, 판매처, NFC, 입력방법 등 상세 정보를 모아 보는 허브</span></a></li>
+<li><a href="/guide/plans/"><span class="topic-head"><span class="topic-title">요금제</span><span class="topic-count">5개 안내</span></span><span class="topic-desc">선불폰 요금제의 종류, 가격, 데이터 비교와 관련된 상세 안내를 모아 보는 허브</span></a></li>
+<li><a href="/guide/arrears-suspension/"><span class="topic-head"><span class="topic-title">미납·정지</span><span class="topic-count">4개 안내</span></span><span class="topic-desc">통신비 미납, 정지된 회선 처리와 번호이동 가능 여부를 모아 보는 허브</span></a></li>
+<li><a href="/guide/foreigner/"><span class="topic-head"><span class="topic-title">외국인 개통</span><span class="topic-count">1개 안내</span></span><span class="topic-desc">외국인의 휴대폰 개통 가능 조건과 필요 서류를 모아 보는 허브</span></a></li>
+<li><a href="/guide/device-number/"><span class="topic-head"><span class="topic-title">세컨번호·투폰</span><span class="topic-count">1개 안내</span></span><span class="topic-desc">기존 번호와 별개로 세컨번호(투폰)·영업용 번호를 만드는 방법을 모아 보는 허브</span></a></li>
 </ul></section>
 </main>
 <footer class="footer">© 59만선불폰</footer>
