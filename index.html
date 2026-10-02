@@ -727,7 +727,11 @@
         59만모바일
       </div>
 
-      <div class="pill">당일개통 신청</div>
+      <a
+        class="pill"
+        href="/guide/"
+        onclick="trackEvent('click_guide_top');"
+      >선불폰 가이드</a>
     </div>
 
     <section class="hero">
@@ -776,6 +780,14 @@
       >
         실시간 채팅 문의하기
       </button>
+
+      <a
+        href="/guide/"
+        class="btn btn-light"
+        onclick="trackEvent('click_guide_hero');"
+      >
+        선불폰 가이드 보기
+      </a>
 
       <div class="quick">
         <div class="quick-card">
@@ -832,8 +844,13 @@
         </div>
 
         <div class="step">
-          <span class="step-skip">안면인증 건너뛰기</span>
-          → 본인인증 진행
+          본인인증 진행 ·
+          <a
+            href="https://pf.kakao.com/_akxmKn/chat"
+            target="_blank"
+            rel="noopener"
+            onclick="trackEvent('click_face_auth_help');"
+          >어려우면 카카오 상담</a>
         </div>
 
         <div class="step">유심번호 입력 후 신청</div>
