@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index,follow" />
   <meta name="google-site-verification" content="OAT-Dl_n2XOlhnallfCruypCs245ia8zPkgw_h1YCnE" />
+  <link rel="canonical" href="https://www.59man.shop/" />
   
   <!-- Google tag (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N7ZW223ESP"></script>
@@ -20,7 +22,7 @@
 
   
 
-  <title>59만모바일 | 휴대폰 정지됐을 때 편의점 유심으로 선불폰 개통</title>
+  <title>59만선불폰 | 휴대폰 정지됐을 때 편의점 유심으로 선불폰 개통</title>
 
   <meta
     name="description"
@@ -34,19 +36,19 @@
     property="og:description"
     content="편의점 유심 + 간편인증으로 방문 없이 선불폰 개통 신청 가능합니다."
   />
-  <meta property="og:url" content="https://59man.shop/" />
+  <meta property="og:url" content="https://www.59man.shop/" />
   <meta
     property="og:image"
-    content="https://59man.shop/og-image-v5.png?v=20260616"
+    content="https://www.59man.shop/og-image-v5.png?v=20260616"
   />
   <meta
     property="og:image:secure_url"
-    content="https://59man.shop/og-image-v5.png?v=20260616"
+    content="https://www.59man.shop/og-image-v5.png?v=20260616"
   />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1080" />
   <meta property="og:image:height" content="1080" />
-  <meta property="og:site_name" content="59만모바일" />
+  <meta property="og:site_name" content="59만선불폰" />
   <meta property="og:locale" content="ko_KR" />
 
   <!-- Twitter -->
@@ -61,11 +63,10 @@
   />
   <meta
     name="twitter:image"
-    content="https://59man.shop/og-image-v5.png?v=20260616"
+    content="https://www.59man.shop/og-image-v5.png?v=20260616"
   />
 
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/mascot_logo.png" />
 
   <style>
     * {
@@ -311,6 +312,36 @@
       font-size: 12px;
       color: #64748b;
       line-height: 1.45;
+    }
+
+    .hub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .hub-card {
+      display: flex;
+      min-height: 58px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 13px 14px;
+      border: 1px solid #dbe4f0;
+      border-radius: 16px;
+      background: #f8fafc;
+      color: #0f172a;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .hub-card::after {
+      content: "›";
+      color: #2563eb;
+      font-size: 20px;
+      line-height: 1;
     }
 
     .section {
@@ -680,10 +711,10 @@
     {
       "@context": "https://schema.org",
       "@type": "MobilePhoneStore",
-      "name": "59만모바일",
-      "url": "https://59man.shop/",
+      "name": "59만선불폰",
+      "url": "https://www.59man.shop/",
       "telephone": "010-7305-8253",
-      "description": "편의점 유심과 간편인증으로 선불폰 개통을 안내하는 59만모바일입니다.",
+      "description": "편의점 유심과 간편인증으로 선불폰 개통을 안내하는 59만선불폰입니다.",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "KR",
@@ -722,9 +753,9 @@
         <img
           class="logo-mark"
           src="/mascot_logo_v2.png"
-          alt="59만모바일 로고"
+          alt="59만선불폰 로고"
         />
-        59만모바일
+        59만선불폰
       </div>
 
       <a
@@ -751,7 +782,7 @@
       <div class="mascot-card">
         <img
           src="/mascots_card_v2.png"
-          alt="59만모바일 캐릭터 - KT·LG 정식망 선불폰 개통"
+          alt="59만선불폰 캐릭터 - KT·LG 정식망 선불폰 개통"
         />
       </div>
 
@@ -800,6 +831,24 @@
           <span>집에서 10분 만에 셀프신청</span>
         </div>
       </div>
+    </section>
+
+    <section class="section">
+      <h2>필요한 안내 바로 찾기</h2>
+      <p class="section-desc">
+        개통 방법부터 유심·요금제·미납 상태까지 필요한 주제로 바로 이동하세요.
+      </p>
+
+      <nav class="hub-grid" aria-label="선불폰 주제별 안내">
+        <a class="hub-card" href="/guide/activation/">개통 방법</a>
+        <a class="hub-card" href="/guide/usim/">유심 안내</a>
+        <a class="hub-card" href="/guide/kt-baro-usim/">KT 바로유심</a>
+        <a class="hub-card" href="/guide/lg-onechip/">LG 원칩</a>
+        <a class="hub-card" href="/guide/plans/">요금제</a>
+        <a class="hub-card" href="/guide/arrears-suspension/">미납·정지</a>
+        <a class="hub-card" href="/guide/foreigner/">외국인 개통</a>
+        <a class="hub-card" href="/guide/device-number/">휴대폰·번호</a>
+      </nav>
     </section>
 
     <section class="section">
@@ -936,7 +985,7 @@
     </section>
 
     <div class="footer">
-      59만모바일 | 앤텔레콤 공식 파트너
+      59만선불폰 | 앤텔레콤 공식 파트너
     </div>
 
     <div class="policy-footer">
@@ -946,7 +995,7 @@
       </div>
 
       <div class="company-info">
-        59만모바일 | 대표자: 주영돈 | 부산 금정구 금강로 670<br />
+        59만선불폰 | 대표자: 주영돈 | 부산 금정구 금강로 670<br />
         대표번호: 010-7305-8253 | 사업자등록번호: 7745600506<br />
         통신판매신고번호: 2024-부산금정-0130
       </div>
