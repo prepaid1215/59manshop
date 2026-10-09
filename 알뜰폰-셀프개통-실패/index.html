@@ -1,77 +1,4 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>알뜰폰 셀프개통 실패 원인</title>
-<meta name="description" content="인증 실패와 유심정보 입력 오류를 구분해 알뜰폰 셀프개통 실패 원인을 안내합니다.">
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://www.59man.shop/%EC%95%8C%EB%9C%B0%ED%8F%B0-%EC%85%80%ED%94%84%EA%B0%9C%ED%86%B5-%EC%8B%A4%ED%8C%A8/">
-<meta property="og:type" content="article">
-<meta property="og:title" content="알뜰폰 셀프개통 실패 원인">
-<meta property="og:description" content="인증 실패와 유심정보 입력 오류를 구분해 알뜰폰 셀프개통 실패 원인을 안내합니다.">
-<meta property="og:url" content="https://www.59man.shop/%EC%95%8C%EB%9C%B0%ED%8F%B0-%EC%85%80%ED%94%84%EA%B0%9C%ED%86%B5-%EC%8B%A4%ED%8C%A8/">
-<meta property="og:locale" content="ko_KR">
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:radial-gradient(circle at top left,rgba(37,99,235,.16),transparent 34%),linear-gradient(180deg,#f8fafc 0%,#eef2f7 100%);color:#0f172a;line-height:1.7}
-a{text-decoration:none}
-.page{max-width:520px;margin:0 auto;padding:18px 16px 34px}
-.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:13px;color:#64748b}
-.logo{display:flex;align-items:center;gap:8px;font-weight:900;color:#0f172a}
-.logo-mark{width:30px;height:30px;border-radius:50%;display:block;flex:0 0 30px}
-.pill{padding:6px 10px;border-radius:999px;background:#e0f2fe;color:#0369a1;font-weight:800;font-size:12px}
-.crumbs{font-size:12px;color:#64748b;margin:0 0 10px;line-height:1.55}
-.crumbs a{color:#475569;font-weight:750}
-.hero{position:relative;overflow:hidden;background:#fff;border-radius:26px;padding:26px 22px 24px;box-shadow:0 18px 44px rgba(15,23,42,.1);border:1px solid rgba(226,232,240,.9);margin-bottom:16px}
-.hero::before{content:"";position:absolute;right:-60px;top:-60px;width:160px;height:160px;background:rgba(37,99,235,.12);border-radius:999px}
-.hero-badge{position:relative;display:inline-flex;align-items:center;padding:7px 11px;border-radius:999px;background:#f1f5f9;color:#334155;font-size:12px;font-weight:800;margin-bottom:14px}
-.hero h1{position:relative;margin:0;font-size:29px;line-height:1.26;letter-spacing:-.06em;font-weight:950;color:#020617}
-.hero-desc{position:relative;margin:16px 0 0;color:#475569;font-size:15px;line-height:1.65;font-weight:650}
-.answer-box,.section,.faq,.related{margin-top:16px;background:#fff;border-radius:22px;padding:22px 18px;box-shadow:0 12px 30px rgba(15,23,42,.06);border:1px solid rgba(226,232,240,.9)}
-.answer-box{margin-top:0;border-left:4px solid #2563eb}
-.answer-box p,.section p{margin:0;color:#334155;font-size:14px;line-height:1.7;font-weight:650}
-.section p+p{margin-top:12px}
-.section h2,.faq h2,.related h2{margin:0 0 12px;font-size:18px;letter-spacing:-.04em;color:#020617}
-.table-scroll{width:100%;overflow-x:auto;border-radius:16px;border:1px solid #e2e8f0}
-table{border-collapse:collapse;width:100%;font-size:13px;background:#fff}
-th,td{border-bottom:1px solid #e2e8f0;padding:10px;text-align:left;white-space:nowrap;color:#334155}
-th{background:#f8fafc;color:#020617;font-weight:900}
-tr:last-child td{border-bottom:0}
-.cta{margin-top:16px;padding:22px 18px;border-radius:24px;background:radial-gradient(circle at top right,rgba(96,165,250,.28),transparent 30%),#020617;color:#fff;box-shadow:0 18px 38px rgba(15,23,42,.22)}
-.cta p{margin:0 0 14px;color:#cbd5e1;font-size:14px;line-height:1.6;font-weight:600}
-.cta a{display:flex;width:100%;min-height:56px;border-radius:16px;align-items:center;justify-content:center;padding:14px 16px;margin-top:10px;font-size:15px;font-weight:900;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;box-shadow:0 14px 28px rgba(37,99,235,.26);text-align:center}
-.cta a.sub{background:linear-gradient(135deg,#60a5fa,#3b82f6);color:#fff}
-.links{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-.links li{margin:0}
-.links a{display:block;padding:13px;border-radius:16px;background:#f8fafc;border:1px solid #e2e8f0;color:#0f172a;font-size:14px;font-weight:800;line-height:1.5}
-.topic-links{gap:12px}
-.topic-links a{padding:15px 14px;background:#fff;box-shadow:0 8px 20px rgba(15,23,42,.05);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
-.topic-links a:hover{transform:translateY(-1px);border-color:#bfdbfe;box-shadow:0 12px 24px rgba(37,99,235,.1)}
-.topic-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.topic-title{color:#0f172a;font-size:15px;font-weight:900}
-.topic-count{display:inline-flex;align-items:center;justify-content:center;min-width:52px;padding:4px 9px;border-radius:999px;background:#eff6ff;color:#2563eb;font-size:11px;font-weight:900;white-space:nowrap}
-.topic-desc{display:block;margin-top:7px;color:#64748b;font-size:13px;font-weight:650;line-height:1.55}
-.related>p{margin:14px 0 0;text-align:center}
-.related>p a{color:#2563eb;font-weight:850;font-size:13px}
-.faq details{border-bottom:1px solid #e2e8f0;padding:12px 0}
-.faq details:last-child{border-bottom:0}
-.faq summary{cursor:pointer;font-weight:850;color:#020617;font-size:14px}
-.faq details p{margin:8px 0 0;color:#475569;font-size:14px;font-weight:650}
-.footer{text-align:center;font-size:12px;color:#64748b;margin:18px 0 12px;font-weight:700}
-@media(max-width:360px){.hero h1{font-size:26px}.page{padding-left:12px;padding-right:12px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"알뜰폰 셀프개통 실패 원인","description":"인증 실패와 유심정보 입력 오류를 구분해 알뜰폰 셀프개통 실패 원인을 안내합니다.","url":"https://www.59man.shop/%EC%95%8C%EB%9C%B0%ED%8F%B0-%EC%85%80%ED%94%84%EA%B0%9C%ED%86%B5-%EC%8B%A4%ED%8C%A8/","inLanguage":"ko","isPartOf":{"@type":"WebSite","name":"59만선불폰","url":"https://www.59man.shop/"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"59만선불폰","item":"https://www.59man.shop/"},{"@type":"ListItem","position":2,"name":"안내 모음","item":"https://www.59man.shop/guide/"},{"@type":"ListItem","position":3,"name":"개통 방법","item":"https://www.59man.shop/guide/activation/"},{"@type":"ListItem","position":4,"name":"알뜰폰 셀프개통 실패 원인","item":"https://www.59man.shop/%EC%95%8C%EB%9C%B0%ED%8F%B0-%EC%85%80%ED%94%84%EA%B0%9C%ED%86%B5-%EC%8B%A4%ED%8C%A8/"}]}</script>
-</head>
-<body>
-<div class="page">
-<header class="top-bar"><a class="logo" href="/"><img class="logo-mark" src="/mascot_logo.png" alt="">59만선불폰</a><a class="pill" href="/guide/">선불폰 가이드</a></header>
-<main>
-<nav class="crumbs" aria-label="breadcrumb"><a href="/">59만선불폰</a> &gt; <a href="/guide/">안내 모음</a> &gt; <a href="/guide/activation/">개통 방법</a> &gt; 알뜰폰 셀프개통 실패 원인</nav>
-<section class="hero"><span class="hero-badge">개통 방법</span><h1>알뜰폰 셀프개통이 자꾸 실패한다면</h1><div class="hero-desc">인증 실패와 유심정보 입력 오류를 구분해 알뜰폰 셀프개통 실패 원인을 안내합니다.</div></section>
-<article>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>알뜰폰 셀프개통 실패 원인</title><meta name="description" content="인증 실패와 유심정보 입력 오류를 구분해 알뜰폰 셀프개통 실패 원인을 안내합니다."><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://www.59man.shop/알뜰폰-셀프개통-실패/"><link rel="stylesheet" href="/assets/v4-1-final.css"></head><body><header class="top"><div class="site"><a class="brand" href="/">59만모바일</a><span class="tag">선불폰 안내</span></div></header><section class="hero hero-activation"><div class="site"><div class="eyebrow">셀프개통</div><h1>알뜰폰 셀프개통이 자꾸 실패한다면</h1><p>인증 실패와 유심정보 입력 오류를 구분해 알뜰폰 셀프개통 실패 원인을 안내합니다.</p></div></section><main class="site content"><div class="layout"><article class="article"><p class="crumb"><a href="/">홈</a> · 셀프개통</p><p class="noindex-note">이 안내는 사용자 지원을 위해 유지되며 검색 색인 대상은 아닙니다.</p>
 <div class="answer-box"><p>안면인증이 어렵거나 진행되지 않으면 카카오 채널로 문의해 주세요.</p></div>
 <section class="section"><h2>유심번호 입력</h2>
 <p>개통 신청 중 유심번호를 입력할 때는 유심카드에 적힌 19자리 번호를 넣습니다. L망 유심번호는 모델코드 5자리와 일련번호 8자리를 입력합니다.</p>
@@ -87,14 +14,9 @@ tr:last-child td{border-bottom:0}
 <h2>함께 볼 안내</h2>
 <ul class="links">
 <li><a href="/guide/activation/">개통 방법 안내 전체 보기</a></li>
-<li><a href="/%EC%95%8C%EB%9C%B0%ED%8F%B0-%EC%85%80%ED%94%84%EA%B0%9C%ED%86%B5-%EC%95%88%EB%90%A8/">알뜰폰 셀프개통 안 될 때 확인할 것</a></li>
-<li><a href="/%EC%9C%A0%EC%8B%AC-%EC%9D%B8%EC%8B%9D-%EC%95%88%EB%90%A8/">유심 인식 안됨, 정지폰 호환 문제일 수도</a></li>
+<li>알뜰폰 셀프개통 안 될 때 확인할 것</li>
+<li>유심 인식 안됨, 정지폰 호환 문제일 수도</li>
 </ul>
 <p><a href="/guide/">안내 모음으로 돌아가기</a></p>
 </nav>
-</article>
-</main>
-<footer class="footer">© 59만선불폰</footer>
-</div>
-</body>
-</html>
+</article><aside class="side"><div class="side-intro"><span>빠른 개통</span><strong>내 상황에 맞는 경로를 확인하세요</strong><a class="button" href="https://preplan.site/">개통 시작하기 →</a></div><h2>관련 안내</h2><a class="cardlink" href="/앤텔레콤-선불폰-개통-방법/">셀프개통 방법</a><a class="cardlink" href="/편의점-선불유심/">유심 준비 안내</a><a class="cardlink" href="/v4-1/topic/plan-compare/">요금제 비교</a></aside></div></main><footer class="footer"><div class="site">59만모바일 · 조건 확인 후 개통 경로를 선택하세요.</div></footer></body></html>
