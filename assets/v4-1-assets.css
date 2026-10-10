@@ -5,3 +5,6 @@
 
 /* Mobile width safety: remove min-content expansion instead of masking overflow. */
 @media(max-width:760px){.site,.content,.layout,.article,.side,.product-summary,.activation-flow,.related,.summary-grid,.steps,.step,.step>div{width:100%;max-width:100%;min-width:0}.layout{grid-template-columns:minmax(0,1fr)}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.step{grid-template-columns:38px minmax(0,1fr)}.article p,.article h2,.article h3,.summary-grid span,.step p,.step strong,.related a{overflow-wrap:anywhere;word-break:normal}}
+picture{display:contents}
+@media(max-width:760px){.activation-flow #activation-flow-title{padding-right:52px;word-break:keep-all;overflow-wrap:normal}}
+@media(max-width:760px){.article h2{word-break:keep-all;overflow-wrap:break-word}}
