@@ -12,7 +12,7 @@ import re
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, unquote
 from bs4 import BeautifulSoup
 
 KST = timezone(timedelta(hours=9))
@@ -148,7 +148,7 @@ def update_baseline(template,summary,results):
             row["naver_serp_appeared"]="수집 실패"
             continue
         matches=[x for x in results if (x["query"],x["device"])==key
-                 and x["result_url"].rstrip("/")==row["url"].rstrip("/")]
+                 and unquote(x["result_url"]).rstrip("/")==unquote(row["url"]).rstrip("/")]
         if matches:
             x=matches[0]
             row.update({"naver_serp_appeared":"관측(스크린샷 검증 대기)",
