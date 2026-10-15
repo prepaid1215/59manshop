@@ -19,7 +19,9 @@ KST = timezone(timedelta(hours=9))
 NAME = re.compile(r"^(\d{8}-\d{4})_(pc|mo)_(.+)\.html$", re.I)
 TITLE = re.compile(r"total_tit|link_tit|title_link|api_txt_lines|tit_link|tit_main|ugc_title", re.I)
 BOX = re.compile(r"api_subject_bx|total_wrap|ugc_item|ugcItem|web_wrap|lst_total|content_area|section_area|api_section", re.I)
-AD = re.compile(r"powerlink|lst_total|ad_group|sp_ad|ad_item|ad_link", re.I)
+AD = re.compile(r"powerlink|ad_group|sp_ad|ad_item|ad_link", re.I)  # lst_total은 일반 결과 목록에도 쓰일 수 있어 제외
+SECTION = re.compile(r"api_subject_bx|sc_new|section_area|api_section", re.I)  # 블록(섹션) 단위 묶음
+NEWS = re.compile(r"\bnews\b|news_area|news_wrap|sp_nnews", re.I)
 INFRA = {"search.naver.com", "m.search.naver.com", "nid.naver.com",
          "m.naver.com", "help.naver.com", "nmap.place.naver.com",
          "ad.search.naver.com", "m.ad.search.naver.com"}
@@ -34,7 +36,7 @@ PILOT = {"선불폰 개통","선불폰 개통방법","선불폰 셀프개통"}
 def write_csv(path, fields, rows):
     path.parent.mkdir(parents=True,exist_ok=True)
     with path.open("w",encoding="utf-8-sig",newline="") as f:
-        w=csv.DictWriter(f,fieldnames=fields,extrasaction="ignore")
+        w=csv.DictWriter(f,fieldnames=fields,extrasaction="ignore",lineterminator="\n")
         w.writeheader();w.writerows(rows)
 
 def cls(node):
@@ -91,8 +93,12 @@ def parse_html(raw):
             continue
         seen.add(href)
         d=(urlsplit(href).hostname or "").lower()
+        section=a.find_parent(class_=SECTION)
         t="AD" if is_ad(a) else area(d)
-        group=("box",id(box)) if box else ("category",t)
+        if t=="WEB" and section is not None and NEWS.search(cls(section)):
+            t="OTHER"  # 언론사 뉴스 카드는 웹사이트 영역으로 세지 않는다
+        holder=section if section is not None else box
+        group=("box",id(holder)) if holder is not None else ("category",t)
         items.append((href,d,t,group))
     if not items:return [],"수집 실패","unrecognized HTML structure; manual inspection required"
     out=[];prior=None;block=0;pos=0;organic=0
@@ -177,6 +183,7 @@ def main():
         if not m:
             skipped.append(f"bad filename: {path.name}");continue
         stamp,device,keyword=m.groups()
+        keyword=re.sub(r"[_\s]+"," ",keyword).strip()  # 선불폰_개통 → 선불폰 개통
         try:
             when=datetime.strptime(stamp,"%Y%m%d-%H%M").replace(tzinfo=KST).isoformat(timespec="minutes")
         except ValueError:
