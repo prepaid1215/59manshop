@@ -67,5 +67,34 @@ class AuditTests(unittest.TestCase):
             self.assertEqual(reports[0]["similarity"]["body"]["pairs"], 3)
             self.assertIn("body_boilerplate_removed", reports[0]["similarity"])
 
+    def test_competitor_region_classifier(self):
+        disc = load("audit_discovery", "competitor_sitemap_discovery.py")
+        cases = [
+            ("https://x.com/region/seoul.jpg", False),
+            ("https://x.com/region/map.png", False),
+            ("https://x.com/번호이동/", False),
+            ("https://x.com/선불폰/번호이동", False),
+            ("https://x.com/번호이동-방법/", False),
+            ("https://x.com/신림동/", True),
+            ("https://x.com/신림동선불폰/", True),
+            ("https://usimon.pages.dev/region/gwangju/dong-gu/geum-dong/", True),
+        ]
+        for url, expected in cases:
+            with self.subTest(url=url):
+                self.assertEqual(disc.classify_region(url), expected)
+
+    def test_frozen_120_candidates_unchanged(self):
+        import csv
+        disc = load("audit_discovery_samples", "competitor_sitemap_discovery.py")
+        file = ROOT / "sample_urls_20261016.tsv"
+        with file.open(encoding="utf-8", newline="") as handle:
+            samples = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(len(samples), 120)
+        from collections import Counter
+        self.assertTrue(all(n == 20 for n in Counter(x["site"] for x in samples).values()))
+        for row in samples:
+            with self.subTest(url=row["url"]):
+                self.assertTrue(disc.classify_region(row["url"]))
+
 if __name__ == "__main__":
     unittest.main()

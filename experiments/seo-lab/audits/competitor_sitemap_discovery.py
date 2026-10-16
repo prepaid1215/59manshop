@@ -61,7 +61,10 @@ def is_same_host(root, candidate):
 def classify_region(url):
     p = unquote(urlsplit(url).path).lower()
     # Exclude image, RSS and document assets even when their path contains /region/.
-    if re.search(r"\\.(?:jpg|jpeg|png|webp|svg|gif|xml|pdf|mp4)(?:$|/)", p):
+    if re.search(r"\.(?:jpg|jpeg|png|webp|svg|gif|xml|pdf|mp4)(?:$|/)", p):
+        return False
+    # '~동'으로 끝나지만 지역명이 아닌 서비스 용어. 보수적으로 제외한다.
+    if re.search(r"(?:^|/|-)(?:번호이동|자동|연동|작동|변동|활동|운동|행동)(?:/|-|$)", p):
         return False
     if re.search(r"/[가-힣0-9]{2,}동/?$", p):
         return True
