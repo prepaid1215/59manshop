@@ -1,0 +1,24 @@
+name: SEO audit tool offline regression
+on:
+  push:
+    branches: [seo-lab-v01]
+    paths:
+      - "experiments/seo-lab/audits/similarity.py"
+      - "experiments/seo-lab/audits/site_checks_20261016.py"
+      - "experiments/seo-lab/audits/test_audits.py"
+      - ".github/workflows/seo-audit-tests.yml"
+  workflow_dispatch:
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Python compile and offline regression
+        run: |
+          python -m py_compile experiments/seo-lab/audits/similarity.py experiments/seo-lab/audits/site_checks_20261016.py
+          python experiments/seo-lab/audits/test_audits.py -v

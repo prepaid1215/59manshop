@@ -63,6 +63,16 @@ def normalize_region_path(url):
     return p[:-len("선불폰")]
 
 
+ADMIN_SUFFIX = ("구", "군", "시")
+
+
+def prefixed_match(slug, dong):
+    """'관악구신사동'처럼 시군구 이름이 앞에 붙은 주소가 후보 동명과 맞는지 판단."""
+    if slug == dong or not slug.endswith(dong):
+        return False
+    return slug[: -len(dong)].endswith(ADMIN_SUFFIX)
+
+
 def inspect_page(result):
     if result.get("status") != 200 or "body" not in result:
         return {k: v for k, v in result.items() if k != "body"}
@@ -107,11 +117,17 @@ def main():
             dong_set = {normalize_region_path(u) for u in locs}
             dong_set.discard(None)
             overlaps = [r for r in items if r["dong"] in dong_set]
+            exact_names = {r["dong"] for r in overlaps}
+            prefixed = [r for r in items if r["dong"] not in exact_names
+                        and any(prefixed_match(s, r["dong"]) for s in dong_set)]
             preplan_info.update({
                 "sitemap_entries": len(locs),
                 "direct_root_region_names": len(dong_set),
                 "candidate_overlap_exact_root_region": len(overlaps),
                 "candidate_not_matched": 1000 - len(overlaps),
+                "candidate_overlap_admin_prefixed_only": len(prefixed),
+                "candidate_overlap_exact_or_prefixed": len(overlaps) + len(prefixed),
+                "prefixed_examples": [r["province"] + " " + r["dong"] for r in prefixed[:15]],
                 "cohorts": dict(Counter(r["cohort"] for r in overlaps)),
                 "examples": [r["province"] + " " + r["dong"] for r in overlaps[:15]]
             })
