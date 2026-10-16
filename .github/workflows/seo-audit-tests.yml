@@ -1,0 +1,62 @@
+name: SEO audit tool offline regression
+on:
+  push:
+    branches: [seo-lab-v01]
+    paths:
+      - "experiments/seo-lab/audits/similarity.py"
+      - "experiments/seo-lab/audits/site_checks_20261016.py"
+      - "experiments/seo-lab/audits/test_audits.py"
+      - ".github/workflows/seo-audit-tests.yml"
+  workflow_dispatch:
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Python compile and offline regression
+        run: |
+          python -m py_compile experiments/seo-lab/audits/similarity.py experiments/seo-lab/audits/site_checks_20261016.py
+          python experiments/seo-lab/audits/test_audits.py -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Render 1000 offline noindex preview pages
+        run: node experiments/seo-lab/bulk1000/generate.cjs --preview --out "$RUNNER_TEMP/seo-preview"
+      - name: Measure fixed-seed candidate similarity
+        shell: bash
+        run: |
+          python experiments/seo-lab/audits/similarity.py \
+            --pages "$RUNNER_TEMP/seo-preview/bulk-lab" \
+            --n 20 --seed 20261016 \
+            --out "$RUNNER_TEMP/similarity-preview-20.json" > /dev/null
+          python - "$RUNNER_TEMP/similarity-preview-20.json" <<'PY'
+          import json, sys
+          data=json.load(open(sys.argv[1],encoding="utf-8"))
+          assert data["input"]["n"]==20, data["input"]
+          assert data["input"]["files_found"]==1000, data["input"]
+          # 측정이 정상 실행됐는지만 검사한다. 유사도 값 자체는 기록만 한다.
+          # (값을 고정하면 생성기를 개선해 유사도가 내려갈 때 CI가 실패한다.
+          #  공개 합격 기준은 경쟁사 표본 측정 후 별도의 publish gate로 추가한다.)
+          assert len(data["sample"])==20, len(data["sample"])
+          body=data["similarity"]["body"]
+          assert body["pairs"]+body["skipped_pairs"]==190, body
+          assert body["mean"] is None or 0.0 <= body["mean"] <= 1.0, body
+          assert "docs_with_no_unique_body" in data and "body_chars" in data
+          print(json.dumps({
+              "sample": data["input"],
+              "body_similarity": data["similarity"]["body"],
+              "body_after_common_sentences": data["similarity"]["body_boilerplate_removed"],
+              "no_unique_body_count": data["docs_with_no_unique_body"]
+          }, ensure_ascii=False))
+          PY
+      - name: Preserve preview audit sample for reviewer
+        uses: actions/upload-artifact@v4
+        with:
+          name: bulk1000-fixed-seed-similarity
+          path: ${{ runner.temp }}/similarity-preview-20.json
+          retention-days: 14

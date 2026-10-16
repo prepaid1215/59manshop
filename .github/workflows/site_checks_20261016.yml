@@ -1,0 +1,23 @@
+name: Manual SEO read-only checks
+on:
+  push:
+    branches: [seo-lab-v01]
+    paths:
+      - ".github/workflows/site_checks_20261016.yml"
+      - "experiments/seo-lab/audits/site_checks_20261016.py"
+  workflow_dispatch:
+jobs:
+  check-live:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify 3 live pages and compare preplan sitemap (read-only)
+        run: python3 experiments/seo-lab/audits/site_checks_20261016.py
+      - name: Upload aggregate audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-site-checks-20261016
+          path: experiments/seo-lab/audits/site_checks_20261016.result.json
+          retention-days: 7

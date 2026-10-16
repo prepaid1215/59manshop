@@ -1,0 +1,24 @@
+name: Competitor public sitemap metadata
+on:
+  push:
+    branches: [seo-lab-v01]
+    paths:
+      - ".github/workflows/competitor-discovery.yml"
+      - "experiments/seo-lab/audits/competitor_sitemap_discovery.py"
+  workflow_dispatch:
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read public robots and capped sitemaps (no HTML downloads)
+        run: python3 experiments/seo-lab/audits/competitor_sitemap_discovery.py
+      - name: Archive metadata only
+        uses: actions/upload-artifact@v4
+        with:
+          name: competitor-sitemap-discovery
+          path: experiments/seo-lab/audits/competitor_sitemap_discovery.result.json
+          retention-days: 7

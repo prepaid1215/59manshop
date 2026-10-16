@@ -1,0 +1,27 @@
+name: One-shot competitor fixed-sample similarity
+on:
+  push:
+    branches: [seo-lab-v01]
+    paths:
+      - ".github/workflows/one-shot-competitor-similarity.yml"
+jobs:
+  compare-once:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read frozen 118 detail candidates in transient space and compute comparison once
+        run: python3 experiments/seo-lab/audits/compare_competitors_once.py
+      - name: Upload aggregate stats and URL metadata, NEVER HTML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: competitor-similarity-once-20261016
+          path: experiments/seo-lab/audits/COMPETITOR_SIMILARITY_ONCE_20261016.json
+          if-no-files-found: warn
+          retention-days: 7
