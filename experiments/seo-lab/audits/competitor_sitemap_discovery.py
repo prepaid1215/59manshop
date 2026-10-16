@@ -54,7 +54,8 @@ def is_same_host(root, candidate):
     a, b = urlsplit(root).hostname, urlsplit(candidate).hostname
     if not a or not b:
         return False
-    return a.removeprefix("www.") == b.removeprefix("www.")
+    # Compare canonical IDNA hosts, even when XML uses 한글.shop instead of xn-- punycode.
+    return a.removeprefix("www.").encode("idna").decode("ascii") == b.removeprefix("www.").encode("idna").decode("ascii")
 
 
 def classify_region(url):
@@ -141,6 +142,7 @@ def inspect(name, root):
             try:
                 typ, locs = read_sitemap(got["body"])
                 rec.update({"xml_type": typ, "loc_entries": len(locs)})
+                rec["first_locs"] = locs[:4]
                 if typ == "sitemapindex":
                     sitemap_indexes += 1
                     for child in locs:
