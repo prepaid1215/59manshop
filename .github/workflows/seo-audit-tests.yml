@@ -39,10 +39,14 @@ jobs:
           data=json.load(open(sys.argv[1],encoding="utf-8"))
           assert data["input"]["n"]==20, data["input"]
           assert data["input"]["files_found"]==1000, data["input"]
-          assert data["similarity"]["body"]["mean"]==1.0, data["similarity"]["body"]
-          assert data["docs_with_no_unique_body"]==20, data["docs_with_no_unique_body"]
-          assert data["body_chars"]["boilerplate_removed_mean"]==0, data["body_chars"]
-          assert data["similarity"]["body_boilerplate_removed"]["mean"] is None
+          # 측정이 정상 실행됐는지만 검사한다. 유사도 값 자체는 기록만 한다.
+          # (값을 고정하면 생성기를 개선해 유사도가 내려갈 때 CI가 실패한다.
+          #  공개 합격 기준은 경쟁사 표본 측정 후 별도의 publish gate로 추가한다.)
+          assert len(data["sample"])==20, len(data["sample"])
+          body=data["similarity"]["body"]
+          assert body["pairs"]+body["skipped_pairs"]==190, body
+          assert body["mean"] is None or 0.0 <= body["mean"] <= 1.0, body
+          assert "docs_with_no_unique_body" in data and "body_chars" in data
           print(json.dumps({
               "sample": data["input"],
               "body_similarity": data["similarity"]["body"],
