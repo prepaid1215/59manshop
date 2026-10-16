@@ -31,7 +31,9 @@ OUTPUT = Path(__file__).with_name("site_checks_20261016.result.json")
 
 
 def retrieve(url):
-    req = Request(url, headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, identity"})
+    target = urlsplit(url)
+    safe_url = target._replace(path=quote(target.path, safe="/%")).geturl()
+    req = Request(safe_url, headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, identity"})
     try:
         with urlopen(req, timeout=18) as resp:
             payload = resp.read(12_000_000)
