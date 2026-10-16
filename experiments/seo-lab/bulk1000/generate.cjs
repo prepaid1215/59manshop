@@ -12,7 +12,7 @@
  const groups=['A','B','C','D'], names=new Set(), regions=[...new Set(data.map(r=>r.province))].sort();
  const esc=x=>String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
  for(const r of data){
-  if(!groups.includes(r.cohort)||!/^[가-힣]+$/.test(r.province)||!/^[가-힣]+동$/.test(r.dong))throw Error('Bad place '+r.slug);
+  if(!groups.includes(r.cohort)||!/^[가-힣]+$/.test(r.province)||!/^[가-힣0-9]+동$/.test(r.dong))throw Error('Bad place '+r.slug);
   if(r.slug!==['bulk-lab',r.province,r.dong+'-선불폰'].join('/'))throw Error('Invalid slug '+r.slug);
   if(names.has(r.slug))throw Error('Duplicate slug '+r.slug);
   names.add(r.slug);
