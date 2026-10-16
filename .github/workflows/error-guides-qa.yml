@@ -1,0 +1,29 @@
+name: Error guide draft QA
+on:
+  push:
+    branches: [seo-lab-v01]
+    paths:
+      - "experiments/seo-lab/error-guides-qa.py"
+      - ".github/workflows/error-guides-qa.yml"
+      - "선불폰-다른-판매자에게-배정/**"
+      - "선불폰-usim-모델정보-없음/**"
+      - "선불폰-안면인증-실패/**"
+      - "주민등록증-발급일자-오류/**"
+      - "번호이동-사전동의-실패/**"
+      - "번호이동-90일-미경과/**"
+      - "선불폰-희망번호-조회-실패/**"
+      - "선불폰-개통후-데이터-안됨/**"
+      - "유심-인식-안됨/**"
+      - "선불폰-가입제한-다회선/**"
+      - "선불폰-셀프개통/**"
+      - "sitemap.xml"
+  workflow_dispatch:
+jobs:
+  offline-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify 10 unique error guides, sitemap and local links
+        run: python3 experiments/seo-lab/error-guides-qa.py
