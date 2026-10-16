@@ -22,3 +22,37 @@ jobs:
         run: |
           python -m py_compile experiments/seo-lab/audits/similarity.py experiments/seo-lab/audits/site_checks_20261016.py
           python experiments/seo-lab/audits/test_audits.py -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Render 1000 offline noindex preview pages
+        run: node experiments/seo-lab/bulk1000/generate.cjs --preview --out "$RUNNER_TEMP/seo-preview"
+      - name: Measure fixed-seed candidate similarity
+        shell: bash
+        run: |
+          python experiments/seo-lab/audits/similarity.py \
+            --pages "$RUNNER_TEMP/seo-preview/bulk-lab" \
+            --n 20 --seed 20261016 \
+            --out "$RUNNER_TEMP/similarity-preview-20.json" > /dev/null
+          python - "$RUNNER_TEMP/similarity-preview-20.json" <<'PY'
+          import json, sys
+          data=json.load(open(sys.argv[1],encoding="utf-8"))
+          assert data["input"]["n"]==20, data["input"]
+          assert data["input"]["files_found"]==1000, data["input"]
+          assert data["similarity"]["body"]["mean"]==1.0, data["similarity"]["body"]
+          assert data["docs_with_no_unique_body"]==20, data["docs_with_no_unique_body"]
+          assert data["body_chars"]["boilerplate_removed_mean"]==0, data["body_chars"]
+          assert data["similarity"]["body_boilerplate_removed"]["mean"] is None
+          print(json.dumps({
+              "sample": data["input"],
+              "body_similarity": data["similarity"]["body"],
+              "body_after_common_sentences": data["similarity"]["body_boilerplate_removed"],
+              "no_unique_body_count": data["docs_with_no_unique_body"]
+          }, ensure_ascii=False))
+          PY
+      - name: Preserve preview audit sample for reviewer
+        uses: actions/upload-artifact@v4
+        with:
+          name: bulk1000-fixed-seed-similarity
+          path: ${{ runner.temp }}/similarity-preview-20.json
+          retention-days: 14
