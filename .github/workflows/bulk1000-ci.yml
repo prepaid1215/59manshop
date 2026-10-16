@@ -1,0 +1,30 @@
+name: Bulk 1000 preview validation
+on:
+  push:
+    branches: [seo-lab-v01]
+    paths:
+      - "experiments/seo-lab/bulk1000/**"
+      - ".github/workflows/bulk1000-ci.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify manifest and four groups
+        run: node experiments/seo-lab/bulk1000/generate.cjs --check
+      - name: Render exactly 1000 offline noindex previews
+        run: node experiments/seo-lab/bulk1000/generate.cjs --preview --out /tmp/bulk1000-preview
+      - name: Validate generated output
+        shell: bash
+        run: |
+          test "$(find /tmp/bulk1000-preview/bulk-lab -name index.html | wc -l)" -eq 1000
+          test "$(grep -R -l 'name="robots" content="noindex,follow"' /tmp/bulk1000-preview/bulk-lab --include=index.html | wc -l)" -eq 1000
+          test "$(find /tmp/bulk1000-preview/bulk-lab-hub -name index.html | wc -l)" -ge 2
+          test ! -e /tmp/bulk1000-preview/sitemap_index.xml
+          echo "1000 previews generated, all noindex, no publish sitemap"
