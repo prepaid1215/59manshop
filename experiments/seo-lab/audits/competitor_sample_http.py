@@ -92,8 +92,12 @@ def classify(url, saved_type, title, h1):
     # Never turn an obvious hub into a region detail on title keywords alone.
     if saved_type == "hub_candidate":
         return "regional_hub", "frozen_manifest_hub_flag"
-    if re.fullmatch(r"지역/[^/]+/[^/]+", path) or re.fullmatch(r"region/[^/]+", path):
+    if re.fullmatch(r"region/(?:[a-z0-9-]+-(?:dong|ri|eup|myeon)|[가-힣0-9]+동)", path):
+        return "regional_candidate", "single_region_dong_ri_eup_myeon_path"
+    if re.fullmatch(r"지역/[^/]+/[^/]+", path):
         return "regional_hub", "short_hierarchical_path"
+    if re.fullmatch(r"region/[^/]+", path):
+        return "other_or_unclear", "ambiguous_single_region_slug"
     if path.startswith("알뜰폰/"):
         return "regional_postpaid_candidate", "url_category_alteulphone"
     if path.startswith("선불폰/") and len(path.split("/")) >= 2:

@@ -96,5 +96,18 @@ class AuditTests(unittest.TestCase):
             with self.subTest(url=row["url"]):
                 self.assertTrue(disc.classify_region(row["url"]))
 
+    def test_competitor_http_type_classification(self):
+        mod = load("audit_sample_http", "competitor_sample_http.py")
+        cases = [
+            ("https://ntelecomdasi.com/region/gil-dong", "unverified_region_candidate", "regional_candidate"),
+            ("https://ntelecomdasi.com/region/oryu-dong", "unverified_region_candidate", "regional_candidate"),
+            ("https://ntelecomdasi.com/region/gwangju", "unverified_region_candidate", "other_or_unclear"),
+            ("https://선불폰.shop/지역/제주/", "hub_candidate", "regional_hub"),
+            ("https://ntelact.com/알뜰폰/고양-법곶동", "unverified_region_candidate", "regional_postpaid_candidate"),
+        ]
+        for url, label, expected in cases:
+            with self.subTest(url=url):
+                self.assertEqual(mod.classify(url, label, "", "")[0], expected)
+
 if __name__ == "__main__":
     unittest.main()
