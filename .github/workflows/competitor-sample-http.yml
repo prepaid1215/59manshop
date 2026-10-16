@@ -1,0 +1,24 @@
+name: Competitor frozen sample HTTP and page type
+on:
+  push:
+    branches: [seo-lab-v01]
+    paths:
+      - ".github/workflows/competitor-sample-http.yml"
+      - "experiments/seo-lab/audits/competitor_sample_http.py"
+  workflow_dispatch:
+jobs:
+  read-only-http:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read public competitor samples with robots checks, do not store HTML
+        run: python3 experiments/seo-lab/audits/competitor_sample_http.py
+      - name: Archive report JSON only
+        uses: actions/upload-artifact@v4
+        with:
+          name: competitor-frozen-http-type-results
+          path: experiments/seo-lab/audits/competitor_sample_http_20261016.result.json
+          retention-days: 7
