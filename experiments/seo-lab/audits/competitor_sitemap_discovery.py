@@ -59,6 +59,11 @@ def is_same_host(root, candidate):
 
 def classify_region(url):
     p = unquote(urlsplit(url).path).lower()
+    # Exclude image, RSS and document assets even when their path contains /region/.
+    if re.search(r"\\.(?:jpg|jpeg|png|webp|svg|gif|xml|pdf|mp4)(?:$|/)", p):
+        return False
+    if re.search(r"/[가-힣0-9]{2,}동/?$", p):
+        return True
     if re.search(r"/(?:region|regions|area|지역)(?:/|$)", p):
         return True
     if re.search(r"/(?:dong|동)(?:/|$)", p):
@@ -72,10 +77,20 @@ def classify_region(url):
 
 def read_sitemap(payload):
     root = ET.fromstring(payload)
-    typ = root.tag.rsplit("}", 1)[-1]
-    locs = [node.text.strip() for node in root.iter() if node.tag.rsplit("}", 1)[-1] == "loc" and node.text]
+    tag = lambda node: node.tag.rsplit("}", 1)[-1]
+    typ = tag(root)
     if typ not in {"urlset", "sitemapindex"}:
         raise ValueError("unexpected XML root: " + typ)
+    parent_name = "url" if typ == "urlset" else "sitemap"
+    locs = []
+    # Only direct <url><loc> or <sitemap><loc>; do NOT count nested <image:loc>.
+    for parent in root:
+        if tag(parent) != parent_name:
+            continue
+        for node in parent:
+            if tag(node) == "loc" and node.text:
+                locs.append(node.text.strip())
+                break
     return typ, locs
 
 
@@ -145,6 +160,7 @@ def inspect(name, root):
     result["sitemap_files_fetched"] = len(visited)
     result["sitemap_indexes_found"] = sitemap_indexes
     result["unique_discovered_urls"] = len(found_urls)
+    result["raw_url_examples"] = sorted(found_urls)[:6]
     result["candidate_regional_urls"] = len(regional)
     result["sample_urls"] = sorted(sample)
     result["sitemap_queue_unprocessed"] = len(queue)
