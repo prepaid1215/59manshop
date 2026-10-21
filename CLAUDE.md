@@ -16,6 +16,12 @@ This repository powers https://www.59man.shop/ .
 - The SEO plan involves topic pages, regional landing pages, internal linking and conversion paths. Treat this as separate from brand naming.
 - Ask for explicit confirmation before changing the website brand again.
 
+## Phase 2 noindex exception
+- Allowed ONLY for the phase 2 work (branch `seo/phase2`), and ONLY for these two pages:
+  - `/알뜰폰-셀프개통-안됨/`: `noindex,follow` -> `index,follow` (kept page; add to sitemap, `og:type=article`, BreadcrumbList).
+  - `/알뜰폰-셀프개통-실패/`: becomes a redirect stub (`noindex,follow` + canonical to the kept page + meta refresh).
+- Do not change `noindex`/`index` for any other page.
+
 ## Fixed paths
 - Do NOT rename, move, or delete the `v4-1` folder or anything under `/v4-1/` (including `/v4-1/topic/*`). These paths are permanently fixed. Internal links, canonical, and sitemap entries that point to `/v4-1/...` must stay as they are.
 

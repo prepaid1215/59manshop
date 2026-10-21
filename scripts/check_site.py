@@ -134,6 +134,51 @@ for u, h in pages.items():
             if need not in h:
                 fail('푸터 항목 누락(%s): %s' % (need, u))
 
+# 2-1) 내부 링크가 noindex 페이지로 가지 않는지 (홈, /guide/, 색인 페이지의 관련 안내 사이드바)
+def internal_links(h, scope=None):
+    if scope:
+        m = re.search(scope, h, re.S)
+        h = m.group(0) if m else ''
+    return set(re.findall(r'href="(/[^"#?]*)', h))
+
+
+for u in ('/', '/guide/'):
+    for ref in sorted(internal_links(pages[u])):
+        if ref in pages and ref not in indexable:
+            fail('%s 에서 noindex 페이지로 링크: %s' % (u, ref))
+for u in sorted(indexable - {'/', '/guide/'}):
+    for ref in sorted(internal_links(pages[u], r'<aside class="side">.*?</aside>')):
+        if ref in pages and ref not in indexable and ref != '/':
+            fail('%s 관련 안내 사이드바가 noindex 페이지로 링크: %s' % (u, ref))
+
+# 2-2) 리다이렉트 스텁: noindex + 올바른 canonical(색인 대상, 자기 자신 아님) + meta refresh 일치
+for u, h in pages.items():
+    can = re.search(r'rel="canonical" href="([^"]*)"', h)
+    if not can or can.group(1) == BASE + u:
+        continue
+    target = can.group(1)[len(BASE):] if can.group(1).startswith(BASE) else None
+    if 'noindex' not in (meta(h, 'name', 'robots') or ''):
+        fail('canonical이 다른 페이지를 가리키는데 noindex가 아님: %s' % u)
+    if target not in indexable or target not in sitemap:
+        fail('스텁 %s 의 canonical 대상이 색인 대상/sitemap에 없음: %s' % (u, target))
+    mr = re.search(r'<meta http-equiv="refresh" content="0; url=([^"]*)"', h)
+    if mr and urllib.parse.unquote(mr.group(1)) != urllib.parse.unquote(target):
+        fail('스텁 %s 의 meta refresh와 canonical 불일치' % u)
+
+# 2-3) /guide/ 허브: 5단계, 업데이트일, 색인 단계 페이지가 모두 한 번씩 들어 있는지
+gh = pages['/guide/']
+for name in ('개통 전 확인', '준비물', '개통하기', '막힐 때', '개통 후'):
+    if '<h2>%s</h2>' % name not in gh:
+        fail('/guide/ 에 단계 없음: %s' % name)
+if not re.search(r'<p class="updated">업데이트: <time datetime="\d{4}-\d{2}-\d{2}">', gh):
+    fail('/guide/ 업데이트일 표시 없음')
+hub_links = re.findall(r'<ul class="guide-links">.*?</ul>', gh, re.S)
+hub_refs = [r for blk in hub_links for r in re.findall(r'<li><a href="(/[^"]*)"', blk)]
+want = sorted(indexable - {'/', '/guide/'})
+if sorted(hub_refs) != want:
+    fail('/guide/ 허브 링크가 색인 단계 페이지와 불일치: 누락 %s / 초과 %s' % (
+        sorted(set(want) - set(hub_refs)), sorted(set(hub_refs) - set(want))))
+
 # 3) /v4-1/ 경로 고정
 for t in V4_TOPICS:
     if ('/v4-1/topic/%s/' % t) not in pages:
