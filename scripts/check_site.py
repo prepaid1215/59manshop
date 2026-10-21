@@ -15,6 +15,7 @@ import http.server
 import json
 import re
 import socketserver
+import struct
 import sys
 import threading
 import urllib.error
@@ -30,6 +31,7 @@ V4_TOPICS = ['esim-new', 'kt-nfc-compare', 'network-activation', 'plan-396',
 
 sys.stdout.reconfigure(encoding='utf-8')
 errors = []
+org_assets = []  # (url, 설명) Organization logo/image 절대 URL
 
 
 def fail(msg):
@@ -96,6 +98,17 @@ for u, h in pages.items():
                 if b.get('@type') == 'Organization':
                     if b.get('address', {}).get('postalCode') != '46220':
                         fail('Organization.address.postalCode 46220 필요')
+                    for k in ('logo', 'image'):
+                        vals = b.get(k)
+                        vals = vals if isinstance(vals, list) else [vals]
+                        if not vals or not vals[0]:
+                            fail('Organization.%s 없음' % k)
+                        for v in vals:
+                            if v:
+                                if not v.startswith(BASE + '/') or '?' in v:
+                                    fail('Organization.%s는 쿼리 없는 %s 절대 URL이어야 함: %s' % (k, BASE, v))
+                                else:
+                                    org_assets.append((v, k))
                     for k in ('name', 'legalName', 'taxID', 'url', 'telephone', 'address', 'contactPoint', 'sameAs'):
                         if not b.get(k):
                             fail('Organization.%s 없음' % k)
@@ -155,6 +168,9 @@ for u, h in pages.items():
 for ref in ['/', '/sitemap.xml', '/robots.txt'] + sorted(sitemap):
     targets.setdefault(ref, 'sitemap/robots')
 
+for v, k in org_assets:
+    targets.setdefault(v[len(BASE):], 'Organization.' + k)
+
 for ref, src in sorted(targets.items()):
     q = urllib.parse.quote(ref, safe='/')
     try:
@@ -166,6 +182,12 @@ for ref, src in sorted(targets.items()):
     if code != 200:
         fail('깨진 링크 %s (%s) <- %s' % (ref, code, src))
 srv.shutdown()
+for v, k in org_assets:
+    f = ROOT / urllib.parse.unquote(v[len(BASE) + 1:])
+    if f.suffix.lower() == '.png' and f.exists():
+        w, h = struct.unpack('>II', f.read_bytes()[16:24])
+        if w < 112 or h < 112 or abs(w - h) > max(w, h) * 0.2:
+            fail('Organization.%s 이미지가 112x112 이상 정사각형에 가깝지 않음: %s (%dx%d)' % (k, v, w, h))
 
 # 5) 표 출력
 if '--table' in sys.argv:
