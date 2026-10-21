@@ -8,7 +8,7 @@ This repository powers https://www.59man.shop/ .
 - Website `alternateName` may include `59man.shop`; do NOT set `59만모바일` or `59만모바일 선불폰` as the site's official name or alias without an explicit user request.
 - Separate activation/conversion service at https://preplan.site/ : **59만모바일**. Preserve its `preplan.site` CTA links and wording such as `59만모바일 개통 페이지` and `59만모바일 개통 시작하기`. These are NOT the 59man.shop website brand.
 - Exception (explicit user request, phase 1): the operating business is 상호 **59만모바일**. The footer business info and the homepage `Organization` JSON-LD (`name`/`legalName` = 59만모바일, `url` = https://preplan.site) use it, and the homepage `WebSite` JSON-LD links to it via `publisher`. The website brand and `WebSite` `name` stay **59만선불폰**.
-- Never append tracking query parameters (utm_*, etc.) to any link.
+- The `?from=` parameter on preplan.site CTA links is allowed for conversion measurement. External tracking parameters such as `utm_`, `fbclid`, `gclid` are forbidden on any link.
 
 ## Change safety
 - Never bulk-replace `59만모바일` inside activation instructions, CTAs or preplan.site labels simply to unify the 59man.shop site name.

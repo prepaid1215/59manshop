@@ -162,8 +162,10 @@ for u, h in pages.items():
     if target not in indexable or target not in sitemap:
         fail('스텁 %s 의 canonical 대상이 색인 대상/sitemap에 없음: %s' % (u, target))
     mr = re.search(r'<meta http-equiv="refresh" content="0; url=([^"]*)"', h)
-    if mr and urllib.parse.unquote(mr.group(1)) != urllib.parse.unquote(target):
-        fail('스텁 %s 의 meta refresh와 canonical 불일치' % u)
+    if not mr:
+        fail('스텁 %s 에 meta refresh(0초)가 없음' % u)
+    elif urllib.parse.unquote(mr.group(1)) != urllib.parse.unquote(target):
+        fail('스텁 %s 의 meta refresh(%s)와 canonical(%s) 불일치' % (u, mr.group(1), target))
 
 # 2-3) /guide/ 허브: 5단계, 업데이트일, 색인 단계 페이지가 모두 한 번씩 들어 있는지
 gh = pages['/guide/']
@@ -175,9 +177,19 @@ if not re.search(r'<p class="updated">업데이트: <time datetime="\d{4}-\d{2}-
 hub_links = re.findall(r'<ul class="guide-links">.*?</ul>', gh, re.S)
 hub_refs = [r for blk in hub_links for r in re.findall(r'<li><a href="(/[^"]*)"', blk)]
 want = sorted(indexable - {'/', '/guide/'})
-if sorted(hub_refs) != want:
+hub_pages = [r.split('#')[0] for r in hub_refs]
+if set(hub_pages) != set(want):
     fail('/guide/ 허브 링크가 색인 단계 페이지와 불일치: 누락 %s / 초과 %s' % (
-        sorted(set(want) - set(hub_refs)), sorted(set(hub_refs) - set(want))))
+        sorted(set(want) - set(hub_pages)), sorted(set(hub_pages) - set(want))))
+# 한 페이지가 여러 칸에 들어갈 수 있는 것은 #앵커로 구분된 섹션 링크뿐이고, 앵커는 대상 페이지에 실제로 있어야 함
+plain = [r for r in hub_refs if '#' not in r]
+if len(plain) != len(set(plain)):
+    fail('/guide/ 허브에 앵커 없이 중복된 링크가 있음')
+for r in hub_refs:
+    if '#' in r:
+        page, anchor = r.split('#', 1)
+        if page not in pages or ('id="%s"' % anchor) not in pages[page]:
+            fail('/guide/ 허브 앵커 대상이 없음: %s' % r)
 
 # 3) /v4-1/ 경로 고정
 for t in V4_TOPICS:
