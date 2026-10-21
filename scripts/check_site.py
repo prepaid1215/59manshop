@@ -15,6 +15,7 @@ import http.server
 import json
 import re
 import socketserver
+import struct
 import sys
 import threading
 import urllib.error
@@ -30,6 +31,7 @@ V4_TOPICS = ['esim-new', 'kt-nfc-compare', 'network-activation', 'plan-396',
 
 sys.stdout.reconfigure(encoding='utf-8')
 errors = []
+org_assets = []  # (url, 설명) Organization logo/image 절대 URL
 
 
 def fail(msg):
@@ -96,6 +98,17 @@ for u, h in pages.items():
                 if b.get('@type') == 'Organization':
                     if b.get('address', {}).get('postalCode') != '46220':
                         fail('Organization.address.postalCode 46220 필요')
+                    for k in ('logo', 'image'):
+                        vals = b.get(k)
+                        vals = vals if isinstance(vals, list) else [vals]
+                        if not vals or not vals[0]:
+                            fail('Organization.%s 없음' % k)
+                        for v in vals:
+                            if v:
+                                if not v.startswith(BASE + '/') or '?' in v:
+                                    fail('Organization.%s는 쿼리 없는 %s 절대 URL이어야 함: %s' % (k, BASE, v))
+                                else:
+                                    org_assets.append((v, k))
                     for k in ('name', 'legalName', 'taxID', 'url', 'telephone', 'address', 'contactPoint', 'sameAs'):
                         if not b.get(k):
                             fail('Organization.%s 없음' % k)
@@ -120,6 +133,63 @@ for u, h in pages.items():
         for need in ('preplan.site/">preplan.site</a>)에서 진행됩니다', '774-56-00506', '주영돈', '(46220) 부산광역시 금정구 금강로 670', 'tel:+821073058253', 'https://pf.kakao.com/_akxmKn/chat"'):
             if need not in h:
                 fail('푸터 항목 누락(%s): %s' % (need, u))
+
+# 2-1) 내부 링크가 noindex 페이지로 가지 않는지 (홈, /guide/, 색인 페이지의 관련 안내 사이드바)
+def internal_links(h, scope=None):
+    if scope:
+        m = re.search(scope, h, re.S)
+        h = m.group(0) if m else ''
+    return set(re.findall(r'href="(/[^"#?]*)', h))
+
+
+for u in ('/', '/guide/'):
+    for ref in sorted(internal_links(pages[u])):
+        if ref in pages and ref not in indexable:
+            fail('%s 에서 noindex 페이지로 링크: %s' % (u, ref))
+for u in sorted(indexable - {'/', '/guide/'}):
+    for ref in sorted(internal_links(pages[u], r'<aside class="side">.*?</aside>')):
+        if ref in pages and ref not in indexable and ref != '/':
+            fail('%s 관련 안내 사이드바가 noindex 페이지로 링크: %s' % (u, ref))
+
+# 2-2) 리다이렉트 스텁: noindex + 올바른 canonical(색인 대상, 자기 자신 아님) + meta refresh 일치
+for u, h in pages.items():
+    can = re.search(r'rel="canonical" href="([^"]*)"', h)
+    if not can or can.group(1) == BASE + u:
+        continue
+    target = can.group(1)[len(BASE):] if can.group(1).startswith(BASE) else None
+    if 'noindex' not in (meta(h, 'name', 'robots') or ''):
+        fail('canonical이 다른 페이지를 가리키는데 noindex가 아님: %s' % u)
+    if target not in indexable or target not in sitemap:
+        fail('스텁 %s 의 canonical 대상이 색인 대상/sitemap에 없음: %s' % (u, target))
+    mr = re.search(r'<meta http-equiv="refresh" content="0; url=([^"]*)"', h)
+    if not mr:
+        fail('스텁 %s 에 meta refresh(0초)가 없음' % u)
+    elif urllib.parse.unquote(mr.group(1)) != urllib.parse.unquote(target):
+        fail('스텁 %s 의 meta refresh(%s)와 canonical(%s) 불일치' % (u, mr.group(1), target))
+
+# 2-3) /guide/ 허브: 5단계, 업데이트일, 색인 단계 페이지가 모두 한 번씩 들어 있는지
+gh = pages['/guide/']
+for name in ('개통 전 확인', '준비물', '개통하기', '막힐 때', '개통 후'):
+    if '<h2>%s</h2>' % name not in gh:
+        fail('/guide/ 에 단계 없음: %s' % name)
+if not re.search(r'<p class="updated">업데이트: <time datetime="\d{4}-\d{2}-\d{2}">', gh):
+    fail('/guide/ 업데이트일 표시 없음')
+hub_links = re.findall(r'<ul class="guide-links">.*?</ul>', gh, re.S)
+hub_refs = [r for blk in hub_links for r in re.findall(r'<li><a href="(/[^"]*)"', blk)]
+want = sorted(indexable - {'/', '/guide/'})
+hub_pages = [r.split('#')[0] for r in hub_refs]
+if set(hub_pages) != set(want):
+    fail('/guide/ 허브 링크가 색인 단계 페이지와 불일치: 누락 %s / 초과 %s' % (
+        sorted(set(want) - set(hub_pages)), sorted(set(hub_pages) - set(want))))
+# 한 페이지가 여러 칸에 들어갈 수 있는 것은 #앵커로 구분된 섹션 링크뿐이고, 앵커는 대상 페이지에 실제로 있어야 함
+plain = [r for r in hub_refs if '#' not in r]
+if len(plain) != len(set(plain)):
+    fail('/guide/ 허브에 앵커 없이 중복된 링크가 있음')
+for r in hub_refs:
+    if '#' in r:
+        page, anchor = r.split('#', 1)
+        if page not in pages or ('id="%s"' % anchor) not in pages[page]:
+            fail('/guide/ 허브 앵커 대상이 없음: %s' % r)
 
 # 3) /v4-1/ 경로 고정
 for t in V4_TOPICS:
@@ -155,6 +225,9 @@ for u, h in pages.items():
 for ref in ['/', '/sitemap.xml', '/robots.txt'] + sorted(sitemap):
     targets.setdefault(ref, 'sitemap/robots')
 
+for v, k in org_assets:
+    targets.setdefault(v[len(BASE):], 'Organization.' + k)
+
 for ref, src in sorted(targets.items()):
     q = urllib.parse.quote(ref, safe='/')
     try:
@@ -166,6 +239,12 @@ for ref, src in sorted(targets.items()):
     if code != 200:
         fail('깨진 링크 %s (%s) <- %s' % (ref, code, src))
 srv.shutdown()
+for v, k in org_assets:
+    f = ROOT / urllib.parse.unquote(v[len(BASE) + 1:])
+    if f.suffix.lower() == '.png' and f.exists():
+        w, h = struct.unpack('>II', f.read_bytes()[16:24])
+        if w < 112 or h < 112 or abs(w - h) > max(w, h) * 0.2:
+            fail('Organization.%s 이미지가 112x112 이상 정사각형에 가깝지 않음: %s (%dx%d)' % (k, v, w, h))
 
 # 5) 표 출력
 if '--table' in sys.argv:
