@@ -85,3 +85,39 @@ body{max-width:480px;margin:0 auto;min-height:100vh;background:#fff;box-shadow:0
 .article table{display:table;width:100%}
 .article th,.article td{white-space:normal;padding:9px 6px;word-break:keep-all;vertical-align:top}
 .article p+p{margin-top:12px}
+
+/* V5.1 home: hero, badges, plans, USIM cards, contact */
+.home-hero{background:#1959d8;color:#fff;padding:26px 0 24px;overflow:hidden}
+.home-hero .site{display:flex;align-items:center;gap:8px}
+.home-hero-text{flex:1;min-width:0}
+.home-hero-kicker{margin:0;font-size:12.5px;font-weight:700;color:#cfe0ff}
+.home-hero h1{margin:8px 0 8px;font-size:25px;line-height:1.35;word-break:keep-all}
+.home-hero-sub{margin:0;font-size:14.5px;line-height:1.6;color:#e4ecff;word-break:keep-all}
+.home-hero-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:16px;padding:0 22px;border-radius:12px;background:#fff;color:#1959d8;font-weight:800;text-decoration:none}
+.home-hero-mascot{width:118px;height:118px;flex:0 0 118px;object-fit:contain}
+.home-badges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-top:6px!important}
+.home-badges div{background:#f3f7ff;border-radius:12px;padding:12px;display:grid;gap:2px}
+.home-badges b{font-size:15px;color:#1949b8}
+.home-badges span{font-size:12.5px;line-height:1.5;color:#52617a;word-break:keep-all}
+.home-plan-list{display:grid;gap:10px;margin-top:14px}
+.home-plan{border:1px solid #e3e9f3;border-radius:14px;padding:14px 16px;display:grid;gap:2px}
+.home-plan-net{justify-self:start;font-size:12px;font-weight:700;color:#1949b8;background:#eef3ff;border-radius:6px;padding:1px 7px}
+.home-plan b{font-size:17px;margin-top:4px}
+.home-plan strong{font-size:20px;color:#1959d8}
+.home-plan p{font-size:14px!important;color:#52617a;line-height:1.6!important;margin:2px 0 0!important}
+.home-note{font-size:13px!important;color:#60708b;margin-top:10px!important;line-height:1.6!important}
+.home-more{display:inline-block;margin-top:12px;color:#1959d8;font-weight:700;text-decoration:none;font-size:15px}
+.home-usim-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.home-usim{border:1px solid #e3e9f3;border-radius:14px;padding:12px;text-decoration:none;display:grid;gap:2px;justify-items:center;text-align:center}
+.home-usim img{width:96px;height:110px;object-fit:contain}
+.home-usim-icon{width:96px;height:110px;display:grid;place-items:center}
+.home-usim b{font-size:15px;margin-top:6px}
+.home-usim span{font-size:13.5px;color:#1959d8;font-weight:700}
+.home-usim em{font-style:normal;font-size:12.5px;color:#60708b}
+.home-mascots{display:grid;gap:12px}
+.home-mascots img{width:100%;height:auto;border-radius:14px;display:block}
+.home-mascots h2{margin-bottom:6px!important}
+.home-contact{background:#f7f9fc;border:1px solid #e3e9f3;border-radius:14px;padding:18px!important;margin-top:20px}
+.home-contact p{font-size:15px}
+.home-contact-btn{display:flex;align-items:center;justify-content:center;min-height:48px;margin-top:14px;border-radius:12px;background:#fee500;color:#191600;font-weight:800;text-decoration:none}
+.home-hero-kicker{word-break:keep-all}

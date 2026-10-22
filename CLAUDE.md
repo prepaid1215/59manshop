@@ -31,6 +31,6 @@ This repository powers https://www.59man.shop/ .
 ## Mobile-only layout (seo/mobile)
 - Every page uses one 480px column at every screen width (PC shows the same phone layout). No sidebar (`<aside class="side">`); related links appear once at the end of the article in `<nav class="related">`.
 - Every non-stub page ends with `<nav class="bottom-bar">`: "개통 시작하기" (preplan.site link, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat).
-- All pages load only `/assets/v4-1-final.css` (the old `v4-1-assets.css` rules were merged into it).
+- All pages load only `/assets/v4-1-final.css?v=YYYYMMDDx`. When the CSS changes, bump the `?v=` value on every page so browsers do not keep the old file.
 - Do not show the `preplan.site` domain in visible text (body, footer, buttons). Links (`href`) and JSON-LD may use it. Footer wording: "개통은 59만모바일 개통 페이지에서 진행됩니다".
 - Prices, purchase places and conditions come only from the operator's fact sheet (kept outside this repo, never committed).
