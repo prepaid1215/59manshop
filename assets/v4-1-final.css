@@ -121,3 +121,16 @@ body{max-width:480px;margin:0 auto;min-height:100vh;background:#fff;box-shadow:0
 .home-contact p{font-size:15px}
 .home-contact-btn{display:flex;align-items:center;justify-content:center;min-height:48px;margin-top:14px;border-radius:12px;background:#fee500;color:#191600;font-weight:800;text-decoration:none}
 .home-hero-kicker{word-break:keep-all}
+
+/* V5.2 content blocks: numbered steps, bullets, FAQ */
+.article ol.numbered,.article ul.bullets{margin:12px 0 0;padding-left:22px;display:grid;gap:10px}
+.article ol.numbered li,.article ul.bullets li{line-height:1.75;word-break:keep-all}
+.article ol.numbered li::marker{color:#1959d8;font-weight:800}
+.article ul.bullets li::marker{color:#1959d8}
+.article section>table+p,.article section>ol+p,.article section>ul+p{margin-top:12px}
+.faq h2{margin-bottom:6px!important}
+.faq-item{border-top:1px solid #edf0f5;padding:14px 0}
+.faq-item:first-of-type{border-top:0}
+.faq-item h3{font-size:16px;margin:0 0 6px;line-height:1.5}
+.faq-item h3::before{content:"Q. ";color:#1959d8}
+.faq-item p{font-size:15.5px;color:#3a4658}

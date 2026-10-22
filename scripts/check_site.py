@@ -121,8 +121,17 @@ for u, h in pages.items():
                     if last['item'] != BASE + u:
                         fail('BreadcrumbList 마지막 항목이 현재 페이지가 아님: %s' % u)
         if 'FAQPage' in types:
-            # 화면에 FAQ가 없는 FAQPage는 금지
-            fail('FAQPage JSON-LD는 화면 FAQ가 있을 때만 허용: %s' % u)
+            # FAQPage는 화면에 보이는 FAQ(<section class="faq">)와 질문이 일치할 때만 허용
+            faq = re.search(r'<section class="faq".*?</section>', h, re.S)
+            if not faq:
+                fail('FAQPage JSON-LD는 화면 FAQ가 있을 때만 허용: %s' % u)
+            else:
+                shown = [html.unescape(x) for x in re.findall(r'<h3>([^<]*)</h3>', faq.group(0))]
+                for b in blocks:
+                    if b.get('@type') == 'FAQPage':
+                        asked = [q['name'] for q in b['mainEntity']]
+                        if asked != shown:
+                            fail('FAQPage 질문과 화면 FAQ 질문이 다름: %s' % u)
     # 추적 파라미터 금지
     if re.search(r'utm_|[?&]fbclid=|[?&]gclid=', h):
         fail('추적 쿼리 파라미터 발견: %s' % u)

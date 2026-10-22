@@ -34,3 +34,8 @@ This repository powers https://www.59man.shop/ .
 - All pages load only `/assets/v4-1-final.css?v=YYYYMMDDx`. When the CSS changes, bump the `?v=` value on every page so browsers do not keep the old file.
 - Do not show the `preplan.site` domain in visible text (body, footer, buttons). Links (`href`) and JSON-LD may use it. Footer wording: "개통은 59만모바일 개통 페이지에서 진행됩니다".
 - Prices, purchase places and conditions come only from the operator's fact sheet (kept outside this repo, never committed).
+
+## Content rules
+- Facts (prices, plans, conditions, hours, phone numbers) come only from the operator fact sheet kept outside this repo. Mark changeable items with a date ("2026년 10월 기준") and "신청 화면이 최종 기준".
+- Content pages: answer first, question-style h2, tables followed by a short explanation, and a visible FAQ (`<section class="faq">` with `<h3>` questions). FAQPage JSON-LD is allowed only when its questions match the visible FAQ exactly (check_site.py enforces this).
+- Never write: identity-check bypass wording, guarantees ("100%", "무조건", "거절 없이", "누구나"), unsupported superlatives ("최저가", "1위").
