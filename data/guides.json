@@ -1,0 +1,274 @@
+{
+ "categories": [
+  {
+   "key": "all",
+   "label": "전체보기",
+   "desc": "앤텔레콤 선불폰 개통에 필요한 모든 가이드를 확인해 보세요.",
+   "icon": "<svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"3.5\" width=\"7\" height=\"7\" rx=\"1.6\"/><rect x=\"13.5\" y=\"3.5\" width=\"7\" height=\"7\" rx=\"1.6\"/><rect x=\"3.5\" y=\"13.5\" width=\"7\" height=\"7\" rx=\"1.6\"/><rect x=\"13.5\" y=\"13.5\" width=\"7\" height=\"7\" rx=\"1.6\"/></svg>"
+  },
+  {
+   "key": "check",
+   "label": "개통 전 확인",
+   "desc": "신청 조건과 개통 가능 시간, K망·L망 선택을 먼저 확인하세요.",
+   "icon": "<svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"4\" width=\"14\" height=\"17\" rx=\"2\"/><path d=\"M9 4V3h6v1\"/><path d=\"m8.5 13 2.3 2.3L15.5 10.5\"/></svg>"
+  },
+  {
+   "key": "sim",
+   "label": "유심 준비",
+   "desc": "편의점·다이소에서 사는 KT·LG 유심 종류와 구매처를 정리했어요.",
+   "icon": "<svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 2.5h7.5l4.5 4.5v14.5H7z\"/><rect x=\"9.5\" y=\"11\" width=\"7\" height=\"7.5\" rx=\"1.2\"/></svg>"
+  },
+  {
+   "key": "self",
+   "label": "셀프개통",
+   "desc": "신청 화면 순서대로 셀프개통하는 방법을 안내해요.",
+   "icon": "<svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"6\" y=\"2.5\" width=\"12\" height=\"19\" rx=\"2.5\"/><path d=\"M10.5 18.3h3\"/><path d=\"m9.5 10.5 2 2 3.5-3.5\"/></svg>"
+  },
+  {
+   "key": "esim",
+   "label": "eSIM",
+   "desc": "유심 없이 L망 eSIM으로 새 번호를 개통하는 방법이에요.",
+   "icon": "<svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"4\" width=\"14\" height=\"16\" rx=\"2\"/><path d=\"M9 4v16M5 9h4M5 15h4M13 9h3M13 12h3M13 15h2\"/></svg>"
+  },
+  {
+   "key": "move",
+   "label": "번호이동·미납",
+   "desc": "기존 번호를 옮기는 조건과 미납·정지 상태에서 가능한 방법이에요.",
+   "icon": "<svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 8h13l-3.5-3.5M20 16H7l3.5 3.5\"/></svg>"
+  },
+  {
+   "key": "plan",
+   "label": "요금제·충전",
+   "desc": "요금제 비교와 첫 충전, 다음 충전 방법을 모았어요.",
+   "icon": "<svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><ellipse cx=\"12\" cy=\"6\" rx=\"7\" ry=\"2.8\"/><path d=\"M5 6v4c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V6M5 10v4c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-4M5 14v4c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-4\"/></svg>"
+  },
+  {
+   "key": "fix",
+   "label": "문제 해결",
+   "desc": "셀프개통이 막혔을 때 오류 문구별로 확인할 것을 모았어요.",
+   "icon": "<svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.8 1.8 0 0 0 2.5 2.6l5.9-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.5-.5-2.4z\"/></svg>"
+  }
+ ],
+ "guides": [
+  {
+   "href": "/선불폰-개통/",
+   "title": "선불폰 개통 신청 조건",
+   "desc": "지금 신청할 수 있는지, 신규가입 가능 시간과 새 번호·기존 번호의 차이를 확인합니다.",
+   "cat": "check",
+   "ill": "clipboard",
+   "kw": "신청조건 신규가입 번호이동 새번호 기존번호"
+  },
+  {
+   "href": "/앤텔레콤-웹개통/",
+   "title": "앤텔레콤 셀프개통 시간",
+   "desc": "신규가입과 번호이동은 각각 언제 개통할 수 있나요?",
+   "cat": "check",
+   "ill": "clock",
+   "kw": "개통시간 신규가입 번호이동 일요일 공휴일"
+  },
+  {
+   "href": "/v4-1/topic/weekend-activation/",
+   "title": "주말 셀프개통 가능 시간",
+   "desc": "주말과 공휴일에도 개통할 수 있나요?",
+   "cat": "check",
+   "ill": "calendar",
+   "kw": "주말 공휴일 일요일 토요일 개통시간"
+  },
+  {
+   "href": "/v4-1/topic/network-activation/",
+   "title": "K망·L망 고르는 기준",
+   "desc": "K망과 L망 중 무엇을 고르나요? 휴대폰 상태와 필요한 기능으로 정합니다.",
+   "cat": "check",
+   "ill": "signal",
+   "kw": "K망 L망 KT LG 미납정지 eSIM 5G 망선택"
+  },
+  {
+   "href": "/편의점-선불유심/",
+   "title": "편의점 선불유심 KT·LG 종류",
+   "desc": "편의점 유심은 어떤 게 있고, L망 원칩은 어디에서 살 수 있나요?",
+   "cat": "sim",
+   "kw": "편의점 CU GS25 이마트24 바로유심 원칩 유심종류 가격",
+   "ill": "sim"
+  },
+  {
+   "href": "/kt-바로유심/",
+   "title": "KT 바로유심 편의점 판매처",
+   "desc": "KT 바로유심은 어떤 유심이고 어디에서 살 수 있나요?",
+   "cat": "sim",
+   "img": "/kt-baro-usim-graphic.webp",
+   "kw": "CU GS25 세븐일레븐 NFC 판매처 K망"
+  },
+  {
+   "href": "/lg-원칩/",
+   "title": "앤텔레콤 L망 유심",
+   "desc": "L망 개통에 쓰는 LG 모두의 원칩은 어떻게 입력하나요?",
+   "cat": "sim",
+   "img": "/lg-onechip-graphic.webp",
+   "kw": "모두의원칩 LG L망 모델코드 일련번호"
+  },
+  {
+   "href": "/다이소-유심/",
+   "title": "다이소 유심칩 구매",
+   "desc": "다이소 고고비 유심은 어떤 제품이고 어떻게 구분하나요?",
+   "cat": "sim",
+   "img": "/gogobi-usim-graphic.webp",
+   "kw": "고고비 5000원 다이소 L망"
+  },
+  {
+   "href": "/v4-1/topic/sim-buy-where/",
+   "title": "선불유심 구매처",
+   "desc": "선불유심은 어디에서 살 수 있나요?",
+   "cat": "sim",
+   "img": "/img/usim-lg.webp",
+   "kw": "구매처 편의점 다이소 어디서"
+  },
+  {
+   "href": "/v4-1/topic/kt-nfc-compare/",
+   "title": "KT 바로유심 NFC 차이",
+   "desc": "NFC가 되는 유심은 무엇인가요?",
+   "cat": "sim",
+   "ill": "nfc",
+   "kw": "NFC 바로유심 교통카드"
+  },
+  {
+   "href": "/앤텔레콤-선불폰-개통-방법/",
+   "title": "앤텔레콤 셀프개통 방법",
+   "desc": "셀프개통은 어떤 순서로 진행하나요? 실제 신청 화면으로 안내합니다.",
+   "cat": "self",
+   "img": "/img/guide/cap-01-start.webp",
+   "cover": true,
+   "kw": "셀프개통 순서 안면인증 간편인증 신청 준비물"
+  },
+  {
+   "href": "/선불폰-개통방법/",
+   "title": "선불폰 개통방법과 준비물",
+   "desc": "신청 화면에서 어떤 순서로 입력하고, 승인 뒤에는 무엇을 하나요?",
+   "cat": "self",
+   "img": "/img/guide/cap-08-k-apply.webp",
+   "cover": true,
+   "kw": "준비물 안면인증 간편인증 첫충전 유심장착 해피콜"
+  },
+  {
+   "href": "/kt선불폰-개통/",
+   "title": "KT 바로유심 개통 방법",
+   "desc": "KT 바로유심은 어떻게 개통하나요? 19자리 입력까지 안내합니다.",
+   "cat": "self",
+   "img": "/img/guide/cap-09-usim-number.webp",
+   "cover": true,
+   "kw": "바로유심 19자리 K망 개통"
+  },
+  {
+   "href": "/편의점-선불유심-셀프개통/",
+   "title": "편의점 선불유심 개통 방법",
+   "desc": "편의점에서 산 유심은 어떻게 개통하나요?",
+   "cat": "self",
+   "ill": "phone",
+   "kw": "편의점 유심 개통 셀프개통"
+  },
+  {
+   "href": "/태블릿-소유자-회원번호/",
+   "title": "태블릿 소유자 회원번호 2893496",
+   "desc": "멤버십 앱으로 개통할 때 회원번호 칸에는 무엇을 넣나요?",
+   "cat": "self",
+   "ill": "id",
+   "kw": "회원번호 네이버 인증서 멤버십 앱 2893496 태블릿"
+  },
+  {
+   "href": "/v4-1/topic/esim-new/",
+   "title": "L망 선불폰 eSIM 신규개통 방법",
+   "desc": "유심 없이 eSIM으로 신규가입하려면 어떻게 하나요?",
+   "cat": "esim",
+   "ill": "esim",
+   "kw": "eSIM 이심 EID 유심없이 L망"
+  },
+  {
+   "href": "/알뜰폰-셀프개통-번호이동/",
+   "title": "선불폰 번호이동",
+   "desc": "지금 쓰는 번호를 그대로 옮기려면 어떤 조건이 필요한가요?",
+   "cat": "move",
+   "ill": "swap",
+   "kw": "번호이동 사전동의 번호유지"
+  },
+  {
+   "href": "/미납정지-선불폰/",
+   "title": "미납·정지 선불폰 개통·번호이동",
+   "desc": "미납·연체·정지 상태에서는 어떤 개통 방법이 가능한가요?",
+   "cat": "move",
+   "ill": "shield",
+   "kw": "미납 연체 정지 신용불량 발신정지 수신정지 번호이동"
+  },
+  {
+   "href": "/v4-1/topic/plan-compare/",
+   "title": "선불폰 요금제 비교",
+   "desc": "K망·L망 요금제는 데이터와 가격이 어떻게 다른가요?",
+   "cat": "plan",
+   "ill": "coins",
+   "kw": "요금제 396 459 464 가격 데이터 비교"
+  },
+  {
+   "href": "/v4-1/topic/plan-396/",
+   "title": "앤텔레콤 396 요금제 K망·L망",
+   "desc": "가장 많이 고르는 396 요금제는 어떤 요금제인가요?",
+   "cat": "plan",
+   "ill": "bars",
+   "kw": "396 요금제 10.3GB 3Mbps"
+  },
+  {
+   "href": "/선불폰-충전-방법/",
+   "title": "선불폰 충전 방법과 개통 후 할 일",
+   "desc": "첫 충전 요청부터 예약리필, 개통했는데 안 될 때까지 정리했습니다.",
+   "cat": "plan",
+   "ill": "bolt",
+   "kw": "충전 예약리필 해피콜 잔액 개통후"
+  },
+  {
+   "href": "/알뜰폰-셀프개통-안됨/",
+   "title": "셀프개통 안 될 때 확인할 것",
+   "desc": "본인인증, 유심번호 입력, 번호이동 사전동의 중 어디서 막혔나요?",
+   "cat": "fix",
+   "img": "/img/guide/cap-err-id-fail.webp",
+   "cover": true,
+   "kw": "인증실패 안면인증 유심정보 오류 안될때 본인인증"
+  },
+  {
+   "href": "/선불폰-셀프개통/",
+   "title": "선불폰 셀프개통 문제 해결",
+   "desc": "\"다른 판매자에게 배정\", \"USIM 모델정보 없음\" 같은 오류가 뜨면 어떻게 하나요?",
+   "cat": "fix",
+   "ill": "alert",
+   "kw": "오류 다른판매자 USIM모델정보 해결"
+  }
+ ],
+ "asks": [
+  {
+   "href": "/v4-1/topic/weekend-activation/",
+   "text": "주말에도 개통이 가능한가요?"
+  },
+  {
+   "href": "/편의점-선불유심/",
+   "text": "어떤 유심을 사야 하나요?"
+  },
+  {
+   "href": "/미납정지-선불폰/",
+   "text": "미납이 있어도 개통할 수 있나요?"
+  },
+  {
+   "href": "/알뜰폰-셀프개통-안됨/",
+   "text": "인증이 계속 실패하면 어떻게 하나요?"
+  }
+ ],
+ "quick": [
+  {
+   "href": "/알뜰폰-셀프개통-안됨/",
+   "label": "문제 해결"
+  },
+  {
+   "href": "/편의점-선불유심/",
+   "label": "준비물"
+  },
+  {
+   "href": "/앤텔레콤-선불폰-개통-방법/",
+   "label": "처음 개통"
+  }
+ ]
+}
