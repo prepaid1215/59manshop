@@ -132,5 +132,29 @@ ILL = {
 CAT_ILL = {'check': 'clipboard', 'sim': 'sim', 'self': 'phone', 'esim': 'esim', 'move': 'swap', 'plan': 'coins', 'fix': 'wrench', 'all': 'grid'}
 
 
+# 제공받은 UI 삽화 에셋(/img/ui/*.svg, 독립 SVG). 이름이 여기 있으면 <img>로, 없으면 위 인라인 SVG를 쓴다.
+# 제품 사진·공식 로고는 이 매핑과 무관하게 그대로 둔다.
+ASSET = {
+    'clipboard': '02_checklist',
+    'phone': '01_activation_phone_sim',
+    'sim': '05_sim_cards',
+    'esim': '04_esim',
+    'swap': '06_number_transfer',
+    'coins': '07_plans_and_payment',
+    'calendar': '08_opening_hours',
+    'clock': '08_opening_hours',
+    'wrench': '09_support',
+    'alert': '09_support',
+    'id': '10_id_card',
+}
+HERO_ASSET = ('11_detail_hero_phone_sim', 1200, 760)
+
+
+def is_asset(name):
+    return name in ASSET
+
+
 def ill_svg(name, size=64):
+    if name in ASSET:
+        return '<img class="ill" src="/img/ui/%s.svg" alt="" width="%d" height="%d" loading="lazy" decoding="async">' % (ASSET[name], size, size)
     return ('<svg viewBox="0 0 64 64" width="%d" height="%d" role="img" aria-hidden="true">%s</svg>' % (size, size, ILL[name]))

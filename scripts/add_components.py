@@ -44,8 +44,14 @@ JOBS = [
 for rel, anchor, html, marker in JOBS:
     p = ROOT / rel
     s = p.read_text(encoding='utf-8')
-    if marker in s:
-        print(rel, marker, 'already')
+    block = re.compile(r'<div class="img-cards %s".*?</ul><p class="img-cards-note">.*?</p></div>' % re.escape(marker), re.S)
+    if block.search(s):
+        s2 = block.sub(lambda m: html, s, count=1)
+        if s2 != s:
+            p.write_text(s2, encoding='utf-8', newline='')
+            print(rel, marker, 'updated')
+        else:
+            print(rel, marker, 'unchanged')
         continue
     m = re.search(anchor, s, re.S)
     if not m:

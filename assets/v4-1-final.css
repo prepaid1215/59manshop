@@ -700,3 +700,26 @@ body>section.activation-flow{margin:12px 14px 0!important;width:auto!important;m
 .gc-pane-loading{padding:34px 0;color:#5b6779;text-align:center}
 .gc-split.has-pane~.gc-ask{margin-top:28px}
 }
+
+/* ====================================================================
+   V9 (ui/renewal): supplied UI illustration assets (/img/ui/*.svg) used as <img class="ill">
+   ==================================================================== */
+img.ill{display:block;object-fit:contain;max-width:100%}
+.gc-thumb img.ill{width:100%;height:100%;padding:3px}
+.gc-ic img.ill{width:48px;height:48px}
+.gc-head-ic img.ill{width:50px;height:50px}
+.gc-qart img.ill{width:92px;height:92px;filter:drop-shadow(0 8px 10px #1959d82b)}
+.is-hot .gc-qart img.ill{filter:drop-shadow(0 8px 12px #0b2a7040)}
+.pa-main img.ill{width:156px;height:156px}
+.ic-art img.ill{width:96px;height:96px;max-height:none;filter:none}
+.gc-pane-art img.ill{width:112px;height:112px;padding:0}
+@media(hover:hover){.gc-card:hover .gc-thumb img.ill{transform:scale(1.08)}.gc-tile:hover .gc-ic img.ill{transform:translateY(-2px) scale(1.06)}.gc-ic img.ill{transition:transform .2s}}
+.page-art--hero{height:auto;padding:4px 0;background:linear-gradient(135deg,#eef5ff 0%,#f8fbff 60%,#e4efff 100%)}
+.page-art--hero img{display:block;width:100%;height:auto;max-height:260px;object-fit:contain}
+@media(min-width:768px){
+.pa-main img.ill{width:190px;height:190px}
+.gc-qart img.ill{width:108px;height:108px}
+.ic-art img.ill{width:110px;height:110px}
+.page-art--hero img{max-height:340px}
+}
+@media(max-width:360px){.gc-qart img.ill{width:74px;height:74px}.gc-ic img.ill{width:42px;height:42px}}

@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from guide_art import CAT_ILL, ill_svg  # noqa: E402
+from guide_art import CAT_ILL, HERO_ASSET, ill_svg, is_asset  # noqa: E402
 
 DATA = json.loads((ROOT / 'data' / 'guides.json').read_text(encoding='utf-8'))
 CATS = {c['key']: c for c in DATA['categories']}
@@ -41,12 +41,35 @@ def crumb_html(url, h1):
     return None
 
 
+HERO_PAGES = {'/앤텔레콤-선불폰-개통-방법/', '/선불폰-개통방법/'}  # 가로 대표 이미지는 개통 절차 핵심 2개 페이지에만(같은 이미지 반복 방지)
+
+
 def art_html(g):
+    if g['href'] in HERO_PAGES:
+        name, w, h = HERO_ASSET
+        return ('<div class="site page-art-wrap"><figure class="page-art page-art--hero">'
+                '<img src="/img/ui/%s.svg" alt="%s 안내 일러스트" width="%d" height="%d" decoding="async"></figure></div>'
+                % (name, html.escape(g['title']), w, h))
     ill = g.get('ill') or CAT_ILL[g['cat']]
     second = {'check': 'clock', 'sim': 'phone', 'self': 'sim', 'esim': 'phone', 'move': 'shield', 'plan': 'bolt', 'fix': 'alert'}[g['cat']]
+    sub = '' if is_asset(ill) else '<span class="pa-sub">%s</span>' % ill_svg(second, 72)
     return ('<div class="site page-art-wrap"><figure class="page-art" role="img" aria-label="%s 안내 일러스트">'
-            '<span class="pa-main">%s</span><span class="pa-sub">%s</span><span class="pa-dot pa-d1"></span><span class="pa-dot pa-d2"></span></figure></div>'
-            % (html.escape(g['title']), ill_svg(ill, 132), ill_svg(second, 72)))
+            '<span class="pa-main">%s</span>%s<span class="pa-dot pa-d1"></span><span class="pa-dot pa-d2"></span></figure></div>'
+            % (html.escape(g['title']), ill_svg(ill, 150), sub))
+
+
+HOME_TILE_RE = re.compile(r'(<a class="gc-tile" href="/guide/(?:#(\w+))?">)<span class="gc-ic">.*?</span>(<b>)', re.S)
+
+
+def update_home():
+    p = ROOT / 'index.html'
+    s = p.read_text(encoding='utf-8')
+    o = s
+    s = HOME_TILE_RE.sub(lambda m: m.group(1) + '<span class="gc-ic">' + ill_svg(CAT_ILL[m.group(2) or 'all'], 44) + '</span>' + m.group(3), s)
+    if s != o:
+        p.write_text(s, encoding='utf-8', newline='')
+        return 1
+    return 0
 
 
 changed = 0
@@ -79,4 +102,5 @@ for p in sorted(ROOT.rglob('index.html')):
     if s != o:
         p.write_text(s, encoding='utf-8', newline='')
         changed += 1
+changed += update_home()
 print('build_pages: %d개 페이지 갱신' % changed)
