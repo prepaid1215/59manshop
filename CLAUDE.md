@@ -2,19 +2,19 @@
 
 This repository powers https://www.59man.shop/ .
 
-## Fixed brand names
-- Website brand (59man.shop): **59만선불폰**.
-- Keep the same website brand in the visible header/footer, breadcrumbs, page title suffix, Open Graph `og:site_name`, image alt text referring to the website brand, and homepage `WebSite` JSON-LD `name`.
-- Website `alternateName` may include `59man.shop`; do NOT set `59만모바일` or `59만모바일 선불폰` as the site's official name or alias without an explicit user request.
-- Separate activation/conversion service at https://preplan.site/ : **59만모바일**. Preserve its `preplan.site` CTA links and wording such as `59만모바일 개통 페이지` and `59만모바일 개통 시작하기`. These are NOT the 59man.shop website brand.
-- Exception (explicit user request, phase 1): the operating business is 상호 **59만모바일**. The footer business info and the homepage `Organization` JSON-LD (`name`/`legalName` = 59만모바일, `url` = https://preplan.site) use it, and the homepage `WebSite` JSON-LD links to it via `publisher`. The website brand and `WebSite` `name` stay **59만선불폰**.
+## Fixed brand names (revised on `ui/renewal`, 2026-10 — owner decision)
+- Official website/operating brand (59man.shop): **59만모바일**. The former website brand "59만선불폰" is retired: use 59만모바일 in the header/footer, breadcrumbs, `<title>` suffix, Open Graph `og:site_name`, image alt text, and the homepage `WebSite` JSON-LD `name`.
+- Website `alternateName` may include `59man.shop`.
+- Generic search keywords ("선불폰", "선불유심", "앤텔레콤 선불폰") stay in body text and titles; only the brand name changed.
+- Separate activation/conversion service at https://preplan.site/ is wording-wise "59만모바일 개통 페이지" / "59만모바일 개통 시작하기"; keep those labels and the `preplan.site` CTA links.
+- The operating business 상호 is **59만모바일** (footer business info, homepage `Organization` JSON-LD `name`/`legalName`, `url` = https://preplan.site). Legal fields must match the actual business registration.
 - The `?from=` parameter on preplan.site CTA links is allowed for conversion measurement. External tracking parameters such as `utm_`, `fbclid`, `gclid` are forbidden on any link.
 
 ## Change safety
-- Never bulk-replace `59만모바일` inside activation instructions, CTAs or preplan.site labels simply to unify the 59man.shop site name.
+- Brand renames must never touch URLs, slugs, canonical, robots, sitemap, or index/noindex decisions.
 - Do not change existing URLs, canonical, robots, sitemap, index/noindex decisions, or conversion destinations as part of a website-brand correction.
 - The SEO plan involves topic pages, regional landing pages, internal linking and conversion paths. Treat this as separate from brand naming.
-- Ask for explicit confirmation before changing the website brand again.
+- Ask for explicit confirmation before changing the website brand again (last change: 59만선불폰 → 59만모바일 on `ui/renewal`).
 
 ## Phase 2 noindex exception
 - Allowed ONLY for the phase 2 work (branch `seo/phase2`), and ONLY for these two pages:
@@ -28,12 +28,18 @@ This repository powers https://www.59man.shop/ .
 ## Checks
 - Run `python scripts/check_site.py` before opening a PR (`--table` prints the title/description/canonical table for indexable pages). It must report 0 broken links.
 
-## Mobile-only layout (seo/mobile)
-- Every page uses one 480px column at every screen width (PC shows the same phone layout). No sidebar (`<aside class="side">`); related links appear once at the end of the article in `<nav class="related">`.
-- Every non-stub page ends with `<nav class="bottom-bar">`: "개통 시작하기" (preplan.site link, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat).
-- All pages load only `/assets/v4-1-final.css?v=YYYYMMDDx`. When the CSS changes, bump the `?v=` value on every page so browsers do not keep the old file.
+## Responsive layout (revised on `ui/renewal`: mobile first, desktop extension)
+- Mobile (<768px): one column, touch-friendly cards, fixed bottom bar. Desktop (>=768px): wide container with top navigation; guide hub shows category tiles and a 2-column card grid; article pages keep a readable max width (no sprawling lines). Never just scale the phone layout up.
+- Header on every page: brand, nav (홈 / 가이드 / 요금제 / 유심 안내), 카톡 상담, 개통 시작하기, and a working hamburger menu on mobile (`<details class="top-menu">` + `/assets/site.js`).
+- Every non-stub page ends with `<nav class="bottom-bar">` (mobile only): "개통 시작하기" (preplan.site, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat). Related links appear once at the end of the article in `<nav class="related">`.
+- Pages load `/assets/v4-1-final.css?v=YYYYMMDDx` and `/assets/site.js` (deferred). When CSS/JS change, bump the `?v=` value on every page.
+- Brand colour is blue (`--blue`); pink is not part of the design. Design tokens live in `:root` of the stylesheet.
 - Do not show the `preplan.site` domain in visible text (body, footer, buttons). Links (`href`) and JSON-LD may use it. Footer wording: "개통은 59만모바일 개통 페이지에서 진행됩니다".
 - Prices, purchase places and conditions come only from the operator's fact sheet (kept outside this repo, never committed).
+
+## URL policy (renewal)
+- New guide detail pages use top-level slugs: `https://www.59man.shop/{slug}/`. Category is a data attribute, never part of the URL. `/guide/` stays as the hub.
+- Existing indexed URLs (including `/v4-1/topic/*`) stay untouched until a real HTTP 301 is available. `<meta refresh>` is not a substitute for 301. DNS/proxy changes are a separate, explicitly approved task.
 
 ## Content rules
 - Facts (prices, plans, conditions, hours, phone numbers) come only from the operator fact sheet kept outside this repo. Mark changeable items with a date ("2026년 10월 기준") and "신청 화면이 최종 기준".

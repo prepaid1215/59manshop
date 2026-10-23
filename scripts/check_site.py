@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = 'https://www.59man.shop'
-BRAND = '59만선불폰'
+BRAND = '59만모바일'
 V4_TOPICS = ['esim-new', 'kt-nfc-compare', 'network-activation', 'plan-396',
              'plan-compare', 'sim-buy-where', 'weekend-activation']
 
@@ -118,7 +118,7 @@ for u, h in pages.items():
     if u in indexable:
         if meta(h, 'property', 'og:site_name') != BRAND:
             fail('og:site_name != %s: %s' % (BRAND, u))
-        if not re.search(r'<title>[^<]+ - ?59만선불폰</title>|<title>[^<]+\| 59만선불폰</title>', h):
+        if not re.search(r'<title>[^<]+ - ?59만모바일</title>|<title>[^<]+\| 59만모바일</title>', h):
             fail('title 접미사 이상: %s' % u)
         want = 'website' if u in ('/', '/guide/') else 'article'
         if meta(h, 'property', 'og:type') != want:
