@@ -254,3 +254,24 @@ body,body *{word-break:keep-all!important;overflow-wrap:break-word!important}
 .hero h1,.article h2,.article h3{text-wrap:balance}
 .article p,.article li{text-wrap:pretty}
 .kakao-help{padding:10px 14px;text-align:center;word-break:keep-all}
+
+/* V5.8 blue + pink accent mix (visual guide blocks only) */
+:root{--blue:#1959d8;--blue-tint:#eef3ff;--pink:#e8437b;--pink-deep:#c92c63;--pink-tint:#fff1f6;--pink-line:#f9cddd}
+.hero-art{background:linear-gradient(135deg,#e6efff,#ffe8f0)}
+.article .key-points{background:var(--pink-tint)!important;border:1px solid var(--pink-line)!important}
+.article .key-points>h2{color:var(--pink-deep)}
+.article .key-points>h2 .ic{color:var(--pink)}
+.article .check-list li::before{background-color:var(--pink)}
+.article .check-list b{color:#1a3f99}
+.sec-num{background:linear-gradient(135deg,var(--pink),#f36f9b);box-shadow:0 3px 8px #e8437b33}
+.chat-tags span{color:var(--pink-deep)}
+.article .tile-grid li{background:#fff;border-color:#e3e9f6}
+.article .tile-grid li:nth-child(odd) .ic{background:var(--blue-tint);color:var(--blue);box-shadow:none}
+.article .tile-grid li:nth-child(even) .ic{background:var(--pink-tint);color:var(--pink);box-shadow:none}
+.net-card.lgnet{border-color:var(--pink-line);background:var(--pink-tint)}
+.lgnet .net-tag{background:var(--pink)}.lgnet strong{color:var(--pink-deep)}
+.feature-cards>div:nth-child(2) .ic{background:var(--pink)}
+.feature-cards>div:nth-child(2){background:#fff7fa;border-color:var(--pink-line)}
+.article .flow li::before{background:var(--pink)}
+.article .icon-list li:nth-child(odd) .ic{background:var(--pink-tint);color:var(--pink)}
+.article .date-line .ic{color:var(--pink)}
