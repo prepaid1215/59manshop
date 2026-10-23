@@ -38,4 +38,6 @@ This repository powers https://www.59man.shop/ .
 ## Content rules
 - Facts (prices, plans, conditions, hours, phone numbers) come only from the operator fact sheet kept outside this repo. Mark changeable items with a date ("2026년 10월 기준") and "신청 화면이 최종 기준".
 - Content pages: answer first, question-style h2, tables followed by a short explanation, and a visible FAQ (`<section class="faq">` with `<h3>` questions). FAQPage JSON-LD is allowed only when its questions match the visible FAQ exactly (check_site.py enforces this).
-- Never write: identity-check bypass wording, guarantees ("100%", "무조건", "거절 없이", "누구나"), unsupported superlatives ("최저가", "1위").
+- Never write: skipping identity verification as a whole or using someone else's name/certificate ("인증 없이", "신분증 없이", "타인 명의"), absolute guarantees ("100%", "무조건", "누구나", "거절 없음"), or superlatives that compare with other companies ("최저가", "업계 최저", "1위").
+- Allowed when stated accurately with a date: "안면인증 실패해도 다음 단계로 진행 가능 (신청 화면의 안면인증 안정화 기간 안내, 2026년 10월 기준) — 간편인증은 필수", "신용조회가 없어 신용불량·연체 이력만으로 거절되지 않음 (가입제한·회선 수 제한은 별도 확인)", "앤텔레콤 선불 요금제 중 월 요금이 가장 낮은 요금제", "월 12,100원부터".
+- 59만모바일 tablet owner member number (태블릿 소유자 회원번호) is 2893496. It is used in the 앤텔레콤 membership app route (e.g., customers with only a Naver certificate, which the web activation page does not support). Never use another dealer's number.

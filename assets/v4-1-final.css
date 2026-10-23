@@ -143,3 +143,14 @@ body{max-width:480px;margin:0 auto;min-height:100vh;background:#fff;box-shadow:0
 .shot-grid .shot{margin:0}
 .home-brand{display:block;width:140px;height:140px;margin:0 auto 6px;border-radius:50%}
 .shot-guide .shot-grid{grid-template-columns:1fr;gap:18px}
+
+/* V5.4 member number */
+.member-box{margin-top:14px;background:#fff;border:2px solid #1959d8;border-radius:14px;padding:16px;display:grid;gap:6px;justify-items:center;text-align:center}
+.member-box span{font-size:13.5px;color:#52617a;font-weight:700}
+.member-box strong{font-size:34px;letter-spacing:2px;color:#1959d8;line-height:1.2}
+.member-copy{min-height:44px;padding:0 22px;border-radius:10px;border:0;background:#1959d8;color:#fff;font-weight:800;font-size:15px;cursor:pointer}
+.home-member{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff7d6;border:1px solid #f3dc82;border-radius:14px;padding:14px 16px!important;text-decoration:none;color:#1f2733}
+.home-member b{display:block;font-size:15px}
+.home-member span{font-size:13px;color:#52617a}
+.home-member strong{font-size:20px;color:#1959d8;white-space:nowrap}
+.home-member-wrap{padding:6px 0 0!important}
