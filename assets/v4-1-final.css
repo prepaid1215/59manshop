@@ -155,3 +155,18 @@ body{max-width:480px;margin:0 auto;min-height:100vh;background:#fff;box-shadow:0
 .home-member strong{font-size:20px;color:#1959d8;white-space:nowrap}
 .home-member-wrap{padding:6px 0 0!important}
 .shot-guide .shot img,.shot img[src*="/cap-"]{max-width:320px;margin:0 auto}
+
+/* V5.5 larger reading text */
+body{font-size:17.5px}
+.article p,.article li,.article ol.numbered li,.article ul.bullets li{font-size:17.5px!important;line-height:1.85!important}
+.article h2,.article section>h2{font-size:22px!important;line-height:1.4}
+.article h3{font-size:18.5px}
+.article th,.article td{font-size:15.5px!important}
+.shot figcaption{font-size:16px!important;line-height:1.7;color:#3a4658}
+.updated{font-size:14.5px!important}
+.faq-item h3{font-size:18px!important}
+.faq-item p{font-size:17px!important}
+.related a{font-size:16.5px!important}
+.hero p{font-size:16.5px!important}
+.kakao-help{display:flex;align-items:center;justify-content:center;gap:6px;min-height:52px;margin-top:14px;border-radius:12px;background:#fee500;color:#191600!important;font-weight:800;font-size:17px;text-decoration:none!important}
+.kakao-help-note{font-size:15px!important;color:#52617a;margin-top:8px!important;text-align:center}
