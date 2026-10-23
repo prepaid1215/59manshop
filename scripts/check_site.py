@@ -229,24 +229,27 @@ for u, h in pages.items():
     elif urllib.parse.unquote(mr.group(1)) != urllib.parse.unquote(target):
         fail('스텁 %s 의 meta refresh(%s)와 canonical(%s) 불일치' % (u, mr.group(1), target))
 
-# 2-3) /guide/ 허브: 5단계, 업데이트일, 색인 단계 페이지가 모두 한 번씩 들어 있는지
+# 2-3) /guide/ 가이드 센터: 카테고리 7개, 업데이트일, 색인 페이지가 모두 정확히 한 번씩 카드로 들어 있는지
 gh = pages['/guide/']
-for name in ('개통 전 확인', '준비물', '개통하기', '막힐 때', '개통 후'):
-    if '<h2>%s</h2>' % name not in gh:
-        fail('/guide/ 에 단계 없음: %s' % name)
+for name in ('개통 전 확인', '유심 준비', '셀프개통', 'eSIM', '번호이동·미납', '요금제·충전', '문제 해결'):
+    if '<b>%s</b>' % name not in gh:
+        fail('/guide/ 에 카테고리 없음: %s' % name)
 if not re.search(r'<p class="updated">업데이트: <time datetime="\d{4}-\d{2}-\d{2}">', gh):
     fail('/guide/ 업데이트일 표시 없음')
-hub_links = re.findall(r'<ul class="guide-links">.*?</ul>', gh, re.S)
-hub_refs = [r for blk in hub_links for r in re.findall(r'<li><a href="(/[^"]*)"', blk)]
+cats_on_tiles = set(re.findall(r'class="gc-tile[^"]*" data-cat="([a-z]+)"', gh))
+hub_refs = re.findall(r'<li data-cat="([a-z]+)"><a class="gc-card" href="(/[^"]*)"', gh)
+for c, r in hub_refs:
+    if c not in cats_on_tiles:
+        fail('/guide/ 카드 %s 의 카테고리(%s)에 해당하는 타일이 없음' % (r, c))
+hub_refs = [r for c, r in hub_refs]
 want = sorted(indexable - {'/', '/guide/'})
 hub_pages = [r.split('#')[0] for r in hub_refs]
 if set(hub_pages) != set(want):
-    fail('/guide/ 허브 링크가 색인 단계 페이지와 불일치: 누락 %s / 초과 %s' % (
+    fail('/guide/ 허브 링크가 색인 페이지와 불일치: 누락 %s / 초과 %s' % (
         sorted(set(want) - set(hub_pages)), sorted(set(hub_pages) - set(want))))
-# 한 페이지가 여러 칸에 들어갈 수 있는 것은 #앵커로 구분된 섹션 링크뿐이고, 앵커는 대상 페이지에 실제로 있어야 함
 plain = [r for r in hub_refs if '#' not in r]
 if len(plain) != len(set(plain)):
-    fail('/guide/ 허브에 앵커 없이 중복된 링크가 있음')
+    fail('/guide/ 허브에 중복된 카드 링크가 있음')
 for r in hub_refs:
     if '#' in r:
         page, anchor = r.split('#', 1)
