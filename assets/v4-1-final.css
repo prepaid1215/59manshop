@@ -195,7 +195,7 @@ body{font-size:17.5px}
 .notice-box>p{margin:0!important;color:#4a3d12}
 
 /* V5.7 visual guide blocks (charge page first; reusable) */
-.article .date-line{display:flex;align-items:center;gap:6px;color:#60708b;margin:0 0 14px!important}
+.article .date-line{display:flex;align-items:flex-start;gap:6px;color:#60708b;margin:0 0 14px!important}
 .article .date-line .ic{display:inline-flex;color:#60708b}.article .date-line .ic svg{width:17px;height:17px}
 .hero-art{margin:0 0 18px;border-radius:18px;overflow:hidden;background:#e8f0ff}
 .hero-art svg{display:block;width:100%;height:auto}
@@ -275,3 +275,4 @@ body,body *{word-break:keep-all!important;overflow-wrap:break-word!important}
 .article .flow li::before{background:var(--pink)}
 .article .icon-list li:nth-child(odd) .ic{background:var(--pink-tint);color:var(--pink)}
 .article .date-line .ic{color:var(--pink)}
+.article .date-line .ic{margin-top:3px}.article .date-line .date-text{display:flex;flex-direction:column;line-height:1.5}.article .date-line small{font-size:14px;color:#7a879c}
