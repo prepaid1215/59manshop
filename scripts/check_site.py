@@ -64,6 +64,49 @@ for u in indexable - sitemap:
 if not re.search(r'Sitemap: ' + re.escape(BASE) + '/sitemap.xml', read(ROOT / 'robots.txt')):
     fail('robots.txt에 Sitemap 줄 없음')
 
+# 1b) 섹션 구조: <section> 열기/닫기 수 일치 + 같은 class 섹션의 직접 중첩 금지
+from html.parser import HTMLParser
+
+_VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}
+
+
+class _SectionCheck(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.stack = []
+        self.opened = 0
+        self.closed = 0
+        self.nested = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in _VOID:
+            return
+        cls = dict(attrs).get('class') or ''
+        if tag == 'section':
+            self.opened += 1
+            if self.stack and self.stack[-1][0] == 'section' and self.stack[-1][1] == cls:
+                self.nested.append(cls)
+        self.stack.append((tag, cls))
+
+    def handle_endtag(self, tag):
+        if tag in _VOID:
+            return
+        if tag == 'section':
+            self.closed += 1
+        for i in range(len(self.stack) - 1, -1, -1):
+            if self.stack[i][0] == tag:
+                del self.stack[i:]
+                break
+
+
+for u, h in pages.items():
+    sc = _SectionCheck()
+    sc.feed(h)
+    if sc.opened != sc.closed:
+        fail('<section> 열기 %d개, 닫기 %d개 불일치: %s' % (sc.opened, sc.closed, u))
+    for cls in sc.nested:
+        fail('같은 class 섹션이 바로 안에 중첩됨(class="%s"): %s' % (cls, u))
+
 # 2) 페이지별 메타 점검
 for u, h in pages.items():
     can = re.search(r'rel="canonical" href="([^"]*)"', h)

@@ -343,3 +343,15 @@ details.faq-item[open]>summary::after{content:"\2212"}
 details.faq-item>p{margin:0 18px 16px!important}
 @media(max-width:360px){.fact-cards strong{font-size:19px}.result-card strong{font-size:22px}}
 .nw{white-space:nowrap}
+
+/* V5.11 home contact card + home without numbered badges */
+.home .article>section>h2::before{display:none!important}
+.home .article>section>h2{padding-left:0!important}
+.home-contact{text-align:center;padding:20px 18px!important}
+.home-contact h2{margin:6px 0 12px!important;padding-left:0!important}
+.home-contact .home-brand{margin:0 auto 4px}
+.hours-chips{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.hours-chips li{display:inline-flex;font-size:13.5px!important;line-height:1.3!important;font-weight:700;color:#13306e;background:var(--blue-tint);border:1px solid #cfdcf7;border-radius:100px;padding:6px 11px}
+.hours-chips li:last-child{background:var(--pink-tint);border-color:var(--pink-line);color:var(--pink-deep)}
+.home-contact .contact-note{margin:0!important;font-size:15px!important;line-height:1.6!important;color:#3a4658}
+.article section.home-contact{padding:20px 18px!important;margin-top:20px}.article section.home-contact>h2{display:block!important;text-align:center;padding-left:0!important}
