@@ -154,3 +154,4 @@ body{max-width:480px;margin:0 auto;min-height:100vh;background:#fff;box-shadow:0
 .home-member span{font-size:13px;color:#52617a}
 .home-member strong{font-size:20px;color:#1959d8;white-space:nowrap}
 .home-member-wrap{padding:6px 0 0!important}
+.shot-guide .shot img,.shot img[src*="/cap-"]{max-width:320px;margin:0 auto}
