@@ -28,12 +28,14 @@ This repository powers https://www.59man.shop/ .
 ## Checks
 - Run `python scripts/check_site.py` before opening a PR (`--table` prints the title/description/canonical table for indexable pages). It must report 0 broken links.
 
-## Responsive layout (revised on `ui/renewal`: mobile first, desktop extension)
-- Mobile (<768px): one column, touch-friendly cards, fixed bottom bar. Desktop (>=768px): wide container with top navigation; guide hub shows category tiles and a 2-column card grid; article pages keep a readable max width (no sprawling lines). Never just scale the phone layout up.
-- Header on every page: brand, nav (홈 / 가이드 / 요금제 / 유심 안내), 카톡 상담, 개통 시작하기, and a working hamburger menu on mobile (`<details class="top-menu">` + `/assets/site.js`).
-- Every non-stub page ends with `<nav class="bottom-bar">` (mobile only): "개통 시작하기" (preplan.site, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat). Related links appear once at the end of the article in `<nav class="related">`.
-- Pages load `/assets/v4-1-final.css?v=YYYYMMDDx` and `/assets/site.js` (deferred). When CSS/JS change, bump the `?v=` value on every page.
+## Mobile-only layout (owner decision, 2026-10: PC-specific layout is NOT built)
+- Design basis: phone width 390–480px. Every page uses one 480px column at every screen width; PC shows the same phone layout (centered column). No PC two-column layout, no PC-only navigation, no `@media(min-width:...)` desktop rules.
+- Category, list and detail pages all use the same mobile UI. Do not add a sidebar (`<aside class="side">`); related links appear once at the end of the article in `<nav class="related">`.
+- Header on every page: brand + hamburger menu (`<details class="top-menu">` + `/assets/site.js`) with 홈 / 가이드 / 요금제 / 유심 안내 / 개통 시작하기 / 카카오톡 상담.
+- Every non-stub page ends with `<nav class="bottom-bar">`: "개통 시작하기" (preplan.site link, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat).
+- Pages load `/assets/v4-1-final.css?v=YYYYMMDDx` and `/assets/site.js` (deferred); `/guide/` also loads `/assets/guide.js`. When CSS/JS change, bump the `?v=` value on every page (`python scripts/bump_css.py <version>`).
 - Brand colour is blue (`--blue`); pink is not part of the design. Design tokens live in `:root` of the stylesheet.
+- Illustrations: supplied SVG assets live in `/img/ui/` and are used as `<img class="ill">`; real product graphics, screen captures and official logos are never replaced by illustrations.
 - Do not show the `preplan.site` domain in visible text (body, footer, buttons). Links (`href`) and JSON-LD may use it. Footer wording: "개통은 59만모바일 개통 페이지에서 진행됩니다".
 - Prices, purchase places and conditions come only from the operator's fact sheet (kept outside this repo, never committed).
 

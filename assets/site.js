@@ -15,6 +15,4 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && menu.open) { close(); var s = menu.querySelector('summary'); if (s) s.focus(); }
   });
-  var mq = window.matchMedia ? window.matchMedia('(min-width: 768px)') : null;
-  if (mq && mq.addEventListener) mq.addEventListener('change', function (e) { if (e.matches) close(); });
 })();

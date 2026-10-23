@@ -83,7 +83,7 @@ parts.append(''.join(t))
 
 # 목록
 c0 = cats['all']
-parts.append('<div class="gc-split" id="gc-split"><section class="gc-section" id="gc-section"><div class="gc-head" id="gc-head"><span class="gc-head-ic" id="gc-head-ic">%s</span>'
+parts.append('<section class="gc-section" id="gc-section"><div class="gc-head" id="gc-head"><span class="gc-head-ic" id="gc-head-ic">%s</span>'
              '<div><h2 id="gc-title">%s</h2><p id="gc-desc">%s</p></div><span class="gc-total" id="gc-total"><b>%d</b>개</span></div>' % (
                  ill_svg(CAT_ILL['all'], 44), esc(c0['label']), esc(c0['desc']), counts['all']))
 parts.append('<ul class="gc-list" id="gc-list">')
@@ -91,7 +91,7 @@ for g in guides:
     parts.append('<li data-cat="%s"><a class="gc-card" href="%s" data-kw="%s"><span class="gc-num"></span><span class="gc-body">'
                  '<span class="gc-tag">%s</span><b>%s</b><span class="gc-desc">%s</span></span>%s<span class="gc-chev">%s</span></a></li>' % (
                      g['cat'], esc(g['href']), esc(META[g['href']]['kw']), esc(cats[g['cat']]['label']), esc(g['title']), esc(g['desc']), thumb(g), CHEV))
-parts.append('</ul><p class="gc-empty" id="gc-empty" hidden>일치하는 가이드가 없어요. 다른 검색어로 찾아보거나 카테고리를 선택해 보세요.</p></section><aside class="gc-pane" id="gc-pane" aria-label="가이드 미리보기" hidden></aside></div>')
+parts.append('</ul><p class="gc-empty" id="gc-empty" hidden>일치하는 가이드가 없어요. 다른 검색어로 찾아보거나 카테고리를 선택해 보세요.</p></section>')
 
 # 궁금하신가요
 a = ['<section class="gc-ask"><h2>' + BULB + '이런 내용이 궁금하신가요?</h2><ul>']
