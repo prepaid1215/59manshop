@@ -28,10 +28,11 @@
   var state = { cat: 'all', q: initialQuery };
 
   function render() {
-    var term = norm(state.q);
+    var terms = (state.q || '').trim().split(/\s+/).map(norm).filter(Boolean);
+    var term = terms.join('');
     var shown = 0;
     items.forEach(function (li, i) {
-      var ok = term ? index[i].indexOf(term) > -1 : (state.cat === 'all' || li.getAttribute('data-cat') === state.cat);
+      var ok = terms.length ? terms.every(function (word) { return index[i].indexOf(word) > -1; }) : (state.cat === 'all' || li.getAttribute('data-cat') === state.cat);
       li.hidden = !ok;
       if (ok) shown++;
     });

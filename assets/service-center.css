@@ -97,3 +97,7 @@ body{background:#fff!important;color:var(--sc-ink);font-family:-apple-system,Bli
 @media(hover:hover){.gc-tile:hover{border-color:#93b2d4!important;background:#f7faff!important;transform:none!important}.gc-quick-card:hover{background:#f8fafc!important;transform:none!important;box-shadow:none!important}}
 @media(max-width:360px){.site{padding-left:14px!important;padding-right:14px!important}.home-hero h1{font-size:24px!important}.gc-tiles{gap:6px!important}.gc-tile{padding:11px 9px!important}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* 검색 결과가 없을 때 다음 행동을 분명히 표시 */
+.gc-empty{border:1px solid #dfe5ec;border-radius:8px!important;background:#f7f9fc!important;padding:16px!important;line-height:1.7!important}
+.gc-empty a{font-weight:750;color:#175cd3;text-decoration:underline;text-underline-offset:3px}

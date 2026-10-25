@@ -95,7 +95,7 @@ for g in guides:
     parts.append('<li data-cat="%s"><a class="gc-card" href="%s" data-kw="%s"><span class="gc-num"></span><span class="gc-body">'
                  '<span class="gc-tag">%s</span><b>%s</b><span class="gc-desc">%s</span></span>%s<span class="gc-chev">%s</span></a></li>' % (
                      g['cat'], esc(g['href']), esc(META[g['href']]['kw']), esc(cats[g['cat']]['label']), esc(g['title']), esc(g['desc']), thumb(g), CHEV))
-parts.append('</ul><p class="gc-empty" id="gc-empty" hidden>일치하는 가이드가 없어요. 다른 검색어로 찾아보거나 카테고리를 선택해 보세요.</p></section>')
+parts.append('</ul><p class="gc-empty" id="gc-empty" hidden>찾는 안내가 없으신가요? 다른 검색어를 입력하거나 <a href="https://pf.kakao.com/_akxmKn/chat" rel="noopener">카카오톡 상담으로 질문해 주세요</a>.</p></section>')
 
 # 궁금하신가요
 a = ['<section class="gc-ask"><h2>' + BULB + '이런 내용이 궁금하신가요?</h2><ul>']
