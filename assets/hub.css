@@ -77,3 +77,76 @@ body{background:#f6f8fb}
  .detail-lead-visual{min-height:218px}
  .detail-lead-visual img{width:212px;height:212px}
 }
+
+
+/* OWNER REQUIREMENT: single mobile-only experience, INCLUDING desktop screens.
+ * Desktop browser is a centered 480px mobile page. No PC header, side panel or 2-column layouts.
+ * This final override intentionally defeats previous @media(min-width:700px/1024px) design expansions.
+ */
+@media (min-width:481px) {
+ html{scroll-padding-top:66px}
+ .site,.home .site,.top .site,.footer .site,.content.site{width:100%!important;max-width:480px!important;padding-left:18px!important;padding-right:18px!important;margin-left:auto!important;margin-right:auto!important}
+ .top-in{height:60px!important;gap:10px!important}
+ .brand{font-size:18px!important}
+ .brand-mascot{width:31px!important;height:31px!important}
+ .brand-caption{display:none!important}
+ .desktop-nav{display:none!important}
+ .top-menu{display:block!important}
+ .home-hero{padding:28px 0!important}
+ .home-hero .site{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:20px!important}
+ .home-hero h1{font-size:29px!important;line-height:1.36!important}
+ .home-hero-sub{font-size:14px!important}
+ .hero-checklist{max-width:none!important}
+ .checklist-top{padding:18px 18px 14px!important}
+ .hero-checklist>a{padding:13px 18px!important}
+ .home .content,.content{padding-top:24px!important;padding-bottom:96px!important}
+ .home h2{font-size:22px!important}
+ .home .article>section{margin-bottom:30px!important}
+ .home-featured-list,.home-plan-list,.gc-quick-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:11px!important}
+ .home .home-featured-card{display:block!important;min-height:282px!important;padding:22px 20px 108px!important;border-radius:18px!important}
+ .home .hf-body strong{font-size:21px!important;max-width:62%!important}
+ .home .hf-desc{font-size:12px!important;max-width:61%!important}
+ .home .home-featured-card>img.hf-art{position:absolute!important;width:140px!important;height:155px!important;right:0!important;bottom:46px!important}
+ .home .home-featured-card>img.hf-proof{left:21px!important;bottom:16px!important;width:28px!important;height:34px!important}
+ .home .hf-number{left:20px!important;top:22px!important}
+ .home .hf-go{left:20px!important;bottom:61px!important}
+ .home .hf-source{left:57px!important}
+ .home .home-cats .gc-tile{min-height:100px!important;padding:10px 5px!important}
+ .home .home-cats .gc-ic{height:38px!important}
+ .home .home-cats .gc-ic img{height:43px!important;width:43px!important}
+ .gc-tiles,.home .gc-tiles{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+ .gc-tile{min-height:98px!important;padding:9px 5px!important}
+ .gc-tile b{font-size:12px!important}
+ .gc-tile small{font-size:10px!important}
+ .home-badges,.home-usim-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .home-badges>div{padding:14px!important}
+ .home-badges b{font-size:12px!important}
+ .home-badges span{font-size:11px!important}
+ .home-plan{padding:17px!important}
+ .home-usim{padding:15px 10px!important}
+ .home-usim img,.home-usim-icon{width:100px!important;height:105px!important}
+ .home-usim b{font-size:14px!important}
+ .home-faq{max-width:none!important}
+ .home .related{display:block!important;grid-template-columns:1fr!important}
+ .home .related a{font-size:13px!important}
+ .detail-content{padding-top:18px!important}
+ .detail-categories{display:none!important}
+ .detail-workspace{display:block!important;grid-template-columns:none!important}
+ .guide-context{position:static!important}
+ .guide-context .context-list,.guide-context .context-help{display:none!important}
+ .detail-article{padding:22px 18px 28px!important;border-radius:18px!important}
+ .detail-article .hero h1,.hero h1{font-size:27px!important}
+ .detail-article .hero p,.hero p{font-size:14px!important}
+ .detail-article section:not(.gc-section) h2{font-size:21px!important}
+ .detail-article p,.detail-article li{font-size:14px!important}
+ .detail-article>section+section{padding-top:23px!important;margin-top:22px!important}
+ .detail-article table{font-size:12px!important}
+ .detail-article .shot>img{max-height:none!important}
+ .detail-lead-visual{min-height:164px!important;margin:14px 0 20px!important}
+ .detail-lead-visual img{width:160px!important;height:160px!important}
+ .footer{padding:26px 0 100px!important}
+ .footer-grid{grid-template-columns:minmax(0,1fr)!important;gap:18px!important}
+ .footer-info p{font-size:12px!important;line-height:1.7!important}
+ .bottom-bar{display:grid!important;position:fixed!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;width:min(100%,480px)!important;max-width:480px!important;grid-template-columns:minmax(0,1fr) 108px!important;gap:8px!important;padding:10px 18px calc(10px + env(safe-area-inset-bottom))!important}
+ .top-menu-panel{right:0!important}
+}

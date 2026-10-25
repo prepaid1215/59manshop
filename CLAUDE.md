@@ -82,3 +82,11 @@ This repository powers https://www.59man.shop/ .
 - Detail cover art is added only for known guide URLs and is visibly distinguished as editorial artwork; existing real product photos and form captures remain unchanged.
 - Keep scripts/build_hub.py idempotent and match generated detail HTML; don't edit canonical, robots, sitemap, or original text.
 - CSS uses /assets/hub.css and guide-only /assets/guide-hub.css with cache version art3.
+
+
+## Mobile-only non-negotiable — 2026-10-25 correction
+- 59man.shop is a MOBILE-ONLY service experience. At all browser widths (390, 430, 480, 1024, 1440), content must stay centered and never exceed **480px**. Desktop screens must NOT expand into PC layouts.
+- Header always uses mobile hamburger; NEVER desktop navigation. Home keeps one-column cards and compact category grid. Guide uses THREE columns of category tiles and a SINGLE column of guide cards. Detail pages do NOT show desktop sidebars. Footer and bottom action bar retain mobile width.
+- Reference screenshots describe visual composition only. They do not authorize implementing desktop two-column layouts. Ignore previous lines that suggest PC two-column presentation; this explicit owner rule overrides them.
+- CSS remediation is in assets/hub.css and assets/guide-hub.css with version 20261025-mobile-only. Future generators and page edits MUST preserve the mobile shell.
+- Verify with browser at 390/430/480/1024/1440 before merging, then verify sitemap, robots, canonical, index/noindex, existing text and conversion links stay unchanged.
