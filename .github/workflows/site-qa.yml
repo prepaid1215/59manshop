@@ -1,0 +1,21 @@
+name: Site SEO and link QA
+on:
+  push:
+    branches:
+      - main
+      - design/mobile-hub-20261025
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check sitemap, canonical, internal links and pages
+        run: python scripts/check_site.py
