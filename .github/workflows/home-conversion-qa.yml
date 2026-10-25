@@ -1,0 +1,40 @@
+name: Home conversion landing QA
+on:
+  push:
+    branches:
+      - conversion/mobile-home-20261025
+      - main
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check canonical, sitemap and all internal links
+        run: python scripts/check_site.py
+      - name: Install Chromium test dependency
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test original mobile-only shell and conversion flow
+        run: |
+          python scripts/serve_preview.py > /tmp/home-landing-preview.log 2>&1 &
+          sleep 2
+          node scripts/assert_mobile_only.cjs
+          node scripts/assert_home_conversion.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: home-landing-captures
+          path: |
+            reports/ui/home-conversion/
+            reports/ui/mobile-shell-qa/results.json
+          if-no-files-found: warn
