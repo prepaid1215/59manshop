@@ -90,3 +90,10 @@ This repository powers https://www.59man.shop/ .
 - Reference screenshots describe visual composition only. They do not authorize implementing desktop two-column layouts. Ignore previous lines that suggest PC two-column presentation; this explicit owner rule overrides them.
 - CSS remediation is in assets/hub.css and assets/guide-hub.css with version 20261025-mobile-only. Future generators and page edits MUST preserve the mobile shell.
 - Verify with browser at 390/430/480/1024/1440 before merging, then verify sitemap, robots, canonical, index/noindex, existing text and conversion links stay unchanged.
+
+## Homepage conversion-first policy (2026-10-25)
+- Homepage / is a mobile-only activation conversion landing, while /guide/ remains an SEO search and answer hub.
+- First viewport: concrete value proposition, confirmed operating constraints, primary preplan.site CTA, second KakaoTalk CTA. Then scenario choices, plan prices, SIM cards, steps, FAQ and search as secondary route.
+- Every plan CTA sends to selection on activation page; no claim the rate is pre-selected. Preserve `?from=` distinct labels.
+- Never claim instant approval or guaranteed opening. Acceptance and approval are separate. Mobile shell is max 480px even on PC.
+- Only change homepage structure and assets/home-landing.css. Preserve page URLs, canonical, robots, sitemap, official rates, core copy, and all old topic links.
