@@ -252,3 +252,6 @@
  .gh-ask ul{grid-template-columns:minmax(0,1fr)!important}
  .visual-guide .gh-proof,.visual-guide .gh-ask,.visual-guide .gh-cta{margin-left:0!important;margin-right:0!important;border-radius:16px!important}
 }
+
+/* The chooser must also remain 3 columns at phone-native widths. */
+@media (max-width:480px){.gh-categories{grid-template-columns:repeat(3,minmax(0,1fr))!important}}

@@ -1,0 +1,35 @@
+name: Mobile-only 480px regression test
+on:
+  push:
+    branches:
+      - fix/restore-mobile-only-20261025
+      - main
+permissions:
+  contents: read
+jobs:
+  mobile-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Check all page widths and capture comparison
+        run: |
+          python scripts/serve_preview.py > /tmp/mobile-preview.log 2>&1 &
+          sleep 2
+          node scripts/assert_mobile_only.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-only-browser-evidence
+          path: reports/ui/mobile-shell-qa/
+          if-no-files-found: warn
