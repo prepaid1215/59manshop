@@ -28,14 +28,14 @@ This repository powers https://www.59man.shop/ .
 ## Checks
 - Run `python scripts/check_site.py` before opening a PR (`--table` prints the title/description/canonical table for indexable pages). It must report 0 broken links.
 
-## Mobile-only layout (owner decision, 2026-10: PC-specific layout is NOT built)
-- Design basis: phone width 390–480px. Every page uses one 480px column at every screen width; PC shows the same phone layout (centered column). No PC two-column layout, no PC-only navigation, no `@media(min-width:...)` desktop rules.
-- Category, list and detail pages all use the same mobile UI. Do not add a sidebar (`<aside class="side">`); related links appear once at the end of the article in `<nav class="related">`.
-- Header on every page: brand + hamburger menu (`<details class="top-menu">` + `/assets/site.js`) with 홈 / 가이드 / 요금제 / 유심 안내 / 개통 시작하기 / 카카오톡 상담.
+## Responsive information hub (owner request, 2026-10-25)
+- Design basis: phone width 390–480px. At 1024px and above, the guide hub shows a list and selected article together; detail routes show the same topic list beside the original article. This supersedes the earlier mobile-only PC restriction.
+- Mobile flow is category → list → original detail URL. Desktop selection progressively enhances existing links; modified clicks and the no-JavaScript fallback use the original routes. Related links remain at the end of the article in `<nav class="related">`.
+- Header on every page: brand + hamburger menu on mobile (`<details class="top-menu">` + `/assets/site.js`), full navigation on desktop. Keep 홈 / 가이드 / 요금제 / 유심 안내 / 개통 시작하기 / 카카오톡 상담 accessible.
 - Every non-stub page ends with `<nav class="bottom-bar">`: "개통 시작하기" (preplan.site link, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat).
-- Pages load `/assets/v4-1-final.css?v=YYYYMMDDx` and `/assets/site.js` (deferred); `/guide/` also loads `/assets/guide.js`. When CSS/JS change, bump the `?v=` value on every page (`python scripts/bump_css.py <version>`).
+- Pages load `/assets/hub.css?v=VERSION` and `/assets/site.js` (deferred); `/guide/` also loads `/assets/guide.js`. Legacy override stylesheets are retained as files but are not loaded. When CSS/JS change, bump the `?v=` value on every page (`python scripts/bump_css.py <version>`) and set VERSION in scripts/build_hub.py.
 - Brand colour is blue (`--blue`); pink is not part of the design. Design tokens live in `:root` of the stylesheet.
-- Illustrations: supplied SVG assets live in `/img/ui/` and are used as `<img class="ill">`; real product graphics, screen captures and official logos are never replaced by illustrations.
+- Flat brand-blue category SVGs live in `/img/icons/`. Decorative 3D assets are not used; real product graphics and activation captures are retained.
 - Do not show the `preplan.site` domain in visible text (body, footer, buttons). Links (`href`) and JSON-LD may use it. Footer wording: "개통은 59만모바일 개통 페이지에서 진행됩니다".
 - Prices, purchase places and conditions come only from the operator's fact sheet (kept outside this repo, never committed).
 
@@ -56,16 +56,16 @@ This repository powers https://www.59man.shop/ .
 - 59man.shop은 앤텔레콤 질문 답변 탐색과 실제 개통을 연결하는 고객지원 사이트다. 모든 질문의 답변이 수록되어 있다고 과장하지 않는다.
 - 흰 배경, 진한 본문, 절제된 파랑, 읽기 쉬운 목록. 3D SVG·장식 일러스트·과도한 그라데이션을 새로 추가하지 않는다.
 - 실제 유심·제품과 공식 개통 화면에는 실물 이미지 사용. 사실은 운영자 정책팩을 기준으로 검증한다.
-- /assets/v4-1-final.css 다음에 /assets/service-center.css 를 사용한다. 새 페이지 생성 시 둘 다 읽도록 한다.
+- 공통 디자인은 /assets/hub.css 하나로 관리한다. 새 페이지 생성 시 scripts/build_hub.py의 공통 구조를 적용한다.
 - 홈 검색은 /guide/?q=... 를 사용한다. 검색에 없는 내용은 카카오톡 상담으로 연결한다.
 - canonical·robots·sitemap·URL·index/noindex·preplan.site CTA는 디자인 변경 때문에 임의로 바꾸지 않는다.
 
 
 ## Mobile hub design and index-first QA (2026-10-25)
 - 최우선 목표: 실제 색인 → 목표 키워드 검색 노출 → 사용자 방문 → 선불폰 개통. UI 완료는 검색 성과와 동일하지 않다.
-- 모바일 390–480px 기준, PC에서도 모바일 단일 컬럼 유지. 검색 → 카테고리 → 안내 목록 → 상세 답변 → 개통/상담 흐름.
-- 흰 바탕·따뜻한 핑크 포인트·절제된 테두리. AI 3D 아이콘을 반복 생성하지 않는다. 실제 제품·신청 화면만 썸네일로 활용한다.
-- /guide/ 생성 시 카테고리 목록을 먼저 렌더하고, 다음에 자주 찾는 답변을 배치한다. 변경은 scripts/build_guide.py에도 동기화한다.
+- 모바일 390–480px 기준, PC 1024px 이상에서는 목록과 상세 답변을 함께 표시한다. 검색 → 카테고리 → 안내 목록 → 상세 답변 → 개통/상담 흐름.
+- 흰 바탕·브랜드 블루 #175CD3·절제된 테두리. AI 3D 아이콘을 추가하지 않는다. 실제 제품·신청 화면과 의미에 맞는 평면 SVG를 활용한다.
+- /guide/ 생성 시 카테고리 → 안내 목록과 궁금한 질문 → 자주 찾는 답변 순으로 렌더한다. 변경은 scripts/build_guide.py에도 동기화한다.
 - robots, canonical, sitemap, index/noindex, 개별 URL과 preplan.site 전환 목적지를 디자인 수정 때문에 변경하지 않는다.
 - 디자인 완료 후에도 사이트맵 등록 수와 실제 색인 수를 구분하여 안내한다.
 

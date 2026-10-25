@@ -1,0 +1,50 @@
+{
+  "pages": 46,
+  "widths": [
+    390,
+    430,
+    480,
+    1024,
+    1440
+  ],
+  "rendered": 230,
+  "failures": [],
+  "interactions": [
+    {
+      "name": "Mobile category → list → real detail URL",
+      "passed": true
+    },
+    {
+      "name": "Menu disclosure, Escape and native keyboard links",
+      "passed": true
+    },
+    {
+      "name": "Search, empty state, clear and URL query",
+      "passed": true
+    },
+    {
+      "name": "Desktop list selection loads article and keeps route anchors",
+      "passed": true
+    },
+    {
+      "name": "Rapid selection does not replace newest selection with stale fetch",
+      "passed": true
+    },
+    {
+      "name": "Preview fetch failure exposes a usable detail link",
+      "passed": true
+    },
+    {
+      "name": "Responsive preview switches to ordinary mobile navigation",
+      "passed": true
+    },
+    {
+      "name": "Conversion URLs and business contact remain accessible",
+      "passed": true
+    },
+    {
+      "name": "No-JavaScript fallback renders all guide anchors",
+      "passed": true
+    }
+  ]
+}

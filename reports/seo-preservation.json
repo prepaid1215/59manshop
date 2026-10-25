@@ -1,0 +1,282 @@
+{
+  "base": "727568f5f479a1b719adb231e3d22b09401f6a9a",
+  "pages": 55,
+  "failures": [],
+  "results": [
+    {
+      "file": "guide/activation/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "guide/arrears-suspension/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "guide/device-number/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "guide/foreigner/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "guide/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "guide/kt-baro-usim/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "guide/lg-onechip/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "guide/plans/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "guide/usim/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "kt-바로유심-가격/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "kt-바로유심/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "kt선불폰-개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "lg-원칩-개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "lg-원칩/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "v4-1/topic/esim-new/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "v4-1/topic/kt-nfc-compare/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "v4-1/topic/network-activation/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "v4-1/topic/plan-396/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "v4-1/topic/plan-compare/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "v4-1/topic/sim-buy-where/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "v4-1/topic/weekend-activation/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "다이소-선불유심-가격/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "다이소-선불유심-셀프개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "다이소-유심/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "미납정지-선불폰/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "미납정지폰-중고판매/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "미납정지폰/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "선불폰-개통-대리점/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "선불폰-개통-방법-셀프/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "선불폰-개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "선불폰-개통방법/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "선불폰-셀프-개통-방법/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "선불폰-셀프개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "선불폰-충전-방법/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "세컨번호-개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "알뜰폰-셀프개통-번호이동/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "알뜰폰-셀프개통-실패/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "알뜰폰-셀프개통-안됨/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "앤텔레콤-선불폰-개통-방법/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "앤텔레콤-웹개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "외국인-휴대폰-개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "유심-인식-안됨/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "태블릿-소유자-회원번호/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "투폰-요금제-kt/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "투폰-요금제-lg/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "투폰-요금제-skt/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "투폰-요금제-추천/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "편의점-선불유심-방법/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "편의점-선불유심-셀프개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "편의점-선불유심-요금제/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "편의점-선불유심/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "편의점-선불폰-개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "편의점-유심-셀프개통/index.html",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "file": "한국선불유심/index.html",
+      "passed": true,
+      "issues": []
+    }
+  ]
+}

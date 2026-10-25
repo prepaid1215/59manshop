@@ -56,7 +56,7 @@ def update_home():
     p = ROOT / 'index.html'
     s = p.read_text(encoding='utf-8')
     o = s
-    s = HOME_TILE_RE.sub(lambda m: m.group(1) + '<span class="gc-ic">' + ill_svg(CAT_ILL[m.group(2) or 'all'], 44) + '</span>' + m.group(3), s)
+    s = HOME_TILE_RE.sub(lambda m: m.group(1) + '<span class="gc-ic"><img src="/img/icons/guides-' + (m.group(2) or 'all') + '.svg" width="28" height="28" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>' + m.group(3), s)
     if s != o:
         p.write_text(s, encoding='utf-8', newline='')
         return 1
@@ -71,7 +71,7 @@ for p in sorted(ROOT.rglob('index.html')):
     if u in ('/', '/guide/'):
         continue
     s = p.read_text(encoding='utf-8')
-    if 'http-equiv="refresh"' in s or '<section class="hero' not in s:
+    if 'detail-workspace' in s or 'http-equiv="refresh"' in s or '<section class="hero' not in s:
         continue
     o = s
     h1 = re.search(r'<h1>([^<]*)</h1>', s)
