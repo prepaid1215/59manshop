@@ -1,0 +1,128 @@
+[
+  {
+    "name": "guide-chooser",
+    "width": 1440,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-full",
+    "width": 1440,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-list",
+    "width": 1440,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-esim",
+    "width": 1440,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "detail",
+    "width": 1440,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "home-full",
+    "width": 1440,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-chooser",
+    "width": 390,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-full",
+    "width": 390,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-list",
+    "width": 390,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-esim",
+    "width": 390,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "detail",
+    "width": 390,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "home-full",
+    "width": 390,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-chooser",
+    "width": 430,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-full",
+    "width": 430,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-list",
+    "width": 430,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "guide-esim",
+    "width": 430,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "detail",
+    "width": 430,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  },
+  {
+    "name": "home-full",
+    "width": 430,
+    "overflow": false,
+    "broken": [],
+    "errors": []
+  }
+]

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+debug.log
+reports/ui/before/*
+!reports/ui/before/guide-390.png
+!reports/ui/before/guide-1440.png

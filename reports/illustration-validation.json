@@ -1,0 +1,119 @@
+[
+  {
+    "key": "identity",
+    "file": "/img/guide-art/guide-identity-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 47490
+  },
+  {
+    "key": "preparation",
+    "file": "/img/guide-art/guide-preparation-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 36438
+  },
+  {
+    "key": "self-activation",
+    "file": "/img/guide-art/guide-self-activation-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 49146
+  },
+  {
+    "key": "checklist",
+    "file": "/img/guide-art/guide-checklist-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 40226
+  },
+  {
+    "key": "number-transfer",
+    "file": "/img/guide-art/guide-number-transfer-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 39072
+  },
+  {
+    "key": "recharge",
+    "file": "/img/guide-art/guide-recharge-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 41420
+  },
+  {
+    "key": "esim",
+    "file": "/img/guide-art/guide-esim-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 41494
+  },
+  {
+    "key": "sim-cards",
+    "file": "/img/guide-art/guide-sim-cards-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 40266
+  },
+  {
+    "key": "clock",
+    "file": "/img/guide-art/guide-clock-blue.webp",
+    "size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 33930
+  }
+]

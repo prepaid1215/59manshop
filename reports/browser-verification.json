@@ -1,0 +1,58 @@
+{
+  "pages": 46,
+  "widths": [
+    390,
+    430,
+    480,
+    1024,
+    1440
+  ],
+  "rendered": 230,
+  "failures": [],
+  "interactions": [
+    {
+      "name": "Mobile category → list → real detail URL",
+      "passed": true
+    },
+    {
+      "name": "Menu disclosure, Escape and native keyboard links",
+      "passed": true
+    },
+    {
+      "name": "Search, empty state, clear and URL query",
+      "passed": true
+    },
+    {
+      "name": "Reference desktop two-column art cards and original detail route",
+      "passed": true
+    },
+    {
+      "name": "Rapid category selection keeps only the last category",
+      "passed": true
+    },
+    {
+      "name": "Reference mobile three-column chooser, subfilters and return scroll",
+      "passed": true
+    },
+    {
+      "name": "Mobile eSIM selection keeps note and native detail navigation",
+      "passed": true
+    },
+    {
+      "name": "Plugin category query aliases preserve existing canonical",
+      "passed": true
+    },
+    {
+      "name": "Accessible category reorder persists without changing routes",
+      "passed": true
+    },
+    {
+      "name": "Conversion URLs and business contact remain accessible",
+      "passed": true
+    },
+    {
+      "name": "No-JavaScript fallback renders all guide anchors",
+      "passed": true
+    }
+  ]
+}

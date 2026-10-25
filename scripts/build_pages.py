@@ -11,6 +11,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from guide_visuals import illustration, art_img
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -56,7 +57,7 @@ def update_home():
     p = ROOT / 'index.html'
     s = p.read_text(encoding='utf-8')
     o = s
-    s = HOME_TILE_RE.sub(lambda m: m.group(1) + '<span class="gc-ic">' + ill_svg(CAT_ILL[m.group(2) or 'all'], 44) + '</span>' + m.group(3), s)
+    s = HOME_TILE_RE.sub(lambda m: m.group(1) + '<span class="gc-ic">' + art_img(illustration(m.group(2) or 'all'),64) + '</span>' + m.group(3), s)
     if s != o:
         p.write_text(s, encoding='utf-8', newline='')
         return 1
@@ -71,7 +72,7 @@ for p in sorted(ROOT.rglob('index.html')):
     if u in ('/', '/guide/'):
         continue
     s = p.read_text(encoding='utf-8')
-    if 'http-equiv="refresh"' in s or '<section class="hero' not in s:
+    if 'detail-workspace' in s or 'http-equiv="refresh"' in s or '<section class="hero' not in s:
         continue
     o = s
     h1 = re.search(r'<h1>([^<]*)</h1>', s)
