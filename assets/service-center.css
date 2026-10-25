@@ -101,3 +101,6 @@ body{background:#fff!important;color:var(--sc-ink);font-family:-apple-system,Bli
 /* 검색 결과가 없을 때 다음 행동을 분명히 표시 */
 .gc-empty{border:1px solid #dfe5ec;border-radius:8px!important;background:#f7f9fc!important;padding:16px!important;line-height:1.7!important}
 .gc-empty a{font-weight:750;color:#175cd3;text-decoration:underline;text-underline-offset:3px}
+
+/* 검색/필터가 숨긴 항목은 기존 display 규칙보다 우선한다. */
+[hidden]{display:none!important}
