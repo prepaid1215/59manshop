@@ -255,3 +255,6 @@
 
 /* The chooser must also remain 3 columns at phone-native widths. */
 @media (max-width:480px){.gh-categories{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+
+/* Reset legacy six-track child spans when using actual three-column categories. */
+.visual-guide .gh-categories>.gh-category{grid-column:auto!important}
