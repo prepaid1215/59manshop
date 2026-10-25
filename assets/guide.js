@@ -22,7 +22,10 @@
     var a = li.firstElementChild;
     return norm(li.textContent + ' ' + ((a && a.getAttribute('data-kw')) || ''));
   });
-  var state = { cat: 'all', q: '' };
+  var params = new URLSearchParams(window.location.search);
+  var initialQuery = (params.get('q') || '').slice(0, 100);
+  if (input) input.value = initialQuery;
+  var state = { cat: 'all', q: initialQuery };
 
   function render() {
     var term = norm(state.q);
@@ -42,11 +45,11 @@
     if (term) {
       title.textContent = '“' + state.q.trim() + '” 검색 결과';
       desc.textContent = '모든 가이드에서 제목·설명·키워드로 찾았어요.';
-      headIc.innerHTML = data.all.icon;
+      if (headIc) headIc.innerHTML = data.all.icon || '';
     } else {
       title.textContent = c.label;
       desc.textContent = c.desc;
-      headIc.innerHTML = c.icon;
+      if (headIc) headIc.innerHTML = c.icon || '';
     }
     total.innerHTML = '<b>' + shown + '</b>개';
     empty.hidden = shown > 0;
@@ -64,7 +67,7 @@
   tiles.forEach(function (t) {
     t.addEventListener('click', function () {
       var key = t.getAttribute('data-cat');
-      if (state.q) { state.q = ''; input.value = ''; }
+      if (state.q) { state.q = ''; input.value = ''; history.replaceState(null, '', location.pathname + location.hash); }
       if (key === 'all') {
         if (location.hash) history.pushState(null, '', location.pathname + location.search);
         fromHash();
@@ -83,8 +86,8 @@
   input.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && input.value) { input.value = ''; state.q = ''; render(); }
   });
-  clear.addEventListener('click', function () { input.value = ''; state.q = ''; render(); input.focus(); });
-  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  clear.addEventListener('click', function () { input.value = ''; state.q = ''; history.replaceState(null, '', location.pathname + location.hash); render(); input.focus(); });
+  form.addEventListener('submit', function (e) { e.preventDefault(); state.q = input.value.slice(0, 100).trim(); history.replaceState(null, '', location.pathname + (state.q ? '?q=' + encodeURIComponent(state.q) : '') + location.hash); render(); });
   window.addEventListener('hashchange', fromHash);
   fromHash();
 })();

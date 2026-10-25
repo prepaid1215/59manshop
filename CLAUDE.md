@@ -50,3 +50,12 @@ This repository powers https://www.59man.shop/ .
 - Allowed when stated accurately with a date: "안면인증 실패해도 다음 단계로 진행 가능 (신청 화면의 안면인증 안정화 기간 안내, 2026년 10월 기준) — 간편인증은 필수", "신용조회가 없어 신용불량·연체 이력만으로 거절되지 않음 (가입제한·회선 수 제한은 별도 확인)", "앤텔레콤 선불 요금제 중 월 요금이 가장 낮은 요금제", "월 12,100원부터".
 - 59만모바일 tablet owner member number (태블릿 소유자 회원번호) is 2893496. It is used in the 앤텔레콤 membership app route (e.g., customers with only a Naver certificate, which the web activation page does not support). Never use another dealer's number.
 - Activation screen facts confirmed from real captures (2026-10): prepaid eSIM is L망 only (K망 shows eSIM only when 후불 is selected); USIM delivery costs 3,700원 shipping with bank-account owner verification (max 5 tries/day); K망 daily base fee 396=1,320원, 459=1,530원. Screenshots must have the browser address bar, system bars, QR codes and all personal data (name, birth date, phone, IMEI/EID) removed or blurred.
+
+
+## Direction A 고객지원형 디자인 (2026-10-25)
+- 59man.shop은 앤텔레콤 질문 답변 탐색과 실제 개통을 연결하는 고객지원 사이트다. 모든 질문의 답변이 수록되어 있다고 과장하지 않는다.
+- 흰 배경, 진한 본문, 절제된 파랑, 읽기 쉬운 목록. 3D SVG·장식 일러스트·과도한 그라데이션을 새로 추가하지 않는다.
+- 실제 유심·제품과 공식 개통 화면에는 실물 이미지 사용. 사실은 운영자 정책팩을 기준으로 검증한다.
+- /assets/v4-1-final.css 다음에 /assets/service-center.css 를 사용한다. 새 페이지 생성 시 둘 다 읽도록 한다.
+- 홈 검색은 /guide/?q=... 를 사용한다. 검색에 없는 내용은 카카오톡 상담으로 연결한다.
+- canonical·robots·sitemap·URL·index/noindex·preplan.site CTA는 디자인 변경 때문에 임의로 바꾸지 않는다.

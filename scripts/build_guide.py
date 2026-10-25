@@ -20,6 +20,10 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from guide_art import CAT_ILL, ILL, ill_svg  # noqa: E402
 
+# 고객지원형 디자인: 가이드의 장식 일러스트 대신 텍스트를 우선한다.
+def ill_svg(*_args, **_kwargs):
+    return ''
+
 # 가이드별 썸네일/키워드/인기(quick start). href 기준.
 META = {g['href']: g for g in DATA['guides']}
 QUICK = [x['href'] for x in DATA['quick']]
@@ -54,13 +58,13 @@ counts['all'] = len(guides)
 parts = []
 parts.append('<nav class="crumb-bar crumb-inline" aria-label="경로"><p class="crumb"><a href="/">홈</a><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-now" aria-current="page">가이드</span></p></nav>')
 parts.append('<p class="updated">업데이트: <time datetime="2026-10-23">2026년 10월 23일</time></p>')
-parts.append('<header class="gc-hero"><div class="gc-kicker">ALL GUIDES</div><h1>상황에 맞게 찾아보세요</h1>'
-             '<p>개통에 필요한 내용을 상황별로 정리했어요. 원하는 항목을 선택하면 자세한 안내를 볼 수 있어요.</p>'
+parts.append('<header class="gc-hero"><div class="gc-kicker">도움말 검색</div><h1>앤텔레콤 선불폰 이용 안내</h1>'
+             '<p>개통에 필요한 내용을 상황별로 정리했어요. 검색하거나 항목을 선택하면 상황별 안내를 확인할 수 있어요. 찾는 답변이 없으면 카카오톡으로 문의하세요.</p>'
              '<form class="gc-search" id="gc-form" role="search"><label for="gc-q" class="sr-only">가이드 검색</label>' + SEARCH +
              '<input id="gc-q" type="search" placeholder="궁금한 내용을 검색해 보세요 (예: 안면인증, eSIM, 요금제)" autocomplete="off">'
              '<button type="button" class="gc-clear" id="gc-clear" aria-label="검색어 지우기" hidden>&times;</button></form></header>')
 
-# QUICK START
+# 자주 찾는 답변
 byhref = {g['href']: g for g in guides}
 q = ['<section class="gc-quick" aria-labelledby="gc-quick-h"><div class="gc-quick-head"><div><div class="gc-kicker">QUICK START</div><h2 id="gc-quick-h">먼저 확인해 보세요</h2></div>'
      '<a class="gc-first" href="/앤텔레콤-선불폰-개통-방법/">처음 오셨나요?' + CHEV + '</a></div><div class="gc-quick-grid">']

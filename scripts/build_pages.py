@@ -45,17 +45,8 @@ HERO_PAGES = {'/앤텔레콤-선불폰-개통-방법/', '/선불폰-개통방법
 
 
 def art_html(g):
-    if g['href'] in HERO_PAGES:
-        name, w, h = HERO_ASSET
-        return ('<div class="site page-art-wrap"><figure class="page-art page-art--hero">'
-                '<img src="/img/ui/%s.svg" alt="%s 안내 일러스트" width="%d" height="%d" decoding="async"></figure></div>'
-                % (name, html.escape(g['title']), w, h))
-    ill = g.get('ill') or CAT_ILL[g['cat']]
-    second = {'check': 'clock', 'sim': 'phone', 'self': 'sim', 'esim': 'phone', 'move': 'shield', 'plan': 'bolt', 'fix': 'alert'}[g['cat']]
-    sub = '' if is_asset(ill) else '<span class="pa-sub">%s</span>' % ill_svg(second, 72)
-    return ('<div class="site page-art-wrap"><figure class="page-art" role="img" aria-label="%s 안내 일러스트">'
-            '<span class="pa-main">%s</span>%s<span class="pa-dot pa-d1"></span><span class="pa-dot pa-d2"></span></figure></div>'
-            % (html.escape(g['title']), ill_svg(ill, 150), sub))
+    # 고객지원형 디자인: 검색 답변 상단에 장식 일러스트를 추가하지 않는다.
+    return ''
 
 
 HOME_TILE_RE = re.compile(r'(<a class="gc-tile" href="/guide/(?:#(\w+))?">)<span class="gc-ic">.*?</span>(<b>)', re.S)
