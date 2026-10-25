@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - design/mobile-hub-20261025
+      - design/brand-blue-svg-20261025
   pull_request:
     branches: [main]
 permissions:
