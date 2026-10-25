@@ -97,3 +97,10 @@ This repository powers https://www.59man.shop/ .
 - Every plan CTA sends to selection on activation page; no claim the rate is pre-selected. Preserve `?from=` distinct labels.
 - Never claim instant approval or guaranteed opening. Acceptance and approval are separate. Mobile shell is max 480px even on PC.
 - Only change homepage structure and assets/home-landing.css. Preserve page URLs, canonical, robots, sitemap, official rates, core copy, and all old topic links.
+
+
+## 2026-10-26 home v2 (conversion and index protection)
+- 480px mobile-only shell. Homepage is conversion-focused, not a full duplicate of the /guide/ knowledge base.
+- No duplicated preparation card: three existing guide links are preserved as a concise pre-step navigation within the 5-step process. Existing 3 FAQ items remain.
+- Extras (category nav, tablet owner membership reference, benefits) remain accessible inside native details, not deleted. Reference helpful guides use compact text links instead of giant cards.
+- Always compare href preservation and canonical/meta/JSON-LD against main before deploying.

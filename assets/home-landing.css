@@ -181,3 +181,51 @@
  .home .landing-hero h1{font-size:26px}
  .home .landing-intent img{width:67px;height:70px;flex-basis:67px}
 }
+
+
+/* v2 cleanup: one conversion path, less repeated information and shorter mobile scroll. */
+.home .content .article>section{margin-bottom:24px!important}
+.home .landing-ready-intro{font-size:12px;line-height:1.5;color:#657389;margin:0 0 10px}
+.home .landing-ready-links{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.home .landing-ready-links a{display:inline-flex;align-items:center;min-height:32px;border:1px solid #d7e5f7;border-radius:8px;background:#f4f8ff;padding:6px 9px;color:#1756b5;font-size:11px;font-weight:700;text-decoration:none}
+.home .landing-ready-links a:hover{background:#e8f2ff}
+.home .landing-trust{border:1px solid #e0e8f3;border-radius:13px;background:#fff;margin-bottom:20px}
+.home .landing-trust summary,.home .landing-more-information summary{position:relative;display:flex;align-items:center;justify-content:space-between;min-height:49px;padding:12px 14px;cursor:pointer;color:#425775;font-size:12px;font-weight:800}
+.home .landing-trust summary::after{content:"＋";font-size:18px;font-weight:400;color:#175cd3}
+.home .landing-trust[open] summary::after{content:"−"}
+.home .landing-trust .home-badges{margin:0!important;padding:10px 12px 14px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;border-top:1px solid #e7edf5}
+.home .landing-trust .home-badges>div{padding:10px!important}
+.home .landing-trust .home-badges b{font-size:11.5px!important}
+.home .landing-trust .home-badges span{font-size:10.5px!important}
+.home .landing-help{display:flex;align-items:center;justify-content:space-between;gap:11px;border:1px solid #e2e9f2;background:#fff;border-radius:14px;padding:14px 13px}
+.home .landing-help>div{min-width:0}
+.home .landing-help h2{font-size:16px!important;line-height:1.3!important;margin:0 0 5px!important}
+.home .landing-help p{margin:0;color:#728096;font-size:10px;line-height:1.6}
+.home .landing-help a{white-space:nowrap;text-decoration:none!important;flex:0 0 auto;border:1px solid #cdddf3;background:#f5f9ff;border-radius:9px;color:#1655b9;padding:11px 9px;font-size:11.5px;font-weight:800}
+.home .home-faq{padding-top:0!important}
+.home .home-faq summary{font-size:13px;min-height:48px}
+.home .landing-search{margin-bottom:22px!important}
+.home .landing-guides-compact{border-top:1px solid #e4eaf2;padding:20px 0 0}
+.home .landing-guides-compact h2{font-size:18px!important;margin:3px 0 8px!important}
+.home .landing-guides-compact-list{background:#fff;border:1px solid #e4ebf4;border-radius:13px;overflow:hidden}
+.home .landing-guides-compact-list a{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:47px;padding:11px 14px;border-bottom:1px solid #e9edf5;color:#293a53;font-size:12.5px;font-weight:700;text-decoration:none}
+.home .landing-guides-compact-list a:last-child{border-bottom:0}
+.home .landing-guides-compact-list a span{font-size:17px;color:#175cd3}
+.home .landing-more-information{background:#fff;border:1px solid #e2e9f4;border-radius:14px;margin:0 0 19px}
+.home .landing-more-information>summary{color:#294767;font-size:12px!important}
+.home .landing-more-information[open]>summary span{transform:rotate(45deg)}
+.home .landing-more-information .purpose-grid{padding:17px 13px 8px!important;margin:0!important;border-top:1px solid #e5ebf5!important}
+.home .landing-more-information .purpose-grid h2{font-size:18px!important}
+.home .landing-more-information .purpose-grid .gc-tiles{grid-template-columns:repeat(3,minmax(0,1fr))!important;margin-top:12px!important}
+.home .landing-more-information .home-member-wrap{padding:4px 13px 15px!important;margin:0!important}
+.home .landing-more-information .home-member{padding:12px!important}
+.home .landing-more-information .home-member b{font-size:11.5px!important}
+.home .landing-more-information .home-member span{font-size:10px!important}
+.home .landing-more-information .home-member strong{font-size:12px!important}
+.home .related{margin-top:0!important;padding:10px 14px!important;border:1px solid #e5ebf4!important;border-radius:12px!important}
+.home .related h2{font-size:15px!important}
+.home .related a{font-size:12px!important;padding:9px 0!important;min-height:35px!important}
+@media(max-width:370px){
+ .home .landing-help{display:block}
+ .home .landing-help a{display:inline-flex;margin-top:10px;min-height:38px;align-items:center}
+}
