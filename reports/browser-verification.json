@@ -23,19 +23,27 @@
       "passed": true
     },
     {
-      "name": "Desktop list selection loads article and keeps route anchors",
+      "name": "Reference desktop two-column art cards and original detail route",
       "passed": true
     },
     {
-      "name": "Rapid selection does not replace newest selection with stale fetch",
+      "name": "Rapid category selection keeps only the last category",
       "passed": true
     },
     {
-      "name": "Preview fetch failure exposes a usable detail link",
+      "name": "Reference mobile three-column chooser, subfilters and return scroll",
       "passed": true
     },
     {
-      "name": "Responsive preview switches to ordinary mobile navigation",
+      "name": "Mobile eSIM selection keeps note and native detail navigation",
+      "passed": true
+    },
+    {
+      "name": "Plugin category query aliases preserve existing canonical",
+      "passed": true
+    },
+    {
+      "name": "Accessible category reorder persists without changing routes",
       "passed": true
     },
     {

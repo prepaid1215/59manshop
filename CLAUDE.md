@@ -29,13 +29,13 @@ This repository powers https://www.59man.shop/ .
 - Run `python scripts/check_site.py` before opening a PR (`--table` prints the title/description/canonical table for indexable pages). It must report 0 broken links.
 
 ## Responsive information hub (owner request, 2026-10-25)
-- Design basis: phone width 390–480px. At 1024px and above, the guide hub shows a list and selected article together; detail routes show the same topic list beside the original article. This supersedes the earlier mobile-only PC restriction.
-- Mobile flow is category → list → original detail URL. Desktop selection progressively enhances existing links; modified clicks and the no-JavaScript fallback use the original routes. Related links remain at the end of the article in `<nav class="related">`.
+- Design basis: phone width 390–480px. The latest owner request follows the v2.6.2 reference plugin: desktop 8-category selector and two-column visual guide cards, mobile three-column selector followed by a category hero, subfilters and one-column visual list. Detail routes keep the topic list beside the original article on PC.
+- Mobile flow is category → scroll to list → original detail URL; a visible back control returns to the chooser. All guide cards use native detail anchors on desktop and mobile. Existing hash links and q searches remain supported, as do the reference plugin's guide_category query aliases. Related links remain at the end of the article.
 - Header on every page: brand + hamburger menu on mobile (`<details class="top-menu">` + `/assets/site.js`), full navigation on desktop. Keep 홈 / 가이드 / 요금제 / 유심 안내 / 개통 시작하기 / 카카오톡 상담 accessible.
 - Every non-stub page ends with `<nav class="bottom-bar">`: "개통 시작하기" (preplan.site link, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat).
-- Pages load `/assets/hub.css?v=VERSION` and `/assets/site.js` (deferred); `/guide/` also loads `/assets/guide.js`. Legacy override stylesheets are retained as files but are not loaded. When CSS/JS change, bump the `?v=` value on every page (`python scripts/bump_css.py <version>`) and set VERSION in scripts/build_hub.py.
+- Pages load `/assets/hub.css?v=VERSION` and `/assets/site.js` (deferred); `/guide/` also loads the dedicated `/assets/guide-hub.css` and `/assets/guide.js`. Old preview CSS has been removed. When shared CSS/JS change, bump the version on every page (`python scripts/bump_css.py <version>`) and set VERSION in scripts/build_hub.py.
 - Brand colour is blue (`--blue`); pink is not part of the design. Design tokens live in `:root` of the stylesheet.
-- Flat brand-blue category SVGs live in `/img/icons/`. Decorative 3D assets are not used; real product graphics and activation captures are retained.
+- Category and card illustrations are generated transparent 512×512 WebP assets in `/img/guide-art/`, in a matched brand-blue 3D style. UI controls (search, menu, arrows, brand mark) remain SVG. Prompts and use mappings are recorded in data/illustration-prompts.json and scripts/guide_visuals.py. Keep real product photos and activation captures visible and separate from illustrations.
 - Do not show the `preplan.site` domain in visible text (body, footer, buttons). Links (`href`) and JSON-LD may use it. Footer wording: "개통은 59만모바일 개통 페이지에서 진행됩니다".
 - Prices, purchase places and conditions come only from the operator's fact sheet (kept outside this repo, never committed).
 
@@ -54,7 +54,7 @@ This repository powers https://www.59man.shop/ .
 
 ## Direction A 고객지원형 디자인 (2026-10-25)
 - 59man.shop은 앤텔레콤 질문 답변 탐색과 실제 개통을 연결하는 고객지원 사이트다. 모든 질문의 답변이 수록되어 있다고 과장하지 않는다.
-- 흰 배경, 진한 본문, 절제된 파랑, 읽기 쉬운 목록. 3D SVG·장식 일러스트·과도한 그라데이션을 새로 추가하지 않는다.
+- 흰 배경, 진한 본문, 브랜드 블루, 읽기 쉬운 목록. 최신 사용자 요청에 따라 직접 생성한 3D WebP 일러스트를 사용하며 단순 UI 아이콘은 SVG를 유지한다.
 - 실제 유심·제품과 공식 개통 화면에는 실물 이미지 사용. 사실은 운영자 정책팩을 기준으로 검증한다.
 - 공통 디자인은 /assets/hub.css 하나로 관리한다. 새 페이지 생성 시 scripts/build_hub.py의 공통 구조를 적용한다.
 - 홈 검색은 /guide/?q=... 를 사용한다. 검색에 없는 내용은 카카오톡 상담으로 연결한다.
@@ -63,15 +63,15 @@ This repository powers https://www.59man.shop/ .
 
 ## Mobile hub design and index-first QA (2026-10-25)
 - 최우선 목표: 실제 색인 → 목표 키워드 검색 노출 → 사용자 방문 → 선불폰 개통. UI 완료는 검색 성과와 동일하지 않다.
-- 모바일 390–480px 기준, PC 1024px 이상에서는 목록과 상세 답변을 함께 표시한다. 검색 → 카테고리 → 안내 목록 → 상세 답변 → 개통/상담 흐름.
-- 흰 바탕·브랜드 블루 #175CD3·절제된 테두리. AI 3D 아이콘을 추가하지 않는다. 실제 제품·신청 화면과 의미에 맞는 평면 SVG를 활용한다.
+- 모바일 390–480px 기준으로 3열 카테고리 → 일러스트·세부 필터·목록 → 기존 상세 URL 흐름을 따른다. /guide/ PC는 v2.6.2의 8개 카테고리와 2열 일러스트 카드 구성이다.
+- 흰 바탕·브랜드 블루 #175CD3·절제된 테두리. 카테고리·카드는 일관된 질감의 투명 3D WebP, 검색·메뉴·화살표는 SVG를 활용한다. 실제 제품·신청 화면은 유지한다.
 - /guide/ 생성 시 카테고리 → 안내 목록과 궁금한 질문 → 자주 찾는 답변 순으로 렌더한다. 변경은 scripts/build_guide.py에도 동기화한다.
 - robots, canonical, sitemap, index/noindex, 개별 URL과 preplan.site 전환 목적지를 디자인 수정 때문에 변경하지 않는다.
 - 디자인 완료 후에도 사이트맵 등록 수와 실제 색인 수를 구분하여 안내한다.
 
 ## 2026-10-25 브랜드 블루 최종 원칙
 - 공식 브랜드 포인트는 #175CD3. 기존 핑크는 사용하지 않는다.
-- 카테고리 시각 요소는 /img/icons/guides-*.svg의 수작업 평면형 벡터 8종을 재사용한다. 3D 아이콘/장식 일러스트를 추가하지 않는다.
+- 최신 사용자 요청: 카테고리·가이드 카드 시각 요소는 /img/guide-art/의 직접 생성한 블루 3D WebP를 사용한다. 기존 SVG는 단순 UI 컨트롤용으로 유지한다.
 - 유심 실사 및 신청 스크린샷은 SVG로 변경하지 않는다.
-- scripts/build_guide.py는 동일한 카테고리 SVG를 생성해야 한다.
+- scripts/build_guide.py는 v2.6.2 참고 템플릿의 구조와 동일한 WebP 매핑을 생성해야 한다.
 - 모든 디자인 배포 전 SEO 체크: 기존 URL, sitemap, canonical, robots, 내부 링크 및 개통 CTA를 유지하고 check_site.py를 통과한다.

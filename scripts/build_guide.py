@@ -1,149 +1,78 @@
 #!/usr/bin/env python3
-"""가이드 허브(/guide/) 생성 스크립트 (표준 라이브러리만 사용).
+"""Static /guide/ adapter for the reference v2.6.2 PHP directory layout.
 
-data/guides.json 의 카테고리·가이드 목록으로 <main> 영역을 만든다.
-- 검색엔진이 읽을 수 있도록 모든 카드가 정적 HTML로 들어간다.
-- 카테고리 개수는 데이터에서 계산한다(하드코딩 없음).
-- 새 가이드는 data/guides.json 에 한 항목을 추가하고 이 스크립트를 실행하면 목록·개수에 반영된다.
-사용법: python scripts/build_guide.py
+Original routes, index decisions and copy remain in data/guides.json and HTML.
+This replaces the old hub's markup, not just its CSS. Standard library only.
 """
 import html
 import json
 import re
 from pathlib import Path
+from guide_visuals import FILTERS, art_img, illustration, guide_illustration
+from build_hub import transform
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = json.loads((ROOT / 'data' / 'guides.json').read_text(encoding='utf-8'))
-PAGE = ROOT / 'guide' / 'index.html'
-
-import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from guide_art import CAT_ILL, ILL, ill_svg  # noqa: E402
-
-# 고객지원형 디자인: 가이드의 장식 일러스트 대신 텍스트를 우선한다.
-def ill_svg(*_args, **_kwargs):
-    return ''
-
-# 가이드별 썸네일/키워드/인기(quick start). href 기준.
-META = {g['href']: g for g in DATA['guides']}
-PHOTO_FALLBACK = {'/편의점-선불유심/': '/img/guide/usim-kt-photo.webp',
-                  '/v4-1/topic/plan-compare/': '/img/guide/cap-plan-cards.webp',
-                  '/편의점-선불유심-셀프개통/': '/img/guide/cap-09-usim-number.webp'}
-QUICK = [x['href'] for x in DATA['quick']]
-QUICK_LABEL = [x['label'] for x in DATA['quick']]
-
-CHEV = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>'
-SEARCH = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>'
-BULB = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>'
-Q = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8 1c0 1.7-2.4 2.2-2.4 3.7"/><path d="M12 17.2h.01"/></svg>'
+DATA = json.loads((ROOT / 'data/guides.json').read_text(encoding='utf-8'))
+PAGE = ROOT / 'guide/index.html'
+CATS = {c['key']: c for c in DATA['categories']}
+GUIDES = [g for _, g in sorted(enumerate(DATA['guides']), key=lambda pair:(pair[1].get('order', pair[0]),pair[0])) if g.get('visible', True)]
+BY_HREF = {g['href']:g for g in GUIDES}
+COUNTS = {k:len(GUIDES) if k == 'all' else sum(g['cat']==k for g in GUIDES) for k in CATS}
+esc = html.escape
+CHEV = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>'
+BACK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h13"/></svg>'
+SEARCH = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>'
+BULB = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 18h6M10 21h4M8 15a6 6 0 1 1 8 0l-1 3H9z"/></svg>'
 
 
-def esc(s):
-    return html.escape(s, quote=True)
+def category_art(key):
+    if key == 'all':
+        return '<span class="gh-all-icon"><svg viewBox="0 0 28 28" width="28" height="28" fill="currentColor" aria-hidden="true"><rect width="11" height="11" rx="3"/><rect x="16" width="11" height="11" rx="3"/><rect y="16" width="11" height="11" rx="3"/><rect x="16" y="16" width="11" height="11" rx="3"/></svg></span>'
+    return art_img(illustration(key),64,eager=True)
 
 
-def thumb(g, size=64):
-    m = META[g['href']]
-    image = m.get('img') or PHOTO_FALLBACK.get(g['href'])
-    if image:
-        cls = ' is-cover' if m.get('cover') else ''
-        return '<span class="gc-thumb%s"><img src="%s" alt="" width="72" height="72" loading="lazy"></span>' % (cls, image)
-    if m.get('ill') in ('clock', 'calendar', 'signal'):
-        name = 'network' if m['ill'] == 'signal' else 'clock'
-        return '<span class="gc-thumb gc-thumb-icon"><span class="gc-ic"><img src="/img/icons/guide-%s.svg" width="36" height="36" alt="" loading="lazy"></span></span>' % name
-    return '<span class="gc-thumb gc-thumb-icon">%s</span>' % category_icon(g['cat'])
+def render():
+    parts = ['<div class="hub-meta"><nav class="crumb-bar crumb-inline" aria-label="경로"><p class="crumb"><a href="/">홈</a><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-now" aria-current="page">가이드</span></p></nav><p class="updated">업데이트: <time datetime="2026-10-23">2026년 10월 23일</time></p></div>']
+    parts.append('<section class="gh-directory" id="gh-directory" aria-labelledby="gh-title"><header class="gh-directory-top"><div><div class="gh-label">N-TELECOM GUIDES</div><p class="gh-legacy-kicker">앤텔레콤 가이드</p><h1 id="gh-title">상황에 맞게 찾아보세요</h1><p>개통에 필요한 내용을 상황별로 정리했어요. 검색하거나 항목을 선택하면 상황별 안내를 확인할 수 있어요. 찾는 답변이 없으면 카카오톡으로 문의하세요.</p></div><form class="gh-search" id="gc-form" role="search"><label class="sr-only" for="gc-q">가이드 검색</label>'+SEARCH+'<input id="gc-q" name="q" type="search" placeholder="궁금한 내용을 검색해 보세요 (예: 안면인증, eSIM, 요금제)" autocomplete="off"><button class="gh-clear" type="button" id="gc-clear" aria-label="검색어 지우기" hidden>×</button></form></header><nav class="gh-categories" aria-label="카테고리">')
+    for key,c in CATS.items():
+        parts.append('<button type="button" class="gc-tile gh-category%s" data-cat="%s" aria-pressed="%s"><span class="gh-category-art">%s</span><span><b>%s</b><small>%d개 가이드</small></span></button>' % (
+            ' is-active' if key=='all' else '',key,'true' if key=='all' else 'false',category_art(key),esc(c['label']),COUNTS[key]))
+    parts.append('</nav></section>')
+    parts.append('<section class="gh-category-view" id="gc-section" aria-labelledby="gc-title"><nav class="gh-breadcrumb" aria-label="선택한 분류"><button id="gh-back" type="button">'+BACK+'카테고리 선택</button><span>개통 안내</span><span aria-hidden="true">›</span><b id="gh-current">전체보기</b></nav><div class="gh-category-hero"><span class="gh-heading-icon" id="gc-head-ic">'+art_img(illustration('all'),64)+'</span><div><span class="gh-selected" id="gh-selected">선택한 카테고리: 전체보기</span><h2 id="gc-title">전체보기</h2><p id="gc-desc">'+esc(CATS['all']['desc'])+'</p></div>'+art_img(illustration('all'),256,'gh-category-art',True)+'<span class="gh-count" id="gc-total"><b>'+str(len(GUIDES))+'</b>개</span></div><div class="gh-subfilters" id="gh-subfilters" role="group" aria-label="세부 분류"></div><p class="sr-only" id="gh-status" role="status" aria-live="polite"></p><ul class="gc-list gh-guide-grid" id="gc-list">')
+    for n,g in enumerate(GUIDES,1):
+        tags=g.get('tags') or g.get('kw','').split()[:3]
+        parts.append('<li data-cat="%s"><a class="gc-card" href="%s" data-kw="%s"><span class="gh-guide-copy"><span class="gh-guide-meta"><span class="gc-num" aria-hidden="true">%02d</span><span class="gc-tag">%s</span></span><b class="gh-guide-title">%s</b><span class="gc-desc">%s</span><span class="gh-guide-tags">%s</span></span>%s<span class="gc-chev">%s</span></a></li>' % (
+            g['cat'],esc(g['href'],quote=True),esc(g.get('kw',''),quote=True),n,esc(CATS[g['cat']]['label']),esc(g['title']),esc(g['desc']),''.join('<span>'+esc(t)+'</span>' for t in tags),art_img(guide_illustration(g),512,'gh-guide-art'),CHEV))
+    parts.append('</ul><p class="gc-empty" id="gc-empty" hidden>찾는 안내가 없으신가요? 다른 검색어를 입력하거나 <a href="https://pf.kakao.com/_akxmKn/chat" rel="noopener">카카오톡 상담으로 질문해 주세요</a>.</p><aside class="gh-esim-note" id="gh-esim-note" hidden><b>eSIM 개통 전 확인하세요</b><p>지원 기종과 개통 조건은 <a href="/v4-1/topic/esim-new/">L망 eSIM 신규개통 안내</a>에서 확인하세요.</p></aside></section>')
+    parts.append('<section class="gh-quick" aria-labelledby="gc-quick-h"><header><div><div class="gh-label">QUICK START</div><span class="gh-quick-kicker">자주 찾는 답변</span><h2 id="gc-quick-h">먼저 확인해 보세요</h2></div><a href="/앤텔레콤-선불폰-개통-방법/">처음 오셨나요?'+CHEV+'</a></header><div class="gh-quick-grid">')
+    for n,x in enumerate(DATA['quick'],1):
+        g=BY_HREF[x['href']]
+        parts.append('<a class="gh-quick-card%s" href="%s"><span class="gh-quick-meta"><span>%02d</span>%s</span><b>%s</b><span class="gh-quick-desc">%s</span>%s<span class="gh-quick-go">안내 보기%s</span></a>' % (' is-hot' if n==1 else '',esc(g['href']),n,esc(x['label']),esc(g['title']),esc(g['desc']),art_img(guide_illustration(g),512,'gh-quick-art'),CHEV))
+    parts.append('</div></section>')
+    parts.append('<section class="gh-proof" aria-labelledby="gh-proof-title"><header><span class="gh-label">REAL GUIDE</span><h2 id="gh-proof-title">실제 화면으로 확인하세요</h2><p>실제 유심 사진과 개통 화면을 함께 확인할 수 있어요.</p></header><div class="gh-proof-grid">')
+    for g in GUIDES:
+        if g.get('img'):
+            parts.append('<a href="%s"><img src="%s" width="96" height="96" alt="%s 실제 안내 자료" loading="lazy"><span>%s</span>%s</a>' % (esc(g['href']),esc(g['img']),esc(g['title']),esc(g['title']),CHEV))
+    parts.append('</div></section><section class="gh-ask"><h2>'+BULB+'이런 내용이 궁금하신가요?</h2><ul>')
+    for x in DATA['asks']:
+        parts.append('<li><a href="%s"><span>%s</span>%s</a></li>' % (esc(x['href']),esc(x['text']),CHEV))
+    parts.append('</ul></section><section class="gh-cta"><h2>바로 개통하고 싶으신가요?</h2><p>필요한 내용을 확인했다면 개통을 시작하거나 카카오톡으로 물어보세요.</p><div class="cta"><a class="button" href="https://preplan.site/?from=59man_guide">개통 시작하기 →</a><a class="button alt" href="https://pf.kakao.com/_akxmKn/chat" rel="noopener">카카오톡 상담하기</a></div></section>')
+    return '<main id="main-content" class="site content"><div class="layout"><article class="article">'+''.join(parts)+'</article></div></main>'
 
 
-cats = {c['key']: c for c in DATA['categories']}
-guides = DATA['guides']
-for g in guides:
-    assert g['href'] in META, g['href']
-    assert g['cat'] in cats, g['cat']
-counts = {k: sum(1 for g in guides if g['cat'] == k) for k in cats}
-counts['all'] = len(guides)
+def build():
+    page=PAGE.read_text(encoding='utf-8')
+    page=re.sub(r'<main\b[^>]*>.*?</main>',lambda _m:render(),page,count=1,flags=re.S)
+    payload={k:{'label':c['label'],'desc':c['desc'],'art':illustration(k),'filters':FILTERS.get(k,[])} for k,c in CATS.items()}
+    page=re.sub(r'<script id="gc-data"[^>]*>.*?</script>','',page,flags=re.S)
+    page=page.replace('</body>','<script id="gc-data" type="application/json">'+json.dumps(payload,ensure_ascii=False).replace('</',r'<\/')+'</script></body>')
+    page=re.sub(r'<body[^>]*>','<body class="guide-hub visual-guide is-category-all">',page,count=1)
+    page=transform(page,'/guide/')
+    if '/assets/guide-hub.css' not in page:
+        page=page.replace('</head>','<link rel="stylesheet" href="/assets/guide-hub.css?v=20261025-art2"></head>')
+    PAGE.write_text(page,encoding='utf-8',newline='')
+    print('Visual guide: %d static cards, v2.6.2 directory layout' % len(GUIDES))
 
-CAT_SVG = {"all":"guides-all","check":"guides-check","sim":"guides-sim","self":"guides-self","esim":"guides-esim","move":"guides-move","plan":"guides-plan","fix":"guides-fix"}
 
-def category_icon(key):
-    filename = CAT_SVG[key]
-    return '<span class="gc-ic"><img src="/img/icons/%s.svg" alt="" aria-hidden="true" width="28" height="28" loading="lazy" decoding="async"></span>' % filename
-
-
-parts = []
-parts.append('<div class="hub-meta">')
-parts.append('<nav class="crumb-bar crumb-inline" aria-label="경로"><p class="crumb"><a href="/">홈</a><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-now" aria-current="page">가이드</span></p></nav>')
-parts.append('<p class="updated">업데이트: <time datetime="2026-10-23">2026년 10월 23일</time></p>')
-parts.append('</div>')
-parts.append('<header class="gc-hero"><div class="gc-kicker">앤텔레콤 가이드</div><h1>상황에 맞게 찾아보세요</h1>'
-             '<p>개통에 필요한 내용을 상황별로 정리했어요. 검색하거나 항목을 선택하면 상황별 안내를 확인할 수 있어요. 찾는 답변이 없으면 카카오톡으로 문의하세요.</p>'
-             '<form class="gc-search" id="gc-form" role="search"><label for="gc-q" class="sr-only">가이드 검색</label>' + SEARCH +
-             '<input id="gc-q" type="search" placeholder="궁금한 내용을 검색해 보세요 (예: 안면인증, eSIM, 요금제)" autocomplete="off">'
-             '<button type="button" class="gc-clear" id="gc-clear" aria-label="검색어 지우기" hidden>&times;</button></form></header>')
-
-# 자주 찾는 답변
-byhref = {g['href']: g for g in guides}
-q = ['<section class="gc-quick" aria-labelledby="gc-quick-h"><div class="gc-quick-head"><div><div class="gc-kicker">자주 찾는 답변</div><h2 id="gc-quick-h">먼저 확인해 보세요</h2></div>'
-     '<a class="gc-first" href="/앤텔레콤-선불폰-개통-방법/">처음 오셨나요?' + CHEV + '</a></div><div class="gc-quick-grid">']
-for i, h in enumerate(QUICK):
-    g = byhref[h]
-    q.append('<a class="gc-quick-card%s" href="%s"><span class="gc-qn">%02d</span><span class="gc-qtag">%s</span><b>%s</b><span class="gc-qdesc">%s</span>'
-             '<span class="gc-qart">%s</span><span class="gc-qgo">안내 보기%s</span></a>' % (
-                 ' is-hot' if i == 0 else '', esc(h), i + 1, esc(QUICK_LABEL[i]), esc(g['title']), esc(g['desc']),
-                 thumb(g), CHEV))
-q.append('</div></section>')
-
-# 카테고리를 자주 찾는 답변보다 먼저 표시한다(모바일 정보 탐색 흐름).
-quick_html = ''.join(q)
-
-# 카테고리 타일
-t = ['<nav class="gc-tiles" aria-label="카테고리">']
-for k, c in cats.items():
-    t.append('<button type="button" class="gc-tile%s" data-cat="%s" aria-pressed="%s">%s<b>%s</b><small>%d개 가이드</small></button>' % (
-        ' is-active' if k == 'all' else '', k, 'true' if k == 'all' else 'false', category_icon(k), esc(c['label']), counts[k]))
-t.append('</nav>')
-parts.append(''.join(t))
-parts.append('<div class="gc-workspace"><div class="gc-browser">')
-
-# 목록
-c0 = cats['all']
-parts.append('<section class="gc-section" id="gc-section"><div class="gc-head" id="gc-head"><span class="gc-head-ic" id="gc-head-ic">%s</span>'
-             '<div><h2 id="gc-title">%s</h2><p id="gc-desc">%s</p></div><span class="gc-total" id="gc-total"><b>%d</b>개</span></div>' % (
-                 category_icon('all'), esc(c0['label']), esc(c0['desc']), counts['all']))
-parts.append('<ul class="gc-list" id="gc-list">')
-for number, g in enumerate(guides, 1):
-    parts.append('<li data-cat="%s"><a class="gc-card" href="%s" data-kw="%s"><span class="gc-num" aria-hidden="true">%02d</span><span class="gc-body">'
-                 '<span class="gc-tag">%s</span><b>%s</b><span class="gc-desc">%s</span></span>%s<span class="gc-chev">%s</span></a></li>' % (
-                     g['cat'], esc(g['href']), esc(META[g['href']]['kw']), number, esc(cats[g['cat']]['label']), esc(g['title']), esc(g['desc']), thumb(g), CHEV))
-parts.append('</ul><p class="gc-empty" id="gc-empty" hidden>찾는 안내가 없으신가요? 다른 검색어를 입력하거나 <a href="https://pf.kakao.com/_akxmKn/chat" rel="noopener">카카오톡 상담으로 질문해 주세요</a>.</p></section>')
-
-# 궁금하신가요
-a = ['<section class="gc-ask"><h2>' + BULB + '이런 내용이 궁금하신가요?</h2><ul>']
-for x in DATA['asks']:
-    a.append('<li><a href="%s"><span>%s</span>%s</a></li>' % (esc(x['href']), esc(x['text']), CHEV))
-a.append('</ul></section>')
-parts.append(''.join(a))
-parts.append('</div><section class="guide-preview" aria-label="선택한 가이드 미리 보기"><div class="preview-toolbar"><span>가이드 미리 보기</span><a id="preview-open" href="/선불폰-개통/">상세페이지에서 보기 ' + CHEV + '</a></div><div id="preview-content" class="preview-content" aria-busy="false"><p>왼쪽 목록에서 궁금한 안내를 선택해 주세요.</p></div><p class="sr-only" id="preview-status" role="status"></p></section></div>')
-parts.append(quick_html)
-
-parts.append('<section class="gc-cta"><h2>바로 개통하고 싶으신가요?</h2><p>필요한 내용을 확인했다면 개통을 시작하거나 카카오톡으로 물어보세요.</p>'
-             '<div class="cta"><a class="button" href="https://preplan.site/?from=59man_guide">개통 시작하기 →</a>'
-             '<a class="button alt" href="https://pf.kakao.com/_akxmKn/chat" rel="noopener">카카오톡 상담하기</a></div></section>')
-
-main_html = ('<main class="site content"><div class="layout"><article class="article">' + ''.join(parts) + '</article></div></main>')
-
-# 카테고리 데이터는 JS가 읽도록 JSON 한 덩어리로 전달(타일 아이콘 포함)
-page = PAGE.read_text(encoding='utf-8')
-page = re.sub(r'<main(?: id="main-content")? class="site content">.*?</main>', lambda m: main_html, page, count=1, flags=re.S)
-payload = json.dumps({k: {'label': c['label'], 'desc': c['desc'], 'icon': category_icon(k)} for k, c in cats.items()}, ensure_ascii=False)
-page = re.sub(r'<script id="gc-data"[^>]*>.*?</script>', '', page, flags=re.S)
-page = page.replace('</body>', '<script id="gc-data" type="application/json">' + payload.replace('</', '<\\/') + '</script></body>', 1)
-if '/assets/guide.js' not in page:
-    page = page.replace('</body>', '<script src="/assets/guide.js" defer></script></body>', 1)
-# 이전 인라인 스크립트(구버전 허브 JS) 제거
-page = re.sub(r'<script>\(function\(\)\{var D=.*?</script>', '', page, flags=re.S)
-if '<body class="guide-hub">' not in page:
-    page = re.sub(r'<body[^>]*>', '<body class="guide-hub">', page, count=1)
-from build_hub import transform
-page = transform(page, '/guide/')
-PAGE.write_text(page, encoding='utf-8', newline='')
-print('guide/index.html 생성: 가이드 %d개, 카테고리 %d개' % (len(guides), len(cats) - 1))
+if __name__=='__main__':
+    build()

@@ -7,13 +7,14 @@ import html
 import json
 import re
 from pathlib import Path
+from guide_visuals import guide_illustration, art_img
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = json.loads((ROOT / 'data/guides.json').read_text(encoding='utf-8'))
 CATS = {c['key']: c for c in DATA['categories']}
 GUIDES = DATA['guides']
 ICONS = {'all':'all','check':'check','sim':'sim','self':'self','esim':'esim','move':'move','plan':'plan','fix':'fix'}
-VERSION = '20261025-hub1'
+VERSION = '20261025-art2'
 CHEV = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>'
 
 
@@ -95,6 +96,19 @@ def transform(page, url):
     # Old decorative SVGs become the same flat brand icons used in navigation.
     page = re.sub(r'<img[^>]*src="/img/ui/[^\"]*"[^>]*>', icon('check'), page)
     if url == '/':
+        def illustrated_feature(match):
+            opening, href, content = match.groups()
+            guide = next((g for g in GUIDES if g['href'] == href), None)
+            if not guide:
+                return match.group(0)
+            if 'hf-art' in content:
+                content = re.sub(r'(<img class="hf-art" src=")[^"]+',lambda m:m.group(1)+guide_illustration(guide),content,count=1)
+                return opening + content + '</a>'
+            content = re.sub(r'<img\b', '<img class="hf-proof"', content, count=1)
+            content += art_img(guide_illustration(guide),512,'hf-art') + '<span class="hf-source">실제 안내 자료</span>'
+            content += '<span class="hf-go">안내 보기' + CHEV + '</span>'
+            return opening + content + '</a>'
+        page = re.sub(r'(<a class="home-featured-card" href="([^"]+)">)(.*?)</a>',illustrated_feature,page,flags=re.S)
         if 'class="hero-checklist"' not in page:
             checklist = '<div class="hero-checklist"><div class="checklist-top">'+icon('check')+'<span>개통 전, 이것부터</span><span class="checklist-label">START HERE</span></div>'
             for n,cat,title,desc in [('01','check','신청 조건 확인','본인 명의 인증과 개통 가능 시간'),('02','sim','유심 · 요금제 선택','사용할 통신망에 맞게 준비'),('03','self','셀프개통 시작','신청부터 승인 · 첫 충전까지')]:

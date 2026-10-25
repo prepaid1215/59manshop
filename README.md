@@ -16,8 +16,12 @@ python scripts/check_site.py
 python scripts/check_preservation.py --base 727568f
 ```
 
-`build_guide.py` regenerates all 23 static guide cards and applies the shared hub
-components. `build_hub.py` applies the shared header, light footer, desktop topic
+`build_guide.py` regenerates all 23 static guide cards using the supplied v2.6.2
+plugin's directory structure: PC eight-category chooser and two-column visual
+cards; mobile three-column chooser, category hero, subfilters and native detail
+links. Existing hash routes and the plugin's query aliases both work. It reads
+optional `order` and `visible` fields without replacing the content model.
+`build_hub.py` applies the shared header, light footer, desktop topic
 browser and integrated article title without regenerating article copy. Both are
 safe to run again. Update content through the existing content process; this
 redesign does not change titles, descriptions, article text, URLs or indexing.
@@ -38,15 +42,28 @@ With the server running in a separate terminal:
 python scripts/serve_preview.py
 node scripts/verify_hub.cjs
 node scripts/render_qa.cjs
+node scripts/render_visual_qa.cjs
 ```
 
 The browser check renders every non-redirect route at 390, 430, 480, 1024 and
 1440px, checks page overflow, images, duplicate IDs and overlapping text, and
-exercises category/search, history, mobile navigation, desktop preview, fetch
-failure, conversion links and the no-JavaScript fallback. Screenshots and reports
-are under `reports/`. Desktop preview never changes canonical URLs or browser
-history; its “상세페이지에서 보기” link opens the original detail route.
+exercises category/search, history, mobile navigation, subfilters, category return,
+category reorder, native desktop links, query aliases, conversion links and the
+no-JavaScript fallback. Screenshots and reports are under `reports/`. The visual
+capture script records chooser/list/eSIM/detail/quick-start states at 1440, 390
+and 430px. Full-page and section captures hide only the fixed bottom bar to avoid
+stamping it over the long image; viewport captures retain the actual mobile bar.
 
 Design tokens and responsive layouts live in `assets/hub.css`. Update the VERSION
 constant in `scripts/build_hub.py` and run `scripts/bump_css.py VERSION` when
-changing shared assets. Legacy CSS files are kept for reference and are not loaded.
+changing shared assets. `/guide/` uses dedicated `assets/guide-hub.css` for its
+v2.6.2 page components; old preview styles were removed from the shared CSS.
+
+## Generated artwork
+
+Nine new illustrations were created with the built-in image generator, inspected,
+then converted to transparent 512×512 WebP under `img/guide-art/`. UI controls
+remain SVG. Real SIM photos and official activation captures remain unchanged;
+the guide's previous real thumbnails are preserved in a visible reference gallery.
+Prompts: `data/illustration-prompts.json`. Mapping: `scripts/guide_visuals.py`.
+Transparency/size/file checks: `reports/illustration-validation.json`.

@@ -1,0 +1,81 @@
+{
+  "archive": "life-guide-visual-editor-v2.6.2.zip",
+  "sha256": "0c9ef0d8d8b91347c4abda69f51d5023cb553d96a806cf4d6dd00622c2581af1",
+  "version": "2.6.2",
+  "reference_images": [
+    {
+      "file": "life-guide-visual-editor/assets/images/guide-checklist.webp",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "life-guide-visual-editor/assets/images/guide-esim-v2.webp",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "life-guide-visual-editor/assets/images/guide-identity.webp",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "life-guide-visual-editor/assets/images/guide-number-transfer.webp",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "life-guide-visual-editor/assets/images/guide-preparation.webp",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "life-guide-visual-editor/assets/images/guide-recharge.webp",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "life-guide-visual-editor/assets/images/guide-self-activation.webp",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "life-guide-visual-editor/assets/images/guide-sim-cards-v2.webp",
+      "size": [
+        640,
+        640
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "reference_structure": [
+    "PC eight categories and two-column guide cards",
+    "Mobile three-column chooser with centered last row",
+    "Category click scrolls to category hero and list; chooser is retained",
+    "Mobile subfilters and visible chooser return button",
+    "Native detail links; title/summary/keyword search",
+    "All-mode category reorder persisted in localStorage",
+    "PHP sorts visible published managed pages by stored order then ID"
+  ],
+  "implementation": "Static HTML generator and dedicated page CSS/JS; no PHP runtime added to GitHub Pages"
+}

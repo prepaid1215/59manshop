@@ -19,14 +19,14 @@ const {chromium} = require('./browser_runtime.cjs');
       await page.evaluate(()=>document.fonts.ready);
       await page.locator('img').evaluateAll(images=>images.forEach(i=>i.loading='eager'));
       await page.locator('img').evaluateAll(images=>Promise.all(images.map(i=>i.decode().catch(()=>{}))));
-      if(width>=1024&&!baseline&&name==='guide')await page.locator('#preview-content .detail-article').waitFor();
+      if(!baseline&&name==='guide')await page.locator('.gh-guide-grid').waitFor();
       const metrics = await page.evaluate(()=>({
         overflow:document.documentElement.scrollWidth>innerWidth,
         broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')),
         h1:document.querySelector('h1')?.textContent,
         outside:[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e);return r.width && s.position!=='absolute' && (r.right>innerWidth+1||r.left< -1) && !e.closest('.table-scroll,.preview-content,.gc-list')}).slice(0,8).map(e=>e.tagName+'.'+e.className)
       }));
-      await page.screenshot({path:path.join(dir,`${name}-${width}.png`), fullPage:true});
+      await page.screenshot({path:path.join(dir,`${name}-${width}.png`), fullPage:true,style:baseline?undefined:'.bottom-bar{visibility:hidden!important}'});
       if(!baseline)await page.screenshot({path:path.join(dir,`${name}-${width}-viewport.png`)});
       results.push({name,width,...metrics,errors:[...errors]});
     }

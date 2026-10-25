@@ -18,7 +18,7 @@ async function layout(page){return page.evaluate(()=>{
     const disclosure=node.parentElement.closest('details:not([open])');
     if(disclosure&&!disclosure.querySelector('summary')?.contains(node.parentElement))continue;
     const range=document.createRange();range.selectNodeContents(node);
-    const clip=node.parentElement.closest('.gc-list,.preview-content');
+    const clip=node.parentElement.closest('.gc-desc,.gc-list,.preview-content');
     const bounds=clip?.getBoundingClientRect();
     for(const rect of range.getClientRects()){
       const r={left:rect.left,right:rect.right,top:rect.top,bottom:rect.bottom};
@@ -38,16 +38,16 @@ async function layout(page){return page.evaluate(()=>{
 });}
 (async()=>{
  const browser=await chromium.launch({headless:true}),results=[],interactions=[];
- const legacyOnly=process.argv.includes('--noindex');
- const widths=[390,430,480,1024,1440],all=routes().filter(route=>!legacyOnly||/name="robots" content="[^"]*noindex/.test(fs.readFileSync(path.join(root,route.replace(/^\/+/,''),'index.html'),'utf8')));
+ const legacyOnly=process.argv.includes('--noindex'),visualOnly=process.argv.includes('--visual');
+ const widths=[390,430,480,1024,1440],all=routes().filter(route=>(!visualOnly||['/','/guide/'].includes(route))&&(!legacyOnly||/name="robots" content="[^"]*noindex/.test(fs.readFileSync(path.join(root,route.replace(/^\/+/,''),'index.html'),'utf8'))));
  for(const width of (process.argv.includes('--interactions-only') ? [] : widths)){
   for(let start=0;start<all.length;start+=2){
    await Promise.all(all.slice(start,start+2).map(async route=>{
-    const page=await browser.newPage({viewport:{width,height:960}}),jsErrors=[];page.on('pageerror',e=>jsErrors.push(String(e)));
+    const page=await browser.newPage({viewport:{width,height:960},reducedMotion:'reduce'}),jsErrors=[];page.on('pageerror',e=>jsErrors.push(String(e)));
     try{
      await page.goto(base+route,{waitUntil:'networkidle'});
      await page.locator('img').evaluateAll(images=>Promise.all(images.map(i=>{i.loading='eager';return i.decode().catch(()=>{});})));
-     if(route==='/guide/'&&width>=1024)await page.locator('#preview-content .detail-article').waitFor();
+     if(route==='/guide/')await page.locator('.gh-guide-grid').waitFor();
      results.push({route,width,errors:[...jsErrors,...await layout(page)]});
     }catch(e){results.push({route,width,errors:[String(e)]});}finally{await page.close();}
    }));
@@ -61,7 +61,7 @@ async function layout(page){return page.evaluate(()=>{
   if(report.failures.length)process.exitCode=1;
   return;
  }
- const page=await browser.newPage({viewport:{width:390,height:844}});
+ const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});
  page.setDefaultTimeout(10000);
  async function test(name,fn){try{await fn();interactions.push({name,passed:true});console.log('PASS: '+name);}catch(e){interactions.push({name,passed:false,error:String(e)});console.log('FAIL: '+name+' '+String(e));}}
  await test('Mobile category → list → real detail URL',async()=>{
@@ -76,28 +76,43 @@ async function layout(page){return page.evaluate(()=>{
  await test('Search, empty state, clear and URL query',async()=>{
   await page.goto(base+'/guide/?q=eSIM',{waitUntil:'networkidle'});assert.ok(await page.locator('#gc-list>li:visible').count()>0);
   await page.locator('#gc-q').fill('결과없는문자열xyz');await page.locator('#gc-empty').waitFor({state:'visible'});
-  await page.locator('#gc-clear').click();assert.equal(await page.locator('#gc-list>li:visible').count(),23);
+  await page.locator('#gc-clear').click();assert.equal(await page.locator('#gc-list>li:visible').count(),4);
   await page.locator('#gc-q').fill('유심');await page.locator('#gc-q').press('Enter');assert.ok(page.url().includes('?q='));
  });
- await test('Desktop list selection loads article and keeps route anchors',async()=>{
-  await page.setViewportSize({width:1440,height:960});await page.goto(base+'/guide/#self',{waitUntil:'networkidle'});await page.locator('#preview-content .detail-article').waitFor();
+ await test('Reference desktop two-column art cards and original detail route',async()=>{
+  await page.setViewportSize({width:1440,height:960});await page.goto(base+'/guide/#self',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('.gh-guide-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length),2);
+  assert.ok(await page.locator('#gc-list>li:visible .gh-guide-art').first().evaluate(e=>e.getBoundingClientRect().width>=132));
   const link=page.locator('#gc-list>li:visible a').nth(1),href=await link.getAttribute('href');await link.click();
-  await page.waitForFunction(href=>document.querySelector('#preview-open').getAttribute('href')===href&&document.querySelector('#preview-content').getAttribute('aria-busy')==='false',href);
-  assert.equal(await page.locator('#preview-content .preview-title').textContent(),'선불폰 개통방법, 준비물부터 첫 충전까지');
-  assert.ok(page.url().endsWith('/guide/#self'));assert.equal(await page.locator('#preview-open').getAttribute('href'),href);
+  await page.waitForFunction(href=>decodeURIComponent(location.pathname)===href,href);
+  assert.equal(await page.locator('h1').textContent(),'선불폰 개통방법, 준비물부터 첫 충전까지');
  });
- await test('Rapid selection does not replace newest selection with stale fetch',async()=>{
+ await test('Rapid category selection keeps only the last category',async()=>{
+  await page.goto(base+'/guide/#check',{waitUntil:'networkidle'});
   await page.locator('.gc-tile[data-cat="check"]').click();await page.locator('.gc-tile[data-cat="plan"]').click();
-  await page.waitForFunction(()=>document.querySelector('#preview-content').getAttribute('aria-busy')==='false'&&document.querySelector('#preview-content .preview-title')?.textContent==='선불폰 요금제 비교');
+  assert.equal(await page.locator('#gc-title').textContent(),'요금제·충전');assert.equal(await page.locator('#gc-list>li:visible').count(),3);
  });
- await test('Preview fetch failure exposes a usable detail link',async()=>{
-  await page.goto(base+'/guide/#check',{waitUntil:'networkidle'});await page.locator('#preview-content .detail-article').waitFor();
-  await page.route(url=>decodeURIComponent(url.pathname)==='/앤텔레콤-웹개통/',route=>route.abort());await page.locator('#gc-list>li:visible a').nth(1).click();
-  await page.locator('#preview-content').getByText('안내를 불러오지 못했습니다. 상세페이지에서 확인해 주세요.').waitFor();
-  assert.equal(await page.locator('#preview-content a').getAttribute('href'),'/앤텔레콤-웹개통/');await page.unrouteAll();
+ await test('Reference mobile three-column chooser, subfilters and return scroll',async()=>{
+  await page.setViewportSize({width:390,height:844});await page.goto(base+'/guide/',{waitUntil:'networkidle'});
+  const positions=await page.locator('.gh-category').evaluateAll(es=>es.map(e=>({x:e.getBoundingClientRect().x,y:e.getBoundingClientRect().y})));
+  assert.equal(positions[0].y,positions[2].y);assert.ok(positions[3].y>positions[0].y);assert.ok(positions[6].x>positions[0].x);
+  await page.locator('.gh-category[data-cat="check"]').click();
+  assert.ok(await page.locator('#gc-section').evaluate(e=>e.getBoundingClientRect().top<110));
+  await page.locator('#gh-subfilters button[data-tag="신청조건"]').click();assert.equal(await page.locator('#gc-list>li:visible').count(),1);
+  assert.equal(await page.locator('#gc-list>li:visible .gc-num').textContent(),'01');
+  await page.locator('#gh-back').click();assert.ok(await page.locator('#gh-directory').evaluate(e=>e.getBoundingClientRect().top<110));
  });
- await test('Responsive preview switches to ordinary mobile navigation',async()=>{
+ await test('Mobile eSIM selection keeps note and native detail navigation',async()=>{
   await page.setViewportSize({width:430,height:900});await page.goto(base+'/guide/#esim',{waitUntil:'networkidle'});await page.locator('#gc-list>li:visible a').first().click();await page.waitForFunction(()=>location.pathname==='/v4-1/topic/esim-new/');
+ });
+ await test('Plugin category query aliases preserve existing canonical',async()=>{
+  await page.goto(base+'/guide/?guide_category=preparation',{waitUntil:'networkidle'});assert.equal(await page.locator('#gc-list>li:visible').count(),4);
+  assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),'https://www.59man.shop/guide/');
+ });
+ await test('Accessible category reorder persists without changing routes',async()=>{
+  await page.goto(base+'/guide/#all',{waitUntil:'networkidle'});const first=page.locator('.gh-category').first();const key=await first.getAttribute('data-cat');
+  await first.focus();await page.keyboard.press('Alt+ArrowRight');assert.equal(await page.locator('.gh-category').nth(1).getAttribute('data-cat'),key);
+  await page.reload();assert.equal(await page.locator('.gh-category').nth(1).getAttribute('data-cat'),key);
  });
  await test('Conversion URLs and business contact remain accessible',async()=>{
   await page.goto(base+'/',{waitUntil:'networkidle'});assert.ok(await page.locator('.bottom-bar a[href^="https://preplan.site/"]').isVisible());assert.ok(await page.locator('.bottom-bar a[href="https://pf.kakao.com/_akxmKn/chat"]').isVisible());assert.ok((await page.locator('.footer').textContent()).includes('774-56-00506'));
@@ -108,6 +123,6 @@ async function layout(page){return page.evaluate(()=>{
  await page.close();await browser.close();
  const previous=process.argv.includes('--interactions-only')?JSON.parse(fs.readFileSync(path.join(root,'reports/browser-verification.json'),'utf8')):null;
  const report={pages:all.length,widths,rendered:previous?previous.rendered:results.length,failures:previous?previous.failures:results.filter(r=>r.errors.length),interactions};
- fs.writeFileSync(path.join(root,'reports/browser-verification.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+ fs.writeFileSync(path.join(root,visualOnly?'reports/visual-browser-verification.json':'reports/browser-verification.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
  if(report.failures.length||interactions.some(i=>!i.passed))process.exitCode=1;
 })();

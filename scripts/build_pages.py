@@ -11,6 +11,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from guide_visuals import illustration, art_img
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -56,7 +57,7 @@ def update_home():
     p = ROOT / 'index.html'
     s = p.read_text(encoding='utf-8')
     o = s
-    s = HOME_TILE_RE.sub(lambda m: m.group(1) + '<span class="gc-ic"><img src="/img/icons/guides-' + (m.group(2) or 'all') + '.svg" width="28" height="28" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>' + m.group(3), s)
+    s = HOME_TILE_RE.sub(lambda m: m.group(1) + '<span class="gc-ic">' + art_img(illustration(m.group(2) or 'all'),64) + '</span>' + m.group(3), s)
     if s != o:
         p.write_text(s, encoding='utf-8', newline='')
         return 1
