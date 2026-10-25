@@ -4,6 +4,7 @@ on:
     branches:
       - conversion/mobile-home-20261025
       - design/conversion-css-polish-20261026
+      - conversion/home-v2-20261026
       - main
 permissions:
   contents: read
