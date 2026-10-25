@@ -14,7 +14,7 @@ DATA = json.loads((ROOT / 'data/guides.json').read_text(encoding='utf-8'))
 CATS = {c['key']: c for c in DATA['categories']}
 GUIDES = DATA['guides']
 ICONS = {'all':'all','check':'check','sim':'sim','self':'self','esim':'esim','move':'move','plan':'plan','fix':'fix'}
-VERSION = '20261025-art2'
+VERSION = '20261025-art3'
 CHEV = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>'
 
 
@@ -76,6 +76,7 @@ def transform(page, url):
     page = re.sub(r'<link rel="stylesheet" href="/assets/(?:v4-1-final|service-center)\.css[^\"]*">', '', page)
     if '/assets/hub.css' not in page:
         page = page.replace('</head>', '<link rel="stylesheet" href="/assets/hub.css?v=%s"></head>' % VERSION)
+    page = re.sub(r'(/assets/hub\.css\?v=)[^\"]+', lambda match: match.group(1)+VERSION, page)
     page = page.replace('src="/assets/site.js"', 'src="/assets/site.js?v=%s"' % VERSION)
     page = page.replace('src="/assets/guide.js"', 'src="/assets/guide.js?v=%s"' % VERSION)
     page = re.sub(r'<img class="brand-mascot"[^>]*>', '<img class="brand-mascot" src="/img/icons/brand-mark.svg" width="36" height="36" alt="">', page)
@@ -150,6 +151,18 @@ def transform(page, url):
     page = page.replace('<main class="site content"', '<main id="main-content" class="site content"',1)
     if 'id="main-content"' not in page:
         page = page.replace('<main class="site content detail-content"','<main id="main-content" class="site content detail-content"',1)
+    # A contextual visual belongs to the article itself, after its heading.
+    # Only known guide URLs receive generated art; official photos remain untouched.
+    if url not in ('/', '/guide/') and 'detail-workspace' in page and 'detail-lead-visual' not in page:
+        current_guide = next((g for g in GUIDES if g['href'].split('#')[0] == url), None)
+        if current_guide:
+            cover_src = guide_illustration(current_guide)
+            cover = ('<figure class="detail-lead-visual" aria-label="주제별 안내 삽화">'
+                     '<img src="%s" width="512" height="512" alt="" loading="eager" decoding="async">'
+                     '</figure>') % html.escape(cover_src, quote=True)
+            page = re.sub(r'(<section class="hero[^"]*"[^>]*>.*?</section>)',
+                          lambda match: match.group(1) + cover, page,
+                          count=1, flags=re.S)
     # Keep every existing footer sentence, phone number and destination.
     if 'footer-grid' not in page:
         page = page.replace('<footer class="footer"><div class="site">','<footer class="footer"><div class="site footer-grid"><div class="footer-brand"><a href="/">'+icon('sim')+'<b>59만모바일</b></a><span>앤텔레콤 정보 가이드</span></div><div class="footer-info">',1)

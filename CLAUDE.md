@@ -75,3 +75,10 @@ This repository powers https://www.59man.shop/ .
 - 유심 실사 및 신청 스크린샷은 SVG로 변경하지 않는다.
 - scripts/build_guide.py는 v2.6.2 참고 템플릿의 구조와 동일한 WebP 매핑을 생성해야 한다.
 - 모든 디자인 배포 전 SEO 체크: 기존 URL, sitemap, canonical, robots, 내부 링크 및 개통 CTA를 유지하고 check_site.py를 통과한다.
+
+
+## 2026-10-25 UI polish after review
+- PR #5 final polish: mobile category chooser must not use an artificial screen-height empty region, text in guide cards should remain readable at 390px.
+- Detail cover art is added only for known guide URLs and is visibly distinguished as editorial artwork; existing real product photos and form captures remain unchanged.
+- Keep scripts/build_hub.py idempotent and match generated detail HTML; don't edit canonical, robots, sitemap, or original text.
+- CSS uses /assets/hub.css and guide-only /assets/guide-hub.css with cache version art3.
