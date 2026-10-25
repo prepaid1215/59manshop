@@ -68,3 +68,10 @@ This repository powers https://www.59man.shop/ .
 - /guide/ 생성 시 카테고리 목록을 먼저 렌더하고, 다음에 자주 찾는 답변을 배치한다. 변경은 scripts/build_guide.py에도 동기화한다.
 - robots, canonical, sitemap, index/noindex, 개별 URL과 preplan.site 전환 목적지를 디자인 수정 때문에 변경하지 않는다.
 - 디자인 완료 후에도 사이트맵 등록 수와 실제 색인 수를 구분하여 안내한다.
+
+## 2026-10-25 브랜드 블루 최종 원칙
+- 공식 브랜드 포인트는 #175CD3. 기존 핑크는 사용하지 않는다.
+- 카테고리 시각 요소는 /img/icons/guides-*.svg의 수작업 평면형 벡터 8종을 재사용한다. 3D 아이콘/장식 일러스트를 추가하지 않는다.
+- 유심 실사 및 신청 스크린샷은 SVG로 변경하지 않는다.
+- scripts/build_guide.py는 동일한 카테고리 SVG를 생성해야 한다.
+- 모든 디자인 배포 전 SEO 체크: 기존 URL, sitemap, canonical, robots, 내부 링크 및 개통 CTA를 유지하고 check_site.py를 통과한다.

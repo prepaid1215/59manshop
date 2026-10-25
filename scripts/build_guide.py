@@ -55,6 +55,13 @@ for g in guides:
 counts = {k: sum(1 for g in guides if g['cat'] == k) for k in cats}
 counts['all'] = len(guides)
 
+CAT_SVG = {"all":"guides-all","check":"guides-check","sim":"guides-sim","self":"guides-self","esim":"guides-esim","move":"guides-move","plan":"guides-plan","fix":"guides-fix"}
+
+def category_icon(key):
+    filename = CAT_SVG[key]
+    return '<span class="gc-ic"><img src="/img/icons/%s.svg" alt="" aria-hidden="true" width="28" height="28" loading="lazy" decoding="async"></span>' % filename
+
+
 parts = []
 parts.append('<nav class="crumb-bar crumb-inline" aria-label="경로"><p class="crumb"><a href="/">홈</a><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-now" aria-current="page">가이드</span></p></nav>')
 parts.append('<p class="updated">업데이트: <time datetime="2026-10-23">2026년 10월 23일</time></p>')
@@ -82,8 +89,8 @@ quick_html = ''.join(q)
 # 카테고리 타일
 t = ['<nav class="gc-tiles" aria-label="카테고리">']
 for k, c in cats.items():
-    t.append('<button type="button" class="gc-tile%s" data-cat="%s" aria-pressed="%s"><span class="gc-ic">%s</span><b>%s</b><small>%d개 가이드</small></button>' % (
-        ' is-active' if k == 'all' else '', k, 'true' if k == 'all' else 'false', ill_svg(CAT_ILL[k], 44), esc(c['label']), counts[k]))
+    t.append('<button type="button" class="gc-tile%s" data-cat="%s" aria-pressed="%s">%s<b>%s</b><small>%d개 가이드</small></button>' % (
+        ' is-active' if k == 'all' else '', k, 'true' if k == 'all' else 'false', category_icon(k), esc(c['label']), counts[k]))
 t.append('</nav>')
 parts.append(''.join(t))
 parts.append(quick_html)
