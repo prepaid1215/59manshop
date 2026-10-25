@@ -6,6 +6,7 @@ on:
       - design/mobile-hub-20261025
       - design/brand-blue-svg-20261025
       - design/information-hub-20261025
+      - fix/restore-mobile-only-20261025
   pull_request:
     branches: [main]
 permissions:
@@ -24,5 +25,5 @@ jobs:
       - name: Check sitemap, canonical, internal links and pages
         run: python scripts/check_site.py
       - name: Preserve production SEO and content during redesign
-        if: github.head_ref == 'design/information-hub-20261025' || github.ref == 'refs/heads/design/information-hub-20261025'
+        if: github.head_ref == 'design/information-hub-20261025' || github.ref == 'refs/heads/design/information-hub-20261025' || github.head_ref == 'fix/restore-mobile-only-20261025' || github.ref == 'refs/heads/fix/restore-mobile-only-20261025'
         run: python scripts/check_preservation.py --base 727568f
