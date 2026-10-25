@@ -1,0 +1,34 @@
+name: Visual polish screenshots
+on:
+  push:
+    branches:
+      - design/information-hub-20261025
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install browser and Playwright
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Render actual mobile and desktop screens
+        run: |
+          python scripts/serve_preview.py > /tmp/preview.log 2>&1 &
+          sleep 2
+          node scripts/render_qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr5-polish-screenshots
+          path: reports/ui/after/
+          if-no-files-found: warn
