@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - conversion/mobile-home-20261025
+      - design/conversion-css-polish-20261026
       - main
 permissions:
   contents: read
