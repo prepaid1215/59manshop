@@ -70,6 +70,7 @@ def build():
     page=transform(page,'/guide/')
     if '/assets/guide-hub.css' not in page:
         page=page.replace('</head>','<link rel="stylesheet" href="/assets/guide-hub.css?v=20261025-art3"></head>')
+    page=re.sub(r'(/assets/guide-hub\.css\?v=)[^"]+',lambda m:m.group(1)+'20261025-art3',page)
     PAGE.write_text(page,encoding='utf-8',newline='')
     print('Visual guide: %d static cards, v2.6.2 directory layout' % len(GUIDES))
 
