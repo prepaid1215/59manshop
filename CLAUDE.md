@@ -59,3 +59,12 @@ This repository powers https://www.59man.shop/ .
 - /assets/v4-1-final.css 다음에 /assets/service-center.css 를 사용한다. 새 페이지 생성 시 둘 다 읽도록 한다.
 - 홈 검색은 /guide/?q=... 를 사용한다. 검색에 없는 내용은 카카오톡 상담으로 연결한다.
 - canonical·robots·sitemap·URL·index/noindex·preplan.site CTA는 디자인 변경 때문에 임의로 바꾸지 않는다.
+
+
+## Mobile hub design and index-first QA (2026-10-25)
+- 최우선 목표: 실제 색인 → 목표 키워드 검색 노출 → 사용자 방문 → 선불폰 개통. UI 완료는 검색 성과와 동일하지 않다.
+- 모바일 390–480px 기준, PC에서도 모바일 단일 컬럼 유지. 검색 → 카테고리 → 안내 목록 → 상세 답변 → 개통/상담 흐름.
+- 흰 바탕·따뜻한 핑크 포인트·절제된 테두리. AI 3D 아이콘을 반복 생성하지 않는다. 실제 제품·신청 화면만 썸네일로 활용한다.
+- /guide/ 생성 시 카테고리 목록을 먼저 렌더하고, 다음에 자주 찾는 답변을 배치한다. 변경은 scripts/build_guide.py에도 동기화한다.
+- robots, canonical, sitemap, index/noindex, 개별 URL과 preplan.site 전환 목적지를 디자인 수정 때문에 변경하지 않는다.
+- 디자인 완료 후에도 사이트맵 등록 수와 실제 색인 수를 구분하여 안내한다.

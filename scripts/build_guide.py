@@ -44,7 +44,7 @@ def thumb(g, size=64):
     if 'img' in m:
         cls = ' is-cover' if m.get('cover') else ''
         return '<span class="gc-thumb%s"><img src="%s" alt="" width="72" height="72" loading="lazy"></span>' % (cls, m['img'])
-    return '<span class="gc-thumb">%s</span>' % ill_svg(m['ill'], size)
+    return ''  # SVG 장식 아이콘 대신 제목과 내용 우선
 
 
 cats = {c['key']: c for c in DATA['categories']}
@@ -58,7 +58,7 @@ counts['all'] = len(guides)
 parts = []
 parts.append('<nav class="crumb-bar crumb-inline" aria-label="경로"><p class="crumb"><a href="/">홈</a><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-now" aria-current="page">가이드</span></p></nav>')
 parts.append('<p class="updated">업데이트: <time datetime="2026-10-23">2026년 10월 23일</time></p>')
-parts.append('<header class="gc-hero"><div class="gc-kicker">도움말 검색</div><h1>앤텔레콤 선불폰 이용 안내</h1>'
+parts.append('<header class="gc-hero"><div class="gc-kicker">앤텔레콤 가이드</div><h1>상황에 맞게 찾아보세요</h1>'
              '<p>개통에 필요한 내용을 상황별로 정리했어요. 검색하거나 항목을 선택하면 상황별 안내를 확인할 수 있어요. 찾는 답변이 없으면 카카오톡으로 문의하세요.</p>'
              '<form class="gc-search" id="gc-form" role="search"><label for="gc-q" class="sr-only">가이드 검색</label>' + SEARCH +
              '<input id="gc-q" type="search" placeholder="궁금한 내용을 검색해 보세요 (예: 안면인증, eSIM, 요금제)" autocomplete="off">'
@@ -75,7 +75,9 @@ for i, h in enumerate(QUICK):
                  ' is-hot' if i == 0 else '', esc(h), i + 1, esc(QUICK_LABEL[i]), esc(g['title']), esc(g['desc']),
                  ill_svg(META[h].get('ill') or CAT_ILL[g['cat']], 84), CHEV))
 q.append('</div></section>')
-parts.append(''.join(q))
+
+# 카테고리를 자주 찾는 답변보다 먼저 표시한다(모바일 정보 탐색 흐름).
+quick_html = ''.join(q)
 
 # 카테고리 타일
 t = ['<nav class="gc-tiles" aria-label="카테고리">']
@@ -84,6 +86,7 @@ for k, c in cats.items():
         ' is-active' if k == 'all' else '', k, 'true' if k == 'all' else 'false', ill_svg(CAT_ILL[k], 44), esc(c['label']), counts[k]))
 t.append('</nav>')
 parts.append(''.join(t))
+parts.append(quick_html)
 
 # 목록
 c0 = cats['all']
