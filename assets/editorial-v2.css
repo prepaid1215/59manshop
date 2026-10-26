@@ -301,3 +301,6 @@
  .editorial-v2.reference-style>.answer-card{padding:17px 15px!important}
 }
 @media(prefers-reduced-motion:reduce){.editorial-v2.reference-style .reader-toc a{transition:none}}
+
+/* Reader-friendly breaks between complete thoughts, without forced line widths. */
+.editorial-v2.reference-style .reader-paragraph-split{display:block;margin-top:11px;line-height:inherit}
