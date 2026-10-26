@@ -14,7 +14,7 @@ DATA = json.loads((ROOT / 'data/guides.json').read_text(encoding='utf-8'))
 CATS = {c['key']: c for c in DATA['categories']}
 GUIDES = DATA['guides']
 ICONS = {'all':'all','check':'check','sim':'sim','self':'self','esim':'esim','move':'move','plan':'plan','fix':'fix'}
-VERSION = '20261026-font2'
+VERSION = '20261026-quote1'
 CHEV = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>'
 
 
