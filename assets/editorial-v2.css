@@ -241,7 +241,7 @@
    Intentionally scoped; existing content, canonical URLs and structured data remain intact. */
 .editorial-v2.reference-style{
   --reader-accent:#2563eb;--reader-pale:#eff6ff;--reader-line:#dbeafe;
-  color:#232b36;max-width:860px!important;margin-left:auto!important;margin-right:auto!important;
+  color:#232b36;max-width:480px!important;margin-left:auto!important;margin-right:auto!important;
 }
 .editorial-v2.reference-style .hero h1{font-size:clamp(27px,6vw,35px)!important;line-height:1.42!important}
 .editorial-v2.reference-style .hero p{font-size:16px!important;line-height:1.8!important;color:#4d5c70!important}
