@@ -413,7 +413,11 @@ body{background:#f6f8fb}
   display:block;width:100%;height:100%;max-width:28px;max-height:28px;
   object-fit:contain;border-radius:4px
 }
-.detail-article .img-cards .ic-art img.common-card-photo{
-  display:block;width:100%;height:auto;max-width:96px;max-height:96px;
+.detail-article .img-cards--id .ic-art img.common-card-photo{
+  display:block;width:68px;height:68px;max-width:100%;
   margin-inline:auto;object-fit:contain;border-radius:6px
+}
+.detail-article .img-cards--sim .ic-art img.common-card-photo{
+  display:block;width:90px;height:90px;max-width:100%;
+  margin-inline:auto;object-fit:contain;border-radius:8px
 }
