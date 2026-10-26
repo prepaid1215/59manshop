@@ -137,3 +137,6 @@ This repository powers https://www.59man.shop/ .
 - 플랫폼 개통: 본인확인 → 신청서 제출 → 요금 충전 → 사용 → 앤텔레콤 본사 1899-7700 해피콜 수신.
 - 태블릿개통(앤텔레콤 멤버십 앱): 담당자 해피콜 → 담당자 승인 → 요금 충전 → 사용. 1899-7700 본사 플랫폼 해피콜과 구분.
 - All user-facing text and SEO summaries must distinguish these routes.
+
+- Across 플랫폼 and 태블릿 activation, prerequisites, identity verification, SIM input, plan and number selection are the SAME. Only post-submission happy call, staff approval and recharge order differ; app route additionally requires tablet-owner member number **2893496**. Do not suggest other differences.
+- Member-number guide `/태블릿-소유자-회원번호/` must display exactly **2893496** (7 digits) and the tablet order **담당자 해피콜 → 담당자 승인 → 요금 충전**. Do not place 1899-7700 as the tablet callback number.
