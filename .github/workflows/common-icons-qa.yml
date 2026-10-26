@@ -1,0 +1,35 @@
+name: Custom common icon upload QA
+on:
+  push:
+    branches: [feature/auth-card-photo-uploads-20261026]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check site SEO, URLs and assets
+        run: python scripts/check_site.py
+      - name: Syntax check
+        run: |
+          node --check assets/site.js
+          node --check scripts/assert_common_icons.cjs
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Validate fallback and custom icon loading
+        run: |
+          python scripts/serve_preview.py >/tmp/common-icon-preview.log 2>&1 &
+          sleep 2
+          node scripts/assert_common_icons.cjs
