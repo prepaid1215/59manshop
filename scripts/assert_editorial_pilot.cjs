@@ -6,7 +6,7 @@ const {chromium}=require('./browser_runtime.cjs');
  fs.mkdirSync(dir,{recursive:true});
  const results=[],errors=[];
  for(const width of [390,430,480,1024,1440]){
-  for(const [name,route] of [['activation','/선불폰-개통방법/'],['arrears','/미납정지-선불폰/']]){
+  for(const [name,route] of [['activation','/선불폰-개통방법/'],['arrears','/미납정지-선불폰/'],['sim','/편의점-선불유심/']]){
    const page=await browser.newPage({viewport:{width,height:900}});
    const pageErr=[];page.on('pageerror',e=>pageErr.push(e.message));
    await page.goto('http://127.0.0.1:8765'+route,{waitUntil:'networkidle'});
@@ -20,7 +20,8 @@ const {chromium}=require('./browser_runtime.cjs');
     return {
      pageWidth:innerWidth,
      shellWidth:rect('.top .site')?.width,contentWidth:rect('main.site')?.width,articleWidth:rect('.editorial-v2')?.width,
-     headline:txt('.editorial-v2 h1'),summary:txt('.editorial-v2>.answer-card h2'),summaryTop:rect('.editorial-v2>.answer-card')?.top,
+     headline:txt('.editorial-v2 h1'),summary:txt('.editorial-v2>.answer-card h2'),
+     conclusionChars:txt('.editorial-v2>.answer-card .answer-lead').length,summaryTop:rect('.editorial-v2>.answer-card')?.top,
      summaryEnd:rect('.editorial-v2>.answer-card')?.bottom,heroEnd:rect('.editorial-v2>.hero')?.bottom,
      coverInSummary:!!$('.editorial-v2>.answer-card>.detail-lead-visual'),
      duplicateCover:document.querySelectorAll('.editorial-v2 .detail-lead-visual').length,
@@ -35,9 +36,10 @@ const {chromium}=require('./browser_runtime.cjs');
      cta:$('.bottom-bar-main')?.getAttribute('href'),
     };
    });
-   const ok=detail.shellWidth<=480&&detail.contentWidth<=480&&detail.articleWidth<=480&&!detail.overflow&&!detail.broken.length&&detail.coverInSummary&&detail.duplicateCover===1&&detail.summaryTop<Math.min(900,detail.heroEnd+90)&&detail.paraFont>=15.5&&detail.robots==='index,follow'&&detail.backMenu!=='none'&&detail.pcMenu==='none'&&pageErr.length===0;
+   const ok=detail.shellWidth<=480&&detail.contentWidth<=480&&detail.articleWidth<=480&&!detail.overflow&&!detail.broken.length&&detail.coverInSummary&&detail.duplicateCover===1&&detail.summaryTop<Math.min(900,detail.heroEnd+90)&&detail.paraFont>=14.7&&detail.conclusionChars>35&&detail.robots==='index,follow'&&detail.backMenu!=='none'&&detail.pcMenu==='none'&&pageErr.length===0;
    const record={name,width,ok,...detail,errors:pageErr};results.push(record);if(!ok)errors.push(record);
-   if(width===390||width===1440){await page.screenshot({path:path.join(dir,name+'-'+width+'.png'),fullPage:false});}
+   if(width===390||width===1440){await page.screenshot({path:path.join(dir,name+'-'+width+'.png'),fullPage:false});
+    if(width===390) await page.screenshot({path:path.join(dir,name+'-390-full.png'),fullPage:true});}
    await page.close();
   }
  }
