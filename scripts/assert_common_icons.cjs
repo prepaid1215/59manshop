@@ -24,6 +24,37 @@ const {chromium}=require('./browser_runtime.cjs');
     backgrounds:[...document.querySelectorAll('.common-icon-sprite')].every(e=>getComputedStyle(e).backgroundImage.includes('common-icons-sprite.png')),
     broken:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).length,
     overflow:document.documentElement.scrollWidth>innerWidth+1,
+    simLayout:(function(){
+      const grid=document.querySelector('.img-cards--sim .img-cards-grid');
+      const nodes=[...grid.children];
+      const boxes=nodes.map(n=>n.getBoundingClientRect());
+      const figures=nodes.map(n=>n.querySelector('figure').getBoundingClientRect());
+      const imageBoxes=nodes.map(n=>n.querySelector('.ic-art').getBoundingClientRect());
+      const images=nodes.map(n=>n.querySelector('.ic-art img').getBoundingClientRect());
+      return {
+        count:nodes.length,
+        margins:nodes.map(n=>getComputedStyle(n).marginTop),
+        equalWidths:Math.max(...figures.map(x=>x.width))-Math.min(...figures.map(x=>x.width))<=1,
+        equalHeights:Math.max(...figures.map(x=>x.height))-Math.min(...figures.map(x=>x.height))<=1,
+        imageBoxHeights:imageBoxes.map(x=>Math.round(x.height)),
+        imageAlignment:imageBoxes.every((r,i)=>Math.abs((r.left+r.right)/2-(images[i].left+images[i].right)/2)<=1),
+        rowTops:boxes.map(x=>Math.round(x.top)),
+        noOverlap:boxes[2].top>=boxes[0].bottom+8,
+        imageLoaded:nodes.every(n=>{const img=n.querySelector('.ic-art img');return img&&img.complete&&img.naturalWidth>0;})
+      };
+    })(),
+    relatedStyle:(function(){
+      const nav=document.querySelector('.detail-article .related');
+      const link=nav.querySelector('a');
+      return {
+        title:nav.querySelector('h2').textContent.trim(),
+        border:getComputedStyle(nav).borderTopStyle,
+        weight:parseInt(getComputedStyle(link).fontWeight,10),
+        color:getComputedStyle(link).color,
+        hrefs:[...nav.querySelectorAll('a')].every(a=>a.getAttribute('href').startsWith('/'))
+      };
+    })(),
+    inlineLinkColor:getComputedStyle(document.querySelector('.detail-article a[href="/태블릿-소유자-회원번호/"]')).color,
     idLayout:(function(){
       const grid=document.querySelector('.img-cards--id .img-cards-grid');
       const cards=[...grid.children];
@@ -54,6 +85,16 @@ const {chromium}=require('./browser_runtime.cjs');
      ||result.alignment.badgeTops.length!==5||spread(result.alignment.badgeTops)>1
      ||spread(result.alignment.labelTops)>1
      ||result.alignment.margins.some(m=>m!=='0px')
+     ||result.simLayout.count!==4||!result.simLayout.equalWidths||!result.simLayout.equalHeights
+     ||!result.simLayout.imageAlignment||!result.simLayout.noOverlap||!result.simLayout.imageLoaded
+     ||result.simLayout.margins.some(m=>m!=='0px')
+     ||result.simLayout.imageBoxHeights.some(h=>h!==150)
+     ||result.simLayout.rowTops[0]!==result.simLayout.rowTops[1]
+     ||result.simLayout.rowTops[2]!==result.simLayout.rowTops[3]
+     ||result.relatedStyle.title!=='함께 보면 좋은 글'
+     ||result.relatedStyle.border!=='solid'||result.relatedStyle.weight<700
+     ||result.relatedStyle.color!=='rgb(114, 80, 239)'||!result.relatedStyle.hrefs
+     ||result.inlineLinkColor!=='rgb(112, 80, 223)'
      ||result.idLayout.count!==3||!result.idLayout.firstRowAligned
      ||!result.idLayout.centeredLast||!result.idLayout.secondRowBelow
      ||result.idLayout.margins.some(m=>m!=='0px')

@@ -521,3 +521,156 @@ body{background:#f6f8fb}
   display:block;width:auto;height:126px;max-width:100%;max-height:126px;
   border-radius:8px;object-fit:contain;
 }
+
+
+/* Editorial cards and links — SIM photo layout and related-reading block.
+   Scoped to guide articles to avoid altering site navigation and conversion CTAs. */
+.detail-article .img-cards--sim .img-cards-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:10px;
+  row-gap:12px;
+  align-items:stretch;
+  margin:12px 0 0!important;
+  padding:0!important;
+}
+.detail-article .img-cards--sim .img-cards-grid>li,
+.detail-article .img-cards--sim .img-cards-grid>li+li{
+  margin:0!important;
+  padding:0!important;
+  min-width:0;
+}
+.detail-article .img-cards--sim .img-cards-grid>li>figure{
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  padding:12px 8px 14px;
+  width:100%;
+  height:100%;
+  min-width:0;
+}
+.detail-article .img-cards--sim .ic-art,
+.detail-article .img-cards--sim .ic-art.owner-poster-holder{
+  box-sizing:border-box;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  height:150px!important;
+  min-height:150px!important;
+  margin:0 0 8px;
+  overflow:hidden;
+}
+.detail-article .img-cards--sim .ic-art>img:not(.owner-poster){
+  display:block;
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:138px!important;
+  object-fit:contain;
+}
+.detail-article .img-cards--sim .ic-art>img.owner-poster{
+  display:block;
+  width:auto!important;
+  height:140px!important;
+  max-width:100%!important;
+  max-height:140px!important;
+  object-fit:contain;
+}
+.detail-article .img-cards--sim figcaption{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:4px;
+  min-height:60px;
+  margin-top:0;
+  text-align:center;
+}
+.detail-article .img-cards--sim figcaption>b{
+  font-size:12px!important;
+  font-weight:800!important;
+  line-height:1.5!important;
+}
+.detail-article .img-cards--sim figcaption>span,
+.detail-article .img-cards--sim figcaption>em{
+  font-size:10.5px!important;
+  line-height:1.5!important;
+}
+.detail-article .img-cards--sim .img-cards-note{
+  margin:16px 0 0!important;
+  font-size:11px!important;
+  line-height:1.65!important;
+}
+/* Strong visible inline links, retaining underlines for text accessibility. */
+.detail-article > section:not(.hero) p a:not(.kakao-help),
+.detail-article > section:not(.hero) li a:not(.kakao-help){
+  color:#7050df!important;
+  font-weight:750!important;
+  text-decoration:underline!important;
+  text-decoration-thickness:1px!important;
+  text-underline-offset:3px!important;
+}
+.detail-article > section:not(.hero) p a:not(.kakao-help):hover,
+.detail-article > section:not(.hero) li a:not(.kakao-help):hover{
+  color:#5233bd!important;
+}
+/* Reference 5: spacious outlined card, prominent violet editorial links. */
+.detail-article .related{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  box-sizing:border-box;
+  margin:30px 0 10px!important;
+  padding:20px 18px!important;
+  background:#fff;
+  border:1px solid #e5dcff;
+  border-radius:16px;
+}
+.detail-article .related>.related-title{
+  margin:0 0 10px!important;
+  padding:0!important;
+  color:#1b253a!important;
+  font-size:16px!important;
+  font-weight:850!important;
+  line-height:1.5!important;
+}
+.detail-article .related>a{
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  margin:0!important;
+  padding:8px 0!important;
+  border:0!important;
+  background:transparent;
+  color:#7250ef!important;
+  font-size:14px!important;
+  font-weight:800!important;
+  line-height:1.6!important;
+  text-decoration:none!important;
+  overflow-wrap:anywhere;
+  word-break:keep-all;
+}
+.detail-article .related>a::after{
+  content:" →";
+  float:none;
+  margin-left:2px;
+  color:inherit;
+  font-weight:800;
+}
+.detail-article .related>a:hover{
+  color:#5332cf!important;
+  text-decoration:underline!important;
+  text-underline-offset:4px!important;
+}
+.detail-article .related>a:focus-visible{
+  outline:2px solid #7250ef;
+  outline-offset:3px;
+  border-radius:3px;
+}
+@media(max-width:360px){
+  .detail-article .img-cards--sim .img-cards-grid{column-gap:8px;}
+  .detail-article .img-cards--sim .img-cards-grid>li>figure{padding:10px 6px 12px;}
+  .detail-article .related{padding:16px 14px!important;}
+  .detail-article .related>a{font-size:13.5px!important;}
+}
