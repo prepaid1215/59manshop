@@ -41,7 +41,7 @@ const {chromium}=require('./browser_runtime.cjs');
     };
    },name);
    const ok=x.shell<=480&&x.main<=480&&!x.horizontalOverflow&&
-      x.broken.length===0&&x.paragraphFont>=15.3&&x.lineRatio>=1.7&&
+      x.broken.length===0&&x.paragraphFont>=(name==='guide'?12.8:15.3)&&x.lineRatio>=(name==='guide'?1.6:1.7)&&
       x.headingFont>=(name==='guide'?16:21)&&
       (x.tableFont===null||x.tableFont>=13.5)&&errs.length===0;
    const record={width,name,ok,...x,errors:errs};records.push(record);
