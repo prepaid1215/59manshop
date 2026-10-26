@@ -278,3 +278,11 @@ window.enhanceHubContent(document);
     }
   }).catch(function(){mount(original,false)});
 })();
+
+
+/* Keep the common related-reading heading consistent on legacy and new articles.
+   Does not touch link URLs, page titles, canonical, robots or structured data. */
+(function(){
+  document.querySelectorAll('#main-content .detail-article .related > .related-title')
+    .forEach(function(h){if(h.textContent.trim()==='관련 안내')h.textContent='함께 보면 좋은 글';});
+})();
