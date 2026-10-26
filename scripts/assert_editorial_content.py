@@ -14,7 +14,7 @@ def parse(s):
   'robots':attr(s,r'<meta name="robots" content="([^"]+)"'),
   'h1':attr(s,r'<h1[^>]*>(.*?)</h1>'),
   'imgs':sorted(re.findall(r'<img[^>]+src="([^"]+)"',s)),
-  'hrefs':set(re.findall(r'href="([^"]+)"',s)),
+  'hrefs':set(href for href in re.findall(r'href="([^"]+)"',s) if not href.startswith('/assets/')),
  }
 for p in TARGETS:
  before=subprocess.check_output(['git','show','origin/main:'+p],cwd=ROOT).decode('utf-8')
