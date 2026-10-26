@@ -54,9 +54,6 @@ for token in ['태블릿 소유자 회원번호 2893496','data-copy="2893496"','
 for token in ['준비물, 본인인증, 유심정보와 요금제 선택','2893496','담당자 해피콜 → 담당자 승인 → 요금 충전']:
  if token not in page: errors.append(f'activation guide missing shared steps / tablet number: {token}')
 
-print(json.dumps({'checked':len(TARGETS)+1,'errors':errors},ensure_ascii=False,indent=2))
-sys.exit(1 if errors else 0)
-
 # Keep all reference-blog dealer identifiers out of 59만모바일.
 for p in TARGETS + ['태블릿-소유자-회원번호/index.html']:
  content=(ROOT/p).read_text('utf-8')
@@ -64,3 +61,6 @@ for p in TARGETS + ['태블릿-소유자-회원번호/index.html']:
   if old in content: errors.append(f'{p}: external reference identity leaked: {old}')
  if 'reference-style' not in content or 'class="reader-toc"' not in content:
   errors.append(f'{p}: missing reference-style layout')
+
+print(json.dumps({'checked':len(TARGETS)+1,'errors':errors},ensure_ascii=False,indent=2))
+sys.exit(1 if errors else 0)
