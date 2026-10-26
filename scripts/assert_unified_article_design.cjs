@@ -56,7 +56,7 @@ fs.mkdirSync(outDir,{recursive:true});
    const ok=!m.missingArticle&&!m.overflow&&m.cssLink&&m.articleWidth<=480.5&&
       m.font?.includes('Pretendard')&&m.relatedTitle==='함께 보면 좋은 글'&&
       m.bottomLink?.startsWith('https://preplan.site/')&&
-      m.h2Quote?.includes('“')&&m.relatedLinkColor==='rgb(114, 80, 239)'&&
+      m.h2Quote?.includes('01')&&m.relatedLinkColor==='rgb(23, 92, 211)'&&
       drift.length===0&&errors.length===0;
    const row={width,route,ok,drift,...m,errors};
    results.push(row);

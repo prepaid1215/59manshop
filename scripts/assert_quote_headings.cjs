@@ -5,7 +5,7 @@ const selector = '.detail-article > section:not(.hero):not(.answer-card):not(.fa
  const browser = await chromium.launch({headless:true});
  const errors=[], results=[];
  const urls=['/선불폰-개통방법/','/미납정지-선불폰/','/편의점-선불유심/','/v4-1/topic/plan-396/','/kt-바로유심/'];
- const out=path.join(__dirname,'../reports/ui/quote-heading-qa');
+ const out=path.join(__dirname,'../reports/ui/magazine-heading-qa');
  fs.mkdirSync(out,{recursive:true});
  for (const width of [390,480,1440]){
   const page=await browser.newPage({viewport:{width,height:900}});
@@ -31,7 +31,7 @@ const selector = '.detail-article > section:not(.hero):not(.answer-card):not(.fa
       text:first.textContent.trim()
      };
    },selector);
-   const ok=info.count>0&&info.quote.includes('“')&&info.quoteDisplay==='block'&&info.border==='1px'&&!info.overflow&&(!info.nonDecorativeFaq||info.nonDecorativeFaq==='none');
+   const ok=info.count>0&&info.quote.includes('01')&&info.quoteDisplay==='block'&&info.border==='0px'&&!info.overflow&&(!info.nonDecorativeFaq||info.nonDecorativeFaq==='none');
    results.push({url,width,ok,...info});
    if(!ok)errors.push(JSON.stringify({url,width,info}));
    if(width===390&&url==='/선불폰-개통방법/'){

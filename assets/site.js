@@ -322,3 +322,150 @@ window.enhanceHubContent(document);
     }
   }
 })();
+
+
+/* 59만모바일 BLUE editorial magazine
+   Progressively enhances existing indexable articles without changing their
+   SEO text, canonical URLs, product facts, site navigation or activation links.
+   Reference layout: summary tiles -> topic-specific cards -> numbered sections
+   -> related reading -> factual next action.
+*/
+(function(){
+  var root=document.querySelector('#main-content .detail-article');
+  if(!root||root.classList.contains('magazine-blue'))return;
+  root.classList.add('magazine-blue');
+  var route;
+  try{route=decodeURI(location.pathname)}catch(e){route=location.pathname}
+  var specs={
+    '/lg-모두의원칩-셀프개통/':{
+      facts:[['L망 원칩 가격','8,800원'],['모델코드','5자리'],['일련번호','8자리']],
+      choices:[
+        ['원칩을 이미 구매했다면','https://preplan.site/?from=59man_lgonechip_choice','L망 셀프개통 화면에서 모델코드·일련번호 입력'],
+        ['원칩 구매 전이라면','/lg-원칩/','판매처와 제품 정보를 먼저 확인']
+      ],
+      tip:['신청 후 충전 순서','플랫폼 비대면 신청은 개통 완료 → 요금 충전 → 사용 시작 → 이후 1899-7700 해피콜 순서입니다.'],
+      final:['원칩이 준비됐다면','L망을 선택하고 안면인증·간편인증을 거쳐 모델코드 5자리와 일련번호 8자리를 입력하세요.','원칩으로 개통 시작하기','https://preplan.site/?from=59man_lgonechip_magazine']
+    },
+    '/l망-464-요금제/':{
+      facts:[['월 요금','46,400원'],['기본 데이터','20GB'],['소진 후','최대 3Mbps']],
+      choices:[
+        ['실물 원칩으로 신청','/lg-모두의원칩-셀프개통/','유심을 갖고 있다면 L망 개통 순서 확인'],
+        ['eSIM으로 신규가입','/v4-1/topic/esim-new/','지원 기종·EID·발급비 확인']
+      ],
+      tip:['핫스팟 조건을 확인하세요','L망은 기본 데이터 소진 후 핫스팟 이용이 제한됩니다. 노트북 데이터 공유가 중요하면 이 조건을 먼저 비교하세요.'],
+      final:['L망 464가 맞는지 확인했다면','월 46,400원, 기본 20GB, 소진 후 최대 3Mbps 조건과 핫스팟 제한을 확인하고 진행하세요.','464 요금제로 신청하기','https://preplan.site/?from=59man_l464_magazine']
+    },
+    '/l망-2-5gb-요금제/':{
+      facts:[['월 요금','17,000원'],['데이터','2.5GB'],['통화','100분'],['문자','50건']],
+      choices:[
+        ['가벼운 세컨폰 용도','/lg-모두의원칩-셀프개통/','원칩 셀프개통 순서 확인'],
+        ['데이터가 더 필요하다면','/l망-464-요금제/','20GB급 요금제 이용 조건 비교']
+      ],
+      tip:['무제한 요금제가 아닙니다','월 통화 100분·문자 50건 제공량이 있는 요금제입니다. 업무 전화나 문자 발신이 잦다면 사용량을 먼저 살펴보세요.'],
+      final:['소량 사용에 맞는다면','2.5GB·100분·50건의 제공량과 월 17,000원 요금을 확인하고 본인 명의 L망 신규가입을 진행하세요.','2.5GB 요금제로 신청하기','https://preplan.site/?from=59man_l25_magazine']
+    },
+    '/편의점-선불유심/':{
+      facts:[['KT 바로유심','K망 · NFC'],['LG 모두의 원칩','L망 · NFC'],['다이소 고고비','L망 · NFC 미지원']],
+      products:[
+        ['K망 · 편의점','KT 바로유심','8,800원','CU·GS25·세븐일레븐·이마트24','/kt-바로유심/','구매처 확인'],
+        ['L망 · 편의점','LG 모두의 원칩','8,800원','이마트24·스토리웨이','/lg-원칩/','원칩 정보 확인'],
+        ['L망 · 다이소','고고비 유심','5,000원','다이소 · NFC 미지원','/다이소-유심/','구매 안내']
+      ]
+    },
+    '/kt선불폰-개통/':{
+      facts:[['KT 바로유심','K망'],['유심정보','19자리'],['편의점 판매가','8,800원']],
+      choices:[
+        ['바로유심 준비 완료','https://preplan.site/?from=59man_ktbaro_magazine','K망 개통 신청 화면으로'],
+        ['아직 구매 전이라면','/kt-바로유심/','편의점 판매처 확인']
+      ]
+    }
+  };
+  var spec=specs[route]||null;
+  function el(tag,cl,text){
+    var node=document.createElement(tag);
+    if(cl)node.className=cl;
+    if(text!==undefined)node.textContent=text;
+    return node;
+  }
+  var hero=root.querySelector(':scope > .hero');
+  if(spec&&hero){
+    var insertAt=hero;
+    if(spec.facts){
+      var facts=el('div','sm-quick'+(spec.facts.length===4?' is-four':''));
+      facts.setAttribute('aria-label','핵심 정보 요약');
+      spec.facts.forEach(function(f){
+        var item=el('div','sm-quick-item');
+        item.append(el('span','sm-quick-label',f[0]),el('strong','sm-quick-value',f[1]));
+        facts.appendChild(item);
+      });
+      insertAt.after(facts);insertAt=facts;
+    }
+    if(spec.products){
+      var products=el('div','sm-product-grid is-three');
+      products.setAttribute('aria-label','유심 제품별 상세 안내');
+      spec.products.forEach(function(p){
+        var card=el('div','sm-product-card');
+        card.appendChild(el('span','sm-product-card-tag',p[0]));
+        card.appendChild(el('h3','',p[1]));
+        card.appendChild(el('strong','sm-product-price',p[2]));
+        card.appendChild(el('p','',p[3]));
+        var link=el('a','',p[5]);link.href=p[4];card.appendChild(link);
+        products.appendChild(card);
+      });
+      insertAt.after(products);insertAt=products;
+    }
+    if(spec.choices){
+      var choices=el('div','sm-choice-grid');
+      choices.setAttribute('aria-label','상황에 맞는 다음 단계');
+      spec.choices.forEach(function(a){
+        var link=el('a','');link.href=a[1];
+        link.append(el('strong','',a[0]),el('span','',a[2]));
+        choices.appendChild(link);
+      });
+      insertAt.after(choices);
+    }
+  }
+  var excluded=['hero','answer-card','faq','cta','plan-cards','activation-flow'];
+  var sections=Array.from(root.children).filter(function(x){
+    return x.tagName==='SECTION'&&!excluded.some(function(c){return x.classList.contains(c)})&&
+      Array.from(x.children).some(function(y){return y.tagName==='H2'});
+  });
+  sections.forEach(function(section,i){
+    section.classList.add('magazine-section');
+    if(!section.id)section.id='magazine-section-'+(i+1);
+    var h=Array.from(section.children).find(function(y){return y.tagName==='H2'});
+    if(h)h.setAttribute('data-sm-number',('0'+(i+1)).slice(-2));
+  });
+  if(sections.length>=3){
+    var nav=el('nav','sm-page-nav');
+    nav.setAttribute('aria-label','이 페이지 목차');
+    sections.slice(0,7).forEach(function(section){
+      var h=Array.from(section.children).find(function(y){return y.tagName==='H2'});
+      if(!h)return;
+      var a=el('a','',h.textContent.trim());
+      a.setAttribute('href','#'+section.id);
+      nav.appendChild(a);
+    });
+    var answer=root.querySelector(':scope > .answer-card');
+    if(answer)answer.after(nav);
+    else {
+      var lead=root.querySelector(':scope > .detail-lead-visual');
+      (lead||hero||root.firstElementChild).after(nav);
+    }
+  }
+  if(spec&&spec.tip&&sections.length){
+    var tip=el('div','sm-tip');
+    tip.append(el('strong','',spec.tip[0]),el('span','',spec.tip[1]));
+    // Put the warning near the first explanation, rather than the top conversion CTA.
+    sections[0].appendChild(tip);
+  }
+  if(spec&&spec.final){
+    var [heading,summary,action,url]=spec.final;
+    var final=el('aside','sm-final');
+    final.setAttribute('aria-label','핵심 내용 정리');
+    final.append(el('h2','',heading),el('p','',summary));
+    var link=el('a','',action+' →');link.href=url;final.appendChild(link);
+    var related=root.querySelector(':scope > .related');
+    if(related)related.before(final);else root.appendChild(final);
+  }
+})();

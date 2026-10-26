@@ -125,8 +125,8 @@ const {chromium}=require('./browser_runtime.cjs');
      ||result.simLayout.rowTops[2]!==result.simLayout.rowTops[3]
      ||result.relatedStyle.title!=='함께 보면 좋은 글'
      ||result.relatedStyle.border!=='solid'||result.relatedStyle.weight<700
-     ||result.relatedStyle.color!=='rgb(114, 80, 239)'||!result.relatedStyle.hrefs
-     ||result.inlineLinkColor!=='rgb(112, 80, 223)'
+     ||result.relatedStyle.color!=='rgb(23, 92, 211)'||!result.relatedStyle.hrefs
+     ||result.inlineLinkColor!=='rgb(23, 92, 211)'
      ||result.idLayout.count!==3||!result.idLayout.firstRowAligned
      ||!result.idLayout.centeredLast||!result.idLayout.secondRowBelow
      ||result.idLayout.margins.some(m=>m!=='0px')

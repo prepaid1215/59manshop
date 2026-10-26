@@ -1103,3 +1103,281 @@ body{background:#f6f8fb}
   #main-content .detail-article{padding:21px 15px 30px!important;}
   #main-content .detail-article .related{padding:16px 14px!important;}
 }
+
+
+/* 59man.shop | BLUE EDITORIAL MAGAZINE SYSTEM
+   Reference: product-first magazine composition adapted to the brand's existing blue.
+   480px-centered mobile layout even on desktop; actual SEO article content is unchanged.
+*/
+#main-content .detail-article.magazine-blue{
+  --sm-blue:#175cd3;--sm-navy:#15345f;--sm-tint:#f0f6ff;--sm-line:#dce9ff;
+  --sm-ink:#192738;--sm-muted:#576881;
+  color:var(--sm-ink);padding-bottom:36px!important;
+}
+#main-content .detail-article.magazine-blue .crumb-bar{margin-bottom:20px!important}
+#main-content .detail-article.magazine-blue .hero{
+  position:relative;overflow:hidden;padding:12px 0 22px!important;
+  margin-bottom:14px!important;border-bottom:0!important;
+}
+#main-content .detail-article.magazine-blue .hero:after{
+  content:"";position:absolute;right:-74px;top:-66px;z-index:0;
+  width:195px;height:195px;border-radius:50%;
+  background:radial-gradient(circle,rgba(23,92,211,.11),rgba(23,92,211,0) 72%);
+  pointer-events:none;
+}
+#main-content .detail-article.magazine-blue .hero .detail-heading-inner{position:relative;z-index:1}
+#main-content .detail-article.magazine-blue .hero :is(.eyebrow,.hero-badge){
+  gap:7px!important;padding:0!important;border-radius:0!important;
+  background:none!important;color:var(--sm-blue)!important;
+  font-size:12px!important;font-weight:900!important;letter-spacing:.05em!important;
+}
+#main-content .detail-article.magazine-blue .hero :is(.eyebrow,.hero-badge):before{
+  content:"";width:21px;height:2px;background:var(--sm-blue);
+}
+#main-content .detail-article.magazine-blue .hero h1{
+  font-size:clamp(29px,7.1vw,35px)!important;line-height:1.32!important;
+  font-weight:900!important;letter-spacing:-.045em!important;color:#142236!important;
+  margin-bottom:15px!important;
+}
+#main-content .detail-article.magazine-blue .hero p{
+  max-width:38ch;font-size:16px!important;line-height:1.85!important;
+  color:#47576d!important;margin-bottom:17px!important;
+}
+#main-content .detail-article.magazine-blue a.hero-cta{
+  border-radius:14px!important;min-height:50px!important;
+  background:var(--sm-blue)!important;border-color:var(--sm-blue)!important;
+  font-weight:850!important;padding:13px 17px!important;
+  box-shadow:0 9px 20px rgba(23,92,211,.14)!important;
+}
+#main-content .detail-article.magazine-blue .detail-lead-visual{
+  max-width:100%;margin:8px 0 20px!important;
+  overflow:hidden;border-radius:18px!important;
+  background:linear-gradient(145deg,#f5f9ff,#ebf3ff)!important;
+}
+#main-content .detail-article.magazine-blue .detail-lead-visual img{
+  display:block;max-height:228px;width:100%;object-fit:contain;
+  margin-inline:auto;
+}
+#main-content .detail-article.magazine-blue .sm-quick{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;margin:18px 0 24px;
+  background:var(--sm-line);padding:1px;
+  border:1px solid var(--sm-line);border-radius:16px;overflow:hidden;
+}
+#main-content .detail-article.magazine-blue .sm-quick.is-four{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+#main-content .detail-article.magazine-blue .sm-quick-item{
+  background:#fff;padding:16px 9px;text-align:center;min-width:0;
+}
+#main-content .detail-article.magazine-blue .sm-quick-label{
+  display:block;font-size:11px;line-height:1.5;font-weight:750;color:#6b7890;
+  word-break:keep-all;
+}
+#main-content .detail-article.magazine-blue .sm-quick-value{
+  display:block;margin-top:5px;font-size:16px;line-height:1.35;
+  color:#16396e;font-weight:900;letter-spacing:-.035em;
+  overflow-wrap:anywhere;
+}
+#main-content .detail-article.magazine-blue .sm-page-nav{
+  display:flex;gap:6px;overflow:auto;scrollbar-width:thin;
+  margin:18px 0 27px;padding:9px;
+  background:#f8fbff;border:1px solid #dce9fa;border-radius:15px;
+  scroll-margin-top:85px;
+}
+#main-content .detail-article.magazine-blue .sm-page-nav a{
+  flex:0 0 auto;max-width:220px;padding:9px 12px;
+  color:#295385;font-size:12px;font-weight:800;line-height:1.5;
+  text-decoration:none!important;border-radius:9px;
+  background:#fff;border:1px solid #e5edf9;
+  white-space:nowrap;
+}
+#main-content .detail-article.magazine-blue .sm-page-nav a:focus-visible{
+  outline:2px solid var(--sm-blue);outline-offset:2px;
+}
+#main-content .detail-article.magazine-blue > section.magazine-section{
+  margin-top:32px!important;padding-top:0!important;
+  border-top:0!important;scroll-margin-top:90px;
+}
+#main-content .detail-article.magazine-blue > section.magazine-section > h2{
+  position:relative;margin:0 0 20px!important;
+  padding:0 0 17px!important;
+  font-size:clamp(21px,5.2vw,25px)!important;
+  line-height:1.47!important;letter-spacing:-.035em!important;
+  font-weight:900!important;color:#1a2637!important;
+  border:0!important;background:none!important;
+}
+#main-content .detail-article.magazine-blue > section.magazine-section > h2::before{
+  content:attr(data-sm-number)!important;
+  display:block!important;width:auto!important;height:auto!important;
+  margin:0 0 6px!important;
+  font-family:var(--font)!important;font-weight:900!important;
+  font-size:40px!important;line-height:1.13!important;
+  color:#b4cef4!important;letter-spacing:-.05em!important;
+  user-select:none;
+}
+#main-content .detail-article.magazine-blue > section.magazine-section > h2::after{
+  content:"";position:absolute;left:0;bottom:0;
+  width:43px;height:3px;border-radius:4px;background:var(--sm-blue);
+}
+#main-content .detail-article.magazine-blue > section.magazine-section > p{
+  line-height:1.91!important;font-size:16px!important;
+  color:#2f3e52!important;
+}
+#main-content .detail-article.magazine-blue .answer-card{
+  margin:18px 0 24px!important;padding:19px 19px 20px!important;
+  border:1px solid #dce9ff!important;border-left:4px solid var(--sm-blue)!important;
+  border-radius:15px!important;background:linear-gradient(135deg,#f0f6ff,#fff)!important;
+}
+#main-content .detail-article.magazine-blue .answer-card h2{
+  color:#184c98!important;font-size:19px!important;
+  line-height:1.5!important;font-weight:900!important;
+}
+#main-content .detail-article.magazine-blue .answer-card h2::before{content:none!important}
+#main-content .detail-article.magazine-blue > section:not(.hero) p a:not(.kakao-help),
+#main-content .detail-article.magazine-blue > section:not(.hero) li a:not(.kakao-help){
+  color:var(--sm-blue)!important;text-decoration:underline!important;
+  text-decoration-color:#a9c9ff!important;text-underline-offset:3px!important;
+}
+#main-content .detail-article.magazine-blue .related{
+  padding:20px 0 12px!important;margin:42px 0 14px!important;
+  background:#fff!important;border:0!important;
+  border-top:2px solid var(--sm-navy)!important;
+  border-radius:0!important;
+}
+#main-content .detail-article.magazine-blue .related > .related-title{
+  margin-bottom:11px!important;color:#142842!important;
+  font-size:19px!important;font-weight:900!important;
+}
+#main-content .detail-article.magazine-blue .related > a{
+  display:flex!important;justify-content:space-between!important;align-items:baseline;
+  gap:12px;padding:13px 0!important;
+  font-size:14px!important;color:#175cd3!important;
+  border:0!important;border-bottom:1px solid #e9eef6!important;
+  line-height:1.65!important;
+}
+#main-content .detail-article.magazine-blue .related > a::after{
+  content:"→"!important;float:none!important;flex:none;color:var(--sm-blue)!important;
+}
+#main-content .detail-article.magazine-blue table{
+  background:#fff;border-collapse:separate;border-spacing:0;
+  border:1px solid #dbe6f4;border-radius:12px;overflow:hidden;
+}
+#main-content .detail-article.magazine-blue table th{
+  background:#1b3d70!important;color:#fff!important;
+  font-weight:850!important;padding:12px 9px!important;
+  border-color:#31527e!important;
+}
+#main-content .detail-article.magazine-blue table td{
+  padding:12px 9px!important;border-color:#e3ebf7!important;
+  font-size:14px;line-height:1.6;
+}
+#main-content .detail-article.magazine-blue table tbody tr:nth-child(even){background:#f7faff}
+#main-content .detail-article.magazine-blue .sm-product-grid{
+  display:grid;grid-template-columns:1fr;gap:12px;margin:23px 0 27px;
+}
+#main-content .detail-article.magazine-blue .sm-product-card{
+  position:relative;padding:17px;border-radius:16px;
+  border:1px solid #dce8f7;background:linear-gradient(140deg,#fff,#f8fbff);
+}
+#main-content .detail-article.magazine-blue .sm-product-card-tag{
+  display:inline-block;background:#eaf2ff;color:#1b57b3;
+  padding:4px 9px;border-radius:20px;font-size:11px;font-weight:900;
+}
+#main-content .detail-article.magazine-blue .sm-product-card h3{
+  margin:9px 0 6px;color:#192e50;font-size:20px;font-weight:900;
+}
+#main-content .detail-article.magazine-blue .sm-product-price{
+  color:#175cd3;font-size:25px;font-weight:900;line-height:1.4;
+}
+#main-content .detail-article.magazine-blue .sm-product-card p{
+  margin:8px 0 12px!important;font-size:14px!important;line-height:1.7!important;
+  color:#54657d!important;
+}
+#main-content .detail-article.magazine-blue .sm-product-card a{
+  display:inline-flex;align-items:center;min-height:39px;
+  padding:9px 12px;border-radius:10px;
+  background:#eef5ff;border:1px solid #dce8fa;
+  font-size:13px;font-weight:850;color:#175cd3;text-decoration:none!important;
+}
+#main-content .detail-article.magazine-blue .sm-choice-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+  margin:20px 0 26px;
+}
+#main-content .detail-article.magazine-blue .sm-choice-grid a{
+  display:flex;flex-direction:column;gap:7px;
+  min-width:0;padding:15px 13px;
+  background:#f1f6ff;border:1px solid #d3e4ff;border-radius:14px;
+  color:#164b9e!important;text-decoration:none!important;
+}
+#main-content .detail-article.magazine-blue .sm-choice-grid a strong{
+  font-size:15px;font-weight:900;color:#173b72;
+}
+#main-content .detail-article.magazine-blue .sm-choice-grid a span{
+  font-size:12px;color:#546987;line-height:1.6;
+}
+#main-content .detail-article.magazine-blue .sm-tip{
+  margin:19px 0 22px;padding:17px 17px 16px;
+  border-radius:14px;border-left:3px solid #175cd3;
+  background:#f0f6ff;color:#284667;
+  font-size:14px;line-height:1.8;
+}
+#main-content .detail-article.magazine-blue .sm-tip strong{
+  display:block;color:#1750a0;margin-bottom:5px;font-weight:900;
+}
+#main-content .detail-article.magazine-blue .sm-final{
+  position:relative;overflow:hidden;
+  margin:31px 0 10px;padding:22px 20px;
+  color:#fff;background:#173960;border-radius:17px;
+}
+#main-content .detail-article.magazine-blue .sm-final h2{
+  margin:0 0 9px;font-size:18px;color:#aaceff;font-weight:900;
+}
+#main-content .detail-article.magazine-blue .sm-final p{
+  margin:0!important;color:#eef5ff!important;
+  font-size:14px!important;line-height:1.85!important;
+}
+#main-content .detail-article.magazine-blue .sm-final strong{color:#fff}
+#main-content .detail-article.magazine-blue .sm-final a{
+  display:inline-block;margin-top:15px;padding:10px 14px;
+  border-radius:9px;background:#fff;color:#164d9b!important;
+  font-weight:850;text-decoration:none!important;
+}
+#main-content .detail-article.magazine-blue a:focus-visible{
+  outline:2px solid #175cd3;outline-offset:3px;
+}
+@media(min-width:420px){
+ #main-content .detail-article.magazine-blue .sm-product-grid.is-three{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ #main-content .detail-article.magazine-blue .sm-product-grid.is-three .sm-product-card{padding:12px 10px}
+ #main-content .detail-article.magazine-blue .sm-product-grid.is-three .sm-product-card h3{font-size:15px}
+ #main-content .detail-article.magazine-blue .sm-product-grid.is-three .sm-product-price{font-size:18px}
+ #main-content .detail-article.magazine-blue .sm-product-grid.is-three .sm-product-card p{font-size:12px!important}
+ #main-content .detail-article.magazine-blue .sm-product-grid.is-three .sm-product-card a{font-size:11px}
+}
+@media(max-width:370px){
+ #main-content .detail-article.magazine-blue .sm-quick{grid-template-columns:1fr 1fr}
+ #main-content .detail-article.magazine-blue .sm-quick-item{padding:12px 7px}
+ #main-content .detail-article.magazine-blue .sm-choice-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+ #main-content .detail-article.magazine-blue .sm-page-nav{scroll-behavior:auto}
+}
+
+/* Override the prior six :not() exclusions at equal-or-greater specificity.
+   Otherwise its !important opening quotation takes precedence over blue numbers. */
+#main-content .detail-article.magazine-blue > section.magazine-section:not(.hero):not(.answer-card):not(.faq):not(.cta):not(.plan-cards):not(.activation-flow) > h2{
+  margin:0 0 20px!important;
+  padding:0 0 17px!important;
+  border:0!important;
+  color:#1a2637!important;
+  font-size:clamp(21px,5.2vw,25px)!important;
+  line-height:1.47!important;
+}
+#main-content .detail-article.magazine-blue > section.magazine-section:not(.hero):not(.answer-card):not(.faq):not(.cta):not(.plan-cards):not(.activation-flow) > h2::before{
+  content:attr(data-sm-number)!important;
+  display:block!important;
+  width:auto!important;height:auto!important;margin:0 0 6px!important;
+  font-family:var(--font)!important;font-weight:900!important;
+  font-size:40px!important;line-height:1.13!important;
+  color:#b4cef4!important;letter-spacing:-.05em!important;
+}
