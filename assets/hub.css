@@ -475,8 +475,33 @@ body{background:#f6f8fb}
 }
 
 /* Supplied portrait artwork: readable two-column ID cards within 480px mobile canvas. */
+/* Exactly two equal-width columns; remove generic article li spacing.
+   When there are three ID types, center the last card across the second row. */
 .detail-article .img-cards--id .img-cards-grid{
+  display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:8px;
+  row-gap:12px;
+  align-items:stretch;
+  padding:0!important;
+  margin:12px 0 0!important;
+}
+.detail-article .img-cards--id .img-cards-grid > li,
+.detail-article .img-cards--id .img-cards-grid > li + li{
+  margin:0!important;
+  padding:0;
+  min-width:0;
+}
+.detail-article .img-cards--id .img-cards-grid > li:last-child:nth-child(odd){
+  grid-column:1 / -1;
+  justify-self:center;
+  width:calc((100% - 8px) / 2);
+}
+.detail-article .img-cards--id .img-cards-grid > li > figure{
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  height:100%;
 }
 .detail-article .img-cards .ic-art.owner-poster-holder{
   display:flex;align-items:center;justify-content:center;

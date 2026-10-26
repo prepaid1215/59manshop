@@ -24,6 +24,20 @@ const {chromium}=require('./browser_runtime.cjs');
     backgrounds:[...document.querySelectorAll('.common-icon-sprite')].every(e=>getComputedStyle(e).backgroundImage.includes('common-icons-sprite.png')),
     broken:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).length,
     overflow:document.documentElement.scrollWidth>innerWidth+1,
+    idLayout:(function(){
+      const grid=document.querySelector('.img-cards--id .img-cards-grid');
+      const cards=[...grid.children];
+      const bounds=cards.map(e=>e.getBoundingClientRect());
+      const area=grid.getBoundingClientRect();
+      return {
+        count:cards.length,
+        margins:cards.map(e=>getComputedStyle(e).marginTop),
+        widths:bounds.map(e=>e.width),
+        firstRowAligned:Math.abs(bounds[0].top-bounds[1].top)<=1,
+        centeredLast:Math.abs((bounds[2].left+bounds[2].right)/2-(area.left+area.right)/2)<=1,
+        secondRowBelow:bounds[2].top>=bounds[0].bottom+8
+      };
+    })(),
     alignment:(function(){
       const cards=[...document.querySelectorAll('.auth-grid ul > li')];
       return {
@@ -40,6 +54,10 @@ const {chromium}=require('./browser_runtime.cjs');
      ||result.alignment.badgeTops.length!==5||spread(result.alignment.badgeTops)>1
      ||spread(result.alignment.labelTops)>1
      ||result.alignment.margins.some(m=>m!=='0px')
+     ||result.idLayout.count!==3||!result.idLayout.firstRowAligned
+     ||!result.idLayout.centeredLast||!result.idLayout.secondRowBelow
+     ||result.idLayout.margins.some(m=>m!=='0px')
+     ||spread(result.idLayout.widths)>1
      ||spread(result.alignment.badgeWidths)>1
   )errors.push(width+': '+JSON.stringify(result));
   results.push({width,...result});await page.close();
