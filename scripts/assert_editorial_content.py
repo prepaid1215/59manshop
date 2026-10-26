@@ -43,7 +43,7 @@ for token in ['기존 번호 그대로 번호이동은 불가','가입제한','L
  if token not in arrears: errors.append(f'arrears page missing {token}')
 for key in ['신청서 제출 → 요금 충전 → 사용','1899-7700']:
  if key not in arrears: errors.append(f'arrears page missing {key}')
-for t in ['플랫폼 개통 후', '태블릿개통', '담당자가 해피콜', '담당자 승인', '요금 충전']:
+for t in ['플랫폼 개통 후', '태블릿개통', '담당자 해피콜', '담당자 승인', '요금 충전']:
  if t not in page: errors.append(f'activation flow distinction missing {t}')
 if '플랫폼 개통 후' not in arrears: errors.append('arrears guide does not distinguish platform follow-up call')
 if '태블릿개통' not in sim: errors.append('SIM guide does not distinguish tablet happy call')
