@@ -1,0 +1,262 @@
+[
+  {
+    "slug": "guide--activation",
+    "path": "/guide/activation/",
+    "label": "guide / activation"
+  },
+  {
+    "slug": "guide--arrears-suspension",
+    "path": "/guide/arrears-suspension/",
+    "label": "guide / arrears-suspension"
+  },
+  {
+    "slug": "guide--device-number",
+    "path": "/guide/device-number/",
+    "label": "guide / device-number"
+  },
+  {
+    "slug": "guide--foreigner",
+    "path": "/guide/foreigner/",
+    "label": "guide / foreigner"
+  },
+  {
+    "slug": "guide--kt-baro-usim",
+    "path": "/guide/kt-baro-usim/",
+    "label": "guide / kt-baro-usim"
+  },
+  {
+    "slug": "guide--lg-onechip",
+    "path": "/guide/lg-onechip/",
+    "label": "guide / lg-onechip"
+  },
+  {
+    "slug": "guide--plans",
+    "path": "/guide/plans/",
+    "label": "guide / plans"
+  },
+  {
+    "slug": "guide--usim",
+    "path": "/guide/usim/",
+    "label": "guide / usim"
+  },
+  {
+    "slug": "kt-바로유심-가격",
+    "path": "/kt-바로유심-가격/",
+    "label": "kt-바로유심-가격"
+  },
+  {
+    "slug": "kt-바로유심",
+    "path": "/kt-바로유심/",
+    "label": "kt-바로유심"
+  },
+  {
+    "slug": "kt선불폰-개통",
+    "path": "/kt선불폰-개통/",
+    "label": "kt선불폰-개통"
+  },
+  {
+    "slug": "lg-원칩-개통",
+    "path": "/lg-원칩-개통/",
+    "label": "lg-원칩-개통"
+  },
+  {
+    "slug": "lg-원칩",
+    "path": "/lg-원칩/",
+    "label": "lg-원칩"
+  },
+  {
+    "slug": "v4-1--topic--esim-new",
+    "path": "/v4-1/topic/esim-new/",
+    "label": "v4-1 / topic / esim-new"
+  },
+  {
+    "slug": "v4-1--topic--kt-nfc-compare",
+    "path": "/v4-1/topic/kt-nfc-compare/",
+    "label": "v4-1 / topic / kt-nfc-compare"
+  },
+  {
+    "slug": "v4-1--topic--network-activation",
+    "path": "/v4-1/topic/network-activation/",
+    "label": "v4-1 / topic / network-activation"
+  },
+  {
+    "slug": "v4-1--topic--plan-396",
+    "path": "/v4-1/topic/plan-396/",
+    "label": "v4-1 / topic / plan-396"
+  },
+  {
+    "slug": "v4-1--topic--plan-compare",
+    "path": "/v4-1/topic/plan-compare/",
+    "label": "v4-1 / topic / plan-compare"
+  },
+  {
+    "slug": "v4-1--topic--sim-buy-where",
+    "path": "/v4-1/topic/sim-buy-where/",
+    "label": "v4-1 / topic / sim-buy-where"
+  },
+  {
+    "slug": "v4-1--topic--weekend-activation",
+    "path": "/v4-1/topic/weekend-activation/",
+    "label": "v4-1 / topic / weekend-activation"
+  },
+  {
+    "slug": "다이소-선불유심-가격",
+    "path": "/다이소-선불유심-가격/",
+    "label": "다이소-선불유심-가격"
+  },
+  {
+    "slug": "다이소-선불유심-셀프개통",
+    "path": "/다이소-선불유심-셀프개통/",
+    "label": "다이소-선불유심-셀프개통"
+  },
+  {
+    "slug": "다이소-유심",
+    "path": "/다이소-유심/",
+    "label": "다이소-유심"
+  },
+  {
+    "slug": "미납정지-선불폰",
+    "path": "/미납정지-선불폰/",
+    "label": "미납정지-선불폰"
+  },
+  {
+    "slug": "미납정지폰-중고판매",
+    "path": "/미납정지폰-중고판매/",
+    "label": "미납정지폰-중고판매"
+  },
+  {
+    "slug": "미납정지폰",
+    "path": "/미납정지폰/",
+    "label": "미납정지폰"
+  },
+  {
+    "slug": "선불폰-개통-대리점",
+    "path": "/선불폰-개통-대리점/",
+    "label": "선불폰-개통-대리점"
+  },
+  {
+    "slug": "선불폰-개통-방법-셀프",
+    "path": "/선불폰-개통-방법-셀프/",
+    "label": "선불폰-개통-방법-셀프"
+  },
+  {
+    "slug": "선불폰-개통",
+    "path": "/선불폰-개통/",
+    "label": "선불폰-개통"
+  },
+  {
+    "slug": "선불폰-개통방법",
+    "path": "/선불폰-개통방법/",
+    "label": "선불폰-개통방법"
+  },
+  {
+    "slug": "선불폰-셀프-개통-방법",
+    "path": "/선불폰-셀프-개통-방법/",
+    "label": "선불폰-셀프-개통-방법"
+  },
+  {
+    "slug": "선불폰-셀프개통",
+    "path": "/선불폰-셀프개통/",
+    "label": "선불폰-셀프개통"
+  },
+  {
+    "slug": "선불폰-충전-방법",
+    "path": "/선불폰-충전-방법/",
+    "label": "선불폰-충전-방법"
+  },
+  {
+    "slug": "세컨번호-개통",
+    "path": "/세컨번호-개통/",
+    "label": "세컨번호-개통"
+  },
+  {
+    "slug": "알뜰폰-셀프개통-번호이동",
+    "path": "/알뜰폰-셀프개통-번호이동/",
+    "label": "알뜰폰-셀프개통-번호이동"
+  },
+  {
+    "slug": "알뜰폰-셀프개통-안됨",
+    "path": "/알뜰폰-셀프개통-안됨/",
+    "label": "알뜰폰-셀프개통-안됨"
+  },
+  {
+    "slug": "앤텔레콤-선불폰-개통-방법",
+    "path": "/앤텔레콤-선불폰-개통-방법/",
+    "label": "앤텔레콤-선불폰-개통-방법"
+  },
+  {
+    "slug": "앤텔레콤-웹개통",
+    "path": "/앤텔레콤-웹개통/",
+    "label": "앤텔레콤-웹개통"
+  },
+  {
+    "slug": "외국인-휴대폰-개통",
+    "path": "/외국인-휴대폰-개통/",
+    "label": "외국인-휴대폰-개통"
+  },
+  {
+    "slug": "유심-인식-안됨",
+    "path": "/유심-인식-안됨/",
+    "label": "유심-인식-안됨"
+  },
+  {
+    "slug": "태블릿-소유자-회원번호",
+    "path": "/태블릿-소유자-회원번호/",
+    "label": "태블릿-소유자-회원번호"
+  },
+  {
+    "slug": "투폰-요금제-kt",
+    "path": "/투폰-요금제-kt/",
+    "label": "투폰-요금제-kt"
+  },
+  {
+    "slug": "투폰-요금제-lg",
+    "path": "/투폰-요금제-lg/",
+    "label": "투폰-요금제-lg"
+  },
+  {
+    "slug": "투폰-요금제-skt",
+    "path": "/투폰-요금제-skt/",
+    "label": "투폰-요금제-skt"
+  },
+  {
+    "slug": "투폰-요금제-추천",
+    "path": "/투폰-요금제-추천/",
+    "label": "투폰-요금제-추천"
+  },
+  {
+    "slug": "편의점-선불유심-방법",
+    "path": "/편의점-선불유심-방법/",
+    "label": "편의점-선불유심-방법"
+  },
+  {
+    "slug": "편의점-선불유심-셀프개통",
+    "path": "/편의점-선불유심-셀프개통/",
+    "label": "편의점-선불유심-셀프개통"
+  },
+  {
+    "slug": "편의점-선불유심-요금제",
+    "path": "/편의점-선불유심-요금제/",
+    "label": "편의점-선불유심-요금제"
+  },
+  {
+    "slug": "편의점-선불유심",
+    "path": "/편의점-선불유심/",
+    "label": "편의점-선불유심"
+  },
+  {
+    "slug": "편의점-선불폰-개통",
+    "path": "/편의점-선불폰-개통/",
+    "label": "편의점-선불폰-개통"
+  },
+  {
+    "slug": "편의점-유심-셀프개통",
+    "path": "/편의점-유심-셀프개통/",
+    "label": "편의점-유심-셀프개통"
+  },
+  {
+    "slug": "한국선불유심",
+    "path": "/한국선불유심/",
+    "label": "한국선불유심"
+  }
+]

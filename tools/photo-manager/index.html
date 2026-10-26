@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>본문 사진 준비 | 59만모바일</title><meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://www.59man.shop/tools/photo-manager/">
+<link rel="stylesheet" href="/assets/hub.css?v=20261026-font2">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#17263a;line-height:1.7}
+main{max-width:600px;margin:0 auto;padding:26px 18px 90px}
+h1{font-size:27px;line-height:1.4;margin:0 0 10px}h2{font-size:19px;margin:0 0 12px}
+p{margin:0 0 18px}a{color:#175cd3}
+.card{background:#fff;border:1px solid #dfe7f1;border-radius:16px;padding:20px;margin:18px 0}
+.field{margin-bottom:18px}label{display:block;font-size:14px;font-weight:750;margin:0 0 7px}
+select,input[type=file]{width:100%;min-height:45px;border:1px solid #bfccdc;border-radius:10px;background:#fff;padding:10px;font:inherit}
+.note{font-size:13px;color:#51647d}
+#photo-preview{display:none;width:100%;height:auto;max-height:450px;object-fit:contain;border-radius:12px;background:#eef3f9;margin:14px 0}
+button,.action{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:10px;border:0;text-decoration:none;font:inherit;font-weight:750;background:#175cd3;color:#fff;min-height:45px;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}.action.secondary{background:#f0f5ff;color:#164b9c;border:1px solid #cbdcf8}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.actions>*{flex:1}
+#status{font-size:14px;min-height:24px;color:#28518d}ol{padding-left:21px;margin:8px 0}li{margin:10px 0}
+code{background:#f0f4fb;border-radius:5px;padding:3px 5px;overflow-wrap:anywhere}
+</style></head><body><main>
+<p><a href="/guide/">← 59만모바일 가이드</a></p><h1>본문 사진 준비·등록</h1>
+<p>각 글에서 사진을 넣을 위치를 확인하고, 직접 촬영하거나 사용 권한이 있는 이미지를 준비할 수 있습니다. 이미지가 없는 위치는 일반 방문자에게 나타나지 않습니다.</p>
+<div class="card"><h2>1. 사진을 넣을 글 선택</h2>
+<div class="field"><label for="article">글 선택</label><select id="article"><option value="">글을 선택하세요</option></select></div>
+<div class="field"><label for="slot">사진 위치</label><select id="slot"><option value="01">사진 1 (본문 앞부분)</option><option value="02">사진 2 (본문 뒷부분, 지원되는 글)</option></select></div>
+<div class="field"><label for="photo">사진 파일 선택</label><input id="photo" type="file" accept="image/*"></div>
+<img id="photo-preview" alt="선택한 사진 미리보기"><p id="status" role="status"></p>
+<div class="actions"><button type="button" id="save" disabled>WebP 파일 저장</button><a id="open-article" class="action secondary" href="/guide/">사진 위치 미리보기</a></div></div>
+<div class="card"><h2>2. GitHub에 업로드</h2>
+<p>GitHub Pages는 업로드 서버가 없는 정적 사이트입니다. 여기서 파일을 선택하는 것만으로 사이트에 저장되지는 않으며, 아래 GitHub 업로드까지 완료해야 합니다.</p>
+<ol><li>위에서 <b>WebP 파일 저장</b>을 선택합니다.</li><li>GitHub 이미지 폴더에서 <b>Add file → Upload files</b>를 클릭하고 저장된 파일을 올립니다.</li><li><b>Commit changes</b>를 누르면 GitHub Pages 배포 후 해당 글에 사진이 자동 표시됩니다.</li></ol>
+<p class="note">파일명은 바꾸지 마세요. 신분증·연락처·생년월일·IMEI/EID·QR코드 등 개인정보나 인증정보가 포함된 사진은 올리지 마세요.</p>
+<div class="actions"><a class="action" href="https://github.com/prepaid1215/59manshop/tree/main/img/article-photos" target="_blank" rel="noopener">GitHub 이미지 폴더 열기</a></div></div>
+<p class="note">GitHub에서 저장소 수정 권한이 있는 계정으로 로그인해야 업로드할 수 있습니다. 별도 액세스 토큰을 입력할 필요는 없습니다.</p>
+</main><script src="/assets/photo-manager.js?v=20261026-photo1" defer></script></body></html>
