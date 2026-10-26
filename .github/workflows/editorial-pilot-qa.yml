@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - design/reader-first-pilot-20261026
+      - design/readable-paragraphs-20261026
 permissions:
   contents: read
 jobs:
