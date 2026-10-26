@@ -140,3 +140,12 @@ This repository powers https://www.59man.shop/ .
 
 - Across 플랫폼 and 태블릿 activation, prerequisites, identity verification, SIM input, plan and number selection are the SAME. Only post-submission happy call, staff approval and recharge order differ; app route additionally requires tablet-owner member number **2893496**. Do not suggest other differences.
 - Member-number guide `/태블릿-소유자-회원번호/` must display exactly **2893496** (7 digits) and the tablet order **담당자 해피콜 → 담당자 승인 → 요금 충전**. Do not place 1899-7700 as the tablet callback number.
+
+## 2026-10-26 reference-blog writing style (59만모바일 adaptation)
+- Apply the user's five supplied reference HTML posts as FORM and FLOW inspirations, not copied content or cross-brand references. Scope the active pilot to `/선불폰-개통방법/`, `/미납정지-선불폰/`, `/편의점-선불유심/` and `/태블릿-소유자-회원번호/`.
+- Writing sequence: answer-first box → short situation-based intro → clickable numbered table of contents → h2 sections with human-readable explanations, comparisons or step rows → exceptions/FAQ → internal links and existing preplan.site/Kakao conversion destinations.
+- Wording: state the user's practical action first, then give a concrete reason and key exception. Avoid “이번 글에서는”, invented testimonials, jargon, repetitive reassurance, and answer-hiding expanses of text. Keep headings descriptive and topic-specific rather than forcing the same skeleton on every article.
+- Styling: maintain mobile-only 480px shell at all screen widths, brand blue #175CD3 or compatible shades, body 16px, line-height ~1.8, whitespace and prominent real-action elements. Scope editorial CSS in /assets/editorial-v2.css; retain existing true photographs/screenshots and SEO metadata. No pink/purple from reference blogs.
+- Shared tablet member number and visible masked verification name: **2893496 / 주*돈**. Reference blog's 2879248 / 부*빈 belongs to a DIFFERENT dealer and must never appear in 59만모바일.
+- Platform activation: submit → recharge → use; head-office happy call 1899-7700 AFTER activation. Tablet app activation: staff happy call → approval → recharge → use. Only app uses the tablet member number.
+- Preserve title, canonical, robots, sitemap, relevant internal links, metadata and existing conversion targets. A visible FAQ should match any FAQPage JSON-LD if structured data is added; don't add FAQPage JSON-LD merely because an FAQ section appears.
