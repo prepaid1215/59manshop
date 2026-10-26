@@ -1,0 +1,40 @@
+name: Reader-first editorial pilot
+on:
+  push:
+    branches:
+      - design/reader-first-pilot-20261026
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check sitemap, canonical and links
+        run: python scripts/check_site.py
+      - name: Validate preserved metadata and article references
+        run: python scripts/assert_editorial_content.py
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify mobile article and screenshots
+        run: |
+          python scripts/serve_preview.py >/tmp/reader-pilot-server.log 2>&1 &
+          sleep 2
+          node scripts/assert_editorial_pilot.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reader-first-preview
+          path: reports/ui/editorial-pilot/
+          if-no-files-found: warn

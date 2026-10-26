@@ -14,7 +14,7 @@ DATA = json.loads((ROOT / 'data/guides.json').read_text(encoding='utf-8'))
 CATS = {c['key']: c for c in DATA['categories']}
 GUIDES = DATA['guides']
 ICONS = {'all':'all','check':'check','sim':'sim','self':'self','esim':'esim','move':'move','plan':'plan','fix':'fix'}
-VERSION = '20261026-read1'
+VERSION = '20261026-font2'
 CHEV = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>'
 
 
@@ -112,7 +112,7 @@ def transform(page, url):
         page = re.sub(r'(<a class="home-featured-card" href="([^"]+)">)(.*?)</a>',illustrated_feature,page,flags=re.S)
         if 'class="hero-checklist"' not in page:
             checklist = '<div class="hero-checklist"><div class="checklist-top">'+icon('check')+'<span>개통 전, 이것부터</span><span class="checklist-label">START HERE</span></div>'
-            for n,cat,title,desc in [('01','check','신청 조건 확인','본인 명의 인증과 개통 가능 시간'),('02','sim','유심 · 요금제 선택','사용할 통신망에 맞게 준비'),('03','self','셀프개통 시작','신청부터 승인 · 첫 충전까지')]:
+            for n,cat,title,desc in [('01','check','신청 조건 확인','본인 명의 인증과 개통 가능 시간'),('02','sim','유심 · 요금제 선택','사용할 통신망에 맞게 준비'),('03','self','셀프개통 시작','신청서 제출 · 요금 충전까지')]:
                 checklist += '<a href="/guide/#%s"><span class="checklist-num">%s</span><span><b>%s</b><small>%s</small></span>%s</a>' % (cat,n,title,desc,CHEV)
             checklist += '<div class="checklist-bottom">준비부터 이용까지, 필요한 안내를 한곳에서</div></div>'
             page = page.replace('</div></div></section><main', '</div>'+checklist+'</div></section><main',1)
@@ -163,6 +163,51 @@ def transform(page, url):
             page = re.sub(r'(<section class="hero[^"]*"[^>]*>.*?</section>)',
                           lambda match: match.group(1) + cover, page,
                           count=1, flags=re.S)
+
+    # Experimental reader-first layout for two high-intent guides.
+    # Preserve all copy, heading text, canonical and conversion destinations.
+    if url in ('/선불폰-개통방법/', '/미납정지-선불폰/') and 'detail-workspace' in page:
+        page = page.replace('<article class="article detail-article">', '<article class="article detail-article editorial-v2">', 1)
+        cover_match = re.search(r'<figure class="detail-lead-visual".*?</figure>', page, re.S)
+        answer_match = re.search(r'<section class="answer-card">.*?</section>', page, re.S)
+        if cover_match and answer_match and cover_match.start() < answer_match.start():
+            cover = cover_match.group(0)
+            page = page.replace(cover, '', 1)
+            answer = re.search(r'<section class="answer-card">.*?</section>', page, re.S).group(0)
+            rewritten = re.sub(r'(<h2[^>]*>.*?</h2>)', lambda m: m.group(1) + cover, answer, count=1, flags=re.S)
+            page = page.replace(answer, rewritten, 1)
+        chips_match = re.search(r'<nav class="jump-chips".*?</nav>', page, re.S)
+        answer_match = re.search(r'<section class="answer-card">.*?</section>', page, re.S)
+        if chips_match and answer_match and chips_match.start() < answer_match.start():
+            chips = chips_match.group(0)
+            page = page.replace(chips, '', 1)
+            page = page.replace(answer_match.group(0), answer_match.group(0) + chips, 1)
+        if '/assets/editorial-v2.css' not in page:
+            page = page.replace('</head>', '<link rel="stylesheet" href="/assets/editorial-v2.css?v=20261026b"></head>', 1)
+
+
+    # Answer-first editorial pilot: preserve the full original list in native details.
+    if url in ('/선불폰-개통방법/', '/미납정지-선불폰/') and 'detail-workspace' in page:
+        answer_match = re.search(r'<section class="answer-card">.*?</section>', page, re.S)
+        if answer_match and 'answer-lead' not in answer_match.group(0):
+            lead = ('선불폰은 본인확인 수단·신분증·호환 유심을 준비해 신청합니다. 신청서 제출 후 요금을 충전하면 사용할 수 있으며, 플랫폼 개통 후에는 본사 해피콜(1899-7700)을 꼭 받아야 합니다. 태블릿개통은 공통 준비·인증·유심·요금제 선택을 마친 뒤 태블릿 소유자 회원번호 2893496으로 신청하고 담당자 해피콜 → 승인 → 요금 충전 순서로 진행합니다.'
+                    if url == '/선불폰-개통방법/' else
+                    '미납·정지된 기존 번호는 번호이동할 수 없습니다. <strong>본인 명의 선불 신규가입은 신청할 수 있지만</strong> 실제 개통 여부는 인증과 가입 조건에 따라 달라집니다.')
+            answer = answer_match.group(0)
+            listed = re.search(r'<ul class="check-list">.*?</ul>', answer, re.S)
+            small_note = re.search(r'<p class="small-note">.*?</p>', answer, re.S)
+            if listed:
+                disclosure = ('<details class="answer-more"><summary>조건과 진행 순서 자세히 보기 <span aria-hidden="true">+</span></summary>'
+                              '<div class="answer-more-content">' + listed.group(0) +
+                              (small_note.group(0) if small_note else '') + '</div></details>')
+                revised = answer.replace(listed.group(0), '', 1)
+                if small_note:
+                    revised = revised.replace(small_note.group(0), '', 1)
+                revised = revised.replace('</h2>', '</h2><p class="answer-lead">' + lead + '</p>', 1)
+                revised = revised.replace('</section>', disclosure + '</section>', 1)
+                page = page.replace(answer, revised, 1)
+        page = page.replace('editorial-v2.css?v=20261026b', 'editorial-v2.css?v=20261026c')
+
     # Keep every existing footer sentence, phone number and destination.
     if 'footer-grid' not in page:
         page = page.replace('<footer class="footer"><div class="site">','<footer class="footer"><div class="site footer-grid"><div class="footer-brand"><a href="/">'+icon('sim')+'<b>59만모바일</b></a><span>앤텔레콤 정보 가이드</span></div><div class="footer-info">',1)

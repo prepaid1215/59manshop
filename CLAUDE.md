@@ -113,3 +113,39 @@ This repository powers https://www.59man.shop/ .
 - 59만모바일 상세페이지는 실제 읽기 쉬운 한국어 모바일 본문이 우선. 본문 기본 16px/line-height 약 1.82, 제목 21~22px, 단락 간 충분한 여백, 대비 좋은 텍스트·링크, 표의 가로 스크롤을 지원한다.
 - PC도 동일한 480px 모바일 단일 컬럼. 인덱싱 URL, canonical, robots, sitemap, 기존 글·개통 CTA 변경 금지.
 - 독자가 답을 빠르게 이해할 수 있는 핵심 요약 및 소제목의 위계를 유지하고, 과도한 배지/테두리/AI 일러스트 추가를 피한다.
+
+
+## Reader-first editorial pilot 2026-10-26
+- Experiment only on `/선불폰-개통방법/` and `/미납정지-선불폰/`: answer appears before the decorative image or navigation chips, image becomes a small supporting icon in summary.
+- Scoped `/assets/editorial-v2.css`. No other page changes, no mobile-width expansion. Compare source copy, link destinations, canonical, robots, sitemap and headings before approving. Main must not be deployed automatically.
+- Re-running `scripts/build_hub.py` must retain the pilot without duplicate assets.
+
+
+## Editorial content pass (2026-10-26)
+- Use the two supplied reference HTML articles (preparation, SIM buying) only for editorial patterns: answer first, 3-item preparations, K/L product comparison and context-rich exceptions. Never copy their proprietary text/assets/CSS or their pink/purple brand palette.
+- The three revised article files are `/선불폰-개통방법/`, `/미납정지-선불폰/`, `/편의점-선불유심/`. Keep title, H1, URLs, FAQ JSON-LD consistency, canonical, robots, sitemap, photographs, and conversion links. Preserve operator facts and avoid absolute activation promises.
+
+
+## Operator clarification 2026-10-26: self activation vs tablet membership
+- Online non-face-to-face self-activation (e.g. preplan.site): prepare identity verification method, ID document and compatible SIM; submit application; recharge fee; usable immediately thereafter. **Do not insert a staff-approval stage** into online self-activation flow.
+- Staff approval is required for **tablet activation submitted through 앤텔레콤 멤버십 앱**, a distinct path.
+- The head-office follow-up verification call **1899-7700 (해피콜)** occurs ONLY for online PLATFORM activation, after recharge/use begins. Never attribute this number to tablet activation.
+- Tablet activation via 앤텔레콤 멤버십 앱 uses **staff's own happy call -> staff approval -> fee recharge**. Approval is AFTER that staff call, before recharge. This is a distinct happy-call process, not the platform's 1899-7700 call.
+- Correct old `승인 -> 충전` copy, including `meta description`, alongside visible content; retain existing canonical/robots/URLs.
+
+## Corrected flow boundary confirmed by operator 2026-10-26
+- 플랫폼 개통: 본인확인 → 신청서 제출 → 요금 충전 → 사용 → 앤텔레콤 본사 1899-7700 해피콜 수신.
+- 태블릿개통(앤텔레콤 멤버십 앱): 담당자 해피콜 → 담당자 승인 → 요금 충전 → 사용. 1899-7700 본사 플랫폼 해피콜과 구분.
+- All user-facing text and SEO summaries must distinguish these routes.
+
+- Across 플랫폼 and 태블릿 activation, prerequisites, identity verification, SIM input, plan and number selection are the SAME. Only post-submission happy call, staff approval and recharge order differ; app route additionally requires tablet-owner member number **2893496**. Do not suggest other differences.
+- Member-number guide `/태블릿-소유자-회원번호/` must display exactly **2893496** (7 digits) and the tablet order **담당자 해피콜 → 담당자 승인 → 요금 충전**. Do not place 1899-7700 as the tablet callback number.
+
+## 2026-10-26 reference-blog writing style (59만모바일 adaptation)
+- Apply the user's five supplied reference HTML posts as FORM and FLOW inspirations, not copied content or cross-brand references. Scope the active pilot to `/선불폰-개통방법/`, `/미납정지-선불폰/`, `/편의점-선불유심/` and `/태블릿-소유자-회원번호/`.
+- Writing sequence: answer-first box → short situation-based intro → clickable numbered table of contents → h2 sections with human-readable explanations, comparisons or step rows → exceptions/FAQ → internal links and existing preplan.site/Kakao conversion destinations.
+- Wording: state the user's practical action first, then give a concrete reason and key exception. Avoid “이번 글에서는”, invented testimonials, jargon, repetitive reassurance, and answer-hiding expanses of text. Keep headings descriptive and topic-specific rather than forcing the same skeleton on every article.
+- Styling: maintain mobile-only 480px shell at all screen widths, brand blue #175CD3 or compatible shades, body 16px, line-height ~1.8, whitespace and prominent real-action elements. Scope editorial CSS in /assets/editorial-v2.css; retain existing true photographs/screenshots and SEO metadata. No pink/purple from reference blogs.
+- Shared tablet member number and visible masked verification name: **2893496 / 주*돈**. Reference blog's 2879248 / 부*빈 belongs to a DIFFERENT dealer and must never appear in 59만모바일.
+- Platform activation: submit → recharge → use; head-office happy call 1899-7700 AFTER activation. Tablet app activation: staff happy call → approval → recharge → use. Only app uses the tablet member number.
+- Preserve title, canonical, robots, sitemap, relevant internal links, metadata and existing conversion targets. A visible FAQ should match any FAQPage JSON-LD if structured data is added; don't add FAQPage JSON-LD merely because an FAQ section appears.
