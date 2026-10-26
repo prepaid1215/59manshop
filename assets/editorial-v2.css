@@ -236,3 +236,68 @@
  .editorial-v2 .reader-table-scroll table{min-width:345px}
  .editorial-v2 .reader-check-row p{font-size:13.5px!important}
 }
+
+/* Reference-blog-inspired editorial layout for selected 59man.shop guides.
+   Intentionally scoped; existing content, canonical URLs and structured data remain intact. */
+.editorial-v2.reference-style{
+  --reader-accent:#2563eb;--reader-pale:#eff6ff;--reader-line:#dbeafe;
+  color:#232b36;max-width:860px!important;margin-left:auto!important;margin-right:auto!important;
+}
+.editorial-v2.reference-style .hero h1{font-size:clamp(27px,6vw,35px)!important;line-height:1.42!important}
+.editorial-v2.reference-style .hero p{font-size:16px!important;line-height:1.8!important;color:#4d5c70!important}
+.editorial-v2.reference-style>.answer-card{
+  padding:20px 19px!important;margin:14px 0 25px!important;
+  border:1px solid var(--reader-line)!important;border-left:5px solid var(--reader-accent)!important;
+  background:#f8fbff!important;border-radius:15px!important;
+}
+.editorial-v2.reference-style>.answer-card h2{font-size:19px!important;color:#16438d!important}
+.editorial-v2.reference-style .reader-scenario{
+  font-size:16px!important;line-height:1.9!important;
+  margin:23px 0 20px!important;color:#364456!important;word-break:keep-all;
+}
+.editorial-v2.reference-style .reader-scenario strong{color:#124ba3}
+.editorial-v2.reference-style .reader-toc{
+  margin:24px 0 40px;border-top:2px solid var(--reader-accent);
+  border-bottom:1px solid #e7ecf4;background:#fff;
+}
+.editorial-v2.reference-style .reader-toc-head{padding:16px 5px 13px;border-bottom:1px solid #e9eef5}
+.editorial-v2.reference-style .reader-toc-head strong{display:block;color:#1d5bc7;font-size:18px;letter-spacing:.015em}
+.editorial-v2.reference-style .reader-toc-head small{display:block;color:#718096;font-size:12px;margin-top:2px}
+.editorial-v2.reference-style .reader-toc a{
+  display:flex;align-items:center;gap:12px;padding:14px 7px;
+  border-bottom:1px solid #edf0f6;text-decoration:none!important;color:#24344a!important;
+  font-size:14px;line-height:1.5;min-height:53px;
+}
+.editorial-v2.reference-style .reader-toc a:last-child{border-bottom:0}
+.editorial-v2.reference-style .reader-toc a>span:first-child{color:#2563eb;font-size:12px;min-width:25px;font-weight:850}
+.editorial-v2.reference-style .reader-toc a>b{flex:1;font-weight:750}
+.editorial-v2.reference-style .reader-toc a>span:last-child{font-size:22px;color:#94a3b8}
+.editorial-v2.reference-style .reader-toc a:hover{background:#f6f9ff}
+.editorial-v2.reference-style>section:not(.hero):not(.answer-card){scroll-margin-top:80px;margin-top:38px!important;padding-top:20px!important}
+.editorial-v2.reference-style>section:not(.hero):not(.answer-card)>h2{
+  padding:0 0 13px!important;margin:0 0 21px!important;
+  border-bottom:1px solid #dbe2eb;font-size:clamp(21px,4.7vw,25px)!important;
+  line-height:1.49!important;color:#17263c!important;
+}
+.editorial-v2.reference-style .decision-card>div:not(.section-kicker),
+.editorial-v2.reference-style .reader-check-row{
+  padding:16px 17px!important;margin:10px 0!important;
+  border:1px solid #e3eaf5!important;border-radius:12px!important;
+  background:#fff!important;
+}
+.editorial-v2.reference-style .decision-card>div:not(.section-kicker)>b,
+.editorial-v2.reference-style .reader-check-row>b{font-size:14px!important;color:#1c55ae!important}
+.editorial-v2.reference-style .reader-note{
+  background:var(--reader-pale)!important;border:0!important;border-radius:12px!important;
+  padding:17px 18px!important;color:#233f68!important;
+}
+.editorial-v2.reference-style .faq-item{padding:16px 0!important;border-bottom:1px solid #e6ebf2!important}
+.editorial-v2.reference-style .faq-item h3{color:#1c4d95!important}
+.editorial-v2.reference-style .member-box{border:1px solid #dbeafe;border-radius:15px;background:#f6f9ff;padding:20px!important}
+.editorial-v2.reference-style .member-name{display:block;margin:8px 0;font-weight:750;color:#194c92}
+@media(max-width:640px){
+ .editorial-v2.reference-style .reader-toc{margin-bottom:31px}
+ .editorial-v2.reference-style .reader-toc a{padding:13px 5px}
+ .editorial-v2.reference-style>.answer-card{padding:17px 15px!important}
+}
+@media(prefers-reduced-motion:reduce){.editorial-v2.reference-style .reader-toc a{transition:none}}
