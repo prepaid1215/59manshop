@@ -1,0 +1,37 @@
+name: Article readability SEO and mobile QA
+on:
+  push:
+    branches:
+      - design/article-reading-css-20261026
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify existing URLs, SEO and link integrity
+        run: python scripts/check_site.py
+      - name: Install Chromium and Playwright
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test 480px mobile shell and Korean article typography
+        run: |
+          python scripts/serve_preview.py > /tmp/read-preview.log 2>&1 &
+          sleep 2
+          node scripts/assert_mobile_only.cjs
+          node scripts/assert_article_readability.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: article-readability-screenshots
+          path: reports/ui/article-readability/
+          if-no-files-found: warn
