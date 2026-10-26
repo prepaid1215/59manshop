@@ -438,3 +438,38 @@ body{background:#f6f8fb}
 .detail-article .img-cards--sim .ic-art .common-icon-sprite--sim{
   width:90px;height:90px;max-width:100%;margin:0 auto
 }
+
+/* Fix: generic article li+li margin was shifting auth icons 2–5 down 8px.
+   Keep all five pictograms and labels on consistent rows at every width. */
+.detail-article .auth-grid ul{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  align-items:start;
+  margin:14px 0 18px!important;
+  padding:0!important;
+}
+.detail-article .auth-grid ul>li,
+.detail-article .auth-grid ul>li+li{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+  margin:0!important;
+  padding:0!important;
+  min-width:0;
+  text-align:center;
+}
+.detail-article .auth-grid .auth-badge{
+  width:36px;height:36px;min-width:36px;min-height:36px;
+  flex:0 0 36px;
+}
+.detail-article .auth-grid ul>li>b{
+  display:block;
+  margin:0!important;
+  min-height:16px;
+  font-size:11px!important;
+  font-weight:750;
+  line-height:16px!important;
+  white-space:nowrap;
+}
