@@ -133,7 +133,7 @@ window.enhanceHubContent(document);
     if(!holder||!poster)return;
     var pic=new Image();
     pic.alt=name+' 예시 안내 이미지';
-    pic.loading='lazy';
+    pic.loading='eager'; /* Preload before inserting the detached image into the card. */
     pic.decoding='async';
     pic.width=poster.w;pic.height=poster.h;
     pic.className='owner-poster';
