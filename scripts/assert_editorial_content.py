@@ -29,7 +29,7 @@ for p in TARGETS:
  if 'https://preplan.site/' not in after or 'https://pf.kakao.com/_akxmKn/chat' not in after:
   errors.append(f'{p}: expected activation or contact link lost')
  if re.search(r'http://pf.kakao.com/_iNaeb|http://pf.kakao.com/_muGxnn',after):
-  errors.append(f'{p}: reference site's contact URL accidentally copied')
+  errors.append(f"{p}: reference contact URL accidentally copied")
 page=(ROOT/TARGETS[0]).read_text('utf-8')
 for token in ['카카오·토스·PASS','유심번호 19자리','모델코드 5자리','08:00~21:50','첫 충전','/편의점-선불유심/']:
  if token not in page: errors.append(f'activation page missing {token}')
