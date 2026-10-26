@@ -49,10 +49,18 @@ if '플랫폼 개통 후' not in arrears: errors.append('arrears guide does not 
 if '태블릿개통' not in sim: errors.append('SIM guide does not distinguish tablet happy call')
 
 member=(ROOT/'태블릿-소유자-회원번호/index.html').read_text('utf-8')
-for token in ['태블릿 소유자 회원번호 2893496','data-copy="2893496"','담당자 해피콜 → 승인 → 요금 충전','승인 이후']:
+for token in ['태블릿 소유자 회원번호 2893496','data-copy="2893496"','조회 회원명: 주*돈','담당자 해피콜 → 승인 → 요금 충전','승인 이후']:
  if token not in member: errors.append(f'member guide missing {token}')
 for token in ['준비물, 본인인증, 유심정보와 요금제 선택','2893496','담당자 해피콜 → 담당자 승인 → 요금 충전']:
  if token not in page: errors.append(f'activation guide missing shared steps / tablet number: {token}')
 
 print(json.dumps({'checked':len(TARGETS)+1,'errors':errors},ensure_ascii=False,indent=2))
 sys.exit(1 if errors else 0)
+
+# Keep all reference-blog dealer identifiers out of 59만모바일.
+for p in TARGETS + ['태블릿-소유자-회원번호/index.html']:
+ content=(ROOT/p).read_text('utf-8')
+ for old in ['2879248','부*빈','라이프선불폰.com']:
+  if old in content: errors.append(f'{p}: external reference identity leaked: {old}')
+ if 'reference-style' not in content or 'class="reader-toc"' not in content:
+  errors.append(f'{p}: missing reference-style layout')
