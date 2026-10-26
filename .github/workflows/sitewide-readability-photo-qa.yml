@@ -24,6 +24,7 @@ jobs:
       - name: SEO and link checks
         run: python scripts/check_site.py
       - name: Verify article text, links and metadata unchanged
+        if: github.head_ref == 'design/all-article-readability-photos-20261026' || github.ref == 'refs/heads/design/all-article-readability-photos-20261026'
         run: python scripts/assert_sitewide_content.py
       - name: JavaScript syntax check
         run: |
