@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - fix/restore-mobile-only-20261025
+      - fix/guide-button-css-20261026
       - main
 permissions:
   contents: read

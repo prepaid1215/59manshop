@@ -258,3 +258,57 @@
 
 /* Reset legacy six-track child spans when using actual three-column categories. */
 .visual-guide .gh-categories>.gh-category{grid-column:auto!important}
+
+
+/* 2026-10-26: Fix default browser buttons in desktop-centered mobile shell.
+   Mobile-only visual controls must be styled at ALL browser viewport widths,
+   not only under the max-width:768px media query. */
+.visual-guide .gh-breadcrumb{
+ display:flex!important;align-items:center!important;flex-wrap:wrap;
+ gap:6px!important;min-height:40px;
+ margin:0 0 13px!important;padding:0;
+ color:#718099!important;font-size:11px!important;line-height:1.5;
+}
+.visual-guide .gh-breadcrumb > #gh-back{
+ -webkit-appearance:none;appearance:none;
+ display:inline-flex!important;align-items:center;justify-content:center;
+ flex:0 0 auto;gap:5px!important;
+ min-height:36px;padding:7px 10px!important;
+ border:1px solid #cddff8!important;border-radius:10px!important;
+ background:#f0f6ff!important;color:#175cd3!important;
+ box-shadow:none!important;
+ font:inherit;font-size:11px!important;font-weight:750!important;line-height:1.2!important;
+ letter-spacing:-.02em;white-space:nowrap;
+ margin:0 auto 0 0!important;cursor:pointer;
+}
+.visual-guide .gh-breadcrumb > #gh-back svg{
+ display:block!important;flex:0 0 14px;
+ width:14px!important;height:14px!important;
+ stroke:currentColor!important;
+}
+.visual-guide .gh-breadcrumb > #gh-back:hover{background:#e5f0ff!important;border-color:#a7c6f1!important}
+.visual-guide .gh-breadcrumb > #gh-back:focus-visible{outline:2px solid #175cd3!important;outline-offset:2px!important}
+.visual-guide .gh-breadcrumb > #gh-back:active{background:#d5e6ff!important}
+.visual-guide .gh-breadcrumb > span{font-size:11px!important;line-height:1.5;color:#78869b}
+.visual-guide .gh-breadcrumb > span[aria-hidden="true"]{color:#9aa8bb}
+.visual-guide .gh-breadcrumb > b{font-size:11px!important;font-weight:800;color:#175cd3;line-height:1.5}
+.visual-guide .gh-subfilters{display:flex;flex-wrap:wrap;gap:7px}
+.visual-guide .gh-subfilters:empty{display:none!important}
+.visual-guide .gh-subfilters > button{
+ -webkit-appearance:none;appearance:none;
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:35px;padding:7px 11px!important;
+ border:1px solid #dbe4f1!important;border-radius:999px!important;
+ background:#fff!important;color:#596b83!important;
+ box-shadow:none!important;
+ font:inherit;font-size:11px!important;font-weight:700!important;line-height:1.35!important;
+ cursor:pointer;white-space:nowrap;
+}
+.visual-guide .gh-subfilters > button.is-active{background:#175cd3!important;border-color:#175cd3!important;color:#fff!important}
+.visual-guide .gh-subfilters > button:not(.is-active):hover{background:#edf5ff!important;border-color:#b9d4f6!important}
+.visual-guide .gh-subfilters > button:focus-visible{outline:2px solid #175cd3!important;outline-offset:2px!important}
+@media(max-width:360px){
+ .visual-guide .gh-breadcrumb{gap:4px!important}
+ .visual-guide .gh-breadcrumb > #gh-back{padding:7px 8px!important;font-size:10px!important}
+ .visual-guide .gh-breadcrumb > span,.visual-guide .gh-breadcrumb > b{font-size:10px!important}
+}

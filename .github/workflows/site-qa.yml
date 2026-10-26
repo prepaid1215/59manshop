@@ -7,6 +7,7 @@ on:
       - design/brand-blue-svg-20261025
       - design/information-hub-20261025
       - fix/restore-mobile-only-20261025
+      - fix/guide-button-css-20261026
   pull_request:
     branches: [main]
 permissions:

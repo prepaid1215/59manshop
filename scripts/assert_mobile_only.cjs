@@ -26,10 +26,13 @@ const {chromium}=require('./browser_runtime.cjs');
      sidebar:type==='detail'?style('.context-list')?.display:null,
      featuredColumns:type==='home'?countColumns('.home-featured-list'):null,
      overflow:document.documentElement.scrollWidth>innerWidth+1,
+     backButton:type==='guide'?(()=>{
+       const x=style('#gh-back');return {background:x?.backgroundColor,border:x?.borderTopWidth,radius:x?.borderTopLeftRadius,padding:x?.paddingTop,appearance:x?.appearance}
+     })():null,
      broken:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.getAttribute('src')).slice(0,6)
     };
    },type);
-   const ok=result.shell<=480&&result.content<=480&&result.desktopNav==='none'&&result.mobileMenu!=='none'&&result.bottomBar!=='none'&&!result.overflow&&result.broken.length===0&&(!result.guideColumns||result.guideColumns===1)&&(!result.categoryColumns||result.categoryColumns===3)&&(!result.featuredColumns||result.featuredColumns===1)&&(!result.sidebar||result.sidebar==='none')&&(!result.detailColumns||result.detailColumns===1);
+   const ok=result.shell<=480&&result.content<=480&&result.desktopNav==='none'&&result.mobileMenu!=='none'&&result.bottomBar!=='none'&&!result.overflow&&result.broken.length===0&&(!result.guideColumns||result.guideColumns===1)&&(!result.categoryColumns||result.categoryColumns===3)&&(!result.featuredColumns||result.featuredColumns===1)&&(!result.sidebar||result.sidebar==='none')&&(!result.detailColumns||result.detailColumns===1)&&(!result.backButton||result.backButton.background==='rgb(240, 246, 255)'&&result.backButton.border!=='0px'&&result.backButton.radius==='10px');
    const record={type,width,ok,...result,errors};results.push(record);
    if(!ok||errors.length)failures.push(record);
    if(width===390||width===1440){

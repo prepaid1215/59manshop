@@ -104,3 +104,7 @@ This repository powers https://www.59man.shop/ .
 - No duplicated preparation card: three existing guide links are preserved as a concise pre-step navigation within the 5-step process. Existing 3 FAQ items remain.
 - Extras (category nav, tablet owner membership reference, benefits) remain accessible inside native details, not deleted. Reference helpful guides use compact text links instead of giant cards.
 - Always compare href preservation and canonical/meta/JSON-LD against main before deploying.
+
+## Guide navigation control regression (2026-10-26)
+- A desktop browser still uses the centered 480px mobile shell. Control styling cannot rely on @media(max-width:768px) alone. Apply mobile breadcrumb back button and filter chip styling at all viewport widths.
+- Verify computed CSS of #gh-back at both 390px and 1440px; neither can show native browser-button appearance.
