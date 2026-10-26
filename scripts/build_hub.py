@@ -183,7 +183,7 @@ def transform(page, url):
             page = page.replace(chips, '', 1)
             page = page.replace(answer_match.group(0), answer_match.group(0) + chips, 1)
         if '/assets/editorial-v2.css' not in page:
-            page = page.replace('</head>', '<link rel="stylesheet" href="/assets/editorial-v2.css?v=20261026a"></head>', 1)
+            page = page.replace('</head>', '<link rel="stylesheet" href="/assets/editorial-v2.css?v=20261026b"></head>', 1)
 
     # Keep every existing footer sentence, phone number and destination.
     if 'footer-grid' not in page:

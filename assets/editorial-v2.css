@@ -120,3 +120,23 @@
   .editorial-v2 .answer-card .detail-lead-visual{width:70px!important;height:70px!important}
   .editorial-v2 .answer-card .detail-lead-visual img{width:70px!important;height:70px!important}
 }
+
+/* Pilot screenshot correction: no narrow text wrap around generated illustrations. */
+.editorial-v2 .crumb-bar{display:none!important}
+.editorial-v2 .answer-card{position:relative!important}
+.editorial-v2 .answer-card h2{padding-right:70px!important;min-height:64px!important}
+.editorial-v2 .answer-card .detail-lead-visual{
+  position:absolute!important;float:none!important;display:block!important;
+  top:14px!important;right:13px!important;
+  width:61px!important;height:61px!important;
+  min-height:0!important;margin:0!important;padding:0!important;
+}
+.editorial-v2 .answer-card .detail-lead-visual img{
+  width:61px!important;height:61px!important;
+}
+.editorial-v2 .answer-card li{width:auto!important;max-width:100%!important}
+@media(max-width:374px){
+  .editorial-v2 .answer-card h2{padding-right:60px!important}
+  .editorial-v2 .answer-card .detail-lead-visual{width:53px!important;height:53px!important;right:10px!important}
+  .editorial-v2 .answer-card .detail-lead-visual img{width:53px!important;height:53px!important}
+}
