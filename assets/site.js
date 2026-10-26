@@ -31,3 +31,45 @@ window.enhanceHubContent(document);
     if (e.key === 'Escape' && menu.open) { close(); var s = menu.querySelector('summary'); if (s) s.focus(); }
   });
 })();
+
+/* User-uploaded article images. Missing photos are invisible to public visitors. */
+(function(){
+  var article=document.querySelector('main .detail-article');
+  if(!article)return;
+  var raw=decodeURIComponent(window.location.pathname).replace(/^\/+|\/+$/g,'');
+  if(!raw||raw==='guide'||raw==='tools/photo-manager')return;
+  var key=raw.replace(/\//g,'--');
+  var preview=new URLSearchParams(window.location.search).get('image-slots')==='1';
+  var sections=Array.prototype.filter.call(article.children,function(el){
+    if(el.tagName!=='SECTION'||!el.querySelector('h2'))return false;
+    if(/\b(hero|faq|related|cta)\b/.test(el.className||''))return false;
+    return true;
+  });
+  if(!sections.length)return;
+  var anchors=[sections.length>1?sections[1]:sections[0]];
+  if(sections.length>=3)anchors.push(sections.length>=4?sections[3]:sections[2]);
+  anchors.forEach(function(anchor,i){
+    var slot=('0'+(i+1)).slice(-2),name=key+'--'+slot+'.webp';
+    var path='/img/article-photos/'+encodeURIComponent(name);
+    var holder=document.createElement('div');holder.className='article-photo-anchor';
+    holder.setAttribute('data-photo-slot',slot);
+    anchor.insertAdjacentElement('afterend',holder);
+    var loader=new Image();
+    loader.onload=function(){
+      var fig=document.createElement('figure');fig.className='article-photo-figure';
+      var img=document.createElement('img');img.src=path;img.loading='lazy';img.decoding='async';
+      var heading=anchor.querySelector('h2');img.alt=(heading?heading.textContent.trim():'본문')+' 관련 사진';
+      fig.appendChild(img);holder.replaceWith(fig);
+    };
+    loader.onerror=function(){
+      if(!preview){holder.remove();return;}
+      var box=document.createElement('div');box.className='article-photo-preview';
+      var label=document.createElement('strong');label.textContent='사진 넣을 위치 '+slot;
+      var code=document.createElement('code');code.textContent=name;
+      var link=document.createElement('a');link.href='/tools/photo-manager/?page='+encodeURIComponent(key)+'&slot='+slot;
+      link.textContent='사진 준비·업로드 안내';
+      box.appendChild(label);box.appendChild(code);box.appendChild(link);holder.replaceWith(box);
+    };
+    loader.src=path;
+  });
+})();
