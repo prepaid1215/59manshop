@@ -15,7 +15,23 @@ const {chromium}=require('./browser_runtime.cjs');
   page.on('pageerror',e=>errors.push(e.message));
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.querySelectorAll('.owner-poster').length===4);
+  await page.waitForFunction(()=>!!document.querySelector('.shot-guide .guide-carousel'));
   const result=await page.evaluate(()=>({
+    carousel:(function(){
+      const box=document.querySelector('.shot-guide .guide-carousel');
+      const track=box.querySelector('.guide-carousel-track');
+      const cards=[...track.children];
+      const outputs=box.querySelector('.guide-carousel-index');
+      const next=box.querySelector('[aria-label="다음 안내 보기"]');
+      const prev=box.querySelector('[aria-label="이전 안내 보기"]');
+      return {present:!!box,source:box.dataset.source,count:cards.length,
+        trackDisplay:getComputedStyle(track).display,
+        counter:outputs.textContent,buttonNames:!!next&&!!prev,
+        widths:cards.map(x=>x.getBoundingClientRect().width),
+        overflow:track.scrollWidth>track.clientWidth
+      };
+    })(),
+
     auth:document.querySelectorAll('.auth-grid .common-icon-sprite--auth').length,
     idPosters:document.querySelectorAll('.img-cards--id .owner-poster').length,
     esimPosters:document.querySelectorAll('.img-cards--sim .owner-poster').length,
@@ -85,6 +101,11 @@ const {chromium}=require('./browser_runtime.cjs');
      ||result.alignment.badgeTops.length!==5||spread(result.alignment.badgeTops)>1
      ||spread(result.alignment.labelTops)>1
      ||result.alignment.margins.some(m=>m!=='0px')
+     ||!result.carousel.present||!['existing','official'].includes(result.carousel.source)
+     ||![6,16].includes(result.carousel.count)||result.carousel.trackDisplay!=='flex'
+     ||result.carousel.counter!=='1 / '+result.carousel.count
+     ||!result.carousel.buttonNames||!result.carousel.overflow
+     ||Math.max(...result.carousel.widths)-Math.min(...result.carousel.widths)>1
      ||result.simLayout.count!==4||!result.simLayout.equalWidths||!result.simLayout.equalHeights
      ||!result.simLayout.imageAlignment||!result.simLayout.noOverlap||!result.simLayout.imageLoaded
      ||result.simLayout.margins.some(m=>m!=='0px')

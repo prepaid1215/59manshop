@@ -145,3 +145,133 @@ window.enhanceHubContent(document);
     pic.src=poster.path;
   });
 })();
+
+
+/* Official illustrated walkthrough carousel with native swipe + accessible controls.
+   If official images are not in the repository, existing live screenshots stay visible.
+   The user's original screenshot walkthrough is never deleted. */
+(function(){
+  var section=document.querySelector('.detail-article .shot-guide');
+  var original=section&&section.querySelector('.shot-grid');
+  if(!section||!original||original.dataset.carouselMounted==='1')return;
+  original.dataset.carouselMounted='1';
+
+  var official=[
+    {file:'00',title:'셀프개통 시작 안내',caption:'플랫폼에서 제공한 셀프개통 가이드 표지입니다.'},
+    {file:'01',title:'개통할 통신망 선택',caption:'K망 또는 L망을 선택하고 신청을 시작합니다.'},
+    {file:'02',title:'가입유형·고객유형 및 본인정보',caption:'신규가입·번호이동과 내국인·외국인을 선택하고 안내에 따라 본인정보를 입력합니다.'},
+    {file:'04',title:'간편인증 진행',caption:'카카오·토스·PASS·국민·신한 등 신청 화면에서 지원하는 수단으로 인증합니다.'},
+    {file:'06',title:'요금제·납부 정보 입력',caption:'이용할 요금제와 납부 관련 정보를 확인하고 신청합니다. 실제 충전 순서는 개통 방법에 따라 다릅니다.'},
+    {file:'07',title:'선불 충전 방식 참고',caption:'이 이미지는 선불·후불을 비교합니다. 선불폰 이용자는 선불 충전 설명을 확인하세요.'}
+  ];
+  function makeSlide(item){
+    var figure=document.createElement('figure');figure.className='guide-slide';
+    var link=document.createElement('a');link.href='/img/guide/platform-rule-'+item.file+'.webp';
+    link.target='_blank';link.rel='noopener';
+    link.setAttribute('aria-label',item.title+' 이미지 크게 보기');
+    var img=document.createElement('img');img.src=link.href;img.alt='앤텔레콤 공식 안내: '+item.title;
+    img.width=1024;img.height=1024;img.loading='lazy';img.decoding='async';
+    link.appendChild(img);figure.appendChild(link);
+    var cap=document.createElement('figcaption');
+    var strong=document.createElement('strong');strong.textContent=item.title;
+    cap.appendChild(strong);cap.appendChild(document.createTextNode(item.caption));
+    figure.appendChild(cap);return figure;
+  }
+  function mount(track,officialActive){
+    var slides=[].slice.call(track.children);
+    if(!slides.length)return;
+    track.classList.add('guide-carousel-track');
+    track.setAttribute('role','group');
+    track.setAttribute('aria-label','셀프개통 안내 이미지');
+    var gallery=document.createElement('div');gallery.className='guide-carousel';
+    var viewport=document.createElement('div');viewport.className='guide-carousel-viewport';
+    viewport.appendChild(track);gallery.appendChild(viewport);
+    var toolbar=document.createElement('div');toolbar.className='guide-carousel-toolbar';
+    var counter=document.createElement('output');counter.className='guide-carousel-index';
+    counter.setAttribute('aria-live','polite');
+    var actions=document.createElement('div');actions.className='guide-carousel-actions';
+    var previous=document.createElement('button'),next=document.createElement('button');
+    previous.type='button';previous.textContent='‹';previous.setAttribute('aria-label','이전 안내 보기');
+    next.type='button';next.textContent='›';next.setAttribute('aria-label','다음 안내 보기');
+    actions.appendChild(previous);actions.appendChild(next);
+    toolbar.appendChild(counter);toolbar.appendChild(actions);gallery.appendChild(toolbar);
+    var dots=document.createElement('div');dots.className='guide-carousel-dots';
+    if(slides.length<=8){
+      slides.forEach(function(slide,i){
+        var dot=document.createElement('button');dot.type='button';
+        dot.setAttribute('aria-label',(i+1)+'번째 안내 보기');
+        dot.addEventListener('click',function(){show(i)});
+        dots.appendChild(dot);
+      });gallery.appendChild(dots);
+    }
+    var helper=document.createElement('p');helper.className='guide-carousel-helper';
+    helper.textContent='좌우로 밀거나 화살표로 다음 이미지를 볼 수 있습니다.';
+    gallery.appendChild(helper);
+    var idx=0;
+    function update(i){
+      idx=Math.max(0,Math.min(slides.length-1,i));
+      counter.textContent=(idx+1)+' / '+slides.length;
+      previous.disabled=idx===0;next.disabled=idx===slides.length-1;
+      [].forEach.call(dots.children,function(d,n){
+        if(n===idx)d.setAttribute('aria-current','true');
+        else d.removeAttribute('aria-current');
+      });
+    }
+    function show(i){
+      update(i);
+      track.scrollTo({left:slides[idx].offsetLeft-slides[0].offsetLeft,behavior:'smooth'});
+    }
+    previous.addEventListener('click',function(){show(idx-1)});
+    next.addEventListener('click',function(){show(idx+1)});
+    var raf=0;
+    track.addEventListener('scroll',function(){
+      if(raf)cancelAnimationFrame(raf);
+      raf=requestAnimationFrame(function(){
+        raf=0;
+        var left=track.scrollLeft,nearest=0,distance=Infinity;
+        slides.forEach(function(slide,i){
+          var gap=Math.abs((slide.offsetLeft-slides[0].offsetLeft)-left);
+          if(gap<distance){nearest=i;distance=gap;}
+        });
+        if(nearest!==idx)update(nearest);
+      });
+    },{passive:true});
+    track.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){e.preventDefault();show(idx+1);}
+      if(e.key==='ArrowLeft'){e.preventDefault();show(idx-1);}
+    });
+    original.before(gallery);
+    if(officialActive){
+      var details=document.createElement('details');
+      details.className='guide-original-steps';
+      var summary=document.createElement('summary');
+      summary.textContent='실제 신청 화면 16장 자세히 보기';
+      details.appendChild(summary);details.appendChild(original);
+      gallery.after(details);
+      var note=section.querySelector('p.updated');
+      if(note)note.textContent='앤텔레콤 플랫폼에서 제공한 공식 안내 이미지입니다. 실제 신청 화면은 아래에서 펼쳐 볼 수 있으며, 화면 구성은 달라질 수 있습니다.';
+    } else {
+      original.remove();
+    }
+    update(0);
+    if(officialActive)gallery.dataset.source='official';
+    else gallery.dataset.source='existing';
+  }
+  function hasImage(src){
+    return new Promise(function(resolve){
+      var test=new Image();test.onload=function(){resolve(test.naturalWidth>0)};
+      test.onerror=function(){resolve(false)};test.src=src;
+    });
+  }
+  Promise.all(official.map(function(item){
+    return hasImage('/img/guide/platform-rule-'+item.file+'.webp');
+  })).then(function(check){
+    if(check.every(Boolean)){
+      var track=document.createElement('div');track.className='shot-grid';
+      official.forEach(function(item){track.appendChild(makeSlide(item));});
+      mount(track,true);
+    }else{
+      mount(original,false);
+    }
+  }).catch(function(){mount(original,false)});
+})();

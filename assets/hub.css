@@ -674,3 +674,182 @@ body{background:#f6f8fb}
   .detail-article .related{padding:16px 14px!important;}
   .detail-article .related>a{font-size:13.5px!important;}
 }
+
+
+/* Mobile-first activation walkthrough. Only applies inside guide articles. */
+.detail-article .shot-guide .guide-carousel{
+  margin:20px 0 12px;
+  min-width:0;
+}
+.detail-article .shot-guide .guide-carousel-viewport{
+  width:100%;
+  min-width:0;
+  overflow:hidden;
+}
+.detail-article .shot-guide .guide-carousel-track{
+  box-sizing:border-box;
+  display:flex!important;
+  align-items:stretch;
+  gap:10px;
+  width:100%;
+  margin:0!important;
+  padding:0 0 10px!important;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:0;
+  scroll-behavior:smooth;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.detail-article .shot-guide .guide-carousel-track::-webkit-scrollbar{display:none;}
+.detail-article .shot-guide .guide-carousel-track > :is(.shot,.guide-slide){
+  box-sizing:border-box;
+  display:flex;
+  flex:0 0 100%;
+  flex-direction:column;
+  min-width:0;
+  max-width:100%;
+  margin:0!important;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  border:1px solid #e0e8f2;
+  border-radius:14px;
+  background:#f8faff;
+  padding:12px;
+  overflow:hidden;
+}
+.detail-article .shot-guide .guide-carousel-track .shot>img,
+.detail-article .shot-guide .guide-carousel-track .guide-slide img{
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  height:auto;
+  max-height:600px;
+  margin:0 auto;
+  object-fit:contain;
+  border-radius:9px;
+}
+.detail-article .shot-guide .guide-slide>a{
+  display:block;
+  width:100%;
+  padding:0;
+  margin:0;
+  outline-offset:3px;
+}
+.detail-article .shot-guide .guide-slide figcaption,
+.detail-article .shot-guide .guide-carousel-track .shot figcaption{
+  margin:12px 0 2px!important;
+  font-size:13px!important;
+  font-weight:450;
+  line-height:1.65!important;
+  word-break:keep-all;
+  color:#384b64;
+}
+.detail-article .shot-guide .guide-slide figcaption strong{
+  display:block;
+  margin-bottom:3px;
+  color:#142b4b;
+  font-size:14px;
+  font-weight:800;
+}
+.detail-article .shot-guide .guide-carousel-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:8px 1px 0;
+}
+.detail-article .shot-guide .guide-carousel-index{
+  white-space:nowrap;
+  color:#223a5c;
+  font-size:13px;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+}
+.detail-article .shot-guide .guide-carousel-actions{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.detail-article .shot-guide .guide-carousel-actions button{
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  border:1px solid #ccd9ee;
+  border-radius:11px;
+  background:#fff;
+  color:#2252a6;
+  font-size:20px;
+  line-height:1;
+  font-weight:800;
+  cursor:pointer;
+}
+.detail-article .shot-guide .guide-carousel-actions button:disabled{
+  opacity:.32;
+  cursor:default;
+}
+.detail-article .shot-guide .guide-carousel-actions button:not(:disabled):hover{
+  background:#f0f6ff;
+}
+.detail-article .shot-guide .guide-carousel-actions button:focus-visible{
+  outline:2px solid #2458be;
+  outline-offset:3px;
+}
+.detail-article .shot-guide .guide-carousel-dots{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:11px 0 2px;
+}
+.detail-article .shot-guide .guide-carousel-dots>button{
+  display:block;
+  box-sizing:border-box;
+  width:8px;
+  height:8px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:#cbd5e4;
+  cursor:pointer;
+}
+.detail-article .shot-guide .guide-carousel-dots>button[aria-current="true"]{
+  width:21px;
+  border-radius:8px;
+  background:#426de1;
+}
+.detail-article .shot-guide .guide-carousel-helper{
+  margin:8px 0 0!important;
+  text-align:center;
+  color:#6a7891!important;
+  font-size:11px!important;
+  line-height:1.5!important;
+}
+.detail-article .shot-guide .guide-original-steps{
+  margin:14px 0;
+  padding:12px 14px;
+  border:1px solid #e4eaf4;
+  border-radius:12px;
+  background:#fff;
+}
+.detail-article .shot-guide .guide-original-steps>summary{
+  color:#365a90;
+  font-size:13px;
+  font-weight:750;
+  cursor:pointer;
+}
+.detail-article .shot-guide .guide-original-steps .shot-grid{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:13px;
+  margin-top:14px;
+}
+.detail-article .shot-guide .guide-original-steps .shot{min-width:0;margin:0;}
+.detail-article .shot-guide .guide-original-steps .shot>img{max-width:100%;height:auto;}
+@media(prefers-reduced-motion:reduce){
+  .detail-article .shot-guide .guide-carousel-track{scroll-behavior:auto;}
+}
