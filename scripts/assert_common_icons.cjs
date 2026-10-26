@@ -16,6 +16,11 @@ const {chromium}=require('./browser_runtime.cjs');
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.querySelectorAll('.owner-poster').length===4);
   await page.waitForFunction(()=>!!document.querySelector('.shot-guide .guide-carousel'));
+  // The four SIM posters are below the first viewport and use browser lazy loading.
+  // Scroll them into view and wait for their actual decoding before checking naturalWidth.
+  await page.locator('.img-cards--sim').scrollIntoViewIfNeeded();
+  await page.waitForFunction(()=>[...document.querySelectorAll('.img-cards--sim .ic-art img')].length===4 &&
+    [...document.querySelectorAll('.img-cards--sim .ic-art img')].every(img=>img.complete&&img.naturalWidth>0));
   const result=await page.evaluate(()=>({
     carousel:(function(){
       const box=document.querySelector('.shot-guide .guide-carousel');
