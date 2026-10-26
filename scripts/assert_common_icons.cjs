@@ -22,11 +22,14 @@ const {chromium}=require('./browser_runtime.cjs');
       const track=box.querySelector('.guide-carousel-track');
       const cards=[...track.children];
       const outputs=box.querySelector('.guide-carousel-index');
+      const dotCount=box.querySelectorAll('.guide-carousel-dots button').length;
+      const officialPaths=cards.map(c=>c.querySelector('img')?.getAttribute('src'));
+      const originalSteps=!!document.querySelector('.shot-guide .guide-original-steps .shot-grid');
       const next=box.querySelector('[aria-label="다음 안내 보기"]');
       const prev=box.querySelector('[aria-label="이전 안내 보기"]');
       return {present:!!box,source:box.dataset.source,count:cards.length,
         trackDisplay:getComputedStyle(track).display,
-        counter:outputs.textContent,buttonNames:!!next&&!!prev,
+        counter:outputs.textContent,buttonNames:!!next&&!!prev,dotCount,officialPaths,originalSteps,
         widths:cards.map(x=>x.getBoundingClientRect().width),
         overflow:track.scrollWidth>track.clientWidth
       };
@@ -102,7 +105,10 @@ const {chromium}=require('./browser_runtime.cjs');
      ||spread(result.alignment.labelTops)>1
      ||result.alignment.margins.some(m=>m!=='0px')
      ||!result.carousel.present||!['existing','official'].includes(result.carousel.source)
-     ||![6,16].includes(result.carousel.count)||result.carousel.trackDisplay!=='flex'
+     ||![8,16].includes(result.carousel.count)||result.carousel.trackDisplay!=='flex'
+     ||(result.carousel.source==='official'&&(result.carousel.count!==8||result.carousel.dotCount!==8||!result.carousel.originalSteps
+       ||!['00','01','02','03','04','05','06','07'].every((n,i)=>result.carousel.officialPaths[i]?.endsWith('platform-rule-'+n+'.webp'))))
+     ||(result.carousel.source==='existing'&&(result.carousel.count!==16||result.carousel.dotCount!==0))
      ||result.carousel.counter!=='1 / '+result.carousel.count
      ||!result.carousel.buttonNames||!result.carousel.overflow
      ||Math.max(...result.carousel.widths)-Math.min(...result.carousel.widths)>1
