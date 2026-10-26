@@ -73,3 +73,51 @@ window.enhanceHubContent(document);
     loader.src=path;
   });
 })();
+
+
+/* Optional, owner-uploaded common card images. Missing assets retain the original UI. */
+(function () {
+  var base = '/img/article-photos/';
+  var auth = {'카카오':'common-auth-kakao.webp','토스':'common-auth-toss.webp',
+              'PASS':'common-auth-pass.webp','국민':'common-auth-kb.webp',
+              '신한':'common-auth-shinhan.webp'};
+  var identity = {'주민등록증':'common-id-resident.webp',
+                  '운전면허증':'common-id-driver.webp',
+                  '모바일 신분증':'common-id-mobile.webp'};
+  function preload(file, show) {
+    var url = base + file, probe = new Image();
+    probe.onload = function () { show(url); };
+    probe.onerror = function () {}; // Keep the text or illustration fallback.
+    probe.src = url;
+  }
+  document.querySelectorAll('.auth-grid li').forEach(function (card) {
+    var label = card.querySelector('b'), badge = card.querySelector('.auth-badge');
+    var name = label && label.textContent.trim();
+    if (!badge || !auth[name]) return;
+    preload(auth[name], function (url) {
+      var img = document.createElement('img');
+      img.src = url;
+      img.alt = '';
+      img.setAttribute('aria-hidden','true');
+      img.width = 28; img.height = 28;
+      badge.replaceChildren(img);
+      badge.classList.add('auth-badge--photo');
+    });
+  });
+  function swap(selector, names) {
+    document.querySelectorAll(selector).forEach(function (card) {
+      var label=card.querySelector('figcaption b'), img=card.querySelector('.ic-art img');
+      var name=label&&label.textContent.trim();
+      if(!img||!names[name])return;
+      preload(names[name],function(url) {
+        img.src=url;
+        img.alt=name+' 안내 이미지';
+        img.removeAttribute('aria-hidden');
+        img.width=96;img.height=96;
+        img.classList.add('common-card-photo');
+      });
+    });
+  }
+  swap('.img-cards--id li', identity);
+  swap('.img-cards--sim li', {'eSIM':'common-esim.webp'});
+})();
