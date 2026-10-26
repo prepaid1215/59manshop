@@ -124,3 +124,10 @@ This repository powers https://www.59man.shop/ .
 ## Editorial content pass (2026-10-26)
 - Use the two supplied reference HTML articles (preparation, SIM buying) only for editorial patterns: answer first, 3-item preparations, K/L product comparison and context-rich exceptions. Never copy their proprietary text/assets/CSS or their pink/purple brand palette.
 - The three revised article files are `/선불폰-개통방법/`, `/미납정지-선불폰/`, `/편의점-선불유심/`. Keep title, H1, URLs, FAQ JSON-LD consistency, canonical, robots, sitemap, photographs, and conversion links. Preserve operator facts and avoid absolute activation promises.
+
+
+## Operator clarification 2026-10-26: self activation vs tablet membership
+- Online non-face-to-face self-activation (e.g. preplan.site): prepare identity verification method, ID document and compatible SIM; submit application; recharge fee; usable immediately thereafter. **Do not insert a staff-approval stage** into online self-activation flow.
+- Staff approval is required for **tablet activation submitted through 앤텔레콤 멤버십 앱**, a distinct path.
+- After activation, the user MUST answer the Anne Telecom follow-up verification call **1899-7700 (해피콜)**. This is after use begins, not the approval prerequisite.
+- Correct old `승인 -> 충전` copy, including `meta description`, alongside visible content; retain existing canonical/robots/URLs.
