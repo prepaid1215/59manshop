@@ -189,3 +189,50 @@
  .editorial-v2 .answer-card .detail-lead-visual{width:49px!important;height:49px!important}
  .editorial-v2 .answer-card .detail-lead-visual img{width:49px!important;height:49px!important}
 }
+
+
+/* Content pass: table and practical checklist, no repetitive pink/purple cards. */
+.editorial-v2 .reader-comparison,.editorial-v2 .reader-checklist{
+  margin-top:25px!important;padding-top:24px!important;
+  border-top:1px solid #e7edf4!important;
+}
+.editorial-v2 .reader-comparison>h2,.editorial-v2 .reader-checklist>h2{
+  color:#192e4a!important;font-size:21px!important;line-height:1.45!important;margin:0 0 13px!important;
+}
+.editorial-v2 .reader-comparison>p,.editorial-v2 .reader-checklist>p{
+  font-size:15px!important;line-height:1.8!important;color:#33465f!important;margin:0 0 15px!important;
+}
+.editorial-v2 .reader-table-scroll{
+  max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  border:1px solid #e1e8f3;border-radius:12px;
+  margin:14px 0 16px;
+}
+.editorial-v2 .reader-table-scroll table{display:table!important;border:0!important;width:100%!important;min-width:345px;margin:0!important;border-collapse:collapse}
+.editorial-v2 .reader-table-scroll th{
+  background:#edf4ff!important;color:#1f487e!important;text-align:left;
+  font-size:12px!important;white-space:nowrap;padding:11px 10px!important;
+}
+.editorial-v2 .reader-table-scroll td{
+  background:#fff!important;font-size:12.5px!important;line-height:1.6!important;
+  padding:12px 10px!important;border-bottom:1px solid #eef2f8;
+}
+.editorial-v2 .reader-table-scroll a{color:#1558b7!important;text-decoration:underline;text-underline-offset:3px}
+.editorial-v2 .reader-note{
+  color:#4b5b71!important;background:#f5f8fd!important;border-radius:9px!important;
+  padding:13px 14px!important;margin:15px 0!important;
+  line-height:1.75!important;font-size:13px!important;
+}
+.editorial-v2 .reader-note strong{color:#164a91!important}
+.editorial-v2 .reader-check-row{
+  display:block!important;
+  padding:13px 0!important;border-bottom:1px solid #e9eef5!important;
+  background:transparent!important;box-shadow:none!important;
+}
+.editorial-v2 .reader-check-row b{display:block!important;margin:0 0 5px!important;color:#194d9b!important;font-size:13px!important;line-height:1.45!important}
+.editorial-v2 .reader-check-row p{margin:0!important;font-size:14px!important;line-height:1.72!important;color:#39485c!important}
+.editorial-v2 .decision-card>p{font-size:15px!important;line-height:1.75!important}
+.editorial-v2 .answer-card{overflow:visible}
+@media(max-width:374px){
+ .editorial-v2 .reader-table-scroll table{min-width:345px}
+ .editorial-v2 .reader-check-row p{font-size:13.5px!important}
+}

@@ -119,3 +119,8 @@ This repository powers https://www.59man.shop/ .
 - Experiment only on `/선불폰-개통방법/` and `/미납정지-선불폰/`: answer appears before the decorative image or navigation chips, image becomes a small supporting icon in summary.
 - Scoped `/assets/editorial-v2.css`. No other page changes, no mobile-width expansion. Compare source copy, link destinations, canonical, robots, sitemap and headings before approving. Main must not be deployed automatically.
 - Re-running `scripts/build_hub.py` must retain the pilot without duplicate assets.
+
+
+## Editorial content pass (2026-10-26)
+- Use the two supplied reference HTML articles (preparation, SIM buying) only for editorial patterns: answer first, 3-item preparations, K/L product comparison and context-rich exceptions. Never copy their proprietary text/assets/CSS or their pink/purple brand palette.
+- The three revised article files are `/선불폰-개통방법/`, `/미납정지-선불폰/`, `/편의점-선불유심/`. Keep title, H1, URLs, FAQ JSON-LD consistency, canonical, robots, sitemap, photographs, and conversion links. Preserve operator facts and avoid absolute activation promises.
