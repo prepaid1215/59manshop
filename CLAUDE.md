@@ -108,3 +108,8 @@ This repository powers https://www.59man.shop/ .
 ## Guide navigation control regression (2026-10-26)
 - A desktop browser still uses the centered 480px mobile shell. Control styling cannot rely on @media(max-width:768px) alone. Apply mobile breadcrumb back button and filter chip styling at all viewport widths.
 - Verify computed CSS of #gh-back at both 390px and 1440px; neither can show native browser-button appearance.
+
+## Article readability (2026-10-26)
+- 59만모바일 상세페이지는 실제 읽기 쉬운 한국어 모바일 본문이 우선. 본문 기본 16px/line-height 약 1.82, 제목 21~22px, 단락 간 충분한 여백, 대비 좋은 텍스트·링크, 표의 가로 스크롤을 지원한다.
+- PC도 동일한 480px 모바일 단일 컬럼. 인덱싱 URL, canonical, robots, sitemap, 기존 글·개통 CTA 변경 금지.
+- 독자가 답을 빠르게 이해할 수 있는 핵심 요약 및 소제목의 위계를 유지하고, 과도한 배지/테두리/AI 일러스트 추가를 피한다.

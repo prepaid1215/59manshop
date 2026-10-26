@@ -150,3 +150,208 @@ body{background:#f6f8fb}
  .bottom-bar{display:grid!important;position:fixed!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;width:min(100%,480px)!important;max-width:480px!important;grid-template-columns:minmax(0,1fr) 108px!important;gap:8px!important;padding:10px 18px calc(10px + env(safe-area-inset-bottom))!important}
  .top-menu-panel{right:0!important}
 }
+
+
+/* ARTICLE READABILITY v1 — 59만모바일.
+ * 390–480px mobile reading first; PC keeps the same centered mobile column.
+ * SEO content, illustrations and action destinations remain unchanged.
+ */
+.detail-article{
+  color:#27374c;
+  text-wrap:pretty;
+}
+.detail-article .hero h1{
+  color:#142842!important;
+  font-size:clamp(25px,6.9vw,29px)!important;
+  line-height:1.39!important;
+  letter-spacing:-.045em;
+  overflow-wrap:break-word;
+}
+.detail-article .hero p{
+  font-size:15px!important;
+  line-height:1.76!important;
+  color:#54677e!important;
+  margin-bottom:14px!important;
+}
+.detail-article > section:not(.hero) > h2{
+  font-size:22px!important;
+  font-weight:800!important;
+  line-height:1.44!important;
+  letter-spacing:-.035em;
+  color:#172b45!important;
+  word-break:keep-all;
+  margin:0 0 16px!important;
+}
+.detail-article > section:not(.hero) h3,
+.detail-article .faq-item h3{
+  font-size:18px!important;
+  line-height:1.5!important;
+  letter-spacing:-.025em;
+  color:#203955!important;
+  margin:20px 0 10px!important;
+  word-break:keep-all;
+}
+.detail-article > section:not(.hero) p,
+.detail-article > section:not(.hero) ul:not(.img-cards-grid):not(.auth-grid ul) > li,
+.detail-article > section:not(.hero) ol > li{
+  font-size:16px!important;
+  line-height:1.82!important;
+  letter-spacing:-.012em;
+  color:#2d3c50!important;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.detail-article > section:not(.hero) p{
+  margin-top:0;
+  margin-bottom:16px;
+}
+.detail-article > section:not(.hero) p:last-child{margin-bottom:0}
+.detail-article > section:not(.hero) ul:not(.img-cards-grid),
+.detail-article > section:not(.hero) ol{
+  margin-top:10px;
+  margin-bottom:17px;
+}
+.detail-article > section:not(.hero) li + li{margin-top:8px}
+.detail-article > section:not(.hero) p a,
+.detail-article > section:not(.hero) li a,
+.detail-article .related a{
+  color:#1556be;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  overflow-wrap:anywhere;
+}
+.detail-article > section:not(.hero) p a:hover,
+.detail-article > section:not(.hero) li a:hover{color:#103f8c}
+.detail-article > section:not(.hero) :is(a,button):focus-visible{
+  outline:2px solid #175cd3;
+  outline-offset:3px;
+}
+.detail-article>section+section{
+  margin-top:24px!important;
+  padding-top:25px!important;
+  border-top:1px solid #e7edf5;
+}
+.detail-article .answer-card,
+.detail-article .answer-box,
+.detail-article .key-points,
+.detail-article .lede-answer{
+  padding:19px 17px!important;
+  background:#f2f7ff!important;
+  border:1px solid #d7e5f8!important;
+  border-left:3px solid #175cd3!important;
+  border-radius:12px!important;
+}
+.detail-article .answer-card h2,
+.detail-article .answer-box h2{
+  font-size:19px!important;
+  line-height:1.45!important;
+  color:#173f7e!important;
+  margin-bottom:12px!important;
+}
+.detail-article .check-list li:before,
+.detail-article .icon-list li:before{font-size:15px;top:0}
+.detail-article .decision-card{
+  padding:19px 17px!important;
+  background:#fbfcff!important;
+  border:1px solid #e0e7f2!important;
+  border-radius:12px!important;
+}
+.detail-article .decision-card > div:not(.section-kicker){
+  font-size:15px!important;
+  line-height:1.76!important;
+  color:#35465a!important;
+  margin-bottom:14px;
+}
+.detail-article .decision-card>div>b{
+  display:inline;
+  font-weight:800;
+  color:#173f82!important;
+}
+.detail-article .faq-item{
+  padding:15px 0 18px!important;
+  border-bottom:1px solid #e5eaf1!important;
+}
+.detail-article .faq-item h3{margin:0 0 9px!important}
+.detail-article .faq-item p{
+  margin:0!important;
+  font-size:16px!important;
+  line-height:1.78!important;
+}
+.detail-article .table-scroll{
+  border:1px solid #e0e7f2;
+  border-radius:11px;
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.detail-article > section > table{
+  display:block!important;
+  max-width:100%!important;
+  overflow-x:auto!important;
+  -webkit-overflow-scrolling:touch;
+  border:1px solid #e0e7f2;
+  border-radius:10px;
+}
+.detail-article table{
+  font-size:14px!important;
+  line-height:1.55!important;
+}
+.detail-article :is(td,th){
+  padding:11px 10px!important;
+  vertical-align:top;
+  line-height:1.55!important;
+  font-size:14px!important;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.detail-article :is(td,th) p{
+  font-size:14px!important;
+  line-height:1.6!important;
+}
+.detail-article th{background:#f2f6fc;color:#243e61;font-weight:800}
+.detail-article .steps .step{padding:14px 13px}
+.detail-article .step strong{font-size:15px!important;line-height:1.5!important}
+.detail-article .step p{
+  font-size:14px!important;
+  line-height:1.72!important;
+  margin-bottom:0!important;
+}
+.detail-article .shot figcaption,
+.detail-article .img-cards figcaption{
+  font-size:12px!important;
+  line-height:1.58!important;
+  color:#667991!important;
+}
+.detail-article .img-cards-title,.detail-article .auth-grid-title{
+  font-size:14px!important;
+  line-height:1.45!important;
+}
+.detail-article .img-cards .img-cards-note,
+.detail-article .auth-grid .auth-grid-note{
+  font-size:12px!important;
+  line-height:1.6!important;
+}
+.detail-article .related{
+  margin-top:25px!important;
+  border-top:1px solid #dbe5f2;
+}
+.detail-article .related h2{font-size:18px!important}
+.detail-article .related a{
+  display:flex;
+  align-items:center;
+  min-height:44px;
+  padding:10px 0;
+  font-size:14px!important;
+  line-height:1.5;
+}
+.detail-article .cta a{min-height:46px}
+@media(max-width:380px){
+  .detail-article > section:not(.hero) p,
+  .detail-article > section:not(.hero) ul:not(.img-cards-grid) > li,
+  .detail-article > section:not(.hero) ol > li{
+    font-size:15.5px!important;
+  }
+  .detail-article > section:not(.hero) > h2{font-size:21px!important}
+  .detail-article :is(td,th){font-size:13.5px!important;padding:10px 8px!important}
+}
