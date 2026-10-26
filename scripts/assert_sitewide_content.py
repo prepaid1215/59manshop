@@ -9,7 +9,7 @@ def article(s):
  m=re.search(r'<article\b[^>]*>[\s\S]*?</article>',s,re.I)
  return m.group(0) if m else ""
 def visible(s): return re.sub(r'<[^>]*>','',s)
-def links(s): return sorted(re.findall(r'href="([^"]+)"',s))
+def links(s): return sorted(link for link in re.findall(r'href="([^"]+)"',s) if not link.startswith("/assets/hub.css?v="))
 for p in files:
  relative=p.relative_to(ROOT).as_posix()
  try: before=subprocess.check_output(["git","show","origin/main:"+relative],cwd=ROOT).decode("utf8")
