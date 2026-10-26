@@ -38,6 +38,13 @@ const {chromium}=require('./browser_runtime.cjs');
  }
  await page.goto(root+'/선불폰-개통방법/',{waitUntil:'networkidle'});
  if(await page.locator('.article-photo-preview').count())errors.push('public empty slot visible');
+ if(await page.locator('.article-photo-figure').count())errors.push('unexpected photo before upload');
+ const target=path.join(__dirname,'../img/article-photos/선불폰-개통방법--01.webp');
+ await download.saveAs(target);
+ await page.goto(root+'/선불폰-개통방법/',{waitUntil:'networkidle'});
+ await page.waitForFunction(()=>document.querySelector('.article-photo-figure img')?.naturalWidth>0);
+ if(await page.locator('.article-photo-figure img').count()!==1)errors.push('uploaded image not displayed');
+ fs.unlinkSync(target);
  await page.close();await browser.close();
  console.log(JSON.stringify({catalog:catalog.length,errors},null,2));if(errors.length)process.exit(1);
 })().catch(e=>{console.error(e);process.exit(1);});
