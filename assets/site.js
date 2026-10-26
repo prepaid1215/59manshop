@@ -286,3 +286,39 @@ window.enhanceHubContent(document);
   document.querySelectorAll('#main-content .detail-article .related > .related-title')
     .forEach(function(h){if(h.textContent.trim()==='관련 안내')h.textContent='함께 보면 좋은 글';});
 })();
+
+
+/* Keep guide directory totals and same-topic links in sync with newly indexed L-network guides. */
+(function(){
+  var items=[
+    {href:'/lg-모두의원칩-셀프개통/',cat:'self',title:'LG 모두의 원칩 셀프개통 방법',desc:'L망 원칩 입력부터 첫 충전까지'},
+    {href:'/l망-464-요금제/',cat:'plan',title:'L망 5G 464 요금제',desc:'20GB·3Mbps·핫스팟 조건'},
+    {href:'/l망-2-5gb-요금제/',cat:'plan',title:'L망 2.5GB 17,000원',desc:'통화 100분·문자 50건'}
+  ],counts={all:26,self:6,plan:5};
+  document.querySelectorAll('.detail-categories .gc-tile').forEach(function(a){
+    var m=(a.getAttribute('href')||'').match(/#(\w+)/);
+    var k=m?m[1]:'all';
+    if(counts[k]!=null){var small=a.querySelector('small');if(small)small.textContent=counts[k]+'개 가이드';}
+  });
+  var ctx=document.querySelector('.guide-context');
+  if(ctx){
+    var heading=ctx.querySelector('.context-heading h2'),title=heading&&heading.textContent.trim();
+    var cat=title==='셀프개통'?'self':title==='요금제·충전'?'plan':null;
+    if(cat){
+      var total=ctx.querySelector('.context-heading span');
+      if(total)total.textContent=counts[cat]+'개 가이드';
+      var place=ctx.querySelector('.context-all');
+      items.filter(function(x){return x.cat===cat}).forEach(function(x,i){
+        if(!ctx.querySelector('a[href="'+x.href+'"]')&&place){
+          var a=document.createElement('a');a.className='context-card';a.href=x.href;
+          var s=document.createElement('span');s.className='context-number';s.textContent=cat==='self'?'06':('0'+(4+i));
+          var info=document.createElement('span');
+          var small=document.createElement('small');small.textContent=title;
+          var b=document.createElement('b');b.textContent=x.title;
+          var d=document.createElement('span');d.className='context-desc';d.textContent=x.desc;
+          info.append(small,b,d);a.append(s,info);place.before(a);
+        }
+      });
+    }
+  }
+})();
