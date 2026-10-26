@@ -113,3 +113,9 @@ This repository powers https://www.59man.shop/ .
 - 59만모바일 상세페이지는 실제 읽기 쉬운 한국어 모바일 본문이 우선. 본문 기본 16px/line-height 약 1.82, 제목 21~22px, 단락 간 충분한 여백, 대비 좋은 텍스트·링크, 표의 가로 스크롤을 지원한다.
 - PC도 동일한 480px 모바일 단일 컬럼. 인덱싱 URL, canonical, robots, sitemap, 기존 글·개통 CTA 변경 금지.
 - 독자가 답을 빠르게 이해할 수 있는 핵심 요약 및 소제목의 위계를 유지하고, 과도한 배지/테두리/AI 일러스트 추가를 피한다.
+
+
+## Reader-first editorial pilot 2026-10-26
+- Experiment only on `/선불폰-개통방법/` and `/미납정지-선불폰/`: answer appears before the decorative image or navigation chips, image becomes a small supporting icon in summary.
+- Scoped `/assets/editorial-v2.css`. No other page changes, no mobile-width expansion. Compare source copy, link destinations, canonical, robots, sitemap and headings before approving. Main must not be deployed automatically.
+- Re-running `scripts/build_hub.py` must retain the pilot without duplicate assets.

@@ -163,6 +163,28 @@ def transform(page, url):
             page = re.sub(r'(<section class="hero[^"]*"[^>]*>.*?</section>)',
                           lambda match: match.group(1) + cover, page,
                           count=1, flags=re.S)
+
+    # Experimental reader-first layout for two high-intent guides.
+    # Preserve all copy, heading text, canonical and conversion destinations.
+    if url in ('/선불폰-개통방법/', '/미납정지-선불폰/') and 'detail-workspace' in page:
+        page = page.replace('<article class="article detail-article">', '<article class="article detail-article editorial-v2">', 1)
+        cover_match = re.search(r'<figure class="detail-lead-visual".*?</figure>', page, re.S)
+        answer_match = re.search(r'<section class="answer-card">.*?</section>', page, re.S)
+        if cover_match and answer_match and cover_match.start() < answer_match.start():
+            cover = cover_match.group(0)
+            page = page.replace(cover, '', 1)
+            answer = re.search(r'<section class="answer-card">.*?</section>', page, re.S).group(0)
+            rewritten = re.sub(r'(<h2[^>]*>.*?</h2>)', lambda m: m.group(1) + cover, answer, count=1, flags=re.S)
+            page = page.replace(answer, rewritten, 1)
+        chips_match = re.search(r'<nav class="jump-chips".*?</nav>', page, re.S)
+        answer_match = re.search(r'<section class="answer-card">.*?</section>', page, re.S)
+        if chips_match and answer_match and chips_match.start() < answer_match.start():
+            chips = chips_match.group(0)
+            page = page.replace(chips, '', 1)
+            page = page.replace(answer_match.group(0), answer_match.group(0) + chips, 1)
+        if '/assets/editorial-v2.css' not in page:
+            page = page.replace('</head>', '<link rel="stylesheet" href="/assets/editorial-v2.css?v=20261026a"></head>', 1)
+
     # Keep every existing footer sentence, phone number and destination.
     if 'footer-grid' not in page:
         page = page.replace('<footer class="footer"><div class="site">','<footer class="footer"><div class="site footer-grid"><div class="footer-brand"><a href="/">'+icon('sim')+'<b>59만모바일</b></a><span>앤텔레콤 정보 가이드</span></div><div class="footer-info">',1)
