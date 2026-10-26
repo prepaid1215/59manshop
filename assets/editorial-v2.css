@@ -140,3 +140,52 @@
   .editorial-v2 .answer-card .detail-lead-visual{width:53px!important;height:53px!important;right:10px!important}
   .editorial-v2 .answer-card .detail-lead-visual img{width:53px!important;height:53px!important}
 }
+
+
+/* Reader-first decision: short answer visible, optional detail expandable. */
+.editorial-v2 .answer-card{
+  background:#fff!important;border:0!important;border-left:3px solid #175cd3!important;
+  border-radius:0!important;padding:4px 0 8px 18px!important;
+  margin:8px 0 24px!important;
+}
+.editorial-v2 .answer-card h2{
+  font-size:18px!important;line-height:1.43!important;color:#15335e!important;
+  margin:0 0 14px!important;
+}
+.editorial-v2 .answer-card .answer-lead{
+  font-size:16px!important;
+  line-height:1.79!important;color:#26374f!important;
+  letter-spacing:-.015em;
+  margin:0 0 14px!important;
+  padding-right:0!important;
+  word-break:keep-all;
+}
+.editorial-v2 .answer-card .answer-lead strong{
+  color:#13499e!important;
+  font-weight:850!important;
+}
+.editorial-v2 .answer-more{
+  border-top:1px solid #e6edf6;
+  margin:16px 0 0!important;
+}
+.editorial-v2 .answer-more summary{
+  display:flex;align-items:center;justify-content:space-between;
+  min-height:43px;
+  font-size:13px;line-height:1.4;font-weight:750;
+  color:#1752ad;cursor:pointer;padding:10px 0;
+  list-style:none;
+}
+.editorial-v2 .answer-more summary::-webkit-details-marker{display:none}
+.editorial-v2 .answer-more summary span{font-size:19px;line-height:1;font-weight:450}
+.editorial-v2 .answer-more[open] summary span{transform:rotate(45deg)}
+.editorial-v2 .answer-more-content{padding:5px 0 0}
+.editorial-v2 .answer-more-content .check-list{margin:8px 0 0!important}
+.editorial-v2 .answer-more-content .small-note{margin-top:12px!important;font-size:14px!important}
+.editorial-v2 .answer-card .detail-lead-visual{top:0!important;right:0!important;width:53px!important;height:53px!important}
+.editorial-v2 .answer-card .detail-lead-visual img{width:53px!important;height:53px!important}
+.editorial-v2 .answer-card h2{min-height:0!important;padding-right:57px!important}
+@media(max-width:374px){
+ .editorial-v2 .answer-card h2{padding-right:55px!important}
+ .editorial-v2 .answer-card .detail-lead-visual{width:49px!important;height:49px!important}
+ .editorial-v2 .answer-card .detail-lead-visual img{width:49px!important;height:49px!important}
+}
