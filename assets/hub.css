@@ -473,3 +473,26 @@ body{background:#f6f8fb}
   line-height:16px!important;
   white-space:nowrap;
 }
+
+/* Supplied portrait artwork: readable two-column ID cards within 480px mobile canvas. */
+.detail-article .img-cards--id .img-cards-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.detail-article .img-cards .ic-art.owner-poster-holder{
+  display:flex;align-items:center;justify-content:center;
+  overflow:visible;
+}
+.detail-article .img-cards--id .ic-art.owner-poster-holder{
+  height:auto;min-height:0;
+}
+.detail-article .img-cards--id .ic-art .owner-poster{
+  display:block;width:100%;height:auto;max-width:166px;max-height:none;
+  border-radius:9px;object-fit:contain;
+}
+.detail-article .img-cards--sim .ic-art.owner-poster-holder{
+  height:126px;min-height:126px;
+}
+.detail-article .img-cards--sim .ic-art .owner-poster{
+  display:block;width:auto;height:126px;max-width:100%;max-height:126px;
+  border-radius:8px;object-fit:contain;
+}

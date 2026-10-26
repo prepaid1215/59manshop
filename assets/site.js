@@ -81,6 +81,7 @@ window.enhanceHubContent(document);
   var cards=document.querySelectorAll('.auth-grid li, .img-cards--id li, .img-cards--sim li');
   if(!cards.length)return;
   var spriteUrl='/img/article-photos/common-icons-sprite.png';
+  var ownerPosterPaths={'주민등록증':true,'운전면허증':true,'모바일 신분증':true,'eSIM':true};
   var coords={
     '카카오':[0,0],'토스':[1,0],'PASS':[2,0],'국민':[3,0],'신한':[4,0],
     '주민등록증':[0,1],'운전면허증':[1,1],'모바일 신분증':[2,1],'eSIM':[3,1]
@@ -107,10 +108,40 @@ window.enhanceHubContent(document);
         var label=card.querySelector('figcaption b'),holder=card.querySelector('.ic-art');
         var name=label&&label.textContent.trim();
         if(!holder||!coords[name])return;
+        if(ownerPosterPaths[name])return; /* Owner-provided full-card artwork wins over the sprite. */
         holder.replaceChildren(icon(name,spec[1]));
       });
     });
   };
   test.onerror=function(){};
   test.src=spriteUrl;
+})();
+
+/* Optional user-provided portrait posters for the three ID cards and the eSIM card.
+   Keep the existing icon when a poster is unavailable. */
+(function(){
+  var posters={
+    '주민등록증':{path:'/img/article-photos/identity-resident-card.png',w:265,h:361},
+    '운전면허증':{path:'/img/article-photos/identity-driver-license.png',w:261,h:361},
+    '모바일 신분증':{path:'/img/article-photos/identity-mobile-id.png',w:253,h:361},
+    'eSIM':{path:'/img/article-photos/esim-guide.png',w:262,h:361}
+  };
+  document.querySelectorAll('.img-cards--id li, .img-cards--sim li').forEach(function(card){
+    var title=card.querySelector('figcaption b');
+    var holder=card.querySelector('.ic-art');
+    var name=title&&title.textContent.trim(),poster=posters[name];
+    if(!holder||!poster)return;
+    var pic=new Image();
+    pic.alt=name+' 예시 안내 이미지';
+    pic.loading='eager'; /* Preload before inserting the detached image into the card. */
+    pic.decoding='async';
+    pic.width=poster.w;pic.height=poster.h;
+    pic.className='owner-poster';
+    pic.onload=function(){
+      holder.classList.add('owner-poster-holder');
+      holder.replaceChildren(pic);
+    };
+    pic.onerror=function(){};
+    pic.src=poster.path;
+  });
 })();
