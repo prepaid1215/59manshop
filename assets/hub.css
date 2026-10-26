@@ -366,3 +366,43 @@ body{background:#f6f8fb}
 .article-photo-preview strong{display:block;font-size:14px;margin-bottom:4px}
 .article-photo-preview code{display:block;white-space:normal;overflow-wrap:anywhere;font-size:12px;margin:5px 0}
 .article-photo-preview a{display:inline-block;margin-top:7px;color:#175cd3;text-decoration:underline;text-underline-offset:3px}
+
+/* Reference-style opening quotation for primary article section headings.
+   Purely decorative: preserves actual H2 text, hierarchy, anchor targets and SEO. 
+   Keep component headings (hero, summary, FAQ, pricing cards, CTA and activation steps) as designed. */
+.detail-article > section:not(.hero):not(.answer-card):not(.faq):not(.cta):not(.plan-cards):not(.activation-flow) > h2 {
+  display:block;
+  position:relative;
+  color:#111318!important;
+  font-size:clamp(21px,4.8vw,24px)!important;
+  font-weight:850!important;
+  line-height:1.45!important;
+  letter-spacing:-.038em!important;
+  border:0!important;
+  border-bottom:1px solid #d9dce2!important;
+  padding:0 0 15px!important;
+  margin:0 0 22px!important;
+  background:transparent!important;
+  text-align:left;
+  word-break:keep-all;
+}
+.detail-article > section:not(.hero):not(.answer-card):not(.faq):not(.cta):not(.plan-cards):not(.activation-flow) > h2::before {
+  content:"“";
+  display:block;
+  box-sizing:border-box;
+  height:41px;
+  margin:0 0 13px -2px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:77px;
+  font-weight:700;
+  line-height:.85;
+  letter-spacing:-.08em;
+  color:#e5e2f0;
+  user-select:none;
+  pointer-events:none;
+}
+@media(max-width:380px){
+  .detail-article > section:not(.hero):not(.answer-card):not(.faq):not(.cta):not(.plan-cards):not(.activation-flow) > h2{
+    font-size:21px!important;
+  }
+}
