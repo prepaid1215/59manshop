@@ -17,9 +17,24 @@ const {chromium}=require('./browser_runtime.cjs');
     esim:document.querySelectorAll('.img-cards--sim .common-icon-sprite--sim').length,
     backgrounds:[...document.querySelectorAll('.common-icon-sprite')].every(e=>getComputedStyle(e).backgroundImage.includes('common-icons-sprite.png')),
     broken:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).length,
-    overflow:document.documentElement.scrollWidth>innerWidth+1
+    overflow:document.documentElement.scrollWidth>innerWidth+1,
+    alignment:(function(){
+      const cards=[...document.querySelectorAll('.auth-grid ul > li')];
+      return {
+        badgeTops:cards.map(c=>Number(c.querySelector('.auth-badge').getBoundingClientRect().top.toFixed(2))),
+        labelTops:cards.map(c=>Number(c.querySelector('b').getBoundingClientRect().top.toFixed(2))),
+        margins:cards.map(c=>getComputedStyle(c).marginTop),
+        badgeWidths:cards.map(c=>Number(c.querySelector('.auth-badge').getBoundingClientRect().width.toFixed(2)))
+      };
+    })()
   }));
-  if(result.auth!==5||result.id!==3||result.esim!==1||!result.backgrounds||result.broken||result.overflow)errors.push(width+': '+JSON.stringify(result));
+  const spread=xs=>Math.max(...xs)-Math.min(...xs);
+  if(result.auth!==5||result.id!==3||result.esim!==1||!result.backgrounds||result.broken||result.overflow
+     ||result.alignment.badgeTops.length!==5||spread(result.alignment.badgeTops)>1
+     ||spread(result.alignment.labelTops)>1
+     ||result.alignment.margins.some(m=>m!=='0px')
+     ||spread(result.alignment.badgeWidths)>1
+  )errors.push(width+': '+JSON.stringify(result));
   results.push({width,...result});await page.close();
  }
  const disabled=sprite+'.temporarily-disabled';
