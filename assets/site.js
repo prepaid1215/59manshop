@@ -178,6 +178,9 @@ window.enhanceHubContent(document);
     figure.appendChild(cap);return figure;
   }
   function mount(track,officialActive){
+    // Preserve the insert location before moving the original track.
+    var anchor=document.createElement('span');
+    original.before(anchor);
     var slides=[].slice.call(track.children);
     if(!slides.length)return;
     track.classList.add('guide-carousel-track');
@@ -240,7 +243,7 @@ window.enhanceHubContent(document);
       if(e.key==='ArrowRight'){e.preventDefault();show(idx+1);}
       if(e.key==='ArrowLeft'){e.preventDefault();show(idx-1);}
     });
-    original.before(gallery);
+    anchor.replaceWith(gallery);
     if(officialActive){
       var details=document.createElement('details');
       details.className='guide-original-steps';
@@ -250,8 +253,6 @@ window.enhanceHubContent(document);
       gallery.after(details);
       var note=section.querySelector('p.updated');
       if(note)note.textContent='앤텔레콤 플랫폼에서 제공한 공식 안내 이미지입니다. 실제 신청 화면은 아래에서 펼쳐 볼 수 있으며, 화면 구성은 달라질 수 있습니다.';
-    } else {
-      original.remove();
     }
     update(0);
     if(officialActive)gallery.dataset.source='official';
