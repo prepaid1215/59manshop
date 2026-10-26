@@ -19,6 +19,7 @@ const {chromium}=require('./browser_runtime.cjs');
     const summary=$('.detail-article>.answer-card');
     return {
      pageWidth:innerWidth,
+     fontFamily:getComputedStyle(document.body).fontFamily,
      shellWidth:rect('.top .site')?.width,contentWidth:rect('main.site')?.width,articleWidth:rect('.editorial-v2')?.width,
      headline:txt('.editorial-v2 h1'),summary:txt('.editorial-v2>.answer-card h2'),
      conclusionChars:txt('.editorial-v2>.answer-card .answer-lead').length,summaryTop:rect('.editorial-v2>.answer-card')?.top,
@@ -36,7 +37,7 @@ const {chromium}=require('./browser_runtime.cjs');
      cta:$('.bottom-bar-main')?.getAttribute('href'),
     };
    });
-   const ok=detail.shellWidth<=480&&detail.contentWidth<=480&&detail.articleWidth<=480&&!detail.overflow&&!detail.broken.length&&detail.coverInSummary&&detail.duplicateCover===1&&detail.summaryTop<Math.min(900,detail.heroEnd+90)&&detail.paraFont>=14.7&&detail.conclusionChars>35&&detail.robots==='index,follow'&&detail.backMenu!=='none'&&detail.pcMenu==='none'&&pageErr.length===0;
+   const ok=detail.fontFamily.includes('Pretendard Variable')&&detail.shellWidth<=480&&detail.contentWidth<=480&&detail.articleWidth<=480&&!detail.overflow&&!detail.broken.length&&detail.coverInSummary&&detail.duplicateCover===1&&detail.summaryTop<Math.min(900,detail.heroEnd+90)&&detail.paraFont>=14.7&&detail.conclusionChars>35&&detail.robots==='index,follow'&&detail.backMenu!=='none'&&detail.pcMenu==='none'&&pageErr.length===0;
    const record={name,width,ok,...detail,errors:pageErr};results.push(record);if(!ok)errors.push(record);
    if(width===390||width===1440){await page.screenshot({path:path.join(dir,name+'-'+width+'.png'),fullPage:false});
     if(width===390) await page.screenshot({path:path.join(dir,name+'-390-full.png'),fullPage:true});}
