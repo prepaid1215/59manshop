@@ -33,7 +33,7 @@ for p in TARGETS:
  if re.search(r'http://pf.kakao.com/_iNaeb|http://pf.kakao.com/_muGxnn',after):
   errors.append(f"{p}: reference contact URL accidentally copied")
 page=(ROOT/TARGETS[0]).read_text('utf-8')
-for token in ['카카오·토스·PASS','유심번호 19자리','모델코드 5자리','08:00~21:50','요금을 충전','1899-7700','멤버십 앱','담당자의 승인이 필요','/편의점-선불유심/']:
+for token in ['카카오·토스·PASS','유심번호 19자리','모델코드 5자리','08:00~21:50','요금을 충전','1899-7700','멤버십 앱','담당자 승인','/편의점-선불유심/']:
  if token not in page: errors.append(f'activation page missing {token}')
 sim=(ROOT/TARGETS[2]).read_text('utf-8')
 for token in ['8,800원','5,000원','2,750원','NFC','다이소 고고비']:
@@ -43,5 +43,9 @@ for token in ['기존 번호 그대로 번호이동은 불가','가입제한','L
  if token not in arrears: errors.append(f'arrears page missing {token}')
 for key in ['신청서 제출 → 요금 충전 → 사용','1899-7700']:
  if key not in arrears: errors.append(f'arrears page missing {key}')
+for t in ['플랫폼 개통 후', '태블릿개통', '담당자가 해피콜', '담당자 승인', '요금 충전']:
+ if t not in page: errors.append(f'activation flow distinction missing {t}')
+if '플랫폼 개통 후' not in arrears: errors.append('arrears guide does not distinguish platform follow-up call')
+if '태블릿개통' not in sim: errors.append('SIM guide does not distinguish tablet happy call')
 print(json.dumps({'checked':len(TARGETS),'errors':errors},ensure_ascii=False,indent=2))
 sys.exit(1 if errors else 0)

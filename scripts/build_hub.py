@@ -190,7 +190,7 @@ def transform(page, url):
     if url in ('/선불폰-개통방법/', '/미납정지-선불폰/') and 'detail-workspace' in page:
         answer_match = re.search(r'<section class="answer-card">.*?</section>', page, re.S)
         if answer_match and 'answer-lead' not in answer_match.group(0):
-            lead = ('선불폰은 본인확인 수단·신분증·호환 유심을 준비해 신청합니다. 신청서 제출 후 요금을 충전하면 사용할 수 있으며, 개통 후 해피콜(1899-7700)을 꼭 받아야 합니다.'
+            lead = ('선불폰은 본인확인 수단·신분증·호환 유심을 준비해 신청합니다. 신청서 제출 후 요금을 충전하면 사용할 수 있으며, 플랫폼 개통 후에는 본사 해피콜(1899-7700)을 꼭 받아야 합니다. 태블릿개통은 담당자 해피콜 후 승인, 이후 요금 충전 순서입니다.'
                     if url == '/선불폰-개통방법/' else
                     '미납·정지된 기존 번호는 번호이동할 수 없습니다. <strong>본인 명의 선불 신규가입은 신청할 수 있지만</strong> 실제 개통 여부는 인증과 가입 조건에 따라 달라집니다.')
             answer = answer_match.group(0)

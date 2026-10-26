@@ -129,5 +129,11 @@ This repository powers https://www.59man.shop/ .
 ## Operator clarification 2026-10-26: self activation vs tablet membership
 - Online non-face-to-face self-activation (e.g. preplan.site): prepare identity verification method, ID document and compatible SIM; submit application; recharge fee; usable immediately thereafter. **Do not insert a staff-approval stage** into online self-activation flow.
 - Staff approval is required for **tablet activation submitted through 앤텔레콤 멤버십 앱**, a distinct path.
-- After activation, the user MUST answer the Anne Telecom follow-up verification call **1899-7700 (해피콜)**. This is after use begins, not the approval prerequisite.
+- The head-office follow-up verification call **1899-7700 (해피콜)** occurs ONLY for online PLATFORM activation, after recharge/use begins. Never attribute this number to tablet activation.
+- Tablet activation via 앤텔레콤 멤버십 앱 uses **staff's own happy call -> staff approval -> fee recharge**. Approval is AFTER that staff call, before recharge. This is a distinct happy-call process, not the platform's 1899-7700 call.
 - Correct old `승인 -> 충전` copy, including `meta description`, alongside visible content; retain existing canonical/robots/URLs.
+
+## Corrected flow boundary confirmed by operator 2026-10-26
+- 플랫폼 개통: 본인확인 → 신청서 제출 → 요금 충전 → 사용 → 앤텔레콤 본사 1899-7700 해피콜 수신.
+- 태블릿개통(앤텔레콤 멤버십 앱): 담당자 해피콜 → 담당자 승인 → 요금 충전 → 사용. 1899-7700 본사 플랫폼 해피콜과 구분.
+- All user-facing text and SEO summaries must distinguish these routes.
