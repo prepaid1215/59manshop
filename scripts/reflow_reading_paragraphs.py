@@ -22,9 +22,9 @@ TOKEN = re.compile(r'<[^>]*>|[^<]+', re.S)
 TAG = re.compile(r'^<\s*(/?)\s*([a-z][\w:-]*)', re.I)
 SENT = re.compile(r'[.!?。！？](?:["”’\')\]]+)?\s+(?=[가-힣A-Za-z0-9“"\'(\[])')
 VOID = {'br', 'img', 'hr', 'meta', 'link', 'input', 'source', 'wbr', 'area'}
-MAX_CHARS = 123
-TARGET_CHARS = 84
-MIN_CHARS = 37
+MAX_CHARS = 108
+TARGET_CHARS = 76
+MIN_CHARS = 28
 SKIP_CLASSES = ('step-', 'reader-toc', 'gc-', 'sm-ai-caption', 'hero-', 'member-')
 
 def visible(s: str) -> str:

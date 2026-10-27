@@ -23,7 +23,7 @@ jobs:
           git diff --check
           python - <<'PY'
           import subprocess,re,html
-          names=subprocess.check_output(['git','diff','--name-only'],text=True).splitlines()
+          names=[n for n in subprocess.check_output(['git','diff','--name-only','-z']).decode('utf8').split('\x00') if n]
           for name in names:
               before=subprocess.check_output(['git','show','HEAD:'+name],text=True)
               after=open(name,encoding='utf8').read()
