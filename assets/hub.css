@@ -1381,3 +1381,53 @@ body{background:#f6f8fb}
   font-size:40px!important;line-height:1.13!important;
   color:#b4cef4!important;letter-spacing:-.05em!important;
 }
+
+
+/* Informational images: authentic product photography, official activation screens
+   and explicitly labeled original brand infographics. Keep copy readable at 390px. */
+#main-content .detail-article.magazine-blue figure.sm-editorial-figure{
+  box-sizing:border-box;
+  max-width:100%;
+  width:100%;
+  margin:18px 0 24px!important;
+  padding:12px!important;
+  background:linear-gradient(140deg,#f7faff,#edf5ff)!important;
+  border:1px solid #dce8f8!important;
+  border-radius:16px!important;
+  overflow:hidden;
+  text-align:center;
+}
+#main-content .detail-article.magazine-blue figure.sm-editorial-figure img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  max-height:450px;
+  margin:0 auto;
+  object-fit:contain;
+  border-radius:10px;
+  background:#fff;
+}
+#main-content .detail-article.magazine-blue figure.sm-editorial-figure.sm-real-screen img{
+  width:auto;
+  max-width:100%;
+  max-height:430px;
+}
+#main-content .detail-article.magazine-blue figure.sm-editorial-figure.sm-product-photo img{
+  width:auto;
+  max-width:100%;
+  max-height:290px;
+}
+#main-content .detail-article.magazine-blue figure.sm-editorial-figure figcaption{
+  display:block;
+  margin:10px 0 0!important;
+  font-size:12px!important;
+  font-weight:650!important;
+  line-height:1.65!important;
+  color:#465e7e!important;
+  word-break:keep-all;
+}
+#main-content .detail-article.magazine-blue > .detail-lead-visual img{
+  object-fit:contain;
+  max-height:240px;
+}
