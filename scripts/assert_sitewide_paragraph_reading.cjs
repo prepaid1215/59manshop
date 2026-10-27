@@ -15,6 +15,7 @@ function collect(folder,base=''){
 const files=collect(root).sort();
 (async()=>{
  const browser=await chromium.launch({headless:true});
+ try {
  const summary=[],issues=[],longParagraphs=[];
  for(const width of [390,480]){
   const page=await browser.newPage({viewport:{width,height:850},deviceScaleFactor:1,reducedMotion:'reduce'});
@@ -22,8 +23,16 @@ const files=collect(root).sort();
    const route=filename==='index.html'?'/':'/'+filename.replace(/index\.html$/,'');
    const errors=[];const handler=e=>errors.push(e.message);page.on('pageerror',handler);
    await page.goto('http://127.0.0.1:8765'+route,{waitUntil:'domcontentloaded',timeout:25000});
-   await page.evaluate(()=>document.fonts.ready);
-   const m=await page.evaluate(()=>{
+   // Redirect pages can replace the navigation context after DOMContentLoaded.
+   // Retry inspection on the settled document instead of leaving Chromium open.
+   let m;
+   for(let attempt=0;attempt<3;attempt++){
+     try{
+       await Promise.race([
+         page.evaluate(()=>document.fonts.ready),
+         new Promise(resolve=>setTimeout(resolve,2000))
+       ]);
+       m=await page.evaluate(()=>{
     const article=document.querySelector('article.detail-article');
     const paragraphs=article?[...article.querySelectorAll('p')]:[];
     let seen=0,veryLong=[];
@@ -53,6 +62,14 @@ const files=collect(root).sort();
       loaded:true
     };
    });
+       break;
+     }catch(error){
+       if(attempt===2||!/Execution context was destroyed|navigation|Frame was detached/i.test(String(error)))
+         throw new Error(route+' at '+width+'px: '+String(error));
+       await page.waitForLoadState('domcontentloaded',{timeout:5000}).catch(()=>{});
+       await page.waitForTimeout(400);
+     }
+   }
    const row={route,width,...m,errors:errors.slice(0,2)};
    summary.push(row);
    for(const bad of m.long)longParagraphs.push({route,width,...bad});
@@ -68,9 +85,9 @@ const files=collect(root).sort();
   }
   await page.close();
  }
- await browser.close();
  const result={htmlPages:files.length,rendered:summary.length,articlesRendered:summary.filter(r=>r.isArticle).length,issues,longParagraphs,perPage:summary};
  fs.writeFileSync(path.join(out,'results.json'),JSON.stringify(result,null,2));
  console.log(JSON.stringify({htmlPages:result.htmlPages,rendered:result.rendered,articlesRendered:result.articlesRendered,issues,paragraphsAtLeast6Lines:longParagraphs.length,longParagraphs:longParagraphs.slice(0,70)},null,2));
  if(issues.length)process.exitCode=1;
+ } finally { await browser.close(); }
 })().catch(e=>{console.error(e);process.exitCode=1});
