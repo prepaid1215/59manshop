@@ -4,7 +4,7 @@ const fs=require('fs'),path=require('path'),{chromium}=require('./browser_runtim
 const root=path.join(__dirname,'..');
 const pages=[
  {slug:'lg-모두의원칩-셀프개통',expected:['/img/guide/usim-lg-photo.webp','/img/editorial/lg-onechip-activation-steps.svg','/img/guide/platform-rule-03.webp','/img/editorial/lg-onechip-model-serial.svg']},
- {slug:'l망-464-요금제',expected:['/img/editorial/l464-data-condition.svg','/img/guide/cap-plan-selected.webp']},
+ {slug:'l망-464-요금제',expected:['/img/editorial/l464-data-condition.svg','/img/guide/usim-lg-photo.webp']},
  {slug:'l망-2-5gb-요금제',expected:['/img/editorial/l25-usage-summary.svg','/img/guide/usim-lg-photo.webp']},
  {slug:'kt선불폰-개통',expected:['/img/guide/usim-kt-photo.webp','/img/editorial/kt-baro-19digits.svg']}
 ];
