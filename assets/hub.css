@@ -1433,6 +1433,17 @@ body{background:#f6f8fb}
 }
 
 
+/* Page-specific square representative covers. */
+#main-content .detail-lead-visual.representative-visual,
+#main-content .home-representative,
+#main-content .guide-representative{display:block!important;box-sizing:border-box;width:min(640px,calc(100% - 32px))!important;max-width:640px!important;min-height:0!important;padding:0!important;margin:18px auto 26px!important;border-radius:18px!important;overflow:hidden;background:#fff!important;box-shadow:0 10px 28px rgba(17,48,90,.12)}
+#main-content .detail-lead-visual.representative-visual img,
+#main-content .home-representative img,
+#main-content .guide-representative img{display:block;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;margin:0!important}
+#main-content .representative-visual figcaption,
+#main-content .home-representative figcaption,
+#main-content .guide-representative figcaption{padding:7px 10px;text-align:center;font-size:11px;line-height:1.45;color:#5d6b7d;background:#f6f8fc}
+
 /* Small AI-created visual previews: never style these as genuine package photos. */
 #main-content .detail-article.magazine-blue .sm-ai-photo-preview{
   display:flex;gap:14px;align-items:center;box-sizing:border-box;
