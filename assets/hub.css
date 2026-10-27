@@ -1466,3 +1466,16 @@ body{background:#f6f8fb}
    width:110px;height:110px;
  }
 }
+
+
+/* Mobile readability and full-size representative image links. */
+@media (max-width:640px){body.home .landing-hero .home-hero-sub{font-size:15px!important;line-height:1.7!important}
+body.home .landing-hero-notice{font-size:13px!important;line-height:1.6!important}
+body.home .landing-intents-sub,body.home .home-plans p,body.home .home-usim em{font-size:14px!important;line-height:1.6!important}
+body.home .home-note{font-size:13px!important;line-height:1.65!important}
+body.guide-hub .hub-meta .crumb-bar,body.guide-hub .hub-meta .crumb,body.guide-hub .hub-meta .updated,body.guide-hub .gc-tile small{font-size:12px!important;line-height:1.5!important}
+}
+#main-content figure.representative-visual figcaption,#main-content figure.home-representative figcaption,#main-content figure.guide-representative figcaption{font-size:12px!important;line-height:1.55!important}
+#main-content figure.representative-visual .cover-open-original,#main-content figure.home-representative .cover-open-original,#main-content figure.guide-representative .cover-open-original{display:flex!important;align-items:center;justify-content:center;min-height:44px;padding:9px 12px;border-top:1px solid #dce8f8;background:#f7fbff!important;color:#175cd3!important;font-size:14px!important;font-weight:750!important;line-height:1.5!important;text-decoration:underline!important;text-underline-offset:3px}
+#main-content figure.representative-visual .cover-open-original:focus-visible,#main-content figure.home-representative .cover-open-original:focus-visible,#main-content figure.guide-representative .cover-open-original:focus-visible{outline:2px solid #175cd3;outline-offset:-3px}
+

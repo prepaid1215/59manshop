@@ -469,3 +469,25 @@ window.enhanceHubContent(document);
     if(related)related.before(final);else root.appendChild(final);
   }
 })();
+
+
+// Let readers inspect small text in a cover at its full-resolution image URL.
+(function(){
+  function addCoverLinks(){
+      document.querySelectorAll('figure.representative-visual,figure.home-representative,figure.guide-representative').forEach(function(figure){
+            var image=figure.querySelector('img[src*="cover-"][src$="-mobile.jpg"]');
+                  if(!image||figure.querySelector('.cover-open-original'))return;
+                        var link=document.createElement('a');
+                              link.className='cover-open-original';
+                                    link.href=image.src.replace(/-mobile\.jpg$/,'-og.jpg');
+                                          link.target='_blank';
+                                                link.rel='noopener';
+                                                      link.textContent='대표이미지 크게 보기 (새 탭)';
+                                                            link.setAttribute('aria-label',(image.alt||'대표이미지')+' 원본 크기로 보기, 새 탭');
+                                                                  figure.appendChild(link);
+                                                                      });
+                                                                        }
+                                                                          if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addCoverLinks,{once:true});
+                                                                            else addCoverLinks();
+                                                                            })();
+                                                                            
