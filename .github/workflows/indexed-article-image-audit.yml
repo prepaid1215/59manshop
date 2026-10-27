@@ -1,0 +1,18 @@
+name: Indexed article image audit
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  indexed-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Audit all 26 indexed articles and 20 refreshed pages
+        run: python scripts/assert_indexed_article_images.py
