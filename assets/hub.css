@@ -1479,3 +1479,6 @@ body.guide-hub .hub-meta .crumb-bar,body.guide-hub .hub-meta .crumb,body.guide-h
 #main-content figure.representative-visual .cover-open-original,#main-content figure.home-representative .cover-open-original,#main-content figure.guide-representative .cover-open-original{display:flex!important;align-items:center;justify-content:center;min-height:44px;padding:9px 12px;border-top:1px solid #dce8f8;background:#f7fbff!important;color:#175cd3!important;font-size:14px!important;font-weight:750!important;line-height:1.5!important;text-decoration:underline!important;text-underline-offset:3px}
 #main-content figure.representative-visual .cover-open-original:focus-visible,#main-content figure.home-representative .cover-open-original:focus-visible,#main-content figure.guide-representative .cover-open-original:focus-visible{outline:2px solid #175cd3;outline-offset:-3px}
 
+
+/* Small guide counts need AA-level contrast on white cards. */
+body.guide-hub .gc-tile small{color:#53647c!important}
