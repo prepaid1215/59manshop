@@ -1,0 +1,21 @@
+name: Test image source resolution
+on:
+  push:
+    branches: [design/test-image-staging-20261027]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Canva image download variants
+        env:
+          SMALL: 'https://media.canva.com/v2/image-resize/format:PNG/height:200/quality:100/uri:ifs%3A%2F%2FM%2F1afbe9b3-fdbd-4661-b90c-bb7134ab5dcb/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAACCmdcCpIpPy7ntPVVv7URJZ-sbinNc5etn4i_49fsar&exp=1793084939&osig=AAAAAAAAAAAAAAAAAAAAAI9WlqF99rJuL18OxvX4doxhYZ86Gw-jCnxyc5Z1W2S3&signer=media-rpc&token=AAIAAU0AJDFhZmJlOWIzLWZkYmQtNDY2MS1iOTBjLWJiNzEzNGFiNWRjYgAAAAABoXww2vh6HYSOL6417-xeHjsHB1-zoJ3zm6ILNxoIuvBp3or_2A&x-canva-quality=thumbnail'
+          BIG: 'https://media.canva.com/v2/image-resize/format:PNG/height:1000/quality:100/uri:ifs%3A%2F%2FM%2F1afbe9b3-fdbd-4661-b90c-bb7134ab5dcb/watermark:F/width:1000?csig=AAAAAAAAAAAAAAAAAAAAACCmdcCpIpPy7ntPVVv7URJZ-sbinNc5etn4i_49fsar&exp=1793084939&osig=AAAAAAAAAAAAAAAAAAAAAI9WlqF99rJuL18OxvX4doxhYZ86Gw-jCnxyc5Z1W2S3&signer=media-rpc&token=AAIAAU0AJDFhZmJlOWIzLWZkYmQtNDY2MS1iOTBjLWJiNzEzNGFiNWRjYgAAAAABoXww2vh6HYSOL6417-xeHjsHB1-zoJ3zm6ILNxoIuvBp3or_2A&x-canva-quality=thumbnail'
+        run: |
+          for t in SMALL BIG; do
+            value="${!t}"
+            status=$(curl --max-time 30 -L -sS -o "/tmp/${t}.png" -w '%{http_code}' "$value" || true)
+            echo "$t status=$status bytes=$(wc -c </tmp/${t}.png 2>/dev/null || echo 0)"
+            file "/tmp/${t}.png" || true
+          done
