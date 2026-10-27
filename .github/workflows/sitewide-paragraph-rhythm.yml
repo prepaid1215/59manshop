@@ -1,0 +1,50 @@
+name: Apply sitewide natural paragraph spacing
+on:
+  push:
+    branches:
+      - design/sitewide-paragraph-rhythm-20261027
+permissions:
+  contents: write
+jobs:
+  reflow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Review and split overlong paragraph sentences
+        run: python scripts/reflow_reading_paragraphs.py --write | tee /tmp/readability-report.json
+      - name: Verify whitespace and generated HTML changes
+        run: |
+          git diff --check
+          python - <<'PY'
+          import subprocess,re,html
+          names=subprocess.check_output(['git','diff','--name-only'],text=True).splitlines()
+          for name in names:
+              before=subprocess.check_output(['git','show','HEAD:'+name],text=True)
+              after=open(name,encoding='utf8').read()
+              p=re.compile(r'<article\b[^>]*>[\s\S]*?</article>')
+              a=p.search(before);b=p.search(after)
+              if not a or not b:raise SystemExit('Missing article '+name)
+              strip=lambda x:html.unescape(re.sub(r'<[^>]*>','',x))
+              if strip(a.group())!=strip(b.group()):raise SystemExit('Visible text changed '+name)
+              for pattern in [r'<title>[\s\S]*?</title>',r'<link rel="canonical"[^>]*>',r'<meta name="robots"[^>]*>',r'href="[^"]+"']:
+                  if re.findall(pattern,before)!=re.findall(pattern,after):
+                      raise SystemExit('SEO or href changed '+name+' '+pattern)
+          print('PASS: preserved visible article text, titles, canonical, robots and links for',len(names),'HTML pages')
+          PY
+      - name: Save edited pages on this branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '**/index.html' index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Improve natural sentence paragraph spacing across article pages"
+            git push origin HEAD:design/sitewide-paragraph-rhythm-20261027
+          else
+            echo 'No additional paragraph changes'
+          fi
