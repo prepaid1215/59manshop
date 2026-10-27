@@ -1,0 +1,35 @@
+name: Editorial images visual QA
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify image rendering and mobile layout
+        run: |
+          python scripts/serve_preview.py >/tmp/site-preview.log 2>&1 &
+          sleep 2
+          node scripts/assert_editorial_images.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 59man-editorial-images
+          path: reports/ui/editorial-images/
+          if-no-files-found: warn
