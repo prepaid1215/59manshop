@@ -340,11 +340,11 @@ window.enhanceHubContent(document);
     '/lg-모두의원칩-셀프개통/':{
       facts:[['L망 원칩 가격','8,800원'],['모델코드','5자리'],['일련번호','8자리']],
       choices:[
-        ['원칩을 이미 구매했다면','https://preplan.site/?from=59man_lgonechip_choice','L망 셀프개통 화면에서 모델코드·일련번호 입력'],
+        ['원칩을 이미 구매했다면','https://preplan.site/lg-self/?from=59man_lgonechip_choice','L망 셀프개통 화면에서 모델코드·일련번호 입력'],
         ['원칩 구매 전이라면','/lg-원칩/','판매처와 제품 정보를 먼저 확인']
       ],
       tip:['신청 후 충전 순서','플랫폼 비대면 신청은 개통 완료 → 요금 충전 → 사용 시작 → 이후 1899-7700 해피콜 순서입니다.'],
-      final:['원칩이 준비됐다면','L망을 선택하고 안면인증·간편인증을 거쳐 모델코드 5자리와 일련번호 8자리를 입력하세요.','원칩으로 개통 시작하기','https://preplan.site/?from=59man_lgonechip_magazine']
+      final:['원칩이 준비됐다면','L망을 선택하고 안면인증·간편인증을 거쳐 모델코드 5자리와 일련번호 8자리를 입력하세요.','원칩으로 개통 시작하기','https://preplan.site/lg-self/?from=59man_lgonechip_magazine']
     },
     '/l망-464-요금제/':{
       facts:[['월 요금','46,400원'],['기본 데이터','20GB'],['소진 후','최대 3Mbps']],
