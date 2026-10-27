@@ -1,0 +1,35 @@
+name: AI media thumbnails regression
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  previews:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Validate five article previews in three screen widths
+        run: |
+          python scripts/serve_preview.py >/tmp/preview.log 2>&1 &
+          sleep 2
+          node scripts/assert_ai_media_previews.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 59man-ai-media-preview-qa
+          path: reports/ui/ai-media-previews/
+          if-no-files-found: warn

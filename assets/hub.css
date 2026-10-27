@@ -1431,3 +1431,27 @@ body{background:#f6f8fb}
   object-fit:contain;
   max-height:240px;
 }
+
+
+/* Small AI-created visual previews: never style these as genuine package photos. */
+#main-content .detail-article.magazine-blue .sm-ai-photo-preview{
+  display:flex;gap:14px;align-items:center;box-sizing:border-box;
+  padding:12px;margin:16px 0 23px;
+  border:1px solid #dce8f8;border-radius:15px;background:#f7fbff;
+}
+#main-content .detail-article.magazine-blue .sm-ai-photo-preview img{
+  width:130px;height:130px;max-width:40%;flex:none;
+  border-radius:11px;object-fit:cover;border:1px solid #e6edf5;
+}
+#main-content .detail-article.magazine-blue .sm-ai-photo-preview .sm-ai-caption{
+  min-width:0;flex:1;font-size:12.5px;line-height:1.7;color:#53677f;
+}
+#main-content .detail-article.magazine-blue .sm-ai-photo-preview strong{
+  display:block;margin-bottom:7px;color:#164e9f;font-size:14px;
+  line-height:1.5;font-weight:850;
+}
+@media(max-width:365px){
+ #main-content .detail-article.magazine-blue .sm-ai-photo-preview img{
+   width:110px;height:110px;
+ }
+}
