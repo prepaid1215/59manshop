@@ -1,0 +1,47 @@
+name: Temporary stage 1 content and cover update
+on:
+  push:
+    branches: [fix/stage1-content-cover-20261028]
+    paths:
+      - 'scripts/.stage1-content-20261028.py'
+      - '.github/workflows/stage1-content-20261028.yml'
+permissions:
+  contents: write
+jobs:
+  edit-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install SVG renderer and Korean fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin fonts-noto-cjk
+          python -m pip install pillow
+      - name: Update article navigation and verified copy
+        run: python scripts/.stage1-content-20261028.py
+      - name: Render 5-step cover with revised shared subtitle
+        run: |
+          rsvg-convert -w 1254 -h 1254 img/.cover-02-five-step.svg -o /tmp/cover-02.png
+          python - <<'PY'
+          from PIL import Image
+          i=Image.open('/tmp/cover-02.png').convert('RGB')
+          i.save('img/cover-02-activation-steps-og.jpg','JPEG',quality=92,optimize=True)
+          i.resize((640,640),Image.Resampling.LANCZOS).save('img/cover-02-activation-steps-mobile.jpg','JPEG',quality=90,optimize=True)
+          PY
+      - name: Run canonical, links, image and article checks
+        run: |
+          python scripts/check_site.py
+          python scripts/assert_indexed_article_images.py
+      - name: Commit just resulting content, remove temporary tool
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git rm scripts/.stage1-content-20261028.py img/.cover-02-five-step.svg .github/workflows/stage1-content-20261028.yml
+          git commit -m "Stage 1: synchronize 26 guide menus, correct policy copy and cover subtitle"
+          git push origin HEAD:fix/stage1-content-cover-20261028
