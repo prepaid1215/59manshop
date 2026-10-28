@@ -28,4 +28,11 @@ jobs:
                   print(json.dumps({'url':url,'status':status,'final_url':final,'html_bytes':len(html),'public_tag_ids':ids,'has_dataLayer':bool(re.search(r'dataLayer',html)),'has_consent_mode':bool(re.search('consent.*default|gtag\\(.[,]consent',html,re.I)),'has_analytics_keyword':bool(re.search('google-analytics|gtag/js|googletagmanager.com/gtm.js',html,re.I))},ensure_ascii=False))
               except Exception as e:
                   print(json.dumps({'url':url,'error':str(e)[:180]},ensure_ascii=False))
+          try:
+              url='https://www.googletagmanager.com/gtm.js?id=GTM-NB2K5MFQ'
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=18) as f:
+                  source=f.read(1500000).decode('utf-8','replace')
+              ids=sorted(set(re.findall(r'G-[A-Z0-9]{7,}|AW-[0-9]{6,}',source)))
+              print(json.dumps({'public_gtm_js':'GTM-NB2K5MFQ','bytes':len(source),'google_ids':ids,'pageview_tag_references':source.count('page_view')},ensure_ascii=False))
+          except Exception as e: print(json.dumps({'gtm_error':str(e)[:160]}))
           PY
