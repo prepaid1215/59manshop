@@ -42,6 +42,12 @@ const pages=[
       tocCount:toc.length,
       validToc:checks,
       primary:a.querySelector('.hero-cta')?.getAttribute('href'),
+      // Include links injected by assets/site.js, not only static HTML.
+      directCtas:[
+        ...a.querySelectorAll('.hero-cta, .sm-final>a'),
+        ...[...a.querySelectorAll('.sm-choice-grid a')].filter(x=>x.querySelector('strong')?.textContent.trim()==='원칩을 이미 구매했다면')
+      ].map(x=>({label:x.textContent.trim(),href:x.getAttribute('href')})),
+      infoLink:a.querySelector('a[href*="preplan.site/lg-self/"]')?.getAttribute('href'),
       noOverflow:document.documentElement.scrollWidth<=innerWidth+1,
       imgBroken:[...a.querySelectorAll('img')].filter(x=>x.complete&&x.naturalWidth===0).map(x=>x.src).slice(0,6)
      };
@@ -49,7 +55,13 @@ const pages=[
    const ok=m.mag&&m.articleWidth<=480&&m.facts===spec.facts&&m.products===spec.products&&
      m.choices===spec.choices&&m.final===spec.final&&m.numbered&&m.tocCount>=3&&m.validToc&&
      m.blueRule==='rgb(23, 92, 211)'&&m.linkColor==='rgb(23, 92, 211)'&&
-     m.primary?.startsWith('https://preplan.site/')&&m.noOverflow&&!m.imgBroken.length&&!errs.length;
+     m.primary?.startsWith('https://preplan.site/')&&
+     m.directCtas.every(x=>{try{return new URL(x.href).pathname==='/'}catch(e){return false}})&&
+     (spec.route!=='/lg-모두의원칩-셀프개통/'||(
+       m.directCtas.some(x=>x.href?.includes('59man_lgonechip_choice'))&&
+       m.directCtas.some(x=>x.href?.includes('59man_lgonechip_magazine'))&&
+       m.infoLink?.startsWith('https://preplan.site/lg-self/')
+     ))&&m.noOverflow&&!m.imgBroken.length&&!errs.length;
    const row={width,route:spec.route,pass:ok,...m,errors:errs};results.push(row);
    if(!ok)failures.push(row);
    if(width===390||width===1440){
