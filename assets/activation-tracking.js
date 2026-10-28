@@ -122,11 +122,36 @@
     controls.append(no,yes);node.appendChild(controls);
     document.body.appendChild(node);
   }
-  if(consent==='yes')loadGA();
-  else if(consent==='unset'){
-    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',consentNotice);
-    else consentNotice();
+  function settingsButton(){
+    if(document.getElementById('mm59-analytics-settings'))return;
+    var footer=document.querySelector('footer .footer-info')||document.querySelector('footer');
+    if(!footer)return;
+    var button=document.createElement('button');
+    button.id='mm59-analytics-settings';
+    button.type='button';
+    button.textContent='방문 통계 설정';
+    button.style.cssText='background:transparent;border:0;padding:4px 0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit';
+    button.addEventListener('click',function(){
+      // Withdrawing consent stops future events and avoids loading GA on reload.
+      if(consent==='yes'&&typeof window.gtag==='function'){
+        window.gtag('consent','update',{
+          analytics_storage:'denied',ad_storage:'denied',
+          ad_user_data:'denied',ad_personalization:'denied'
+        });
+      }
+      consent='unset';
+      try{localStorage.removeItem(KEY)}catch(e){}
+      consentNotice();
+    });
+    footer.appendChild(button);
   }
+  function startup(){
+    settingsButton();
+    if(consent==='yes')loadGA();
+    else if(consent==='unset')consentNotice();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startup);
+  else startup();
   // Explicit, local-only hook for diagnostics. It never marks a verified activation.
   window.mm59TrackingStatus=function(){return {analyticsConsent:consent,gaLoaded:!!window.__mm59GaLoaded}};
 })();
