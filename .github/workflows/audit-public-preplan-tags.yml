@@ -33,7 +33,7 @@ jobs:
               with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=18) as f:
                   source=f.read(1500000).decode('utf-8','replace')
               ids=sorted(set(re.findall(r'G-[A-Z0-9]{7,}|AW-[0-9]{6,}',source)))
-              print(json.dumps({'public_gtm_js':'GTM-NB2K5MFQ','bytes':len(source),'google_ids':ids,'pageview_tag_references':source.count('page_view')},ensure_ascii=False))
+              print(json.dumps({'public_gtm_js':'GTM-NB2K5MFQ','bytes':len(source),'google_ids':ids,'pageview_tag_references':source.count('page_view'), 'contains_mm59_preplan_visit':'mm59_preplan_visit' in source,'contains_mm59_application_handoff':'mm59_application_handoff' in source, 'contains_mm_source':'mm_source' in source},ensure_ascii=False))
           except Exception as e: print(json.dumps({'gtm_error':str(e)[:160]}))
           # Verify public plugin install and enqueue without mutating WordPress.
           for url in ['https://preplan.site/?from=59man_qa_bridge_20261028',
