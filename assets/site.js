@@ -471,3 +471,12 @@ window.enhanceHubContent(document);
 })();
 
 
+
+
+/* Conversion measurement: separate consent-controlled tracking module, shared by all article pages. */
+(function(){
+  var script=document.createElement('script');
+  script.src='/assets/activation-tracking.js?v=20261028';
+  script.async=true;
+  document.head.appendChild(script);
+})();

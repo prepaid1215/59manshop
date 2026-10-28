@@ -1,0 +1,35 @@
+name: Conversion source and consent QA
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  conversion-tracking:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test consent and conversion attribution
+        run: |
+          python scripts/serve_preview.py >/tmp/tracking-preview.log 2>&1 &
+          sleep 2
+          node scripts/assert_conversion_tracking.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 59man-conversion-tracking
+          path: reports/ui/conversion-tracking/
+          if-no-files-found: warn
