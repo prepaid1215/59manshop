@@ -1,0 +1,33 @@
+name: Naver IndexNow changed URLs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - '**/index.html'
+      - 'sitemap.xml'
+      - 'b10edb20efd14a1666dd9f0930f45ac5.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naver-indexnow-main
+  cancel-in-progress: true
+
+jobs:
+  notify:
+    name: Submit changed indexable URLs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout complete repository history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Notify Naver after the changed pages are live
+        env:
+          INDEXNOW_BEFORE: ${{ github.event.before }}
+          INDEXNOW_AFTER: ${{ github.sha }}
+        run: python3 scripts/submit_indexnow.py
