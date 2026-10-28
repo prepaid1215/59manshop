@@ -99,6 +99,12 @@
     try{localStorage.setItem(KEY,value)}catch(e){}
     var dlg=document.getElementById('mm59-analytics-consent');
     if(dlg)dlg.remove();
+    if(value==='yes'&&window.__mm59GaLoaded&&typeof window.gtag==='function'){
+      window.gtag('consent','update',{
+        analytics_storage:'granted',ad_storage:'denied',
+        ad_user_data:'denied',ad_personalization:'denied'
+      });
+    }
     if(value==='yes')loadGA();
   }
   function consentNotice(){
