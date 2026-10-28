@@ -42,7 +42,7 @@ replace_exact(p,'<td>화면에 칸이 나오면 2893496</td>','<td>입력 불필
 replace_exact(p,'휴대폰으로 신청해도 이 칸이 나오면 담당 판매점 번호를 넣습니다.','앤텔레콤 멤버십 앱에서 신청할 때만 담당 판매점 번호를 넣습니다. 59만모바일 웹 플랫폼 개통에는 회원번호 입력이 필요하지 않습니다.',count=2)
 # A6: titles match comparison intent, keep canonical/URLs
 p='v4-1/topic/network-activation/index.html'
-replace_exact(p,'앤텔레콤 K망 유심 준비와 개통 순서','앤텔레콤 K망·L망 선택 기준',count=2)
+replace_exact(p,'앤텔레콤 K망 유심 준비와 개통 순서','앤텔레콤 K망·L망 선택 기준',count=3)
 replace_exact(p,'앤텔레콤 K망 개통은 망을 선택한 뒤 호환 유심을 준비해 개통을 신청하는 순서로 진행합니다. K망에서는 KT 바로유심을 사용합니다.','미납정지 단말, eSIM·5G, 투넘버·핫스팟·로밍 조건에 따라 앤텔레콤 K망과 L망을 선택하는 기준을 비교합니다.',count=2)
 replace_exact(p,'<h1>앤텔레콤 K망 개통 방법 안내</h1>','<h1>앤텔레콤 K망·L망 선택 기준</h1>')
 replace_exact(p,'<p>K망 유심 준비와 개통 신청 순서</p>','<p>내 휴대폰과 이용 목적에 맞는 통신망 고르기</p>')
