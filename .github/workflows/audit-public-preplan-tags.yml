@@ -35,4 +35,18 @@ jobs:
               ids=sorted(set(re.findall(r'G-[A-Z0-9]{7,}|AW-[0-9]{6,}',source)))
               print(json.dumps({'public_gtm_js':'GTM-NB2K5MFQ','bytes':len(source),'google_ids':ids,'pageview_tag_references':source.count('page_view')},ensure_ascii=False))
           except Exception as e: print(json.dumps({'gtm_error':str(e)[:160]}))
+          # Verify public plugin install and enqueue without mutating WordPress.
+          for url in ['https://preplan.site/?from=59man_qa_bridge_20261028',
+                      'https://preplan.site/wp-content/plugins/mm59-preplan-attribution/assets/bridge.js']:
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=20) as f:
+                      raw=f.read(1500000).decode('utf-8','replace')
+                      status=f.status
+                  print(json.dumps({'bridge_probe_url':url.split('?')[0],'status':status,
+                    'bytes':len(raw),
+                    'has_plugin_script_reference':'mm59-preplan-attribution' in raw,
+                    'has_preplan_visit_event':'mm59_preplan_visit' in raw,
+                    'has_handoff_event':'mm59_application_handoff' in raw,
+                    'plugin_script_enqueued':'/wp-content/plugins/mm59-preplan-attribution/assets/bridge.js' in raw},ensure_ascii=False))
+              except Exception as e: print(json.dumps({'bridge_probe_url':url.split('?')[0],'error':str(e)[:160]},ensure_ascii=False))
           PY
