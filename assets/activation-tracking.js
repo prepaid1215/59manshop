@@ -85,6 +85,9 @@
     window.gtag('config',GA_ID,{
       allow_google_signals:false,
       allow_ad_personalization_signals:false,
+      // Exclude URL query strings from GA4 automatic page_view (may contain user data).
+      page_location:location.origin+location.pathname,
+      page_referrer:document.referrer.split('?')[0].split('#')[0],
       cookie_flags:'SameSite=Lax;Secure'
     });
     var sc=document.createElement('script');
