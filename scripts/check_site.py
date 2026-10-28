@@ -196,6 +196,23 @@ for u, h in pages.items():
             if need not in h:
                 fail('푸터 항목 누락(%s): %s' % (need, u))
 
+# 2a) CTA intent: starting activation must land on preplan.site home.
+# Detailed guides/blog links are informational and may point to their own pages.
+# Preserve per-link ?from= tracking; the pathname is the routing contract.
+_CTA_START_WORDS = re.compile(
+    r'개통\s*시작|셀프개통\s*시작|신규가입\s*(?:시작|신청)|'
+    r'개통하기|개통\s*페이지\s*(?:접속|이동)|신청\s*화면\s*바로가기|'
+    r'개통\s*페이지에서\s*선택하기'
+)
+for u, h in pages.items():
+    for anchor in re.finditer(r'<a\b[^>]*\bhref="(https://preplan\.site/[^"]*)"[^>]*>[\s\S]*?</a>', h):
+        tag = anchor.group(0)
+        dest = html.unescape(anchor.group(1))
+        label = ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', tag)).split())
+        is_direct = ('bottom-bar-main' in tag.split('>')[0] or _CTA_START_WORDS.search(label))
+        if is_direct and urllib.parse.urlsplit(dest).path != '/':
+            fail('바로 개통 CTA는 preplan.site 홈으로 연결해야 함: %s / %s -> %s' % (u, label[:50], dest))
+
 # 2-1) 내부 링크가 noindex 페이지로 가지 않는지 (홈, /guide/, 색인 페이지의 관련 안내 사이드바)
 def internal_links(h, scope=None):
     if scope:
