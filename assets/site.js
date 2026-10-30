@@ -436,16 +436,21 @@ window.enhanceHubContent(document);
     var h=Array.from(section.children).find(function(y){return y.tagName==='H2'});
     if(h)h.setAttribute('data-sm-number',('0'+(i+1)).slice(-2));
   });
-  if(sections.length>=3){
+  if(sections.length>=3 && !root.querySelector(':scope > .reader-toc')){
     var nav=el('nav','sm-page-nav');
-    nav.setAttribute('aria-label','이 페이지 목차');
-    sections.slice(0,7).forEach(function(section){
+    nav.setAttribute('aria-label','본문 목차');
+    nav.appendChild(el('strong','sm-page-nav-title','목차'));
+    var tocList=el('ol','sm-page-nav-list');
+    sections.forEach(function(section){
       var h=Array.from(section.children).find(function(y){return y.tagName==='H2'});
       if(!h)return;
+      var item=el('li','sm-page-nav-item');
       var a=el('a','',h.textContent.trim());
       a.setAttribute('href','#'+section.id);
-      nav.appendChild(a);
+      item.appendChild(a);
+      tocList.appendChild(item);
     });
+    nav.appendChild(tocList);
     var answer=root.querySelector(':scope > .answer-card');
     if(answer)answer.after(nav);
     else {
