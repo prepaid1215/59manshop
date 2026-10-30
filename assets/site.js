@@ -480,3 +480,74 @@ window.enhanceHubContent(document);
   script.async=true;
   document.head.appendChild(script);
 })();
+
+/* 59만모바일: sitewide member number and answer-to-platform conversion. */
+(function () {
+  'use strict';
+  var header = document.querySelector('header.top');
+  if (!header || document.querySelector('.sm-member-banner')) return;
+
+  // Owner number is ONLY entered in the Ntelecom membership app.
+  // It is NOT required by the 59만모바일 web platform.
+  var banner = document.createElement('aside');
+  banner.className = 'sm-member-banner';
+  banner.setAttribute('aria-label', '59만모바일 태블릿 소유자 회원번호 안내');
+  banner.innerHTML =
+    '<div class="site sm-member-banner-inner">' +
+      '<div class="sm-member-banner-message">' +
+        '<span class="sm-member-kicker">59만모바일 · 앤텔레콤 멤버십 앱</span>' +
+        '<strong>태블릿 소유자 회원번호 <span class="sm-member-number">2893496</span></strong>' +
+        '<p>멤버십 앱의 회원번호 칸에서만 사용합니다. 웹 플랫폼 개통에는 입력하지 않습니다.</p>' +
+      '</div>' +
+      '<button type="button" class="sm-member-copy" aria-label="태블릿 소유자 회원번호 2893496 복사">2893496 복사</button>' +
+    '</div>';
+  header.insertAdjacentElement('afterend', banner);
+
+  var copy = banner.querySelector('.sm-member-copy');
+  copy.addEventListener('click', function () {
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      copy.textContent = '번호: 2893496';
+      return;
+    }
+    navigator.clipboard.writeText('2893496').then(function () {
+      copy.textContent = '복사 완료';
+      window.setTimeout(function () { copy.textContent = '2893496 복사'; }, 1700);
+    }).catch(function () {
+      copy.textContent = '번호: 2893496';
+    });
+  });
+
+  // Keep the existing keyword answer and place the next action immediately
+  // after the first substantive answer section, not in place of the answer.
+  var article = document.querySelector('main .detail-article');
+  var answer = null;
+  if (article) {
+    answer = article.querySelector(':scope > .answer-card');
+    if (!answer) {
+      answer = Array.prototype.find.call(article.children, function (child) {
+        return child.tagName === 'SECTION' &&
+          !child.classList.contains('hero') &&
+          !child.classList.contains('faq') &&
+          child.querySelector(':scope > h2');
+      });
+    }
+  } else {
+    answer = document.getElementById('gh-directory');
+  }
+  // The homepage already has a hero platform CTA immediately after the banner.
+  if (!answer) return;
+
+  var slug = window.location.pathname.replace(/^\/+|\/+$/g, '') || 'home';
+  var url = 'https://preplan.site/?from=59man_answer_' + encodeURIComponent(slug);
+  var box = document.createElement('aside');
+  box.className = 'sm-answer-platform';
+  box.setAttribute('aria-label', '답변 확인 후 59만모바일 플랫폼 개통');
+  box.innerHTML =
+    '<div class="sm-answer-platform-message">' +
+      '<strong>답변을 확인했다면, 이제 개통을 시작하세요.</strong>' +
+      '<p>카카오·토스·PASS·국민·신한 간편인증서로 웹 플랫폼에서 본인인증과 신규가입을 진행할 수 있습니다.</p>' +
+      '<small>네이버 인증서만 있나요? <a href="/태블릿-소유자-회원번호/">멤버십 앱에서 회원번호 2893496 입력 방법 보기</a></small>' +
+    '</div>' +
+    '<a class="sm-answer-platform-action" href="' + url + '">59만모바일 플랫폼 개통하기 <span aria-hidden="true">→</span></a>';
+  answer.insertAdjacentElement('afterend', box);
+})();
