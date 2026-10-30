@@ -1,6 +1,11 @@
-name: Naver IndexNow changed URLs
+name: Naver IndexNow static-site notifications
 
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/indexnow.yml'
+      - 'scripts/submit_indexnow.py'
+      - 'scripts/test_indexnow.py'
   push:
     branches: [main]
     paths:
@@ -8,26 +13,53 @@ on:
       - '**/index.html'
       - 'sitemap.xml'
       - 'b10edb20efd14a1666dd9f0930f45ac5.txt'
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'Submit the full sitemap, or only URLs changed in the latest commit'
+        required: true
+        type: choice
+        default: all
+        options:
+          - all
+          - changed
+      dry_run:
+        description: 'Show URLs without contacting Naver'
+        required: true
+        type: boolean
+        default: true
 
 permissions:
   contents: read
 
 concurrency:
-  group: naver-indexnow-main
-  cancel-in-progress: true
+  group: naver-indexnow-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  notify:
-    name: Submit changed indexable URLs
+  validate:
+    name: Validate IndexNow helper
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
-      - name: Checkout complete repository history
+      - uses: actions/checkout@v4
+      - name: Run tests without contacting any search engine
+        run: python3 -m unittest discover -s scripts -p 'test_indexnow.py'
+
+  notify:
+    name: Notify Naver after site deployment
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout full history for changed URL detection
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Notify Naver after the changed pages are live
+      - name: Notify Naver only when live site is verified
         env:
           INDEXNOW_BEFORE: ${{ github.event.before }}
           INDEXNOW_AFTER: ${{ github.sha }}
+          INDEXNOW_SCOPE: ${{ github.event.inputs.scope || 'auto' }}
+          INDEXNOW_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: python3 scripts/submit_indexnow.py
