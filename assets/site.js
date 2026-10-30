@@ -481,73 +481,98 @@ window.enhanceHubContent(document);
   document.head.appendChild(script);
 })();
 
-/* 59만모바일: sitewide member number and answer-to-platform conversion. */
+/* 59만모바일: integrated member-number note and context-aware next step. */
 (function () {
   'use strict';
   var header = document.querySelector('header.top');
   if (!header || document.querySelector('.sm-member-banner')) return;
 
-  // Owner number is ONLY entered in the Ntelecom membership app.
-  // It is NOT required by the 59만모바일 web platform.
-  var banner = document.createElement('aside');
-  banner.className = 'sm-member-banner';
-  banner.setAttribute('aria-label', '59만모바일 태블릿 소유자 회원번호 안내');
-  banner.innerHTML =
+  // Keep the membership-app number visible but subordinate to the article H1.
+  var note = document.createElement('div');
+  note.className = 'sm-member-banner';
+  note.setAttribute('role', 'note');
+  note.setAttribute('aria-label', '태블릿 소유자 회원번호');
+  note.innerHTML =
     '<div class="site sm-member-banner-inner">' +
-      '<div class="sm-member-banner-message">' +
-        '<span class="sm-member-kicker">59만모바일 · 앤텔레콤 멤버십 앱</span>' +
-        '<strong>태블릿 소유자 회원번호 <span class="sm-member-number">2893496</span></strong>' +
-        '<p>멤버십 앱의 회원번호 칸에서만 사용합니다. 웹 플랫폼 개통에는 입력하지 않습니다.</p>' +
-      '</div>' +
-      '<button type="button" class="sm-member-copy" aria-label="태블릿 소유자 회원번호 2893496 복사">2893496 복사</button>' +
+      '<span class="sm-member-banner-label">태블릿 소유자 회원번호 <strong>2893496</strong> <small>멤버십 앱 개통용</small></span>' +
+      '<button type="button" class="sm-member-copy" aria-label="회원번호 2893496 복사">복사</button>' +
     '</div>';
-  header.insertAdjacentElement('afterend', banner);
-
-  var copy = banner.querySelector('.sm-member-copy');
+  header.insertAdjacentElement('afterend', note);
+  var copy = note.querySelector('.sm-member-copy');
   copy.addEventListener('click', function () {
     if (!navigator.clipboard || !navigator.clipboard.writeText) {
-      copy.textContent = '번호: 2893496';
+      copy.textContent = '2893496';
       return;
     }
     navigator.clipboard.writeText('2893496').then(function () {
-      copy.textContent = '복사 완료';
-      window.setTimeout(function () { copy.textContent = '2893496 복사'; }, 1700);
+      copy.textContent = '복사됨';
+      window.setTimeout(function () { copy.textContent = '복사'; }, 1800);
     }).catch(function () {
-      copy.textContent = '번호: 2893496';
+      copy.textContent = '2893496';
     });
   });
 
-  // Keep the existing keyword answer and place the next action immediately
-  // after the first substantive answer section, not in place of the answer.
+  // Existing answers and conversion controls remain untouched.
+  // Home and guide directory have their own navigation and application CTA.
   var article = document.querySelector('main .detail-article');
-  var answer = null;
-  if (article) {
-    answer = article.querySelector(':scope > .answer-card');
-    if (!answer) {
-      answer = Array.prototype.find.call(article.children, function (child) {
-        return child.tagName === 'SECTION' &&
-          !child.classList.contains('hero') &&
-          !child.classList.contains('faq') &&
-          child.querySelector(':scope > h2');
-      });
-    }
-  } else {
-    answer = document.getElementById('gh-directory');
+  if (!article) return;
+  var answer = article.querySelector(':scope > .answer-card');
+  if (!answer) {
+    answer = Array.prototype.find.call(article.children, function (child) {
+      return child.tagName === 'SECTION' &&
+        !child.classList.contains('hero') &&
+        !child.classList.contains('faq') &&
+        !!child.querySelector(':scope > h2');
+    });
   }
-  // The homepage already has a hero platform CTA immediately after the banner.
   if (!answer) return;
 
-  var slug = decodeURIComponent(window.location.pathname.replace(/^\/+|\/+$/g, '')) || 'home';
-  var url = 'https://preplan.site/?from=59man_answer_' + encodeURIComponent(slug);
-  var box = document.createElement('aside');
-  box.className = 'sm-answer-platform';
-  box.setAttribute('aria-label', '답변 확인 후 59만모바일 플랫폼 개통');
-  box.innerHTML =
-    '<div class="sm-answer-platform-message">' +
-      '<strong>답변을 확인했다면, 이제 개통을 시작하세요.</strong>' +
-      '<p>카카오·토스·PASS·국민·신한 간편인증서로 웹 플랫폼에서 본인인증과 신규가입을 진행할 수 있습니다.</p>' +
-      '<small>네이버 인증서만 있나요? <a href="/태블릿-소유자-회원번호/">멤버십 앱에서 회원번호 2893496 입력 방법 보기</a></small>' +
-    '</div>' +
-    '<a class="sm-answer-platform-action" href="' + url + '">59만모바일 플랫폼 개통하기 <span aria-hidden="true">→</span></a>';
-  answer.insertAdjacentElement('afterend', box);
+  var path;
+  try { path = decodeURIComponent(window.location.pathname); }
+  catch (_) { path = window.location.pathname; }
+  var route = path.replace(/^\/+|\/+$/g, '');
+  var context = {
+    '앤텔레콤-선불폰-개통-방법': ['유심과 인증 수단을 준비했다면, 59만모바일에서 셀프개통을 이어가세요.', '셀프개통 시작하기'],
+    '앤텔레콤-웹개통': ['간편인증서와 유심이 준비됐다면 웹 플랫폼에서 신규가입을 진행하세요.', '웹개통 시작하기'],
+    'v4-1/topic/esim-new': ['지원 단말의 EID와 IMEI를 준비했다면 L망 eSIM 신규가입을 진행하세요.', 'L망 eSIM 개통 시작하기'],
+    '다이소-유심': ['고고비 유심을 준비했다면 L망을 선택해 선불 신규가입을 진행하세요.', 'L망 선불폰 개통하기'],
+    'kt선불폰-개통': ['KT 바로유심과 본인인증 수단을 준비했다면 K망 셀프개통을 시작하세요.', 'KT 선불폰 개통하기'],
+    'kt-바로유심': ['바로유심의 번호를 준비했다면 K망 신규가입으로 이어가세요.', 'KT 바로유심 개통하기'],
+    'v4-1/topic/kt-nfc-compare': ['사용할 KT 유심을 정했다면 K망 셀프개통으로 이어가세요.', 'KT 선불폰 개통하기'],
+    'lg-원칩': ['원칩을 준비했다면 모델코드와 일련번호를 입력해 L망 개통을 진행하세요.', 'LG 원칩 개통하기'],
+    'v4-1/topic/network-activation': ['통신망과 유심을 결정했다면 개통 화면에서 신규가입을 진행하세요.', '선불폰 개통 시작하기'],
+    '알뜰폰-셀프개통-번호이동': ['쓰던 번호를 유지하려면 미납 정산과 번호이동 가능 시간을 먼저 확인한 뒤 신청하세요.', '번호이동 개통 시작하기'],
+    'v4-1/topic/plan-396': ['396 요금제를 선택했다면 사용할 통신망을 고른 뒤 신청하세요.', '396 요금제로 개통 시작하기'],
+    '편의점-선불유심-셀프개통': ['호환 유심을 구매했다면 유심번호를 준비해 셀프개통을 이어가세요.', '편의점 유심으로 개통하기'],
+    'v4-1/topic/sim-buy-where': ['사용할 통신망에 맞는 유심을 구했다면 개통 신청으로 이어가세요.', '선불폰 개통 시작하기'],
+    '편의점-선불유심': ['유심을 준비했다면 KT망 또는 LG망을 선택해 신규가입을 진행하세요.', '유심으로 셀프개통하기'],
+    '미납정지-선불폰': ['미납·정지 상태에서 선불 신규가입을 선택했다면 본인인증과 호환 유심을 준비해 진행하세요.', '선불폰 신규가입 시작하기'],
+    'v4-1/topic/weekend-activation': ['신규가입 가능 시간 안이라면 유심과 인증 수단을 준비해 개통을 진행하세요.', '주말 셀프개통 시작하기'],
+    '선불폰-개통': ['가입 조건과 준비물을 확인했다면 59만모바일에서 신규가입을 진행하세요.', '선불폰 개통 시작하기'],
+    '선불폰-개통방법': ['개통 순서를 확인했다면 유심정보와 인증 수단을 준비해 진행하세요.', '셀프개통 바로 시작하기'],
+    '선불폰-셀프개통': ['개통 준비가 끝났다면 59만모바일 플랫폼에서 셀프개통을 시작하세요.', '셀프개통 시작하기'],
+    '알뜰폰-셀프개통-안됨': ['오류 내용을 점검했다면 개통 화면으로 돌아가 다시 진행하세요.', '셀프개통 다시 진행하기'],
+    'lg-모두의원칩-셀프개통': ['원칩 모델코드와 일련번호를 확인했다면 L망 신규가입으로 이어가세요.', 'LG 원칩 개통 시작하기'],
+    'l망-464-요금제': ['L망 5G 464 요금제가 맞는다면 L망 유심 또는 eSIM 준비 후 신청하세요.', 'L망 464 개통 시작하기'],
+    'l망-2-5gb-요금제': ['L망 2.5GB 요금제가 맞는다면 L망 호환 유심을 준비해 신청하세요.', 'L망 2.5GB 개통 시작하기']
+  };
+  // These pages serve existing customers or app-only applicants. Their native
+  // next steps are more useful than a second generic web sign-up CTA.
+  if (route === '태블릿-소유자-회원번호' ||
+      route === '선불폰-충전-방법' ||
+      route === 'v4-1/topic/plan-compare') return;
+  var next = context[route];
+  if (!next) return;
+
+  var section = document.createElement('div');
+  section.className = 'sm-answer-next';
+  section.setAttribute('aria-label', '안내에 따른 다음 단계');
+  var message = document.createElement('p');
+  message.textContent = next[0];
+  var link = document.createElement('a');
+  link.className = 'primary-cta sm-answer-next-action';
+  link.textContent = next[1] + ' →';
+  link.href = 'https://preplan.site/?from=59man_answer_' + encodeURIComponent(route);
+  section.append(message, link);
+  answer.insertAdjacentElement('afterend', section);
 })();
