@@ -95,41 +95,75 @@ def deployed(urls, sitemap_changed):
 
 
 def main():
+    # "auto" runs after deployment: first activation sends a site snapshot once,
+    # subsequent commits send only actual newly added, updated or removed pages.
+    scope = os.environ.get("INDEXNOW_SCOPE", "auto").lower()
+    dry_run = os.environ.get("INDEXNOW_DRY_RUN", "false").lower() == "true"
+    if scope not in ("auto", "all", "changed"):
+        print(f"Unknown INDEXNOW_SCOPE={scope!r}", file=sys.stderr)
+        return 2
+
     before = os.environ.get("INDEXNOW_BEFORE", "")
     after = os.environ.get("INDEXNOW_AFTER", "HEAD")
-    if not before or set(before) == {"0"}:
-        print("No prior commit: skipping historic URL submission")
-        return 0
-
-    changes = git("diff", "--name-status", "--no-renames", before, after).splitlines()
-    old_sitemap = sitemap(git("show", f"{before}:sitemap.xml"))
     new_sitemap = sitemap((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
-    changed = set()
-    sitemap_changed = False
-    for line in changes:
-        if "\t" not in line:
-            continue
-        status, path = line.split("\t", 1)
-        if path == "sitemap.xml":
-            sitemap_changed = True
-        url = page_url(path)
-        if not url:
-            continue
-        if status.startswith("D") and url in old_sitemap:
-            changed.add(url)
-        elif url in new_sitemap and is_indexable(url):
-            changed.add(url)
-        elif url in old_sitemap and url not in new_sitemap:
-            changed.add(url)
+    if not new_sitemap:
+        print("Empty or invalid sitemap URL set", file=sys.stderr)
+        return 2
 
-    # A newly listed URL can be notified even when its HTML was not modified.
-    changed.update(url for url in new_sitemap - old_sitemap if is_indexable(url))
-    changed.update(old_sitemap - new_sitemap)
+    if scope == "all":
+        changed = {url for url in new_sitemap if is_indexable(url)}
+        sitemap_changed = True
+        print("Explicit full-site IndexNow notification requested")
+    else:
+        if not before or set(before) == {"0"}:
+            if scope == "changed":
+                before = git("rev-parse", "HEAD^").strip()
+            else:
+                print("No prior commit available: no automatic URL notification")
+                return 0
+        changes = git("diff", "--name-status", "--no-renames", before, after).splitlines()
+        try:
+            old_sitemap = sitemap(git("show", f"{before}:sitemap.xml"))
+        except subprocess.CalledProcessError:
+            old_sitemap = set()
+        changed = set()
+        sitemap_changed = False
+        initial_install = False
+        for line in changes:
+            if "\t" not in line:
+                continue
+            status, path = line.split("\t", 1)
+            if path == "sitemap.xml":
+                sitemap_changed = True
+            if (path == KEY + ".txt" and status.startswith("A")):
+                initial_install = True
+            url = page_url(path)
+            if not url:
+                continue
+            if status.startswith("D") and url in old_sitemap:
+                changed.add(url)
+            elif url in new_sitemap and is_indexable(url):
+                changed.add(url)
+            elif url in old_sitemap and url not in new_sitemap:
+                changed.add(url)
+        changed.update(url for url in new_sitemap - old_sitemap if is_indexable(url))
+        changed.update(old_sitemap - new_sitemap)
+        if scope == "auto" and initial_install:
+            # First activation: reproduce the verified full-list bootstrap pattern
+            # exactly once. Future pushes notify changes only.
+            changed = {url for url in new_sitemap if is_indexable(url)}
+            sitemap_changed = True
+            print("First IndexNow activation: notifying the initial sitemap snapshot")
     if not changed:
         print("No changed indexable URLs: nothing to submit")
         return 0
+    print(f"Prepared {len(changed)} URLs (scope={scope}); all URLs are from the site's sitemap")
+    if dry_run:
+        for url in sorted(changed):
+            print("DRY RUN:", url)
+        return 0
 
-    print(f"Prepared {len(changed)} changed URLs, waiting for GitHub Pages deployment")
+    print(f"Waiting for the published GitHub Pages files to match {len(changed)} submitted URLs")
     for attempt in range(30):
         if deployed(sorted(changed), sitemap_changed):
             break
