@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Notify Naver IndexNow only about pages changed in a deployed main commit.
+"""Notify Naver IndexNow after deployment: initial sitemap once, then changed pages.
 
-The public ownership key is intentionally hosted at the site root.
-Do not send historic pages wholesale or noindex-only URLs.
+The public ownership key is hosted at the site root. The initial installation
+can notify all indexable sitemap URLs; later pushes notify only changed URLs.
 """
 import json
 import os
