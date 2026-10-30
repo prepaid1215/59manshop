@@ -1179,18 +1179,38 @@ body{background:#f6f8fb}
   color:#16396e;font-weight:900;letter-spacing:-.035em;
   overflow-wrap:anywhere;
 }
+/* Standard article table of contents: no sideways swiping or clipped headings. */
 #main-content .detail-article.magazine-blue .sm-page-nav{
-  display:flex;gap:6px;overflow:auto;scrollbar-width:thin;
-  margin:18px 0 27px;padding:9px;
-  background:#f8fbff;border:1px solid #dce9fa;border-radius:15px;
+  display:block;overflow:visible;
+  margin:20px 0 27px;padding:17px 18px;
+  background:#fff;border:1px solid #dce5f2;border-radius:12px;
   scroll-margin-top:85px;
 }
+#main-content .detail-article.magazine-blue .sm-page-nav-title{
+  display:block;margin:0 0 6px;color:#193b65;
+  font-size:16px;font-weight:850;line-height:1.6;
+}
+#main-content .detail-article.magazine-blue .sm-page-nav-list{
+  display:block;margin:0!important;padding:0 0 0 23px!important;
+  list-style:decimal outside!important;
+}
+#main-content .detail-article.magazine-blue .sm-page-nav-item{
+  display:list-item;margin:0!important;padding:0 0 0 1px;
+  color:#2b62a1;list-style:decimal outside;
+  font-size:13px;line-height:1.6;
+}
+#main-content .detail-article.magazine-blue .sm-page-nav-item + .sm-page-nav-item{
+  border-top:1px solid #edf1f6;
+}
 #main-content .detail-article.magazine-blue .sm-page-nav a{
-  flex:0 0 auto;max-width:220px;padding:9px 12px;
-  color:#295385;font-size:12px;font-weight:800;line-height:1.5;
-  text-decoration:none!important;border-radius:9px;
-  background:#fff;border:1px solid #e5edf9;
-  white-space:nowrap;
+  display:block;width:100%;max-width:none;margin:0;padding:11px 0;
+  color:#24476b;font-size:13px;font-weight:650;line-height:1.65;
+  text-decoration:none!important;border:0;border-radius:0;
+  background:transparent;white-space:normal;overflow-wrap:anywhere;
+  word-break:keep-all;
+}
+#main-content .detail-article.magazine-blue .sm-page-nav a:hover{
+  color:var(--sm-blue);text-decoration:underline!important;
 }
 #main-content .detail-article.magazine-blue .sm-page-nav a:focus-visible{
   outline:2px solid var(--sm-blue);outline-offset:2px;
