@@ -537,7 +537,7 @@ window.enhanceHubContent(document);
   // The homepage already has a hero platform CTA immediately after the banner.
   if (!answer) return;
 
-  var slug = window.location.pathname.replace(/^\/+|\/+$/g, '') || 'home';
+  var slug = decodeURIComponent(window.location.pathname.replace(/^\/+|\/+$/g, '')) || 'home';
   var url = 'https://preplan.site/?from=59man_answer_' + encodeURIComponent(slug);
   var box = document.createElement('aside');
   box.className = 'sm-answer-platform';
