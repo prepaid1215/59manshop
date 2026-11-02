@@ -229,3 +229,13 @@
  .home .landing-help{display:block}
  .home .landing-help a{display:inline-flex;margin-top:10px;min-height:38px;align-items:center}
 }
+
+/* Home-only secondary path: keep platform signup as the single dominant CTA. */
+.home .landing-tablet-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;padding:10px 13px;border:1px solid #ffffff72;border-radius:11px;background:#ffffff16;color:#fff!important;text-decoration:none!important}
+.home .landing-tablet-entry:hover{background:#ffffff24;border-color:#ffffffa3}
+.home .landing-tablet-entry:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.home .landing-tablet-entry-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.home .landing-tablet-entry-copy strong{font-size:13px;font-weight:800;line-height:1.35;color:#fff}
+.home .landing-tablet-entry-copy small{font-size:10px;line-height:1.45;font-weight:500;color:#e4efff}
+.home .landing-tablet-entry-arrow{font-size:19px;font-weight:600;flex:0 0 auto;line-height:1}
+@media(max-width:370px){.home .landing-tablet-entry-copy strong{font-size:12px}.home .landing-tablet-entry-copy small{font-size:9.5px}}
