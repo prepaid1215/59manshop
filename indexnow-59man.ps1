@@ -33,7 +33,7 @@ try {
       throw "Invalid URL: $address"
     }
     if ($parsed.Scheme -cne 'https' -or $parsed.Host -cne $hostName -or $parsed.Port -ne 443) {
-      throw "The URL must belong to https://$hostName: $address"
+      throw ('The URL must belong to https://{0}/ : {1}' -f $hostName, $address)
     }
     if ($parsed.Query -or $parsed.Fragment) { throw "Remove query strings and fragments: $address" }
     $list.Add($parsed.AbsoluteUri)
