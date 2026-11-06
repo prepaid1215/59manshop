@@ -67,7 +67,8 @@ for url in routes:
   can=re.search(r'<link rel="canonical" href="([^"]+)"',html)
   if not can or can[1]!='https://www.59man.shop'+url:issues.append('canonical changed '+url)
   checks.append({'url':url,'images':len(imgs),'new_figures':len(figures),'updated':url in expected})
-if len(routes)!=26:issues.append('expected 26 indexed detail articles, got '+str(len(routes)))
+original_routes=[u for u in routes if not u.startswith('/faq/')]
+if len(original_routes)!=26:issues.append('expected 26 preserved original indexed detail articles, got '+str(len(original_routes)))
 if len(expected)!=20:issues.append('expected 20 illustrated pages')
 if new_figures<24:issues.append('expected 24 new placements got '+str(new_figures))
 for svg in (root/'img'/'editorial').glob('*.svg'):
