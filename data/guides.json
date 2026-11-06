@@ -166,7 +166,7 @@
       "kw": "편의점 유심 개통 셀프개통"
     },
     {
-      "href": "/태블릿-소유자-회원번호/",
+      "href": "/tablet-2893496/",
       "title": "태블릿 소유자 회원번호 2893496",
       "desc": "멤버십 앱으로 개통할 때 회원번호 칸에는 무엇을 넣나요?",
       "cat": "self",
@@ -261,6 +261,62 @@
       "cat": "plan",
       "img": "/img/guide-art/guide-recharge-blue.webp",
       "kw": "LG 선불 2.5GB 17000원 100분 50건"
+    },
+    {
+      "href": "/faq/",
+      "title": "선불폰 자주 묻는 질문 12가지",
+      "desc": "유심 호환, 인증, 충전, 데이터 소진 등 질문별 핵심 답변",
+      "cat": "check",
+      "ill": "clipboard",
+      "kw": "FAQ 질문답변 검색 AI 개통 방법 유심"
+    },
+    {
+      "href": "/faq/sim-compatibility/",
+      "title": "KT망 유심은 모두 호환될까?",
+      "desc": "같은 망이어도 사업자별 유심 호환 여부는 다릅니다.",
+      "cat": "sim",
+      "ill": "sim",
+      "kw": "유심 호환 KT M모바일 바로유심 LG 원칩"
+    },
+    {
+      "href": "/faq/face-auth-skip/",
+      "title": "안면인증 건너뛰기와 간편인증",
+      "desc": "안면인증을 건너뛰어도 별도의 본인확인이 필요합니다.",
+      "cat": "self",
+      "ill": "id",
+      "kw": "안면인증 건너뛰기 카카오 토스 PASS 간편인증"
+    },
+    {
+      "href": "/faq/web-vs-app/",
+      "title": "웹 셀프개통과 멤버십 앱 차이",
+      "desc": "직접 충전하는 웹 방식과 담당자가 처리하는 앱 방식 비교",
+      "cat": "self",
+      "ill": "phone",
+      "kw": "웹개통 앱개통 멤버십 승인 해피콜 충전"
+    },
+    {
+      "href": "/faq/usim-number/",
+      "title": "KT·LG 유심번호 입력법",
+      "desc": "K망 19자리, L망 모델코드 5자리와 일련번호 8자리",
+      "cat": "sim",
+      "ill": "sim",
+      "kw": "유심번호 바로유심 19자리 F LG 모델코드 일련번호"
+    },
+    {
+      "href": "/faq/prepaid-charge/",
+      "title": "K망·L망 선불요금 충전과 차감",
+      "desc": "K망 일 단위, L망 월 단위 선차감 방식과 충전 후 순서",
+      "cat": "plan",
+      "ill": "charge",
+      "kw": "충전 선불 K망 일차감 L망 월차감"
+    },
+    {
+      "href": "/faq/data-after/",
+      "title": "396 데이터 10.3GB 이후 3Mbps",
+      "desc": "기본 데이터를 모두 사용한 후 속도와 실제 이용 조건",
+      "cat": "plan",
+      "ill": "signal",
+      "kw": "396 10.3GB 3Mbps 속도제어 데이터 소진"
     }
   ],
   "asks": [
