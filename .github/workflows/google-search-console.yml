@@ -55,8 +55,8 @@ jobs:
     env:
       WIF_PROVIDER: '${{ vars.GSC_WIF_PROVIDER }}'
       SA_EMAIL: '${{ vars.GSC_SERVICE_ACCOUNT }}'
-      HAS_JSON_KEY: '${{ secrets.GSC_SERVICE_ACCOUNT_JSON != '' }}'
-      MODE: '${{ github.event_name == 'schedule' && 'inspect' || (github.event_name == 'workflow_dispatch' && inputs.mode || 'both') }}'
+      HAS_JSON_KEY: "${{ secrets.GSC_SERVICE_ACCOUNT_JSON != '' }}"
+      MODE: "${{ github.event_name == 'schedule' && 'inspect' || (github.event_name == 'workflow_dispatch' && inputs.mode || 'both') }}"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

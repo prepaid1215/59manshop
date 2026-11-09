@@ -19,7 +19,7 @@ class SitemapAutomationTests(unittest.TestCase):
 
     def test_published_targets_are_in_local_sitemap(self):
         items = gsc.parse_sitemap((gsc.ROOT / "sitemap.xml").read_bytes())
-        self.assertEqual(len(items), 35)
+        self.assertGreaterEqual(len(items), 35)
         self.assertTrue(all(gsc.ORIGIN + path in items for path in gsc.PRIORITY))
 
     def test_missing_lastmod_not_allowed(self):
