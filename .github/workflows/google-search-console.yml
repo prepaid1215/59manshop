@@ -1,0 +1,102 @@
+name: Google Search Console auto sitemap and URL monitor
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/google-search-console.yml'
+      - 'scripts/google_search_console.py'
+      - 'scripts/test_google_search_console.py'
+  push:
+    branches: [main]
+    paths:
+      - 'sitemap.xml'
+      - '.github/workflows/google-search-console.yml'
+      - 'scripts/google_search_console.py'
+  schedule:
+    # Every morning at 08:30 Asia/Seoul
+    - cron: '30 23 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Action to run'
+        type: choice
+        required: true
+        default: both
+        options:
+          - both
+          - submit
+          - inspect
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: google-search-console-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate Google sitemap integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run offline request and sitemap tests
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_google_search_console.py'
+          python3 scripts/google_search_console.py --mode both --dry-run
+
+  gsc:
+    name: Submit sitemap and monitor priority URLs
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      WIF_PROVIDER: '${{ vars.GSC_WIF_PROVIDER }}'
+      SA_EMAIL: '${{ vars.GSC_SERVICE_ACCOUNT }}'
+      HAS_JSON_KEY: "${{ secrets.GSC_SERVICE_ACCOUNT_JSON != '' }}"
+      MODE: "${{ github.event_name == 'schedule' && 'inspect' || (github.event_name == 'workflow_dispatch' && inputs.mode || 'both') }}"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check one-time Google connection
+        id: connection
+        shell: bash
+        run: |
+          if [[ -n "$WIF_PROVIDER" && -n "$SA_EMAIL" ]]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "method=wif" >> "$GITHUB_OUTPUT"
+          elif [[ "$HAS_JSON_KEY" == "true" ]]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "method=json" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "### Google Search Console not connected" >> "$GITHUB_STEP_SUMMARY"
+            echo "Configure the GSC_SERVICE_ACCOUNT_JSON secret, or GSC_WIF_PROVIDER and GSC_SERVICE_ACCOUNT variables." >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::No GSC credentials were configured; no Google API calls were made."
+          fi
+      - name: Authenticate with Workload Identity Federation
+        if: steps.connection.outputs.method == 'wif'
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: '${{ vars.GSC_WIF_PROVIDER }}'
+          service_account: '${{ vars.GSC_SERVICE_ACCOUNT }}'
+      - name: Authenticate with private service account key
+        if: steps.connection.outputs.method == 'json'
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: '${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}'
+      - name: Install Google OAuth dependencies
+        if: steps.connection.outputs.ready == 'true'
+        run: python -m pip install 'google-auth>=2.35,<4' requests
+      - name: Submit deployed sitemap and check 7 URLs
+        if: steps.connection.outputs.ready == 'true'
+        run: |
+          if [[ "$MODE" == "inspect" ]]; then
+            python scripts/google_search_console.py --mode inspect
+          else
+            python scripts/google_search_console.py --mode "$MODE" --wait-live
+          fi
