@@ -264,7 +264,7 @@
     },
     {
       "href": "/faq/",
-      "title": "선불폰 자주 묻는 질문 25가지",
+      "title": "선불폰 자주 묻는 질문 33가지",
       "desc": "유심 호환, 인증, 충전, 데이터 소진 등 질문별 핵심 답변",
       "cat": "check",
       "ill": "clipboard",
@@ -405,6 +405,70 @@
       "cat": "fix",
       "kw": "유심인식 안됨 통화안됨 개통완료 재부팅 K망 L망",
       "ill": "alert"
+    },
+    {
+      "href": "/faq/cancel-service/",
+      "title": "앤텔레콤 선불폰 해지 방법",
+      "desc": "해지 접수 고객센터와 충전 중단의 차이",
+      "cat": "check",
+      "kw": "선불폰 해지 고객센터 114 18997700",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/change-plan/",
+      "title": "앤텔레콤 요금제 변경 방법",
+      "desc": "멤버십 앱 셀프케어와 공식 고객센터",
+      "cat": "plan",
+      "kw": "앤텔레콤 요금제변경 셀프케어 멤버십앱",
+      "ill": "coins"
+    },
+    {
+      "href": "/faq/carrier-store/",
+      "title": "KT·LG 대리점에서 앤텔레콤 개통?",
+      "desc": "같은 통신망이어도 가입 창구가 다른 이유",
+      "cat": "check",
+      "kw": "KT대리점 LG대리점 앤텔레콤 개통",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/verify-carrier-option/",
+      "title": "앤텔레콤 본인인증 통신사 선택",
+      "desc": "알뜰폰 KT·LG 선택과 인증 오류",
+      "cat": "fix",
+      "kw": "본인인증 알뜰폰 KT LG 통신사선택",
+      "ill": "alert"
+    },
+    {
+      "href": "/faq/hotspot-tethering/",
+      "title": "선불폰 핫스팟·테더링 조건",
+      "desc": "K망·L망 데이터 공유와 소진 후 이용",
+      "cat": "plan",
+      "kw": "핫스팟 테더링 K망 L망 데이터 3Mbps",
+      "ill": "coins"
+    },
+    {
+      "href": "/faq/customer-center-hours/",
+      "title": "앤텔레콤 고객센터 운영시간",
+      "desc": "평일 상담시간과 온라인 개통 가능 시간",
+      "cat": "check",
+      "kw": "고객센터 야간 주말 114 18997700",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/change-phone-number/",
+      "title": "앤텔레콤 전화번호 변경",
+      "desc": "앱 번호변경과 센터 방문 준비물",
+      "cat": "check",
+      "kw": "번호변경 전화번호변경 멤버십앱 신분증",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/check-account-info/",
+      "title": "앤텔레콤 가입정보·사용량 조회",
+      "desc": "멤버십 앱에서 가입일·요금제·데이터 확인",
+      "cat": "plan",
+      "kw": "가입정보 조회 데이터사용량 요금제 멤버십앱",
+      "ill": "coins"
     }
   ],
   "asks": [
