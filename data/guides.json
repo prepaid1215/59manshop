@@ -264,7 +264,7 @@
     },
     {
       "href": "/faq/",
-      "title": "선불폰 자주 묻는 질문 12가지",
+      "title": "선불폰 자주 묻는 질문 15가지",
       "desc": "유심 호환, 인증, 충전, 데이터 소진 등 질문별 핵심 답변",
       "cat": "check",
       "ill": "clipboard",
@@ -317,6 +317,30 @@
       "cat": "plan",
       "ill": "signal",
       "kw": "396 10.3GB 3Mbps 속도제어 데이터 소진"
+    },
+    {
+      "href": "/faq/receiving-suspended/",
+      "title": "수신정지 상태 선불폰 신규가입",
+      "desc": "문자 수신이 안 될 때 신규가입과 본인인증 조건",
+      "cat": "move",
+      "ill": "number-transfer",
+      "kw": "수신정지 미납 선불폰 신규가입 문자 본인인증 L망"
+    },
+    {
+      "href": "/faq/after-application/",
+      "title": "선불폰 신청 완료 후 통화 시작",
+      "desc": "신청 완료와 개통 완료, 충전 후 사용 순서",
+      "cat": "self",
+      "ill": "phone",
+      "kw": "신청완료 개통완료 요금충전 통화 문자 유심 재부팅"
+    },
+    {
+      "href": "/faq/face-vs-simple-auth/",
+      "title": "안면인증과 간편인증 순서",
+      "desc": "PASS·모바일신분증, 카카오·토스 인증 구분",
+      "cat": "self",
+      "ill": "phone",
+      "kw": "안면인증 간편인증 카카오 토스 PASS 모바일신분증 건너뛰기"
     }
   ],
   "asks": [
