@@ -271,7 +271,7 @@
       "kw": "FAQ 질문답변 검색 AI 개통 방법 유심"
     },
     {
-      "href": "/faq/sim-compatibility/",
+      "href": "/sim-compatibility/",
       "title": "KT망 유심은 모두 호환될까?",
       "desc": "같은 망이어도 사업자별 유심 호환 여부는 다릅니다.",
       "cat": "sim",
@@ -279,7 +279,7 @@
       "kw": "유심 호환 KT M모바일 바로유심 LG 원칩"
     },
     {
-      "href": "/faq/face-auth-skip/",
+      "href": "/face-auth-skip/",
       "title": "안면인증 건너뛰기와 간편인증",
       "desc": "안면인증을 건너뛰어도 별도의 본인확인이 필요합니다.",
       "cat": "self",
@@ -287,7 +287,7 @@
       "kw": "안면인증 건너뛰기 카카오 토스 PASS 간편인증"
     },
     {
-      "href": "/faq/web-vs-app/",
+      "href": "/web-vs-app/",
       "title": "웹 셀프개통과 멤버십 앱 차이",
       "desc": "직접 충전하는 웹 방식과 담당자가 처리하는 앱 방식 비교",
       "cat": "self",
@@ -295,7 +295,7 @@
       "kw": "웹개통 앱개통 멤버십 승인 해피콜 충전"
     },
     {
-      "href": "/faq/usim-number/",
+      "href": "/usim-number/",
       "title": "KT·LG 유심번호 입력법",
       "desc": "K망 19자리, L망 모델코드 5자리와 일련번호 8자리",
       "cat": "sim",
@@ -303,7 +303,7 @@
       "kw": "유심번호 바로유심 19자리 F LG 모델코드 일련번호"
     },
     {
-      "href": "/faq/prepaid-charge/",
+      "href": "/prepaid-charge/",
       "title": "K망·L망 선불요금 충전과 차감",
       "desc": "K망 일 단위, L망 월 단위 선차감 방식과 충전 후 순서",
       "cat": "plan",
@@ -311,7 +311,7 @@
       "kw": "충전 선불 K망 일차감 L망 월차감"
     },
     {
-      "href": "/faq/data-after/",
+      "href": "/data-after/",
       "title": "396 데이터 10.3GB 이후 3Mbps",
       "desc": "기본 데이터를 모두 사용한 후 속도와 실제 이용 조건",
       "cat": "plan",
@@ -319,7 +319,7 @@
       "kw": "396 10.3GB 3Mbps 속도제어 데이터 소진"
     },
     {
-      "href": "/faq/receiving-suspended/",
+      "href": "/receiving-suspended/",
       "title": "수신정지 상태 선불폰 신규가입",
       "desc": "문자 수신이 안 될 때 신규가입과 본인인증 조건",
       "cat": "move",
@@ -327,7 +327,7 @@
       "kw": "수신정지 미납 선불폰 신규가입 문자 본인인증 L망"
     },
     {
-      "href": "/faq/after-application/",
+      "href": "/after-application/",
       "title": "선불폰 신청 완료 후 통화 시작",
       "desc": "신청 완료와 개통 완료, 충전 후 사용 순서",
       "cat": "self",
@@ -335,7 +335,7 @@
       "kw": "신청완료 개통완료 요금충전 통화 문자 유심 재부팅"
     },
     {
-      "href": "/faq/face-vs-simple-auth/",
+      "href": "/face-vs-simple-auth/",
       "title": "안면인증과 간편인증 순서",
       "desc": "PASS·모바일신분증, 카카오·토스 인증 구분",
       "cat": "self",
@@ -343,7 +343,7 @@
       "kw": "안면인증 간편인증 카카오 토스 PASS 모바일신분증 건너뛰기"
     },
     {
-      "href": "/faq/sim-only-activation/",
+      "href": "/sim-only-activation/",
       "title": "유심만 구매해 신규가입하는 방법",
       "desc": "휴대폰 없이 유심만 구매해 개통하는 조건",
       "cat": "self",
@@ -351,7 +351,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/change-device/",
+      "href": "/change-device/",
       "title": "유심을 다른 휴대폰에 옮겨 쓰기",
       "desc": "기기변경과 유심 재장착, IMEI 확인",
       "cat": "fix",
@@ -359,7 +359,7 @@
       "ill": "alert"
     },
     {
-      "href": "/faq/background-data-usage/",
+      "href": "/background-data-usage/",
       "title": "데이터를 안 써도 줄어드는 이유",
       "desc": "앱 업데이트와 사진 백업, 데이터 사용량 확인",
       "cat": "plan",
@@ -367,7 +367,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/what-is-mvno/",
+      "href": "/what-is-mvno/",
       "title": "MVNO 알뜰폰 뜻과 KT·LG망",
       "desc": "알뜰폰이 기존 통신망을 사용하는 방식",
       "cat": "check",
@@ -375,7 +375,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/new-or-port/",
+      "href": "/new-or-port/",
       "title": "신규가입과 번호이동 차이",
       "desc": "전화번호 발급과 기존 번호 유지의 차이",
       "cat": "check",
@@ -383,7 +383,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/change-subscriber-name/",
+      "href": "/change-subscriber-name/",
       "title": "앤텔레콤 명의변경 조건",
       "desc": "명의변경 사유와 서류, 센터 방문 전 준비",
       "cat": "check",
@@ -391,7 +391,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/self-activation-eligibility/",
+      "href": "/self-activation-eligibility/",
       "title": "셀프개통 가능 대상과 제한",
       "desc": "미성년자·외국인·법인 신청과 인증 조건",
       "cat": "check",
@@ -399,7 +399,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/sim-not-detected/",
+      "href": "/sim-not-detected/",
       "title": "개통 후 유심 인식 오류 해결",
       "desc": "개통 상태·충전·재부팅·망 호환 확인",
       "cat": "fix",
@@ -407,7 +407,7 @@
       "ill": "alert"
     },
     {
-      "href": "/faq/cancel-service/",
+      "href": "/cancel-service/",
       "title": "앤텔레콤 선불폰 해지 방법",
       "desc": "해지 접수 고객센터와 충전 중단의 차이",
       "cat": "check",
@@ -415,7 +415,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/change-plan/",
+      "href": "/change-plan/",
       "title": "앤텔레콤 요금제 변경 방법",
       "desc": "멤버십 앱 셀프케어와 공식 고객센터",
       "cat": "plan",
@@ -423,7 +423,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/carrier-store/",
+      "href": "/carrier-store/",
       "title": "KT·LG 대리점에서 앤텔레콤 개통?",
       "desc": "같은 통신망이어도 가입 창구가 다른 이유",
       "cat": "check",
@@ -431,7 +431,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/verify-carrier-option/",
+      "href": "/verify-carrier-option/",
       "title": "앤텔레콤 본인인증 통신사 선택",
       "desc": "알뜰폰 KT·LG 선택과 인증 오류",
       "cat": "fix",
@@ -439,7 +439,7 @@
       "ill": "alert"
     },
     {
-      "href": "/faq/hotspot-tethering/",
+      "href": "/hotspot-tethering/",
       "title": "선불폰 핫스팟·테더링 조건",
       "desc": "K망·L망 데이터 공유와 소진 후 이용",
       "cat": "plan",
@@ -447,7 +447,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/customer-center-hours/",
+      "href": "/customer-center-hours/",
       "title": "앤텔레콤 고객센터 운영시간",
       "desc": "평일 상담시간과 온라인 개통 가능 시간",
       "cat": "check",
@@ -455,7 +455,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/change-phone-number/",
+      "href": "/change-phone-number/",
       "title": "앤텔레콤 전화번호 변경",
       "desc": "앱 번호변경과 센터 방문 준비물",
       "cat": "check",
@@ -463,7 +463,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/check-account-info/",
+      "href": "/check-account-info/",
       "title": "앤텔레콤 가입정보·사용량 조회",
       "desc": "멤버십 앱에서 가입일·요금제·데이터 확인",
       "cat": "plan",
@@ -471,7 +471,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/roaming-overseas/",
+      "href": "/roaming-overseas/",
       "title": "선불폰 해외로밍과 망별 신청",
       "desc": "선불폰은 해외에서 자동으로 로밍되지 않습니다. K망은 출국 전에 신청하고, L망은 별도의 K망 로밍 지원번호를 이용하는 방식으로 준비합니다.",
       "cat": "check",
@@ -479,7 +479,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/port-old-carrier-cancellation/",
+      "href": "/port-old-carrier-cancellation/",
       "title": "번호이동 후 이전 통신사 자동 해지",
       "desc": "번호이동이 완료되면 이전 통신사의 해당 번호는 자동 해지됩니다. 먼저 직접 해지하지 말고 이전 요금과 휴대폰 할부금은 따로 확인하세요.",
       "cat": "check",
@@ -487,7 +487,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/midmonth-plan-change/",
+      "href": "/midmonth-plan-change/",
       "title": "월중 요금제 변경 시 요금 계산",
       "desc": "월중 요금제 변경은 변경 전후 사용 기간에 따라 기본료와 제공량을 나눠 계산합니다. 선불은 이미 충전한 잔액 처리도 확인해야 합니다.",
       "cat": "plan",
@@ -495,7 +495,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/transit-card-nfc/",
+      "href": "/transit-card-nfc/",
       "title": "선불폰 교통카드 NFC 오류",
       "desc": "교통카드는 NFC 유심 여부, 휴대폰 NFC 설정, 번호 등록 상태를 확인해야 합니다. 일반 유심이라면 NFC 유심으로 교체해야 할 수 있습니다",
       "cat": "fix",
@@ -503,7 +503,7 @@
       "ill": "alert"
     },
     {
-      "href": "/faq/other-carrier-phone/",
+      "href": "/other-carrier-phone/",
       "title": "다른 통신사 휴대폰 호환 조건",
       "desc": "기존에 다른 통신사에서 쓰던 휴대폰이나 공기계도 사용할 수 있습니다. 다만 기기와 선택한 통신망이 맞는지 확인해야 합니다.",
       "cat": "sim",
@@ -511,7 +511,7 @@
       "ill": "sim"
     },
     {
-      "href": "/faq/minor-signup/",
+      "href": "/minor-signup/",
       "title": "미성년자 선불폰 가입 절차",
       "desc": "미성년자는 일반 웹 셀프개통 대상이 아닙니다. 법정대리인과 필요한 서류를 준비해 앤텔레콤 센터에서 가입할 수 있습니다.",
       "cat": "check",
@@ -519,7 +519,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/kt-public-wifi/",
+      "href": "/kt-public-wifi/",
       "title": "K망 KT 와이파이 연결 문제",
       "desc": "K망 이용 중 KT 공용 와이파이에 접속이 안 된다면 휴대폰의 Wi-Fi MAC 주소를 확인해 공식 고객센터에 문의하세요.",
       "cat": "fix",
@@ -527,7 +527,7 @@
       "ill": "alert"
     },
     {
-      "href": "/faq/msafer-join-notice/",
+      "href": "/msafer-join-notice/",
       "title": "휴대폰 가입사실 알림 문자",
       "desc": "본인 명의로 휴대폰을 개통하거나 번호이동했을 때 M-safer에서 가입사실 알림이 올 수 있습니다. 신청하지 않은 가입이라면 직접 확인하세요.",
       "cat": "check",
@@ -535,7 +535,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/unlimited-calls-limit/",
+      "href": "/unlimited-calls-limit/",
       "title": "통화 기본제공의 별도 한도",
       "desc": "통화 기본제공도 1588·1577 대표번호나 영상·부가통화에는 별도 제공 시간이 있을 수 있습니다. 요금제별 한도를 확인하세요.",
       "cat": "plan",
@@ -543,7 +543,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/device-switch-cost/",
+      "href": "/device-switch-cost/",
       "title": "기기변경 가입비·유심 비용",
       "desc": "휴대폰만 바꾼다고 가입비를 다시 내지는 않습니다. 기존 유심을 그대로 쓸 수 있으면 새 유심을 구매할 필요도 없습니다.",
       "cat": "fix",
@@ -551,7 +551,7 @@
       "ill": "alert"
     },
     {
-      "href": "/faq/call-waiting/",
+      "href": "/call-waiting/",
       "title": "K망·L망 통화중대기 이용 방법",
       "desc": "무료 부가서비스인 통화중대기를 사용하면 됩니다. K망은 전화 앱에서 *40 설정, *400 해제가 가능하고 L망은 멤버십 앱을 이용합니다.",
       "cat": "check",
@@ -559,7 +559,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/find-missing-phone/",
+      "href": "/find-missing-phone/",
       "title": "휴대폰 기기 찾기 방법",
       "desc": "앤텔레콤은 휴대폰 위치를 직접 찾아주는 서비스를 제공하지 않습니다. 본인 구글·삼성·애플 계정의 기기 찾기 기능을 사용하세요.",
       "cat": "fix",
@@ -567,7 +567,7 @@
       "ill": "alert"
     },
     {
-      "href": "/faq/extra-calls/",
+      "href": "/extra-calls/",
       "title": "요금제의 부가통화 뜻",
       "desc": "부가통화는 대표번호와 050 번호, 영상통화처럼 일반 음성통화 제공량과 별도로 계산되는 통화입니다. 요금제마다 제공량이 다릅니다.",
       "cat": "plan",
@@ -575,7 +575,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/billing-statement/",
+      "href": "/billing-statement/",
       "title": "선불·후불 요금 명세서 차이",
       "desc": "선불폰은 요금을 미리 충전하기 때문에 일반 후불 요금 청구서가 발행되지 않습니다. 후불 명세서가 오지 않는다면 수령 방법을 확인하세요.",
       "cat": "plan",
@@ -583,7 +583,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/pause-prepaid-service/",
+      "href": "/pause-prepaid-service/",
       "title": "선불폰 일시정지 가능 여부",
       "desc": "K망 선불은 멤버십 앱에서 일시정지를 신청할 수 있습니다. L망 선불은 일반 일시정지 서비스가 지원되지 않습니다.",
       "cat": "check",
@@ -591,7 +591,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/video-call-overage-text/",
+      "href": "/video-call-overage-text/",
       "title": "영상통화 초과 알림 확인",
       "desc": "영상통화가 아니라 음성·부가통화 제공량 초과로 알림이 올 수도 있습니다. 통화내역과 요금제 제공량을 함께 확인하세요.",
       "cat": "fix",
@@ -599,7 +599,7 @@
       "ill": "alert"
     },
     {
-      "href": "/faq/postpaid-other-carrier-arrears/",
+      "href": "/postpaid-other-carrier-arrears/",
       "title": "통신요금 미납 중 후불 가입",
       "desc": "다른 통신사의 미납요금이 남아 있다면 후불 가입이 제한됩니다. 선불 신규가입은 별도로 신청할 수 있지만 본인인증과 가입 조건을 충족해야 합니다.",
       "cat": "check",
@@ -607,7 +607,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/lg-public-wifi/",
+      "href": "/lg-public-wifi/",
       "title": "L망 선불 U+ 공용 와이파이",
       "desc": "L망 선불에서는 LG유플러스 공용 와이파이(U+zone)를 이용할 수 없습니다. 집이나 카페의 일반 와이파이 이용과는 다릅니다.",
       "cat": "plan",
@@ -615,7 +615,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/lg-ringback-melody/",
+      "href": "/lg-ringback-melody/",
       "title": "L망 선불 통화연결음 설정",
       "desc": "L망 선불폰은 상대방에게 들려주는 통화연결음 음악 서비스를 지원하지 않습니다. 휴대폰 자체 벨소리는 변경할 수 있습니다.",
       "cat": "check",
@@ -623,7 +623,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/lg-prepaid-extra-charge/",
+      "href": "/lg-prepaid-extra-charge/",
       "title": "L망 부가서비스 요금 충전",
       "desc": "L망 선불은 월 기본료 외 유료 부가서비스용 잔액을 따로 충전해야 합니다. 부가서비스 이용료는 추가 충전 잔액에서 차감됩니다.",
       "cat": "plan",
@@ -631,7 +631,7 @@
       "ill": "coins"
     },
     {
-      "href": "/faq/lg-prepaid-international-call/",
+      "href": "/lg-prepaid-international-call/",
       "title": "L망 선불 002 국제전화",
       "desc": "L망 선불은 002 국제전화를 이용할 수 있습니다. 002와 국가번호, 상대방 번호를 순서대로 입력하며 통화료는 국가마다 다릅니다.",
       "cat": "check",
@@ -639,7 +639,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/prepaid-micropayments/",
+      "href": "/prepaid-micropayments/",
       "title": "선불폰 소액결제 가능 여부",
       "desc": "선불폰은 휴대폰 소액결제를 지원하지 않습니다. 휴대폰 본인인증은 별개의 기능이며 후불 소액결제는 상품과 가입 조건에 따라 확인해야 합니다.",
       "cat": "check",
@@ -647,7 +647,7 @@
       "ill": "clipboard"
     },
     {
-      "href": "/faq/block-mobile-data/",
+      "href": "/block-mobile-data/",
       "title": "선불폰 모바일 데이터 차단",
       "desc": "휴대폰 설정에서 모바일 데이터를 끄거나 고객센터에 무선데이터 차단 부가서비스를 신청해 접속을 제한할 수 있습니다.",
       "cat": "plan",
