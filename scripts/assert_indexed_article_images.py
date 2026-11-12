@@ -10,7 +10,8 @@ import xml.etree.ElementTree as ET
 import re,json,sys
 root=Path(__file__).resolve().parent.parent
 routes=[unescape(x) for x in re.findall(r'<loc>https://www\.59man\.shop(/[^<]+)</loc>',(root/'sitemap.xml').read_text())]
-routes=[p for p in routes if p not in ['/','/guide/']]
+# The homepage, guide and blog landing page are collection hubs, not detail articles.
+routes=[p for p in routes if p not in ['/','/guide/','/blog/']]
 expected={
 '/앤텔레콤-웹개통/':['activation-hours-new.svg'],
 '/v4-1/topic/esim-new/':['esim-new-setup.svg'],
