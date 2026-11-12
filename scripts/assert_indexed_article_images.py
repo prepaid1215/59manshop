@@ -67,7 +67,12 @@ for url in routes:
   can=re.search(r'<link rel="canonical" href="([^"]+)"',html)
   if not can or can[1]!='https://www.59man.shop'+url:issues.append('canonical changed '+url)
   checks.append({'url':url,'images':len(imgs),'new_figures':len(figures),'updated':url in expected})
-original_routes=[u for u in routes if not u.startswith('/faq/')]
+# Identify FAQ articles by their content/template instead of URL depth: FAQ answers
+# now live at /slug/, while /faq/ remains the question index.
+def is_faq_detail(url):
+  html=(root/url.lstrip('/')/'index.html').read_text(encoding='utf-8')
+  return 'class="answer-card"' in html and '/assets/faq.css' in html
+original_routes=[u for u in routes if u!='/faq/' and not is_faq_detail(u)]
 if len(original_routes)!=26:issues.append('expected 26 preserved original indexed detail articles, got '+str(len(original_routes)))
 if len(expected)!=20:issues.append('expected 20 illustrated pages')
 if new_figures<24:issues.append('expected 24 new placements got '+str(new_figures))
