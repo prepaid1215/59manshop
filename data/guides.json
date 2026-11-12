@@ -264,7 +264,7 @@
     },
     {
       "href": "/faq/",
-      "title": "선불폰 자주 묻는 질문 15가지",
+      "title": "선불폰 자주 묻는 질문 25가지",
       "desc": "유심 호환, 인증, 충전, 데이터 소진 등 질문별 핵심 답변",
       "cat": "check",
       "ill": "clipboard",
@@ -341,6 +341,70 @@
       "cat": "self",
       "ill": "phone",
       "kw": "안면인증 간편인증 카카오 토스 PASS 모바일신분증 건너뛰기"
+    },
+    {
+      "href": "/faq/sim-only-activation/",
+      "title": "유심만 구매해 신규가입하는 방법",
+      "desc": "휴대폰 없이 유심만 구매해 개통하는 조건",
+      "cat": "self",
+      "kw": "유심단독 유심만개통 공기계 신규가입 KT바로유심 LG원칩",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/change-device/",
+      "title": "유심을 다른 휴대폰에 옮겨 쓰기",
+      "desc": "기기변경과 유심 재장착, IMEI 확인",
+      "cat": "fix",
+      "kw": "기기변경 유심이동 공기계 IMEI 재부팅 유심인식",
+      "ill": "alert"
+    },
+    {
+      "href": "/faq/background-data-usage/",
+      "title": "데이터를 안 써도 줄어드는 이유",
+      "desc": "앱 업데이트와 사진 백업, 데이터 사용량 확인",
+      "cat": "plan",
+      "kw": "데이터 통화료 자동업데이트 백그라운드 데이터소진 앱사용량",
+      "ill": "coins"
+    },
+    {
+      "href": "/faq/what-is-mvno/",
+      "title": "MVNO 알뜰폰 뜻과 KT·LG망",
+      "desc": "알뜰폰이 기존 통신망을 사용하는 방식",
+      "cat": "check",
+      "kw": "MVNO 알뜰폰 뜻 통신망 KT LG 앤텔레콤",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/new-or-port/",
+      "title": "신규가입과 번호이동 차이",
+      "desc": "전화번호 발급과 기존 번호 유지의 차이",
+      "cat": "check",
+      "kw": "신규가입 번호이동 차이 미납 정지 010 선불폰",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/change-subscriber-name/",
+      "title": "앤텔레콤 명의변경 조건",
+      "desc": "명의변경 사유와 서류, 센터 방문 전 준비",
+      "cat": "check",
+      "kw": "명의변경 가족간 변경 서류 센터 요금제 앤텔레콤",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/self-activation-eligibility/",
+      "title": "셀프개통 가능 대상과 제한",
+      "desc": "미성년자·외국인·법인 신청과 인증 조건",
+      "cat": "check",
+      "kw": "셀프개통 불가 대상자 미성년자 외국인 법인 인증 가입제한",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/faq/sim-not-detected/",
+      "title": "개통 후 유심 인식 오류 해결",
+      "desc": "개통 상태·충전·재부팅·망 호환 확인",
+      "cat": "fix",
+      "kw": "유심인식 안됨 통화안됨 개통완료 재부팅 K망 L망",
+      "ill": "alert"
     }
   ],
   "asks": [
