@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep the existing 35 indexable sitemap URLs and their real page modification dates.
+"""Check all indexable sitemap URLs and their real page modification dates.
 
 Usage:
   python scripts/sync_sitemap_lastmod.py          # write dates
@@ -61,17 +61,17 @@ def main() -> int:
         return before + "<lastmod>" + modified(path) + "</lastmod>" + after
 
     expected = URL_RE.sub(update, xml)
-    if len(seen) != 35 or xml.count("<url>") != 35:
-        raise ValueError(f"Expected 35 existing sitemap entries, found {len(seen)}")
+    if len(seen) != xml.count("<url>") or not seen:
+        raise ValueError(f"Sitemap entries invalid: {len(seen)} matched out of {xml.count('<url>')} URLs")
     if args.check:
         if expected != xml:
             print("Sitemap lastmod out of sync; run python scripts/sync_sitemap_lastmod.py", file=sys.stderr)
             return 1
-        print("Sitemap: 35 URLs, lastmod dates verified against Git history")
+        print(f"Sitemap: {len(seen)} URLs, lastmod dates verified against Git history")
         return 0
     if expected != xml:
         SITEMAP.write_text(expected, encoding="utf-8")
-        print("Updated sitemap lastmod for 35 URLs")
+        print(f"Updated sitemap lastmod for {len(seen)} URLs")
     else:
         print("Sitemap dates already current")
     return 0
