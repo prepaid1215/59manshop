@@ -1,0 +1,50 @@
+/* Public Naver RSS links for the 59man.shop static site. */
+.home .landing-blog{border:1px solid #dfe8f5;background:#fff;border-radius:16px;padding:19px 15px}
+.home .landing-blog .blog-sub{margin:5px 0 12px;font-size:12px;line-height:1.65;color:#65758d}
+.home .landing-blog .blog-preview-list{list-style:none;margin:0;padding:0;border-top:1px solid #e8edf5}
+.home .landing-blog .blog-preview-list li{margin:0;border-bottom:1px solid #e8edf5}
+.home .landing-blog .blog-preview-list a{display:flex;align-items:center;gap:8px;padding:12px 0;text-decoration:none;color:#1b304c;font-size:13px;line-height:1.45}
+.home .landing-blog .blog-post-title{flex:1;min-width:0;word-break:keep-all}
+.home .landing-blog time{white-space:nowrap;color:#8390a2;font-size:10px}
+.home .landing-blog .blog-post-arrow{color:#3e72bd}
+.home .landing-blog .blog-empty{font-size:12px;color:#6c788a;padding:12px 0}
+.home .landing-blog .blog-more{display:inline-flex;margin-top:13px;font-size:13px;font-weight:800;text-decoration:none;color:#175cd3}
+.naver-blog-page{background:#f5f7fb}
+.naver-blog-page .blog-main{max-width:760px;margin:0 auto;padding:26px 16px 64px}
+.naver-blog-page .blog-crumb{display:flex;gap:9px;font-size:12px;color:#6b7a90;margin-bottom:18px}
+.naver-blog-page .blog-crumb a{color:#566985;text-decoration:none}
+.naver-blog-page .blog-heading{background:#f0f6ff;border:1px solid #d8e7fd;border-radius:18px;padding:28px 24px;margin-bottom:24px}
+.naver-blog-page .blog-kicker{margin:0 0 9px;color:#1f65c4;font-weight:750;font-size:12px}
+.naver-blog-page .blog-heading h1{font-size:28px;letter-spacing:-.045em;margin:0 0 10px;color:#18365c}
+.naver-blog-page .blog-heading p:not(.blog-kicker){font-size:14px;line-height:1.8;color:#52667f;margin:0}
+.naver-blog-page .blog-source-link{margin-top:19px;display:inline-flex;gap:15px;align-items:center;padding:12px 15px;background:#175cd3;color:#fff!important;border-radius:10px;text-decoration:none!important;font-size:13px;font-weight:800}
+.naver-blog-page .blog-list-section{padding:25px 24px;background:#fff;border:1px solid #e1e8f2;border-radius:18px}
+.naver-blog-page .blog-list-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.naver-blog-page .blog-list-heading h2{font-size:21px;letter-spacing:-.03em;margin:0 0 11px}
+.naver-blog-page .blog-list-heading span{font-size:12px;color:#758397}
+.naver-blog-page .blog-entries{list-style:none;margin:0;padding:0}
+.naver-blog-page .blog-entries li{border-bottom:1px solid #e9eef5;margin:0}
+.naver-blog-page .blog-entries li:first-child{border-top:1px solid #e9eef5}
+.naver-blog-page .blog-entries a{display:flex;align-items:center;gap:12px;text-decoration:none!important;padding:17px 0;color:#1d324e!important;line-height:1.5}
+.naver-blog-page .blog-entries a:hover .blog-post-title{color:#175cd3}
+.naver-blog-page .blog-post-title{flex:1;min-width:0;font-size:14px;word-break:keep-all;font-weight:650}
+.naver-blog-page .blog-entries time{font-size:11px;color:#8a97a7;white-space:nowrap}
+.naver-blog-page .blog-post-arrow{color:#3472ca;font-size:16px}
+.naver-blog-page .blog-empty{padding:20px 0;color:#697c91;font-size:13px}
+.naver-blog-page .blog-list-footnote{font-size:12px;color:#79869a;line-height:1.7;margin:16px 0 0}
+.naver-blog-page .blog-next{margin-top:22px;display:grid;gap:16px;padding:23px 24px;background:#fff;border:1px solid #e1e8f2;border-radius:17px}
+.naver-blog-page .blog-next h2{font-size:19px;margin:0 0 6px}
+.naver-blog-page .blog-next p{font-size:13px;line-height:1.7;margin:0;color:#62758d}
+.naver-blog-page .blog-next-links{display:flex;gap:8px;flex-wrap:wrap}
+.naver-blog-page .blog-next-links a{font-size:13px;font-weight:750;background:#edf4ff;border:1px solid #d6e4fb;border-radius:9px;padding:11px 13px;color:#205bad;text-decoration:none}
+.naver-blog-page .blog-footer{display:flex;flex-wrap:wrap;gap:20px;padding:24px 16px}
+.naver-blog-page .blog-footer a{color:#6d7c90;text-decoration:none;font-size:12px}
+@media(max-width:600px){
+ .naver-blog-page .blog-main{padding:18px 14px 50px}
+ .naver-blog-page .blog-heading,.naver-blog-page .blog-list-section,.naver-blog-page .blog-next{padding:20px 17px}
+ .naver-blog-page .blog-heading h1{font-size:24px}
+ .naver-blog-page .blog-entries a{gap:6px;flex-wrap:wrap}
+ .naver-blog-page .blog-entries time{order:2}
+ .naver-blog-page .blog-post-arrow{margin-left:auto;order:3}
+ .naver-blog-page .blog-post-title{width:100%;flex-basis:100%}
+}
