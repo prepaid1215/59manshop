@@ -1,0 +1,23 @@
+/* IndexKit C: human-readable reference hub. No mirrored Naver post text. */
+.kit-page{background:#f5f7fb}
+.kit-main{max-width:840px;margin:0 auto;padding:22px 15px 60px}
+.kit-crumb{display:flex;gap:9px;font-size:12px;color:#687a92;margin:0 0 16px}
+.kit-crumb a{color:#516985;text-decoration:none}
+.kit-hero{background:#edf5ff;border:1px solid #d9e9ff;border-radius:18px;padding:27px 26px;margin-bottom:18px}
+.kit-kicker{font-size:12px;color:#3164b4;font-weight:800;margin:0 0 10px}
+.kit-hero h1{margin:0 0 12px;color:#18365d;line-height:1.33;letter-spacing:-.035em;font-size:27px}
+.kit-hero>p:last-child{font-size:14px;color:#52677e;line-height:1.85;margin:0}
+.kit-list{display:grid;gap:13px}
+.kit-card{background:#fff;border:1px solid #e2e9f3;border-radius:16px;padding:22px 24px}
+.kit-meta{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:12px;color:#667d99}
+.kit-meta span{color:#215ab3;font-weight:800}
+.kit-card h2{font-size:19px;line-height:1.45;letter-spacing:-.025em;color:#243753;margin:11px 0}
+.kit-card p{color:#4e6078;font-size:14px;line-height:1.8;margin:0 0 15px}
+.kit-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.kit-actions a{display:inline-flex;align-items:center;gap:8px;border-radius:9px;padding:10px 12px;font-size:13px;font-weight:750;text-decoration:none}
+.kit-post{background:#1f61bd;color:#fff!important}
+.kit-guide{background:#eef4ff;border:1px solid #d7e5fd;color:#1d5da9!important}
+.kit-next{margin-top:18px;border:1px solid #e2e9f3;border-radius:17px;background:#fff;padding:24px}
+.kit-next h2{font-size:19px;margin:0 0 9px;color:#243753}
+.kit-next p{font-size:14px;line-height:1.75;color:#5d7189;margin:0 0 12px}
+@media(max-width:600px){.kit-main{padding:16px 13px 45px}.kit-hero,.kit-card,.kit-next{padding:19px 17px}.kit-hero h1{font-size:23px}.kit-card h2{font-size:17px}.kit-actions a{padding:11px;font-size:12px}}

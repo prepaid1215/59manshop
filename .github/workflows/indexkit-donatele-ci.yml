@@ -1,0 +1,32 @@
+name: IndexKit C - donor blog treatment integrity
+
+on:
+  push:
+    branches: [feature/indexkit-donatele-pilot, main]
+    paths:
+      - "indexkit/**"
+      - "data/indexkit-donatele-treatment.json"
+      - "scripts/check_indexkit_donatele.py"
+      - "index.html"
+      - "sitemap.xml"
+      - ".github/workflows/indexkit-donatele-ci.yml"
+  pull_request:
+    paths:
+      - "indexkit/**"
+      - "data/indexkit-donatele-treatment.json"
+      - "scripts/check_indexkit_donatele.py"
+      - "index.html"
+      - "sitemap.xml"
+      - ".github/workflows/indexkit-donatele-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify IndexKit C pages and control isolation
+        run: python scripts/check_indexkit_donatele.py
