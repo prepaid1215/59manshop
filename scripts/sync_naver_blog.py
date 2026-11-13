@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 FEED_URL = "https://rss.blog.naver.com/ntelecom59.xml"
-BLOG_HOME = "https://blog.naver.com/ntelecom59"
+BLOG_HOME = "https://m.blog.naver.com/ntelecom59"
 STATE = ROOT / "data/naver-blog-posts.json"
 HOME = ROOT / "index.html"
 LIST = ROOT / "blog/index.html"
@@ -36,11 +36,11 @@ def permitted_url(value):
             return None
         path = u.path.rstrip("/")
         if re.fullmatch(r"/ntelecom59/\d+", path):
-            return "https://blog.naver.com" + path
+            return "https://m.blog.naver.com" + path
         if path == "/PostView.naver":
             q = urllib.parse.parse_qs(u.query)
             if q.get("blogId") == ["ntelecom59"] and re.fullmatch(r"\d+", (q.get("logNo") or [""])[0]):
-                return "https://blog.naver.com/ntelecom59/" + q["logNo"][0]
+                return "https://m.blog.naver.com/ntelecom59/" + q["logNo"][0]
     except (ValueError, AttributeError):
         pass
     return None
