@@ -40,6 +40,29 @@ jobs:
       - name: Refresh latest posts from Naver RSS
         run: python scripts/sync_naver_blog.py
 
+      - name: Verify all generated Naver blog links use the mobile domain
+        run: |
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          root = Path(".")
+          spec = importlib.util.spec_from_file_location("rss_sync", root / "scripts/sync_naver_blog.py")
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          samples = [
+              "https://blog.naver.com/ntelecom59/224475389513",
+              "https://m.blog.naver.com/ntelecom59/224475389513",
+              "https://blog.naver.com/PostView.naver?blogId=ntelecom59&logNo=224475389513",
+          ]
+          expected = "https://m.blog.naver.com/ntelecom59/224475389513"
+          assert all(module.permitted_url(s) == expected for s in samples)
+          for path in ("index.html", "blog/index.html", "data/naver-blog-posts.json"):
+              content = (root / path).read_text(encoding="utf-8")
+              assert "https://blog.naver.com/ntelecom59" not in content, path
+              assert "https://m.blog.naver.com/ntelecom59" in content, path
+          print("Mobile Naver blog links verified in RSS parser, homepage, listing and state")
+          PY
+
       - name: Commit updated static article links
         run: |
           if ! git diff --quiet -- index.html blog/index.html sitemap.xml data/naver-blog-posts.json; then
