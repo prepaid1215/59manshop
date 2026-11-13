@@ -1,56 +1,41 @@
-# 59man.shop 실험 C (IndexKit): donatele 원문 발견·색인 비교
+# 59man.shop × donatele — IndexKit 실험 C
 
-시작일: 2026-11-13 · 상태: **후보 수집 단계 (아직 공개 링크 없음)**
+시작 준비일: 2026-11-13 · 실험 링크 공개일: **운영 배포 확인 시 확정** · 상태: **실험 페이지 구현·검증**
 
-## 실험 질문
+## 목표
 
-59man.shop에서 네이버 블로그 [donatele](https://blog.naver.com/donatele)의
-공개 원문으로 크롤링 가능한 일반 HTML 링크를 만들었을 때, 새로 검색에서
-관측되는 원문 비율이 링크를 만들지 않은 대조군보다 높아지는가?
+[donatele](https://blog.naver.com/donatele) 원문 10개를 유사한 검색 주제 5쌍으로 묶은 뒤, 각 쌍에서 1개씩 59man.shop에 일반 HTML 링크를 게시합니다. 나머지 5개는 대조군이며 59man.shop에 링크를 걸지 않습니다. 두 군의 구글 검색 관측 변화를 7·14·28일 동안 비교합니다.
 
-이 실험은 발견 경로를 추가할 뿐 **Google 또는 네이버 색인을 보장하지 않는다.**
+- **실험군:** 업무용 전화, 미납정지, GS25 유심, 1년 요금제 비교, 카카오톡 변경의 원문 5개.
+- **대조군:** 각 주제에서 대응하는 다른 원문 5개. URL을 공개 HTML에 넣지 않고 SHA-256 체크섬만 `data/indexkit-donatele-treatment.json`에 기록합니다.
+- 무작위 배정 방식: 주제별 두 후보 URL을 `SHA256("59man-indexkit-C-v1\n" + normalized-url)`로 정렬해 작은 쪽이 실험군입니다. 공개 후 배정 변경 금지.
 
-## 현재 사이트와 충돌 방지
+## 실제 구현
 
-- 59man.shop의 기존 RSS 수집기 \`scripts/sync_naver_blog.py\`는 현재 **ntelecom59**를 수집한다.
-- 최종 사이트 짝은 **donatele ↔ 59man.shop**으로 정했으나 RSS 주소 교체는 아직 하지 않았다.
-- **먼저 대조군을 확정해야 한다.** donatele RSS 전체를 홈, /blog/, /sitemap.xml 또는 다른 페이지에 내보내면 대조군이 노출되어 실험이 무효화된다.
-- 대조군 원문 URL은 GitHub Pages가 배포하는 디렉터리의 일반 JSON 파일에도 저장하지 않는다. 현재 Pages 워크플로는 저장소 루트 "." 전체를 업로드한다.
-- 후속 RSS 전환 시 대조군을 제외한 나머지만 표시하고, 이미 존재하던 외부 링크를 추적한다. 정당하게 공개된 원문 링크를 검색로봇 대상으로 숨기거나 차단하는 방식은 사용하지 않는다.
+- `/indexkit/`: 본문을 복제하지 않은 주제별 원문 5개와 자체 설명, 59man.shop 가이드 링크
+- `/` 및 `/guide/`: /indexkit/로 연결
+- `/sitemap.xml`: 외부 Naver 글 주소는 추가하지 않고 **이 사이트의 /indexkit/만** 추가
+- `scripts/check_indexkit_donatele.py`: 5개 treatment 존재, 5개 control 누출 없음, 내부 링크 정상과 sitemap 검사
+- `.github/workflows/indexkit-donatele-ci.yml`: CI 자동 검증
+- 후보 수집: `scripts/indexkit_donatele_candidates.py` 및 Actions `indexkit-donatele-candidates.yml`; donatele RSS 글 50개 수집 성공
 
-## 1. 후보 수집 — 구현됨
+## RSS 처리: 실험 오염 방지
 
-GitHub Actions의 \`IndexKit C - donatele candidate discovery\` 실행:
+- 59man.shop의 기존 **ntelecom59 RSS 자동 목록 51개는 변경하지 않음**.
+- 도메인별 장기 짝은 `donatele ↔ 59man.shop`으로 정했지만, donatele RSS 전체 수집을 /blog/에 바로 공개하면 대조군도 링크가 생깁니다.
+- 첫 7/14/28일 실험이 끝나거나 통계 설계를 별도로 확정하기 전까지 donatele 전체 RSS 목록 공개를 보류합니다.
+- RSS를 donatele로 바꿀 때는 반드시 대조군 해시 필터링 및 모든 공개 HTML/JSON의 대조군 URL 검사를 먼저 통과시켜야 합니다.
 
-\`\`\`bash
-python scripts/indexkit_donatele_candidates.py --output /tmp/indexkit-donatele-candidates.json
-\`\`\`
+## 사전 기준점과 한계
 
-- 공개 RSS에서 **donatele 소유의 정상 원문 URL만** 수집한다.
-- 후보가 10개 미만이면 실패한다.
-- 출력은 7일 보존되는 Actions artifact이며 사이트 HTML, sitemap, 추적 파일에는 원문 URL을 게시하지 않는다.
-- RSS 연결 실패 또는 글 부족 상황에서는 공개 상태를 변경하지 않는다.
+2026-11-13에 정확한 제목 중심의 공개 검색을 했지만 해당 원문이 검색 결과에 없다는 사실은 **구글 미색인의 증거가 아닙니다.** Google 소유권 기반 URL Inspection은 네이버 외부 글에 적용할 수 없습니다. 사전 상태는 `unverified`로 기록합니다.
 
-## 2. 실험 시작 전에 할 일 — 미완료
+실험 시작 시 운영 배포 페이지 200, indexable, canonical, sitemap, 내부 링크와 다섯 개 외부 URL을 확인하고 최초 공개 날짜를 데이터 파일에 기록합니다. 
+그 뒤 7/14/28일에 같은 검색 방법으로 실험군과 대조군을 관측합니다.
+- 구글 검색에서 발견되었다는 결과만으로 외부 원문의 실제 색인/수집 내부 상태를 단정하지 않습니다.
+- 이미 검색에 나오던 글은 관찰표에서 구분합니다.
+- 실험군의 외부 링크는 `nofollow` 없이 일반 `a href`로 제공합니다. 백링크는 **색인을 강제하지 않습니다**.
 
-1. 후보 중 최소 10개를 선정한다. Google 검색 결과와 기존 외부 링크 노출을 확인한다.
-2. 해당 원문의 기준 시점 검색 관측 여부, 키워드, 조회 날짜 및 근거를 기록한다.
-3. 최소 10개를 고정 시드로 무작위 5:5 배정하고 대조군 URL은 비공개 원장에만 기록한다.
-4. 실험군 **5개만** 주제에 맞는 자연스러운 링크와 요약으로 공개한다. 강제 클릭, 리다이렉트, 내용 복제, noindex 링크 트릭은 사용하지 않는다.
-5. 공개한 59man.shop 페이지는 실제 HTML 앵커(\`<a href="...">\`)를 사용하고 홈페이지 등에서 내부 링크로 도달 가능해야 한다.
-6. 실험 페이지가 실제 200, indexable, sitemap 포함인지 점검한다. 외부 네이버 글 URL은 59man.shop 사이트맵에 넣지 않는다.
-7. 홈·/blog/·RSS·데이터 JSON 등 **59man.shop 전체 빌드 결과**에 대조군 글 주소가 없는지 검색한다.
-8. 게시 날짜를 고정하고 7일/14일/28일에 양 군의 검색 결과를 같은 방식으로 조사한다. URL 검사 도구는 소유 중인 59man.shop 페이지에만 적용한다.
+## 후속 실험
 
-## 3. 평가 기준
-
-- **관찰 가능한 것:** 59man.shop 실험 페이지의 수집·색인 상태, 네이버 원문이 Google 검색에서 직접 관측되는지, 결과 차이
-- **직접 관찰할 수 없는 것:** 다른 소유자 도메인의 개별 URL이 Google 내부에서 발견·수집·색인되었는지에 관한 Search Console 상세 상태
-- 검색 결과가 안 보인다고 곧바로 "미색인 확정"이라 하지 않는다. 모르는 것은 **미확인**으로 남긴다.
-- 게시 전에 이미 검색되던 원문은 별도로 분리·제외한다.
-- 색인이 0건이면 페이지의 Google 수집 여부와 기존 원문 색인 상태를 함께 살핀다.
-
-## 범위
-
-- 이 PR은 **비공개 후보 수집 기반만** 추가한다. 실제 링크 배정, RSS 교체, 공개 페이지, 색인 성과를 만들거나 발표하지 않는다.
-- 프로젝트가 커져도 \`preplan.site\`의 개통 전환 및 \`ntelecomhowto\` 실험 C와 혼동하지 않는다.
+IndexKit 5:5 평가가 끝난 뒤 키자드형 글별 독립 안내 페이지를 별도 실험으로 검토합니다. 이 단계에서는 독립 페이지를 추가하지 않습니다.
