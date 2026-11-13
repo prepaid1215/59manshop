@@ -8,7 +8,7 @@
     "googleIndexed": "unverified",
     "note": "Public web search of exact titles returned no matching donatele results; NOT a reliable Google indexing test. Do not assert unindexed."
   },
-  "publishedAt": null,
+  "publishedAt": "2026-11-13",
   "observationWindowsDays": [
     7,
     14,
@@ -68,5 +68,11 @@
     "2ce094696fda7d09908f6c4b33c1687ae282b98e2f2e686c78b2d59a6aec73f9",
     "ba661ff04b9a6ce5ef977c803dddb47832ee46eab4a9c6eb7a656e3f515fc595"
   ],
-  "controlsNote": "Control URLs are not included in this site repository. Use original Actions candidate artifact and original topic pairs for matching. Never publish control links during the observation window."
+  "controlsNote": "Control URLs are not included in this site repository. Use original Actions candidate artifact and original topic pairs for matching. Never publish control links during the observation window.",
+  "deployment": {
+    "githubPagesWorkflowRun": "https://github.com/prepaid1215/59manshop/actions/runs/43353518598",
+    "result": "success",
+    "liveHttp": "unverified_due_to_DNS_in_check_environment",
+    "checkedAt": "2026-11-13"
+  }
 }
