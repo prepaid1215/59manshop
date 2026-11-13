@@ -62,7 +62,17 @@ const base='http://127.0.0.1:8765';
      const st=mm59TrackingStatus();
      const gtagScript=document.querySelector('script[src*="gtag/js?id="]')?.src;
      const queued=(window.dataLayer||[]).filter(x=>Object.prototype.toString.call(x)==='[object Arguments]');
-     return {pass:st.analyticsConsent==='yes'&&st.gaLoaded&&gtagScript?.includes('G-N22WSXXPHH')&&queued.some(x=>x[0]==='config'&&x[1]==='G-N22WSXXPHH'),state:st,gtagScript,gtagEvents:queued.map(x=>x[0])};
+     return {pass:st.analyticsConsent==='yes'&&st.gaLoaded&&gtagScript?.includes('G-N7ZW223ESP')&&queued.some(x=>x[0]==='config'&&x[1]==='G-N7ZW223ESP'),state:st,gtagScript,gtagEvents:queued.map(x=>x[0])};
+   });
+ });
+ await scenario('Kakao consultation click is attributed without sending before consent', '/', async page=>{
+   return page.evaluate(()=>{
+     document.addEventListener('click',e=>e.preventDefault());
+     const a=document.querySelector('.landing-secondary-cta');
+     a?.click();
+     const clicked=(window.dataLayer||[]).filter(x=>x&&x.event==='mm59_contact_click').pop();
+     const gaScript=!!document.querySelector('script[src*="gtag/js?id="]');
+     return {pass:!!a&&clicked?.mm_channel==='kakao'&&clicked?.mm_origin_path==='/'&&!gaScript,clicked,gaScript};
    });
  });
  await browser.close();
