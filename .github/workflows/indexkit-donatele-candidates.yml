@@ -1,0 +1,42 @@
+name: IndexKit C - donatele candidate discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/indexkit-donatele-pilot]
+    paths:
+      - scripts/indexkit_donatele_candidates.py
+      - .github/workflows/indexkit-donatele-candidates.yml
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify parser with fixture
+        run: |
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          p = Path("scripts/indexkit_donatele_candidates.py")
+          spec = importlib.util.spec_from_file_location("indexkit_donatele", p)
+          mod = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+          sample = b"""<rss><channel><item><title>Test title</title><link>https://blog.naver.com/donatele/224400000001</link></item><item><title>Wrong author</title><link>https://blog.naver.com/ntelecom59/224400000002</link></item></channel></rss>"""
+          posts = mod.parse_feed(sample)
+          assert len(posts) == 1, posts
+          assert posts[0]["url"] == "https://m.blog.naver.com/donatele/224400000001"
+          assert mod.normalize_url("https://evil.example/donatele/224400000003") is None
+          print("Fixture verified")
+          PY
+      - name: Collect public RSS candidates
+        run: python scripts/indexkit_donatele_candidates.py --output /tmp/indexkit-donatele-candidates.json
+      - name: Upload candidates for review - never commit to website
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexkit-donatele-candidates
+          path: /tmp/indexkit-donatele-candidates.json
+          retention-days: 7
