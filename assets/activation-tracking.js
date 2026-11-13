@@ -1,8 +1,8 @@
 /* 59만모바일: first-party activation CTA attribution, no personal data.
-   GA4 G-N22WSXXPHH is from public preplan.site GTM. Load after opt-in only. */
+   GA4 G-N7ZW223ESP is for 59man.shop. Load only after analytics opt-in. */
 (function () {
   'use strict';
-  var GA_ID='G-N22WSXXPHH';
+  var GA_ID='G-N7ZW223ESP';
   var KEY='mm59_analytics_consent_v1';
   var allowedHost='preplan.site';
   var currentPath=window.location.pathname||'/';
@@ -38,12 +38,25 @@
       window.gtag('event',name,Object.assign({send_to:GA_ID,transport_type:'beacon'},props));
     }
   }
+  function isKakaoChat(a){
+    try {
+      var u=new URL(a.getAttribute('href'),location.href);
+      return u.protocol==='https:'&&u.hostname==='pf.kakao.com'&&u.pathname.replace(/\/$/,'')==='/_akxmKn/chat';
+    }catch(e){return false}
+  }
   function onLink(e){
     var a=e.target&&e.target.closest&&e.target.closest('a[href]');
     if(!a)return;
     var u=getPreplanUrl(a);
-    if(!u)return;
     var place=slot(a);
+    if(!u){
+      if(isKakaoChat(a)){
+        window.dataLayer=window.dataLayer||[];
+        window.dataLayer.push({event:'mm59_contact_click',mm_channel:'kakao',mm_origin_path:currentPath,mm_placement:place});
+        analyticsEvent('mm59_contact_click',{channel:'kakao',source_path:currentPath,placement:place});
+      }
+      return;
+    }
     if(!u.searchParams.get('from')){
       u.searchParams.set('from',sourceCode(place));
       a.href=u.href;
