@@ -51,6 +51,15 @@
   ],
   "guides": [
     {
+      "href": "/blog/",
+      "title": "네이버 블로그 최신 글",
+      "desc": "59만모바일 네이버 블로그에서 새로 발행한 선불폰·유심 안내를 확인하세요.",
+      "cat": "check",
+      "kw": "네이버 블로그 최신 글 선불폰 유심 개통정보",
+      "ill": "clipboard",
+      "order": -1
+    },
+    {
       "href": "/선불폰-개통/",
       "title": "선불폰 개통 신청 조건",
       "desc": "지금 신청할 수 있는지, 신규가입 가능 시간과 새 번호·기존 번호의 차이를 확인합니다.",
@@ -661,6 +670,78 @@
       "cat": "check",
       "ill": "clipboard",
       "kw": "블로그 네이버 업무용 미납정지 편의점 유심 요금제 카카오톡 독자글"
+    },
+    {
+      "href": "/auth-popup-blocked/",
+      "title": "인증창이 열리지 않을 때",
+      "desc": "인증 버튼을 눌러도 창이 안 열리면 팝업 차단 여부와 원래 개통 탭을 확인합니다.",
+      "cat": "self",
+      "kw": "인증 팝업 차단 크롬 사파리",
+      "ill": "phone"
+    },
+    {
+      "href": "/msafer-signup-block/",
+      "title": "명의도용방지 가입제한 해제",
+      "desc": "명의도용방지 가입제한이 설정돼 있다면 신규가입 전 본인이 해제해야 합니다.",
+      "cat": "move",
+      "kw": "Msafer 엠세이퍼 가입제한 해제",
+      "ill": "clipboard"
+    },
+    {
+      "href": "/sim-pin-puk/",
+      "title": "유심 PIN·PUK 입력 요청",
+      "desc": "PIN·PUK는 유심 잠금 코드입니다. 임의로 입력하지 말고 통신사에서 확인하세요.",
+      "cat": "sim",
+      "kw": "유심 PIN PUK 잠금 해제",
+      "ill": "sim"
+    },
+    {
+      "href": "/dual-sim-default/",
+      "title": "듀얼심 통화·데이터용 SIM 설정",
+      "desc": "갤럭시·아이폰에서 기본 통화용과 모바일 데이터용 SIM을 각각 선택합니다.",
+      "cat": "sim",
+      "kw": "듀얼심 갤럭시 아이폰 데이터 SIM",
+      "ill": "sim"
+    },
+    {
+      "href": "/verification-sms-missing/",
+      "title": "은행·사이트 인증문자가 안 올 때",
+      "desc": "일반 문자 수신을 먼저 시험하고 알뜰폰 KT·LG 선택과 문자 필터를 확인합니다.",
+      "cat": "fix",
+      "kw": "인증문자 SMS 수신 안됨 알뜰폰",
+      "ill": "alert"
+    },
+    {
+      "href": "/unknown-caller-silenced/",
+      "title": "발신은 되는데 전화 벨이 안 울릴 때",
+      "desc": "방해금지·수신 차단·알 수 없는 발신자 음소거 설정부터 확인합니다.",
+      "cat": "fix",
+      "kw": "전화 수신 벨소리 방해금지 차단",
+      "ill": "alert"
+    },
+    {
+      "href": "/mobile-data-only-failure/",
+      "title": "통화는 되는데 데이터가 안 될 때",
+      "desc": "모바일 데이터와 듀얼심 데이터용 SIM, 남은 이용 상태부터 확인합니다.",
+      "cat": "fix",
+      "kw": "통화 가능 데이터 안됨 APN 인터넷",
+      "ill": "alert"
+    },
+    {
+      "href": "/esim-install-internet/",
+      "title": "eSIM 설치 전 인터넷 연결 준비",
+      "desc": "eSIM 설치에는 인터넷 연결이 필요합니다. 와이파이와 활성화 안내를 확인하세요.",
+      "cat": "esim",
+      "kw": "eSIM 와이파이 설치 연결",
+      "ill": "esim"
+    },
+    {
+      "href": "/esim-eid-imei/",
+      "title": "eSIM EID·IMEI 확인 방법",
+      "desc": "아이폰 설정의 일반·정보에서 EID와 IMEI를 확인하고 신청 화면의 해당 칸에 입력합니다.",
+      "cat": "esim",
+      "kw": "eSIM EID IMEI 확인 아이폰 갤럭시",
+      "ill": "esim"
     }
   ],
   "asks": [
