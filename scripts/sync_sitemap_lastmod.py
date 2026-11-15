@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import difflib
 import re
 import subprocess
 import sys
@@ -65,6 +66,10 @@ def main() -> int:
         raise ValueError(f"Sitemap entries invalid: {len(seen)} matched out of {xml.count('<url>')} URLs")
     if args.check:
         if expected != xml:
+            diff = list(difflib.unified_diff(xml.splitlines(), expected.splitlines(),
+                                             fromfile="sitemap.xml", tofile="expected sitemap.xml",
+                                             lineterm=""))
+            print("\n".join(diff[:30]), file=sys.stderr)
             print("Sitemap lastmod out of sync; run python scripts/sync_sitemap_lastmod.py", file=sys.stderr)
             return 1
         print(f"Sitemap: {len(seen)} URLs, lastmod dates verified against Git history")
