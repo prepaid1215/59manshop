@@ -51,9 +51,11 @@
     var place=slot(a);
     if(!u){
       if(isKakaoChat(a)){
-        window.dataLayer=window.dataLayer||[];
-        window.dataLayer.push({event:'mm59_contact_click',mm_channel:'kakao',mm_origin_path:currentPath,mm_placement:place});
-        analyticsEvent('mm59_contact_click',{channel:'kakao',source_path:currentPath,placement:place});
+        if(consent==='yes'){
+          window.dataLayer=window.dataLayer||[];
+          window.dataLayer.push({event:'mm59_contact_click',mm_channel:'kakao',mm_origin_path:currentPath,mm_placement:place});
+          analyticsEvent('mm59_contact_click',{channel:'kakao',source_path:currentPath,placement:place});
+        }
       }
       return;
     }
@@ -70,14 +72,16 @@
       mm_placement:place,
       mm_destination_type:dest
     };
-    window.dataLayer=window.dataLayer||[];
-    window.dataLayer.push(payload);
-    analyticsEvent('mm59_outbound_click',{
-      source_code:source,
-      source_path:currentPath,
-      placement:place,
-      destination_type:dest
-    });
+    if(consent==='yes'){
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push(payload);
+      analyticsEvent('mm59_outbound_click',{
+        source_code:source,
+        source_path:currentPath,
+        placement:place,
+        destination_type:dest
+      });
+    }
   }
   // Capturing updates the actual href before navigation; delegated for JS-created links.
   document.addEventListener('click',onLink,true);
@@ -112,10 +116,11 @@
     try{localStorage.setItem(KEY,value)}catch(e){}
     var dlg=document.getElementById('mm59-analytics-consent');
     if(dlg)dlg.remove();
-    if(value==='yes'&&window.__mm59GaLoaded&&typeof window.gtag==='function'){
+    if(window.__mm59GaLoaded&&typeof window.gtag==='function'){
       window.gtag('consent','update',{
-        analytics_storage:'granted',ad_storage:'denied',
-        ad_user_data:'denied',ad_personalization:'denied'
+        analytics_storage:value==='yes'?'granted':'denied',
+        ad_storage:'denied',ad_user_data:'denied',
+        ad_personalization:'denied'
       });
     }
     if(value==='yes')loadGA();
@@ -126,23 +131,28 @@
     node.id='mm59-analytics-consent';
     node.setAttribute('role','region');
     node.setAttribute('aria-label','방문 통계 동의');
-    node.style.cssText='position:fixed;z-index:2147483000;bottom:80px;left:50%;transform:translateX(-50%);box-sizing:border-box;width:calc(100% - 24px);max-width:456px;padding:13px 15px;background:#fff;color:#17305c;border:1px solid #d8e3f4;border-radius:12px;box-shadow:0 10px 34px rgba(0,0,0,.14);font:13px/1.5 sans-serif';
+    node.style.cssText='box-sizing:border-box;width:100%;max-width:456px;margin:12px 0 0;padding:12px 14px;background:#f7f9fc;color:#17305c;border:1px solid #d8e3f4;border-radius:10px;font:13px/1.5 sans-serif';
     var p=document.createElement('p');
-    p.textContent='방문·개통 버튼 클릭 통계 수집에 동의하시나요? 이름·전화번호·인증정보는 이벤트에 보내지 않습니다.';
+    p.textContent='방문 및 개통 버튼 클릭 통계는 선택 사항입니다. 동의할 때만 GA4 분석을 켭니다. 이름·전화번호·인증정보는 전송하지 않습니다.';
     p.style.cssText='margin:0 0 9px';
     node.appendChild(p);
     var controls=document.createElement('div');
-    controls.style.cssText='display:flex;gap:8px;justify-content:flex-end';
+    controls.style.cssText='display:flex;gap:8px;justify-content:flex-start;flex-wrap:wrap';
     var no=document.createElement('button');
     no.type='button';no.textContent='거절';
     no.style.cssText='padding:7px 12px;border:1px solid #c2cfe0;border-radius:8px;color:#17305c;background:#fff;cursor:pointer';
     var yes=document.createElement('button');
     yes.type='button';yes.textContent='동의';
     yes.style.cssText='padding:7px 12px;border:1px solid #235ccc;border-radius:8px;color:#fff;background:#235ccc;cursor:pointer';
+    var close=document.createElement('button');
+    close.type='button';close.textContent='닫기';
+    close.style.cssText='padding:7px 12px;border:1px solid #c2cfe0;border-radius:8px;color:#17305c;background:#fff;cursor:pointer';
     no.addEventListener('click',function(){setConsent('no')});
     yes.addEventListener('click',function(){setConsent('yes')});
-    controls.append(no,yes);node.appendChild(controls);
-    document.body.appendChild(node);
+    close.addEventListener('click',function(){node.remove()});
+    controls.append(no,yes,close);node.appendChild(controls);
+    var footer=document.querySelector('footer .footer-info')||document.querySelector('footer');
+    if(footer)footer.appendChild(node);
   }
   function settingsButton(){
     if(document.getElementById('mm59-analytics-settings'))return;
@@ -154,15 +164,8 @@
     button.textContent='방문 통계 설정';
     button.style.cssText='background:transparent;border:0;padding:4px 0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit';
     button.addEventListener('click',function(){
-      // Withdrawing consent stops future events and avoids loading GA on reload.
-      if(consent==='yes'&&typeof window.gtag==='function'){
-        window.gtag('consent','update',{
-          analytics_storage:'denied',ad_storage:'denied',
-          ad_user_data:'denied',ad_personalization:'denied'
-        });
-      }
-      consent='unset';
-      try{localStorage.removeItem(KEY)}catch(e){}
+      var existing=document.getElementById('mm59-analytics-consent');
+      if(existing){existing.remove();return;}
       consentNotice();
     });
     footer.appendChild(button);
@@ -170,7 +173,8 @@
   function startup(){
     settingsButton();
     if(consent==='yes')loadGA();
-    else if(consent==='unset')consentNotice();
+    // No automatic prompt. Unset consent means no GA4 tracking.
+    // Visitors can voluntarily enable it in the footer settings.
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startup);
   else startup();
