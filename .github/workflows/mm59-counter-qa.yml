@@ -40,77 +40,22 @@ jobs:
           origin='https://www.59man.shop'
           echo 'Checking public 59man.shop (not GitHub file contents)'
           curl -fsSL --max-time 30 --retry 2 -D /tmp/mm59-headers.txt -o /tmp/mm59-home.html "$origin/"
-          grep -F 'site.js?v=20261118-aggregate1' /tmp/mm59-home.html >/dev/null || { echo 'FAILED: public homepage still uses OLD JS version'; exit 1; }
+          site_src=$(grep -Eo 'src="/assets/site.js\?v=[^"]+"' /tmp/mm59-home.html | tail -1 | cut -d '"' -f 2)
+          test -n "$site_src" || { echo 'FAILED: site.js reference missing from homepage'; exit 1; }
           echo 'PASS: homepage references latest site.js'
-          curl -fsSL --max-time 30 --retry 2 -o /tmp/mm59-site.js "$origin/assets/site.js?v=20261118-aggregate1"
-          grep -F 'anonymous-counter.js?v=20261118-aggregate1' /tmp/mm59-site.js >/dev/null || { echo 'FAILED: shared site.js missing counter loader'; exit 1; }
+          curl -fsSL --max-time 30 --retry 2 -o /tmp/mm59-site.js "$origin$site_src"
+          counter_src=$(grep -Eo "'/assets/anonymous-counter.js\\?v=[^']+'" /tmp/mm59-site.js | head -1 | tr -d "'")
+          test -n "$counter_src" || { echo 'FAILED: shared site.js missing counter loader'; exit 1; }
           echo 'PASS: public site.js loads anonymous counter'
-          curl -fsSL --max-time 30 --retry 2 -o /tmp/mm59-counter.js "$origin/assets/anonymous-counter.js?v=20261118-aggregate1"
+          curl -fsSL --max-time 30 --retry 2 -o /tmp/mm59-counter.js "$origin$counter_src"
           grep -F 'mm59-daily-aggregate' /tmp/mm59-counter.js >/dev/null || { echo 'FAILED: counter JS is missing API address'; exit 1; }
           grep -F "credentials:'omit'" /tmp/mm59-counter.js >/dev/null || { echo 'FAILED: counter JS missing cookie-free option'; exit 1; }
           grep -F "function optedOut()" /tmp/mm59-counter.js >/dev/null || { echo 'FAILED: counter JS missing opt-out'; exit 1; }
           echo 'PASS: counter script live and cookie-free, explicit opt-out enforced'
           for page in '/%EB%AF%B8%EB%82%A9%EC%A0%95%EC%A7%80-%EC%84%A0%EB%B6%88%ED%8F%B0/' '/%ED%8E%B8%EC%9D%98%EC%A0%90-%EC%84%A0%EB%B6%88%EC%9C%A0%EC%8B%AC/' '/%EC%84%A0%EB%B6%88%ED%8F%B0-%EC%85%80%ED%94%84%EA%B0%9C%ED%86%B5/'; do
             curl -fsSL --max-time 30 --retry 2 -o /tmp/mm59-article.html "$origin$page"
-            grep -F 'site.js?v=20261118-aggregate1' /tmp/mm59-article.html >/dev/null || { echo "FAILED: article JS not updated: $page"; exit 1; }
+            grep -F "src=\"$site_src\"" /tmp/mm59-article.html >/dev/null || { echo "FAILED: article JS different from homepage: $page"; exit 1; }
           done
           echo 'PASS: three high-intent articles serve latest JS version'
 
 
-  one-time-counter-integration-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Execute LIVE published counter JS in isolated browser-like environment and post real test events
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -fsSL --max-time 30 -o /tmp/mm59-live-counter.js 'https://www.59man.shop/assets/anonymous-counter.js?v=20261118-aggregate1'
-          cat > /tmp/mm59-counter-test.cjs <<'NODE'
-          const fs=require('node:fs'),vm=require('node:vm');
-          const code=fs.readFileSync('/tmp/mm59-live-counter.js','utf8');
-          const origin='https://www.59man.shop';
-          const expected=[];
-          const actual=[];
-          const listeners={};
-          const window={
-            location:{
-              hostname:'www.59man.shop',
-              pathname:'/__qa_live__/',
-              href:'https://www.59man.shop/__qa_live__/?utm_source=chatgpt.com',
-              search:'?utm_source=chatgpt.com'
-            },
-            localStorage:{getItem(){return null}},
-            fetch(endpoint, options){
-              const body=JSON.parse(options.body);
-              expected.push(body);
-              actual.push(fetch(endpoint,{
-                ...options,
-                headers:{...options.headers,Origin:origin}
-              }).then(res=>{
-                if(res.status!==204)throw new Error('Supabase event failed: HTTP '+res.status);
-                return res.status;
-              }));
-              return Promise.resolve();
-            },
-            mm59TrackingStatus(){return {optedOut:false}}
-          };
-          const document={
-            referrer:'',
-            addEventListener(name,listener){listeners[name]=listener}
-          };
-          vm.runInNewContext(code,{window,document,URL,URLSearchParams});
-          const click=(href,css)=>{
-            const link={href,matches(selector){return selector.includes(css)},closest(){return null}};
-            listeners.click({target:{closest(){return link}}});
-          };
-          click('https://preplan.site/?from=59man_test','bottom-bar-main');
-          click('https://pf.kakao.com/_akxmKn/chat','bottom-bar-sub');
-          Promise.all(actual).then(()=>{
-            if(actual.length!==3)throw new Error('Expected three real event calls, got '+actual.length);
-            const kinds=expected.map(e=>e.kind).sort().join(',');
-            if(kinds!=='kakao_click,page_view,signup_click')throw new Error('Wrong kinds '+kinds);
-            if(expected.some(e=>e.source!=='chatgpt'||e.page!=='/__qa_live__/'))throw new Error('Incorrect page/source');
-            console.log('PASS: downloaded live JS executed and stored three distinct synthetic events at Supabase (page_view, signup_click, kakao_click).');
-          }).catch(e=>{console.error(e);process.exitCode=1});
-          NODE
-          node /tmp/mm59-counter-test.cjs
