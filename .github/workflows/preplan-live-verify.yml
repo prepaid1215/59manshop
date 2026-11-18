@@ -1,0 +1,71 @@
+name: Preplan SEO live verification (temporary)
+on:
+  push:
+    branches: [verify/preplan-live-20261118]
+  pull_request:
+    paths: ['.github/workflows/preplan-live-verify.yml']
+  workflow_dispatch:
+jobs:
+  inspect-production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Verify public pages after WordPress theme patch
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.error, re, html, json, sys, time
+          from urllib.parse import urljoin
+          base = 'https://preplan.site'
+          result = {}
+          pages = {}
+          for path in ['/', '/blog/', '/guide/']:
+              url = base + path + '?seo_verify=20261118live' 
+              req = urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0 (compatible; preplan-seo-live-verify/1.0)','Cache-Control':'no-cache'})
+              try:
+                  with urllib.request.urlopen(req, timeout=25) as resp:
+                      content = resp.read().decode('utf-8', errors='replace')
+                      status = resp.status
+                      final_url = resp.url
+              except Exception as exc:
+                  result[path] = {'error':str(exc)}
+                  continue
+              pages[path] = content
+              title = re.search(r'<title[^>]*>(.*?)</title>', content, re.I | re.S)
+              vp = re.search(r'<meta[^>]*name=[\"\']viewport[\"\'][^>]*>', content, re.I)
+              links = re.findall(r'<a\b[^>]*href=[\"\']([^\"\']+)', content, re.I)
+              h1 = re.findall(r'<h1\b[^>]*>(.*?)</h1>', content, re.I | re.S)
+              result[path] = {
+                  'http_status': status,
+                  'final_url': final_url,
+                  'title': html.unescape(re.sub('<[^>]+>','',title.group(1))).strip() if title else None,
+                  'viewport': vp.group(0) if vp else None,
+                  'h1_count':len(h1),
+                  'real_usim_K_link': any('/view/buyusim/buyusim_step1.aspx?tp=K' in html.unescape(x) for x in links),
+                  'real_usim_L_link': any('/view/buyusim/buyusim_step1.aspx?tp=L' in html.unescape(x) for x in links),
+                  'javascript_void_links':sum(x.lower().startswith('javascript:void(0)') for x in links),
+                  'front_script_references': re.findall(r'[\"\']([^\"\']*front-plans\.js[^\"\']*)', content, re.I),
+                  'canonical':(re.search(r'<link\b[^>]*rel=[\"\']canonical[\"\'][^>]*>',content,re.I) or [None])[0],
+                  'html_bytes':len(content.encode('utf-8'))
+              }
+          home = result.get('/', {})
+          srcs = home.get('front_script_references', [])
+          valid_srcs = [s for s in srcs if '/assets/front-plans.js' in s and '/assets/js/' not in s]
+          if valid_srcs:
+              js_url = urljoin(base, html.unescape(valid_srcs[0]))
+              try:
+                  req = urllib.request.Request(js_url, headers={'User-Agent':'Mozilla/5.0','Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=25) as r:
+                      result['front_script_http']={'http_status':r.status,'url':r.url,'bytes':len(r.read())}
+              except Exception as e:result['front_script_http']={'error':str(e)}
+          print('PRODUCTION_REVIEW='+json.dumps(result, ensure_ascii=False, indent=2))
+          required = all(result.get(p,{}).get('http_status')==200 for p in ['/', '/blog/', '/guide/'])
+          fixed = bool(valid_srcs) and home.get('real_usim_K_link') and home.get('real_usim_L_link')
+          accessible = result.get('front_script_http',{}).get('http_status')==200
+          vp = home.get('viewport') or ''
+          viewport_fixed = bool(vp) and ('user-scalable=no' not in vp) and ('maximum-scale=1' not in vp)
+          print('CHECKS='+json.dumps({'three_pages_200':required,'new_script_path':bool(valid_srcs),'new_menu_links':bool(home.get('real_usim_K_link') and home.get('real_usim_L_link')),'script_http_200':accessible,'viewport_unlock':viewport_fixed}, ensure_ascii=False))
+          if not (required and fixed and accessible and viewport_fixed): sys.exit(1)
+          PY
