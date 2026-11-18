@@ -581,3 +581,113 @@ window.enhanceHubContent(document);
   section.append(message, link);
   answer.insertAdjacentElement('afterend', section);
 })();
+
+
+/* 59만모바일: leave KakaoTalk in-app browser before identity verification.
+   Preserve the exact landing URL (including path, query, and hash) so that
+   source attribution and the page the visitor selected are not lost.
+   Note: iOS opens the configured default browser, which may not be Safari. */
+(function () {
+  'use strict';
+
+  var ua = navigator.userAgent || '';
+  if (!/KAKAOTALK/i.test(ua)) return;
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var isAndroid = /Android/i.test(ua);
+  if (!isIOS && !isAndroid) return;
+
+  var landingUrl = window.location.href;
+  if (!/^https:\/\//i.test(landingUrl)) return;
+
+  var isGalaxy = isAndroid && /(?:\bSM-[A-Z0-9-]+\b|\bSAMSUNG\b|\bGALAXY\b)/i.test(ua);
+  var browserName = isIOS ? '외부 브라우저' : (isGalaxy ? '삼성 인터넷' : '크롬');
+  var externalUrl = isIOS
+    ? 'kakaotalk://web/openExternal?url=' + encodeURIComponent(landingUrl)
+    : 'intent://' + landingUrl.replace(/^https:\/\//i, '') +
+      '#Intent;scheme=https;package=' +
+      (isGalaxy ? 'com.sec.android.app.sbrowser' : 'com.android.chrome') + ';end';
+
+  // A visible fallback is essential: KakaoTalk/iOS may block automatic schemes.
+  if (!document.getElementById('sm-kakao-external-style')) {
+    var css = document.createElement('style');
+    css.id = 'sm-kakao-external-style';
+    css.textContent =
+      '.sm-kakao-external{box-sizing:border-box;max-width:480px;margin:0 auto;padding:12px 16px;background:#f0f6ff;border:1px solid #d3e4ff;border-radius:0 0 12px 12px;color:#20324f;font:inherit;line-height:1.55}' +
+      '.sm-kakao-external strong{display:block;font-size:14px;font-weight:800;margin-bottom:3px}' +
+      '.sm-kakao-external p{margin:0 0 10px!important;font-size:12px!important;color:#435779!important}' +
+      '.sm-kakao-external-actions{display:flex;flex-wrap:wrap;gap:8px}' +
+      '.sm-kakao-external-actions a,.sm-kakao-external-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:9px 12px;border-radius:9px;border:1px solid #175cd3;font-size:13px;font-weight:750;line-height:1.45;text-decoration:none;cursor:pointer}' +
+      '.sm-kakao-external-actions a{background:#175cd3;color:#fff!important}' +
+      '.sm-kakao-external-actions button{background:#fff;color:#175cd3}' +
+      '.sm-kakao-external small{display:block;margin-top:8px;font-size:11px;color:#64748b;line-height:1.6}';
+    document.head.appendChild(css);
+  }
+
+  var notice = document.createElement('aside');
+  notice.className = 'sm-kakao-external';
+  notice.setAttribute('role', 'note');
+  notice.setAttribute('aria-label', '본인인증용 외부 브라우저 안내');
+
+  var title = document.createElement('strong');
+  title.textContent = '본인인증은 외부 브라우저에서 진행하세요';
+  var description = document.createElement('p');
+  description.textContent = '카카오톡 안에서는 인증 화면이 중단될 수 있습니다. ' +
+    browserName + '에서 현재 페이지를 이어서 열어주세요.';
+
+  var actions = document.createElement('div');
+  actions.className = 'sm-kakao-external-actions';
+  var open = document.createElement('a');
+  open.href = externalUrl;
+  open.textContent = browserName + '으로 열기';
+  var copy = document.createElement('button');
+  copy.type = 'button';
+  copy.textContent = '주소 복사';
+  copy.addEventListener('click', function () {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(landingUrl).then(function () {
+        copy.textContent = '복사됨';
+      }).catch(function () {
+        copy.textContent = '복사 실패';
+      });
+      return;
+    }
+    var field = document.createElement('textarea');
+    field.value = landingUrl;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    document.body.appendChild(field);
+    field.select();
+    try { copy.textContent = document.execCommand('copy') ? '복사됨' : '복사 실패'; }
+    catch (_) { copy.textContent = '복사 실패'; }
+    document.body.removeChild(field);
+  });
+  actions.appendChild(open);
+  actions.appendChild(copy);
+
+  var help = document.createElement('small');
+  help.textContent = isIOS
+    ? '아이폰의 기본 브라우저를 Safari로 설정하면 Safari에서 열립니다. 자동 실행이 안 되면 카카오톡 메뉴에서 다른 브라우저로 열기를 선택하세요.'
+    : '앱이 자동으로 열리지 않으면 버튼을 누르거나 카카오톡 메뉴에서 다른 브라우저로 열기를 선택하세요.';
+
+  notice.appendChild(title);
+  notice.appendChild(description);
+  notice.appendChild(actions);
+  notice.appendChild(help);
+
+  var header = document.querySelector('header.top');
+  if (header) header.insertAdjacentElement('afterend', notice);
+  else if (document.body) document.body.insertBefore(notice, document.body.firstChild);
+
+  // Do not repeatedly invoke a blocked scheme when users navigate in KakaoTalk.
+  var attemptKey = 'sm-kakao-external-auto-v1';
+  var shouldAttempt = true;
+  try {
+    if (window.sessionStorage.getItem(attemptKey) === '1') shouldAttempt = false;
+    else window.sessionStorage.setItem(attemptKey, '1');
+  } catch (_) { /* Storage may be disabled inside KakaoTalk. */ }
+  if (shouldAttempt) {
+    try { window.location.assign(externalUrl); }
+    catch (_) { /* Keep the manual button visible. */ }
+  }
+})();
