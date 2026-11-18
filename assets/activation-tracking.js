@@ -1,5 +1,6 @@
-/* 59만모바일: first-party activation CTA attribution, no personal data.
-   GA4 G-N7ZW223ESP is for 59man.shop. Load only after analytics opt-in. */
+/* 59만모바일: activation CTA attribution with privacy-respecting defaults.
+   Unset = no GA cookies (Consent Mode denied; cookieless pings). Yes = cookie opt-in.
+   No = explicit measurement opt-out. Never send identifying form data. */
 (function () {
   'use strict';
   var GA_ID='G-N7ZW223ESP';
@@ -33,7 +34,7 @@
     return null;
   }
   function analyticsEvent(name,props){
-    if(consent!=='yes')return;
+    if(consent==='no')return;
     if(typeof window.gtag==='function'){
       window.gtag('event',name,Object.assign({send_to:GA_ID,transport_type:'beacon'},props));
     }
@@ -51,7 +52,7 @@
     var place=slot(a);
     if(!u){
       if(isKakaoChat(a)){
-        if(consent==='yes'){
+        if(consent!=='no'){
           window.dataLayer=window.dataLayer||[];
           window.dataLayer.push({event:'mm59_contact_click',mm_channel:'kakao',mm_origin_path:currentPath,mm_placement:place});
           analyticsEvent('mm59_contact_click',{channel:'kakao',source_path:currentPath,placement:place});
@@ -72,7 +73,7 @@
       mm_placement:place,
       mm_destination_type:dest
     };
-    if(consent==='yes'){
+    if(consent!=='no'){
       window.dataLayer=window.dataLayer||[];
       window.dataLayer.push(payload);
       analyticsEvent('mm59_outbound_click',{
@@ -87,17 +88,19 @@
   document.addEventListener('click',onLink,true);
   document.addEventListener('auxclick',function(e){if(e.button===1)onLink(e)},true);
   function loadGA(){
-    if(window.__mm59GaLoaded)return;
+    if(window.__mm59GaLoaded||consent==='no')return;
+    window['ga-disable-'+GA_ID]=false;
     window.__mm59GaLoaded=true;
     window.dataLayer=window.dataLayer||[];
     window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};
-    window.gtag('js',new Date());
+    // Default deny is registered before Google tag initialization.
     window.gtag('consent','default',{
-      analytics_storage:'granted',
+      analytics_storage:consent==='yes'?'granted':'denied',
       ad_storage:'denied',
       ad_user_data:'denied',
       ad_personalization:'denied'
     });
+    window.gtag('js',new Date());
     window.gtag('set','linker',{domains:['www.59man.shop','59man.shop','preplan.site'],accept_incoming:true});
     window.gtag('config',GA_ID,{
       allow_google_signals:false,
@@ -113,44 +116,61 @@
   }
   function setConsent(value){
     consent=value;
-    try{localStorage.setItem(KEY,value)}catch(e){}
+    try {
+      if(value==='unset')localStorage.removeItem(KEY);
+      else localStorage.setItem(KEY,value);
+    } catch(e) {}
     var dlg=document.getElementById('mm59-analytics-consent');
     if(dlg)dlg.remove();
+
+    if(value==='no'){
+      // Do not transmit analytics events after an explicit opt-out.
+      window['ga-disable-'+GA_ID]=true;
+      if(window.__mm59GaLoaded&&typeof window.gtag==='function'){
+        window.gtag('consent','update',{
+          analytics_storage:'denied',ad_storage:'denied',
+          ad_user_data:'denied',ad_personalization:'denied'
+        });
+      }
+      return;
+    }
+    window['ga-disable-'+GA_ID]=false;
     if(window.__mm59GaLoaded&&typeof window.gtag==='function'){
       window.gtag('consent','update',{
         analytics_storage:value==='yes'?'granted':'denied',
-        ad_storage:'denied',ad_user_data:'denied',
-        ad_personalization:'denied'
+        ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'
       });
-    }
-    if(value==='yes')loadGA();
+    } else loadGA();
   }
+  // Footer-only preference panel: do not obstruct the first screen.
   function consentNotice(){
     if(document.getElementById('mm59-analytics-consent'))return;
     var node=document.createElement('aside');
     node.id='mm59-analytics-consent';
     node.setAttribute('role','region');
-    node.setAttribute('aria-label','방문 통계 동의');
+    node.setAttribute('aria-label','방문 통계 설정');
     node.style.cssText='box-sizing:border-box;width:100%;max-width:456px;margin:12px 0 0;padding:12px 14px;background:#f7f9fc;color:#17305c;border:1px solid #d8e3f4;border-radius:10px;font:13px/1.5 sans-serif';
     var p=document.createElement('p');
-    p.textContent='방문 및 개통 버튼 클릭 통계는 선택 사항입니다. 동의할 때만 GA4 분석을 켭니다. 이름·전화번호·인증정보는 전송하지 않습니다.';
+    p.textContent='기본 설정은 분석 쿠키 없이 방문·개통 버튼 클릭의 제한적 측정 신호를 Google에 전송합니다. 통계를 끄거나 분석 쿠키 사용에 동의할 수 있습니다. 이름·전화번호·인증정보는 전송하지 않습니다.';
     p.style.cssText='margin:0 0 9px';
     node.appendChild(p);
     var controls=document.createElement('div');
     controls.style.cssText='display:flex;gap:8px;justify-content:flex-start;flex-wrap:wrap';
-    var no=document.createElement('button');
-    no.type='button';no.textContent='거절';
-    no.style.cssText='padding:7px 12px;border:1px solid #c2cfe0;border-radius:8px;color:#17305c;background:#fff;cursor:pointer';
-    var yes=document.createElement('button');
-    yes.type='button';yes.textContent='동의';
-    yes.style.cssText='padding:7px 12px;border:1px solid #235ccc;border-radius:8px;color:#fff;background:#235ccc;cursor:pointer';
+    function option(label,value,primary){
+      var button=document.createElement('button');
+      button.type='button';button.textContent=label;
+      button.style.cssText='padding:7px 11px;border:1px solid '+(primary?'#235ccc':'#c2cfe0')+';border-radius:8px;color:'+(primary?'#fff':'#17305c')+';background:'+(primary?'#235ccc':'#fff')+';cursor:pointer';
+      button.addEventListener('click',function(){setConsent(value)});
+      controls.appendChild(button);
+    }
+    option('수집 중지','no',false);
+    option('쿠키 없이','unset',false);
+    option('쿠키 동의','yes',true);
     var close=document.createElement('button');
     close.type='button';close.textContent='닫기';
-    close.style.cssText='padding:7px 12px;border:1px solid #c2cfe0;border-radius:8px;color:#17305c;background:#fff;cursor:pointer';
-    no.addEventListener('click',function(){setConsent('no')});
-    yes.addEventListener('click',function(){setConsent('yes')});
+    close.style.cssText='padding:7px 11px;border:1px solid #c2cfe0;border-radius:8px;color:#17305c;background:#fff;cursor:pointer';
     close.addEventListener('click',function(){node.remove()});
-    controls.append(no,yes,close);node.appendChild(controls);
+    controls.appendChild(close);node.appendChild(controls);
     var footer=document.querySelector('footer .footer-info')||document.querySelector('footer');
     if(footer)footer.appendChild(node);
   }
@@ -172,12 +192,11 @@
   }
   function startup(){
     settingsButton();
-    if(consent==='yes')loadGA();
-    // No automatic prompt. Unset consent means no GA4 tracking.
-    // Visitors can voluntarily enable it in the footer settings.
+    // No forced popup; cookieless measurement unless the visitor opts out.
+    if(consent!=='no')loadGA();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startup);
   else startup();
   // Explicit, local-only hook for diagnostics. It never marks a verified activation.
-  window.mm59TrackingStatus=function(){return {analyticsConsent:consent,gaLoaded:!!window.__mm59GaLoaded}};
+  window.mm59TrackingStatus=function(){return {analyticsConsent:consent,gaLoaded:!!window.__mm59GaLoaded,cookieless:consent==='unset',optedOut:consent==='no'}};
 })();
