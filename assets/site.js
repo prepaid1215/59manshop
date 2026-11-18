@@ -486,6 +486,14 @@ window.enhanceHubContent(document);
   document.head.appendChild(script);
 })();
 
+/* Optional independent aggregate-only counter. No cookies or visitor IDs. */
+(function(){
+  var s=document.createElement('script');
+  s.src='/assets/anonymous-counter.js?v=20261118-aggregate1';
+  s.async=true;
+  document.head.appendChild(s);
+})();
+
 /* 59만모바일: integrated member-number note and context-aware next step. */
 (function () {
   'use strict';

@@ -151,7 +151,7 @@
     node.setAttribute('aria-label','방문 통계 설정');
     node.style.cssText='box-sizing:border-box;width:100%;max-width:456px;margin:12px 0 0;padding:12px 14px;background:#f7f9fc;color:#17305c;border:1px solid #d8e3f4;border-radius:10px;font:13px/1.5 sans-serif';
     var p=document.createElement('p');
-    p.textContent='기본 설정은 분석 쿠키 없이 방문·개통 버튼 클릭의 제한적 측정 신호를 Google에 전송합니다. 통계를 끄거나 분석 쿠키 사용에 동의할 수 있습니다. 이름·전화번호·인증정보는 전송하지 않습니다.';
+    p.textContent='기본 설정은 분석 쿠키 없이 Google에 제한적 측정 신호를 보내며, 59만모바일은 날짜·페이지·유입 경로별 방문·개통 버튼·상담 클릭 합계만 별도로 저장합니다. 자체 집계에 방문자 식별자, 원본 IP, 이름·전화번호·인증정보는 저장하지 않습니다. 수집 중지나 분석 쿠키 동의를 선택할 수 있습니다.';
     p.style.cssText='margin:0 0 9px';
     node.appendChild(p);
     var controls=document.createElement('div');

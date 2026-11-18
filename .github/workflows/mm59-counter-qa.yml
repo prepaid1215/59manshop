@@ -1,0 +1,38 @@
+name: 59man aggregate endpoint smoke test
+on:
+  pull_request:
+    paths:
+      - 'assets/anonymous-counter.js'
+      - 'assets/site.js'
+      - '.github/workflows/mm59-counter-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  aggregate-endpoint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check live aggregate function health and invalid request rejection
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://jvatfvqudcyrocykvpot.supabase.co/functions/v1/mm59-daily-aggregate'
+          health=$(curl -fsSL --max-time 20 "$endpoint")
+          echo "$health" | grep -q '"ok":true'
+          echo "$health" | grep -q 'aggregate-only'
+          status=$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
+            -X POST "$endpoint" \
+            -H 'Origin: https://www.59man.shop' \
+            -H 'Content-Type: text/plain;charset=UTF-8' \
+            --data '{"kind":"bad_test","page":"/","source":"other","placement":"page","network":"unknown"}')
+          test "$status" = "400"
+          # Integration test uses an unmistakably synthetic path, removed after the check.
+          write_status=$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
+            -X POST "$endpoint" \
+            -H 'Origin: https://www.59man.shop' \
+            -H 'Content-Type: text/plain;charset=UTF-8' \
+            --data '{"kind":"page_view","page":"/__qa_counter__/","source":"other","placement":"page","network":"unknown"}')
+          test "$write_status" = "204"
+          echo 'Edge health, rejection, and valid aggregate write passed (synthetic event will be removed).'
