@@ -481,7 +481,7 @@ window.enhanceHubContent(document);
 /* Conversion measurement: separate consent-controlled tracking module, shared by all article pages. */
 (function(){
   var script=document.createElement('script');
-  script.src='/assets/activation-tracking.js?v=20261118-no-popup';
+  script.src='/assets/activation-tracking.js?v=20261118-cookieless1';
   script.async=true;
   document.head.appendChild(script);
 })();
