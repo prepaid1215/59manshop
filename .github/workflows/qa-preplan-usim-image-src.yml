@@ -1,0 +1,27 @@
+name: Inspect preplan.site existing product images (temporary)
+on:
+  push:
+    branches: [qa/preplan-usim-original-images-20261118]
+  workflow_dispatch:
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch public HTML and list image src
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,html.parser,json
+          class P(html.parser.HTMLParser):
+            def __init__(self): super().__init__(); self.images=[]
+            def handle_starttag(self,tag,attrs):
+              if tag=='img':
+                d=dict(attrs);self.images.append({'src':d.get('src'),'alt':d.get('alt')})
+          for path in ['/usim/','/blog/daiso-prepaid-phone-activation/']:
+            req=urllib.request.Request('https://preplan.site'+path+'?v=live20261118',headers={'User-Agent':'Mozilla/5.0','Cache-Control':'no-cache'})
+            try:
+              with urllib.request.urlopen(req,timeout=25) as r:src=r.read().decode('utf-8','replace')
+              p=P();p.feed(src)
+              print('URL:',path,'IMG:',json.dumps(p.images,ensure_ascii=False))
+            except Exception as e:print('ERROR',path,repr(e))
+          PY
