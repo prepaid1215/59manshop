@@ -28,4 +28,11 @@ jobs:
             -H 'Content-Type: text/plain;charset=UTF-8' \
             --data '{"kind":"bad_test","page":"/","source":"other","placement":"page","network":"unknown"}')
           test "$status" = "400"
-          echo 'Health endpoint accessible; invalid measurement rejected; no synthetic event stored.'
+          # Integration test uses an unmistakably synthetic path, removed after the check.
+          write_status=$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
+            -X POST "$endpoint" \
+            -H 'Origin: https://www.59man.shop' \
+            -H 'Content-Type: text/plain;charset=UTF-8' \
+            --data '{"kind":"page_view","page":"/__qa_counter__/","source":"other","placement":"page","network":"unknown"}')
+          test "$write_status" = "204"
+          echo 'Edge health, rejection, and valid aggregate write passed (synthetic event will be removed).'
