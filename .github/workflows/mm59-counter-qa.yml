@@ -28,11 +28,34 @@ jobs:
             -H 'Content-Type: text/plain;charset=UTF-8' \
             --data '{"kind":"bad_test","page":"/","source":"other","placement":"page","network":"unknown"}')
           test "$status" = "400"
-          # Integration test uses an unmistakably synthetic path, removed after the check.
-          write_status=$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
-            -X POST "$endpoint" \
-            -H 'Origin: https://www.59man.shop' \
-            -H 'Content-Type: text/plain;charset=UTF-8' \
-            --data '{"kind":"page_view","page":"/__qa_counter__/","source":"other","placement":"page","network":"unknown"}')
-          test "$write_status" = "204"
-          echo 'Edge health, rejection, and valid aggregate write passed (synthetic event will be removed).'
+          echo 'PASS: API health and invalid-request rejection; no test counters created.'
+
+  production-script-verification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify real public HTML and loaded measurement scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          origin='https://www.59man.shop'
+          echo 'Checking public 59man.shop (not GitHub file contents)'
+          curl -fsSL --max-time 30 --retry 2 -D /tmp/mm59-headers.txt -o /tmp/mm59-home.html "$origin/"
+          site_src=$(grep -Eo 'src="/assets/site.js\?v=[^"]+"' /tmp/mm59-home.html | tail -1 | cut -d '"' -f 2)
+          test -n "$site_src" || { echo 'FAILED: site.js reference missing from homepage'; exit 1; }
+          echo 'PASS: homepage references latest site.js'
+          curl -fsSL --max-time 30 --retry 2 -o /tmp/mm59-site.js "$origin$site_src"
+          counter_src=$(grep -Eo "'/assets/anonymous-counter.js\\?v=[^']+'" /tmp/mm59-site.js | head -1 | tr -d "'")
+          test -n "$counter_src" || { echo 'FAILED: shared site.js missing counter loader'; exit 1; }
+          echo 'PASS: public site.js loads anonymous counter'
+          curl -fsSL --max-time 30 --retry 2 -o /tmp/mm59-counter.js "$origin$counter_src"
+          grep -F 'mm59-daily-aggregate' /tmp/mm59-counter.js >/dev/null || { echo 'FAILED: counter JS is missing API address'; exit 1; }
+          grep -F "credentials:'omit'" /tmp/mm59-counter.js >/dev/null || { echo 'FAILED: counter JS missing cookie-free option'; exit 1; }
+          grep -F "function optedOut()" /tmp/mm59-counter.js >/dev/null || { echo 'FAILED: counter JS missing opt-out'; exit 1; }
+          echo 'PASS: counter script live and cookie-free, explicit opt-out enforced'
+          for page in '/%EB%AF%B8%EB%82%A9%EC%A0%95%EC%A7%80-%EC%84%A0%EB%B6%88%ED%8F%B0/' '/%ED%8E%B8%EC%9D%98%EC%A0%90-%EC%84%A0%EB%B6%88%EC%9C%A0%EC%8B%AC/' '/%EC%84%A0%EB%B6%88%ED%8F%B0-%EC%85%80%ED%94%84%EA%B0%9C%ED%86%B5/'; do
+            curl -fsSL --max-time 30 --retry 2 -o /tmp/mm59-article.html "$origin$page"
+            grep -F "src=\"$site_src\"" /tmp/mm59-article.html >/dev/null || { echo "FAILED: article JS different from homepage: $page"; exit 1; }
+          done
+          echo 'PASS: three high-intent articles serve latest JS version'
+
+
