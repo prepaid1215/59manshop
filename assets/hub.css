@@ -1517,3 +1517,13 @@ body.guide-hub .gc-tile small{color:#53647c!important}
   .sm-member-banner-label small{font-size:10px}
   .sm-member-copy{padding:5px 8px;font-size:11px}
 }
+
+/* 2026-11-18: contextual signup actions for priority conversion guides. */
+.sm-quick-apply{display:grid;gap:8px;width:100%;max-width:460px;margin:14px 0 0}
+.sm-quick-apply a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:12px 14px;border-radius:10px;text-align:center;font-size:14px;font-weight:800;line-height:1.5;text-decoration:none!important}
+.sm-quick-apply-primary{background:var(--blue);color:#fff!important}
+.sm-quick-apply-primary:hover{background:var(--blue-dark)}
+.sm-quick-apply-chat{background:#fff;border:1px solid #b9cdf0;color:var(--blue)!important}
+.sm-quick-apply-chat:hover{background:var(--blue-tint)}
+.hero .sm-quick-apply-note{max-width:460px;margin:10px 0 0!important;color:#4c5f79;font-size:12px!important;line-height:1.7!important;word-break:keep-all}
+@media(min-width:600px){.sm-quick-apply{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}}
