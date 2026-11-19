@@ -5,7 +5,7 @@
   'use strict';
   var GA_ID='G-N7ZW223ESP';
   var KEY='mm59_analytics_consent_v1';
-  var allowedHost='preplan.site';
+  var allowedHost='xn--59-9f0jm2a95cuu4a.com';
   var currentPath=window.location.pathname||'/';
   var consent='unset';
   try{consent=localStorage.getItem(KEY)||'unset'}catch(e){}
@@ -26,7 +26,7 @@
     path=path.replace(/\//g,'_').replace(/[^a-zA-Z0-9가-힣_-]/g,'-').slice(0,76);
     return '59man_'+path+'_'+place;
   }
-  function getPreplanUrl(a){
+  function getActivationUrl(a){
     try{
       var u=new URL(a.getAttribute('href'),location.href);
       if(u.protocol==='https:'&&u.hostname===allowedHost)return u;
@@ -48,7 +48,7 @@
   function onLink(e){
     var a=e.target&&e.target.closest&&e.target.closest('a[href]');
     if(!a)return;
-    var u=getPreplanUrl(a);
+    var u=getActivationUrl(a);
     var place=slot(a);
     if(!u){
       if(isKakaoChat(a)){
@@ -101,7 +101,7 @@
       ad_personalization:'denied'
     });
     window.gtag('js',new Date());
-    window.gtag('set','linker',{domains:['www.59man.shop','59man.shop','preplan.site'],accept_incoming:true});
+    window.gtag('set','linker',{domains:['www.59man.shop','59man.shop',allowedHost],accept_incoming:true});
     window.gtag('config',GA_ID,{
       allow_google_signals:false,
       allow_ad_personalization_signals:false,

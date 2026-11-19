@@ -181,10 +181,10 @@ for u, h in pages.items():
     if 'TODO(' in h:
         fail('미해결 TODO 남아 있음: %s' % u)
     # 푸터 (리다이렉트용 스텁 제외)
-    # 화면 텍스트에 preplan.site 도메인 표기 금지 (href·JSON-LD·script 제외)
+    # 화면 텍스트에 xn--59-9f0jm2a95cuu4a.com 도메인 표기 금지 (href·JSON-LD·script 제외)
     vis = re.sub(r'<head>.*?</head>|<script.*?</script>|<style.*?</style>', '', h, flags=re.S)
-    if 'preplan.site' in re.sub(r'<[^>]+>', ' ', vis):
-        fail('화면 텍스트에 preplan.site 도메인 노출: %s' % u)
+    if 'xn--59-9f0jm2a95cuu4a.com' in re.sub(r'<[^>]+>', ' ', vis):
+        fail('화면 텍스트에 xn--59-9f0jm2a95cuu4a.com 도메인 노출: %s' % u)
     # 모바일 전용 레이아웃: 사이드바 없음, 하단 고정 바 있음 (스텁 제외)
     if '<footer class="footer">' in h:
         if '<aside class="side">' in h:
@@ -192,11 +192,11 @@ for u, h in pages.items():
         if '<nav class="bottom-bar"' not in h or 'https://pf.kakao.com/_akxmKn/chat" rel="noopener">카톡 상담' not in h:
             fail('하단 고정 바(개통 시작하기 + 카톡 상담) 없음: %s' % u)
     if '<footer class="footer">' in h:
-        for need in ('preplan.site/">59만모바일 개통 페이지</a>에서 진행됩니다', '774-56-00506', '주영돈', '(46220) 부산광역시 금정구 금강로 670', 'tel:+821073058253', 'https://pf.kakao.com/_akxmKn/chat"'):
+        for need in ('xn--59-9f0jm2a95cuu4a.com/">59만모바일 개통 페이지</a>에서 진행됩니다', '774-56-00506', '주영돈', '(46220) 부산광역시 금정구 금강로 670', 'tel:+821073058253', 'https://pf.kakao.com/_akxmKn/chat"'):
             if need not in h:
                 fail('푸터 항목 누락(%s): %s' % (need, u))
 
-# 2a) CTA intent: starting activation must land on preplan.site home.
+# 2a) CTA intent: starting activation must land on xn--59-9f0jm2a95cuu4a.com home.
 # Detailed guides/blog links are informational and may point to their own pages.
 # Preserve per-link ?from= tracking; the pathname is the routing contract.
 _CTA_START_WORDS = re.compile(
@@ -205,13 +205,13 @@ _CTA_START_WORDS = re.compile(
     r'개통\s*페이지에서\s*선택하기'
 )
 for u, h in pages.items():
-    for anchor in re.finditer(r'<a\b[^>]*\bhref="(https://preplan\.site/[^"]*)"[^>]*>[\s\S]*?</a>', h):
+    for anchor in re.finditer(r'<a\b[^>]*\bhref="(https://xn--59-9f0jm2a95cuu4a\.com/[^"]*)"[^>]*>[\s\S]*?</a>', h):
         tag = anchor.group(0)
         dest = html.unescape(anchor.group(1))
         label = ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', tag)).split())
         is_direct = ('bottom-bar-main' in tag.split('>')[0] or _CTA_START_WORDS.search(label))
         if is_direct and urllib.parse.urlsplit(dest).path != '/':
-            fail('바로 개통 CTA는 preplan.site 홈으로 연결해야 함: %s / %s -> %s' % (u, label[:50], dest))
+            fail('바로 개통 CTA는 xn--59-9f0jm2a95cuu4a.com 홈으로 연결해야 함: %s / %s -> %s' % (u, label[:50], dest))
 
 # 2-1) 내부 링크가 noindex 페이지로 가지 않는지 (홈, /guide/, 색인 페이지의 관련 안내 사이드바)
 def internal_links(h, scope=None):

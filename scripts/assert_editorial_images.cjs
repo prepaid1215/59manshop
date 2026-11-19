@@ -47,7 +47,7 @@ const pages=[
        hasMag:!!document.querySelector('article.magazine-blue')
      }));
      const ok=imgs.length===item.expected.length&&imgs.every(x=>x.loaded&&!x.missing&&x.alt?.trim()&&x.w<=x.containerWidth+1)&&imageStatus.figures.length>=item.expected.length&&imageStatus.figures.every(x=>x.loaded&&!x.missing&&x.alt?.trim()&&x.w<=x.containerWidth+1)&&
-       !m.overflow&&m.contentWidth<=480&&m.hasMag&&m.primary?.startsWith('https://preplan.site/')&&!errors.length;
+       !m.overflow&&m.contentWidth<=480&&m.hasMag&&m.primary?.startsWith('https://xn--59-9f0jm2a95cuu4a.com/')&&!errors.length;
      const row={width,slug:item.slug,ok,...m,imgs,figureImgs:imageStatus.figures,errors};results.push(row);if(!ok)failed.push(row);
      if(width===390){await page.screenshot({path:path.join(output,item.slug+'-390.png'),fullPage:false});}
      page.removeListener('pageerror',listener);

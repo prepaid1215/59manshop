@@ -28,7 +28,7 @@ for p in TARGETS:
   errors.append(f'{p}: outdated approval requirement')
  if 'editorial-v2' not in after or '<p class="answer-lead">' not in after:
   errors.append(f'{p}: missing reader-first content')
- if 'https://preplan.site/' not in after or 'https://pf.kakao.com/_akxmKn/chat' not in after:
+ if 'https://xn--59-9f0jm2a95cuu4a.com/' not in after or 'https://pf.kakao.com/_akxmKn/chat' not in after:
   errors.append(f'{p}: expected activation or contact link lost')
  if re.search(r'http://pf.kakao.com/_iNaeb|http://pf.kakao.com/_muGxnn',after):
   errors.append(f"{p}: reference contact URL accidentally copied")

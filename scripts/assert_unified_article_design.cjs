@@ -55,7 +55,7 @@ fs.mkdirSync(outDir,{recursive:true});
    const drift=common.filter(k=>m[k]!==baseline[k]);
    const ok=!m.missingArticle&&!m.overflow&&m.cssLink&&m.articleWidth<=480.5&&
       m.font?.includes('Pretendard')&&m.relatedTitle==='함께 보면 좋은 글'&&
-      m.bottomLink?.startsWith('https://preplan.site/')&&
+      m.bottomLink?.startsWith('https://xn--59-9f0jm2a95cuu4a.com/')&&
       m.h2Quote?.includes('01')&&m.relatedLinkColor==='rgb(23, 92, 211)'&&
       drift.length===0&&errors.length===0;
    const row={width,route,ok,drift,...m,errors};

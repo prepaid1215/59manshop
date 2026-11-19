@@ -340,11 +340,11 @@ window.enhanceHubContent(document);
     '/lg-모두의원칩-셀프개통/':{
       facts:[['L망 원칩 가격','8,800원'],['모델코드','5자리'],['일련번호','8자리']],
       choices:[
-        ['원칩을 이미 구매했다면','https://preplan.site/?from=59man_lgonechip_choice','L망 셀프개통 화면에서 모델코드·일련번호 입력'],
+        ['원칩을 이미 구매했다면','https://xn--59-9f0jm2a95cuu4a.com/?from=59man_lgonechip_choice','L망 셀프개통 화면에서 모델코드·일련번호 입력'],
         ['원칩 구매 전이라면','/lg-원칩/','판매처와 제품 정보를 먼저 확인']
       ],
       tip:['신청 후 충전 순서','플랫폼 비대면 신청은 개통 완료 → 요금 충전 → 사용 시작 → 이후 1899-7700 해피콜 순서입니다.'],
-      final:['원칩이 준비됐다면','L망을 선택하고 안면인증·간편인증을 거쳐 모델코드 5자리와 일련번호 8자리를 입력하세요.','원칩으로 개통 시작하기','https://preplan.site/?from=59man_lgonechip_magazine']
+      final:['원칩이 준비됐다면','L망을 선택하고 안면인증·간편인증을 거쳐 모델코드 5자리와 일련번호 8자리를 입력하세요.','원칩으로 개통 시작하기','https://xn--59-9f0jm2a95cuu4a.com/?from=59man_lgonechip_magazine']
     },
     '/l망-464-요금제/':{
       facts:[['월 요금','46,400원'],['기본 데이터','20GB'],['소진 후','최대 3Mbps']],
@@ -353,7 +353,7 @@ window.enhanceHubContent(document);
         ['eSIM으로 신규가입','/v4-1/topic/esim-new/','지원 기종·EID·발급비 확인']
       ],
       tip:['핫스팟 조건을 확인하세요','L망은 기본 데이터 소진 후 핫스팟 이용이 제한됩니다. 노트북 데이터 공유가 중요하면 이 조건을 먼저 비교하세요.'],
-      final:['L망 464가 맞는지 확인했다면','월 46,400원, 기본 20GB, 소진 후 최대 3Mbps 조건과 핫스팟 제한을 확인하고 진행하세요.','464 요금제로 신청하기','https://preplan.site/?from=59man_l464_magazine']
+      final:['L망 464가 맞는지 확인했다면','월 46,400원, 기본 20GB, 소진 후 최대 3Mbps 조건과 핫스팟 제한을 확인하고 진행하세요.','464 요금제로 신청하기','https://xn--59-9f0jm2a95cuu4a.com/?from=59man_l464_magazine']
     },
     '/l망-2-5gb-요금제/':{
       facts:[['월 요금','17,000원'],['데이터','2.5GB'],['통화','100분'],['문자','50건']],
@@ -362,7 +362,7 @@ window.enhanceHubContent(document);
         ['데이터가 더 필요하다면','/l망-464-요금제/','20GB급 요금제 이용 조건 비교']
       ],
       tip:['무제한 요금제가 아닙니다','월 통화 100분·문자 50건 제공량이 있는 요금제입니다. 업무 전화나 문자 발신이 잦다면 사용량을 먼저 살펴보세요.'],
-      final:['소량 사용에 맞는다면','2.5GB·100분·50건의 제공량과 월 17,000원 요금을 확인하고 본인 명의 L망 신규가입을 진행하세요.','2.5GB 요금제로 신청하기','https://preplan.site/?from=59man_l25_magazine']
+      final:['소량 사용에 맞는다면','2.5GB·100분·50건의 제공량과 월 17,000원 요금을 확인하고 본인 명의 L망 신규가입을 진행하세요.','2.5GB 요금제로 신청하기','https://xn--59-9f0jm2a95cuu4a.com/?from=59man_l25_magazine']
     },
     '/편의점-선불유심/':{
       facts:[['KT 바로유심','K망 · NFC'],['LG 모두의 원칩','L망 · NFC'],['다이소 고고비','L망 · NFC 미지원']],
@@ -375,7 +375,7 @@ window.enhanceHubContent(document);
     '/kt선불폰-개통/':{
       facts:[['KT 바로유심','K망'],['유심정보','19자리'],['편의점 판매가','8,800원']],
       choices:[
-        ['바로유심 준비 완료','https://preplan.site/?from=59man_ktbaro_magazine','K망 개통 신청 화면으로'],
+        ['바로유심 준비 완료','https://xn--59-9f0jm2a95cuu4a.com/?from=59man_ktbaro_magazine','K망 개통 신청 화면으로'],
         ['아직 구매 전이라면','/kt-바로유심/','편의점 판매처 확인']
       ]
     }
@@ -481,7 +481,7 @@ window.enhanceHubContent(document);
 /* Conversion measurement: separate consent-controlled tracking module, shared by all article pages. */
 (function(){
   var script=document.createElement('script');
-  script.src='/assets/activation-tracking.js?v=20261118-cookieless1';
+  script.src='/assets/activation-tracking.js?v=20261119-activation-domain';
   script.async=true;
   document.head.appendChild(script);
 })();
@@ -585,7 +585,7 @@ window.enhanceHubContent(document);
   var link = document.createElement('a');
   link.className = 'primary-cta sm-answer-next-action';
   link.textContent = next[1] + ' →';
-  link.href = 'https://preplan.site/?from=59man_answer_' + encodeURIComponent(route);
+  link.href = 'https://xn--59-9f0jm2a95cuu4a.com/?from=59man_answer_' + encodeURIComponent(route);
   section.append(message, link);
   answer.insertAdjacentElement('afterend', section);
 })();

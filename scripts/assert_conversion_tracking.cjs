@@ -40,7 +40,7 @@ const base='http://127.0.0.1:8765';
  await scenario('existing info link stays info; sticky CTA gets source code', '/lg-모두의원칩-셀프개통/',async page=>{
    return page.evaluate(()=>{
      document.addEventListener('click',e=>e.preventDefault());
-     const info=document.querySelector('a[href*="preplan.site/lg-self/"]');
+     const info=document.querySelector('a[href*="xn--59-9f0jm2a95cuu4a.com/lg-self/"]');
      const initial=info?.href;
      info?.click();
      const out1=(window.dataLayer||[]).filter(x=>x&&x.event==='mm59_outbound_click').pop();

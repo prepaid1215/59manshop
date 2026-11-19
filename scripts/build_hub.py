@@ -87,7 +87,7 @@ def transform(page, url):
         for href,label in [('/','홈'),('/guide/','가이드'),('/v4-1/topic/plan-compare/','요금제'),('/편의점-선불유심/','유심 안내')]:
             active = url == href or (href == '/guide/' and url not in ('/','/v4-1/topic/plan-compare/','/편의점-선불유심/'))
             nav += '<a href="%s"%s>%s</a>' % (href, ' aria-current="page"' if active else '', label)
-        nav += '<a class="nav-apply" href="https://preplan.site/?from=59man_menu">개통 시작하기 '+CHEV+'</a></nav>'
+        nav += '<a class="nav-apply" href="https://xn--59-9f0jm2a95cuu4a.com/?from=59man_menu">개통 시작하기 '+CHEV+'</a></nav>'
         page = page.replace('<details class="top-menu">', nav+'<details class="top-menu">',1)
     if 'class="skip-link"' not in page:
         page = re.sub(r'(<body[^>]*>)', r'\1<a class="skip-link" href="#main-content">본문 바로가기</a>', page, count=1)

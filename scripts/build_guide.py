@@ -56,7 +56,7 @@ def render():
     parts.append('</div></section><section class="gh-ask"><h2>'+BULB+'이런 내용이 궁금하신가요?</h2><ul>')
     for x in DATA['asks']:
         parts.append('<li><a href="%s"><span>%s</span>%s</a></li>' % (esc(x['href']),esc(x['text']),CHEV))
-    parts.append('</ul></section><section class="gh-cta"><h2>바로 개통하고 싶으신가요?</h2><p>필요한 내용을 확인했다면 개통을 시작하거나 카카오톡으로 물어보세요.</p><div class="cta"><a class="button" href="https://preplan.site/?from=59man_guide">개통 시작하기 →</a><a class="button alt" href="https://pf.kakao.com/_akxmKn/chat" rel="noopener">카카오톡 상담하기</a></div></section>')
+    parts.append('</ul></section><section class="gh-cta"><h2>바로 개통하고 싶으신가요?</h2><p>필요한 내용을 확인했다면 개통을 시작하거나 카카오톡으로 물어보세요.</p><div class="cta"><a class="button" href="https://xn--59-9f0jm2a95cuu4a.com/?from=59man_guide">개통 시작하기 →</a><a class="button alt" href="https://pf.kakao.com/_akxmKn/chat" rel="noopener">카카오톡 상담하기</a></div></section>')
     return '<main id="main-content" class="site content"><div class="layout"><article class="article">'+''.join(parts)+'</article></div></main>'
 
 

@@ -6,9 +6,9 @@ This repository powers https://www.59man.shop/ .
 - Official website/operating brand (59man.shop): **59만모바일**. The former website brand "59만선불폰" is retired: use 59만모바일 in the header/footer, breadcrumbs, `<title>` suffix, Open Graph `og:site_name`, image alt text, and the homepage `WebSite` JSON-LD `name`.
 - Website `alternateName` may include `59man.shop`.
 - Generic search keywords ("선불폰", "선불유심", "앤텔레콤 선불폰") stay in body text and titles; only the brand name changed.
-- Separate activation/conversion service at https://preplan.site/ is wording-wise "59만모바일 개통 페이지" / "59만모바일 개통 시작하기"; keep those labels and the `preplan.site` CTA links.
-- The operating business 상호 is **59만모바일** (footer business info, homepage `Organization` JSON-LD `name`/`legalName`, `url` = https://preplan.site). Legal fields must match the actual business registration.
-- The `?from=` parameter on preplan.site CTA links is allowed for conversion measurement. External tracking parameters such as `utm_`, `fbclid`, `gclid` are forbidden on any link.
+- Separate activation/conversion service at https://xn--59-9f0jm2a95cuu4a.com/ is wording-wise "59만모바일 개통 페이지" / "59만모바일 개통 시작하기"; keep those labels and the `xn--59-9f0jm2a95cuu4a.com` CTA links.
+- The operating business 상호 is **59만모바일** (footer business info, homepage `Organization` JSON-LD `name`/`legalName`, `url` = https://xn--59-9f0jm2a95cuu4a.com). Legal fields must match the actual business registration.
+- The `?from=` parameter on xn--59-9f0jm2a95cuu4a.com CTA links is allowed for conversion measurement. External tracking parameters such as `utm_`, `fbclid`, `gclid` are forbidden on any link.
 
 ## Change safety
 - Brand renames must never touch URLs, slugs, canonical, robots, sitemap, or index/noindex decisions.
@@ -32,11 +32,11 @@ This repository powers https://www.59man.shop/ .
 - Design basis: phone width 390–480px. The latest owner request follows the v2.6.2 reference plugin: desktop 8-category selector and two-column visual guide cards, mobile three-column selector followed by a category hero, subfilters and one-column visual list. Detail routes keep the topic list beside the original article on PC.
 - Mobile flow is category → scroll to list → original detail URL; a visible back control returns to the chooser. All guide cards use native detail anchors on desktop and mobile. Existing hash links and q searches remain supported, as do the reference plugin's guide_category query aliases. Related links remain at the end of the article.
 - Header on every page: brand + hamburger menu on mobile (`<details class="top-menu">` + `/assets/site.js`), full navigation on desktop. Keep 홈 / 가이드 / 요금제 / 유심 안내 / 개통 시작하기 / 카카오톡 상담 accessible.
-- Every non-stub page ends with `<nav class="bottom-bar">`: "개통 시작하기" (preplan.site link, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat).
+- Every non-stub page ends with `<nav class="bottom-bar">`: "개통 시작하기" (xn--59-9f0jm2a95cuu4a.com link, `?from=` allowed) + "카톡 상담" (https://pf.kakao.com/_akxmKn/chat).
 - Pages load `/assets/hub.css?v=VERSION` and `/assets/site.js` (deferred); `/guide/` also loads the dedicated `/assets/guide-hub.css` and `/assets/guide.js`. Old preview CSS has been removed. When shared CSS/JS change, bump the version on every page (`python scripts/bump_css.py <version>`) and set VERSION in scripts/build_hub.py.
 - Brand colour is blue (`--blue`); pink is not part of the design. Design tokens live in `:root` of the stylesheet.
 - Category and card illustrations are generated transparent 512×512 WebP assets in `/img/guide-art/`, in a matched brand-blue 3D style. UI controls (search, menu, arrows, brand mark) remain SVG. Prompts and use mappings are recorded in data/illustration-prompts.json and scripts/guide_visuals.py. Keep real product photos and activation captures visible and separate from illustrations.
-- Do not show the `preplan.site` domain in visible text (body, footer, buttons). Links (`href`) and JSON-LD may use it. Footer wording: "개통은 59만모바일 개통 페이지에서 진행됩니다".
+- Do not show the `xn--59-9f0jm2a95cuu4a.com` domain in visible text (body, footer, buttons). Links (`href`) and JSON-LD may use it. Footer wording: "개통은 59만모바일 개통 페이지에서 진행됩니다".
 - Prices, purchase places and conditions come only from the operator's fact sheet (kept outside this repo, never committed).
 
 ## URL policy (renewal)
@@ -58,7 +58,7 @@ This repository powers https://www.59man.shop/ .
 - 실제 유심·제품과 공식 개통 화면에는 실물 이미지 사용. 사실은 운영자 정책팩을 기준으로 검증한다.
 - 공통 디자인은 /assets/hub.css 하나로 관리한다. 새 페이지 생성 시 scripts/build_hub.py의 공통 구조를 적용한다.
 - 홈 검색은 /guide/?q=... 를 사용한다. 검색에 없는 내용은 카카오톡 상담으로 연결한다.
-- canonical·robots·sitemap·URL·index/noindex·preplan.site CTA는 디자인 변경 때문에 임의로 바꾸지 않는다.
+- canonical·robots·sitemap·URL·index/noindex·xn--59-9f0jm2a95cuu4a.com CTA는 디자인 변경 때문에 임의로 바꾸지 않는다.
 
 
 ## Mobile hub design and index-first QA (2026-10-25)
@@ -66,7 +66,7 @@ This repository powers https://www.59man.shop/ .
 - 모바일 390–480px 기준으로 3열 카테고리 → 일러스트·세부 필터·목록 → 기존 상세 URL 흐름을 따른다. /guide/ PC는 v2.6.2의 8개 카테고리와 2열 일러스트 카드 구성이다.
 - 흰 바탕·브랜드 블루 #175CD3·절제된 테두리. 카테고리·카드는 일관된 질감의 투명 3D WebP, 검색·메뉴·화살표는 SVG를 활용한다. 실제 제품·신청 화면은 유지한다.
 - /guide/ 생성 시 카테고리 → 안내 목록과 궁금한 질문 → 자주 찾는 답변 순으로 렌더한다. 변경은 scripts/build_guide.py에도 동기화한다.
-- robots, canonical, sitemap, index/noindex, 개별 URL과 preplan.site 전환 목적지를 디자인 수정 때문에 변경하지 않는다.
+- robots, canonical, sitemap, index/noindex, 개별 URL과 xn--59-9f0jm2a95cuu4a.com 전환 목적지를 디자인 수정 때문에 변경하지 않는다.
 - 디자인 완료 후에도 사이트맵 등록 수와 실제 색인 수를 구분하여 안내한다.
 
 ## 2026-10-25 브랜드 블루 최종 원칙
@@ -93,7 +93,7 @@ This repository powers https://www.59man.shop/ .
 
 ## Homepage conversion-first policy (2026-10-25)
 - Homepage / is a mobile-only activation conversion landing, while /guide/ remains an SEO search and answer hub.
-- First viewport: concrete value proposition, confirmed operating constraints, primary preplan.site CTA, second KakaoTalk CTA. Then scenario choices, plan prices, SIM cards, steps, FAQ and search as secondary route.
+- First viewport: concrete value proposition, confirmed operating constraints, primary xn--59-9f0jm2a95cuu4a.com CTA, second KakaoTalk CTA. Then scenario choices, plan prices, SIM cards, steps, FAQ and search as secondary route.
 - Every plan CTA sends to selection on activation page; no claim the rate is pre-selected. Preserve `?from=` distinct labels.
 - Never claim instant approval or guaranteed opening. Acceptance and approval are separate. Mobile shell is max 480px even on PC.
 - Only change homepage structure and assets/home-landing.css. Preserve page URLs, canonical, robots, sitemap, official rates, core copy, and all old topic links.
@@ -127,7 +127,7 @@ This repository powers https://www.59man.shop/ .
 
 
 ## Operator clarification 2026-10-26: self activation vs tablet membership
-- Online non-face-to-face self-activation (e.g. preplan.site): prepare identity verification method, ID document and compatible SIM; submit application; recharge fee; usable immediately thereafter. **Do not insert a staff-approval stage** into online self-activation flow.
+- Online non-face-to-face self-activation (e.g. xn--59-9f0jm2a95cuu4a.com): prepare identity verification method, ID document and compatible SIM; submit application; recharge fee; usable immediately thereafter. **Do not insert a staff-approval stage** into online self-activation flow.
 - Staff approval is required for **tablet activation submitted through 앤텔레콤 멤버십 앱**, a distinct path.
 - The head-office follow-up verification call **1899-7700 (해피콜)** occurs ONLY for online PLATFORM activation, after recharge/use begins. Never attribute this number to tablet activation.
 - Tablet activation via 앤텔레콤 멤버십 앱 uses **staff's own happy call -> staff approval -> fee recharge**. Approval is AFTER that staff call, before recharge. This is a distinct happy-call process, not the platform's 1899-7700 call.
@@ -143,7 +143,7 @@ This repository powers https://www.59man.shop/ .
 
 ## 2026-10-26 reference-blog writing style (59만모바일 adaptation)
 - Apply the user's five supplied reference HTML posts as FORM and FLOW inspirations, not copied content or cross-brand references. Scope the active pilot to `/선불폰-개통방법/`, `/미납정지-선불폰/`, `/편의점-선불유심/` and `/태블릿-소유자-회원번호/`.
-- Writing sequence: answer-first box → short situation-based intro → clickable numbered table of contents → h2 sections with human-readable explanations, comparisons or step rows → exceptions/FAQ → internal links and existing preplan.site/Kakao conversion destinations.
+- Writing sequence: answer-first box → short situation-based intro → clickable numbered table of contents → h2 sections with human-readable explanations, comparisons or step rows → exceptions/FAQ → internal links and existing xn--59-9f0jm2a95cuu4a.com/Kakao conversion destinations.
 - Wording: state the user's practical action first, then give a concrete reason and key exception. Avoid “이번 글에서는”, invented testimonials, jargon, repetitive reassurance, and answer-hiding expanses of text. Keep headings descriptive and topic-specific rather than forcing the same skeleton on every article.
 - Styling: maintain mobile-only 480px shell at all screen widths, brand blue #175CD3 or compatible shades, body 16px, line-height ~1.8, whitespace and prominent real-action elements. Scope editorial CSS in /assets/editorial-v2.css; retain existing true photographs/screenshots and SEO metadata. No pink/purple from reference blogs.
 - Shared tablet member number and visible masked verification name: **2893496 / 주*돈**. Reference blog's 2879248 / 부*빈 belongs to a DIFFERENT dealer and must never appear in 59만모바일.

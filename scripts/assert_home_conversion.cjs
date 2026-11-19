@@ -37,8 +37,8 @@ const {chromium}=require('./browser_runtime.cjs');
   const order=result.sectionOrder;
   const valid=results!==null&&result.headerWidth<=480&&result.heroWidth<=480&&result.contentWidth<=480&&
     result.desktopNav==='none'&&result.hamburger!=='none'&&result.primaryInViewport&&
-    result.primary==='https://preplan.site/?from=59man_home_hero'&&result.secondary==='https://pf.kakao.com/_akxmKn/chat'&&
-    result.scenarioCount===3&&result.planCTAs.length===3&&result.planCTAs.every(x=>x.startsWith('https://preplan.site/?from=59man_home_plan_'))&&
+    result.primary==='https://xn--59-9f0jm2a95cuu4a.com/?from=59man_home_hero'&&result.secondary==='https://pf.kakao.com/_akxmKn/chat'&&
+    result.scenarioCount===3&&result.planCTAs.length===3&&result.planCTAs.every(x=>x.startsWith('https://xn--59-9f0jm2a95cuu4a.com/?from=59man_home_plan_'))&&
     order.every((n,i)=>Number.isFinite(n)&&(i===0||n>order[i-1]))&&result.searchAction==='/guide/'&&
     result.bottomCTA!=='none'&&!result.overflow&&result.broken.length===0&&
     result.canonical==='https://www.59man.shop/'&&result.robots==='index,follow'&&errors.length===0;

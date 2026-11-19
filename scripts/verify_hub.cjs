@@ -115,7 +115,7 @@ async function layout(page){return page.evaluate(()=>{
   await page.reload();assert.equal(await page.locator('.gh-category').nth(1).getAttribute('data-cat'),key);
  });
  await test('Conversion URLs and business contact remain accessible',async()=>{
-  await page.goto(base+'/',{waitUntil:'networkidle'});assert.ok(await page.locator('.bottom-bar a[href^="https://preplan.site/"]').isVisible());assert.ok(await page.locator('.bottom-bar a[href="https://pf.kakao.com/_akxmKn/chat"]').isVisible());assert.ok((await page.locator('.footer').textContent()).includes('774-56-00506'));
+  await page.goto(base+'/',{waitUntil:'networkidle'});assert.ok(await page.locator('.bottom-bar a[href^="https://xn--59-9f0jm2a95cuu4a.com/"]').isVisible());assert.ok(await page.locator('.bottom-bar a[href="https://pf.kakao.com/_akxmKn/chat"]').isVisible());assert.ok((await page.locator('.footer').textContent()).includes('774-56-00506'));
  });
  await test('No-JavaScript fallback renders all guide anchors',async()=>{
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}}),p=await context.newPage();await p.goto(base+'/guide/');assert.equal(await p.locator('.gc-card').count(),23);await p.locator('.gc-card').first().focus();await p.keyboard.press('Enter');await p.waitForURL(url=>decodeURIComponent(url.pathname)==='/선불폰-개통/');await context.close();
