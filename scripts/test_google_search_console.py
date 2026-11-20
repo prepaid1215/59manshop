@@ -17,6 +17,19 @@ class SitemapAutomationTests(unittest.TestCase):
             "sitemaps/https%3A%2F%2Fwww.59man.shop%2Fsitemap.xml",
         )
 
+    def test_rss_api_endpoint(self):
+        self.assertIn("blog-guide%2Frss.xml", gsc.sitemap_api_url(gsc.FEED_URL))
+
+    def test_blog_guide_rss_has_three_local_pages(self):
+        import xml.etree.ElementTree as ET
+        feed = ET.parse(gsc.ROOT / "blog-guide/rss.xml").getroot()
+        self.assertEqual(feed.tag, "rss")
+        items = feed.findall("./channel/item")
+        self.assertEqual(len(items), 3)
+        links = [item.findtext("link") for item in items]
+        self.assertTrue(all(link.startswith(gsc.ORIGIN + "/blog-guide/") for link in links))
+        self.assertEqual(len(set(links)), 3)
+
     def test_published_targets_are_in_local_sitemap(self):
         items = gsc.parse_sitemap((gsc.ROOT / "sitemap.xml").read_bytes())
         self.assertGreaterEqual(len(items), 35)

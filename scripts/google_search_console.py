@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = "sc-domain:59man.shop"
 ORIGIN = "https://www.59man.shop"
 SITEMAP_URL = ORIGIN + "/sitemap.xml"
+FEED_URL = ORIGIN + "/blog-guide/rss.xml"
 SCOPE = "https://www.googleapis.com/auth/webmasters"
 NAMESPACE = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
 PRIORITY = (
@@ -30,15 +31,19 @@ PRIORITY = (
     "/v4-1/topic/network-activation/",
     "/v4-1/topic/sim-buy-where/",
     "/v4-1/topic/weekend-activation/",
+    # The separate donatele mirror-style pilot; URL inspection is read-only.
+    "/blog-guide/daiso-purple-sim/",
+    "/blog-guide/lg-onechip-number/",
+    "/blog-guide/kt-396-vs-459-data/",
 )
 
 
-def sitemap_api_url():
+def sitemap_api_url(source=SITEMAP_URL):
     return (
         "https://www.googleapis.com/webmasters/v3/sites/"
         + urllib.parse.quote(SITE, safe="")
         + "/sitemaps/"
-        + urllib.parse.quote(SITEMAP_URL, safe="")
+        + urllib.parse.quote(source, safe="")
     )
 
 
@@ -84,6 +89,26 @@ def await_live_sitemap(local, attempts=16, interval=15):
         if i + 1 < attempts:
             time.sleep(interval)
     raise RuntimeError("Live sitemap does not match commit: Google submission cancelled")
+
+
+def await_live_feed(expected, attempts=16, interval=15):
+    """Avoid registering RSS before the built site has deployed this exact feed."""
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(
+                FEED_URL, headers={"User-Agent": "59man-GSC-RSS/1.0", "Cache-Control": "no-cache"}
+            )
+            with urllib.request.urlopen(req, timeout=25) as response:
+                content = response.read()
+            if content == expected:
+                print("Published pilot RSS feed matches GitHub: 3 pages")
+                return
+            print(f"Waiting for pilot RSS deployment (attempt {i+1}/{attempts})")
+        except (urllib.error.URLError, TimeoutError) as exc:
+            print(f"Waiting for pilot RSS deployment (attempt {i+1}/{attempts}): {exc}")
+        if i + 1 < attempts:
+            time.sleep(interval)
+    raise RuntimeError("Published pilot RSS does not match GitHub; feed submission cancelled")
 
 
 def get_token():
@@ -134,13 +159,16 @@ def main():
 
     if args.mode in ("both", "submit") and args.wait_live:
         await_live_sitemap(urls)
+        await_live_feed((ROOT / "blog-guide/rss.xml").read_bytes())
 
     token = get_token()
     report = ["### Google Search Console", "", f"- Property: {SITE}"]
     if args.mode in ("both", "submit"):
         google_api(sitemap_api_url(), token, method="PUT")
-        print("Sitemap submission accepted; this is not confirmation of indexing.")
+        google_api(sitemap_api_url(FEED_URL), token, method="PUT")
+        print("Sitemap and pilot RSS submitted; neither guarantees indexing.")
         report.append("- Submitted sitemap: " + SITEMAP_URL + " (not a crawl/indexing guarantee)")
+        report.append("- Submitted pilot RSS: " + FEED_URL + " (not an individual URL indexing request)")
     if args.mode in ("both", "inspect"):
         report.extend(["", "| URL | Verdict | Coverage | Last crawl |", "|---|---|---|---|"])
         for url in targets:

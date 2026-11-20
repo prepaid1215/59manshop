@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>59만모바일 - donatele 연계 선불폰 독립 안내 3편</title>
+<link>https://www.59man.shop/blog-guide/</link>
+<description>네이버 donatele 블로그의 공개 주제와 연결되는 별도 실용 안내 글 3편입니다. 외부 네이버 원문은 각 상세페이지에서 연결됩니다.</description>
+<language>ko</language>
+<atom:link href="https://www.59man.shop/blog-guide/rss.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>다이소 보라색 유심, LG 선불폰 개통 전 호환 제품부터 확인하세요</title>
+<link>https://www.59man.shop/blog-guide/daiso-purple-sim/</link>
+<guid isPermaLink="true">https://www.59man.shop/blog-guide/daiso-purple-sim/</guid>
+<description>보라색 고고비 유심으로 LG망 선불폰을 개통한 사례를 참고하되, 상품명과 제품 호환 여부를 직접 확인하는 방법을 정리했습니다.</description>
+<category>선불폰 정보</category>
+</item>
+<item>
+<title>LG 모두의 원칩 유심번호 입력, 모델코드 5자리와 일련번호 8자리 구별하기</title>
+<link>https://www.59man.shop/blog-guide/lg-onechip-number/</link>
+<guid isPermaLink="true">https://www.59man.shop/blog-guide/lg-onechip-number/</guid>
+<description>LG 원칩의 모델코드 5자리와 일련번호 8자리 구분, 번호 입력 실수와 신규가입 전 준비를 설명합니다.</description>
+<category>선불폰 정보</category>
+</item>
+<item>
+<title>KT 선불폰 396과 459 차이, 월 6,300원으로 데이터 10GB 더 쓰는 기준</title>
+<link>https://www.59man.shop/blog-guide/kt-396-vs-459-data/</link>
+<guid isPermaLink="true">https://www.59man.shop/blog-guide/kt-396-vs-459-data/</guid>
+<description>KT 선불폰 K396·K459의 데이터와 요금 차이, 기존 가입자 요금제 변경 시 신규가입 전용 혜택에 주의할 점을 설명합니다.</description>
+<category>선불폰 정보</category>
+</item>
+</channel>
+</rss>
