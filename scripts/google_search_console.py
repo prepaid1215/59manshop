@@ -171,18 +171,37 @@ def main():
         report.append("- Submitted pilot RSS: " + FEED_URL + " (not an individual URL indexing request)")
     if args.mode in ("both", "inspect"):
         report.extend(["", "| URL | Verdict | Coverage | Last crawl |", "|---|---|---|---|"])
+        inspected, errors = 0, 0
         for url in targets:
-            response = google_api(
-                "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
-                token, method="POST",
-                payload={"inspectionUrl": url, "siteUrl": SITE, "languageCode": "ko-KR"},
-            )
+            response = None
+            for attempt in range(2):
+                try:
+                    response = google_api(
+                        "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+                        token, method="POST",
+                        payload={"inspectionUrl": url, "siteUrl": SITE, "languageCode": "ko-KR"},
+                    )
+                    break
+                except (TimeoutError, urllib.error.URLError) as exc:
+                    print(f"::warning::Read-only URL inspection timed out for {url} (attempt {attempt+1}/2): {exc}")
+                    if attempt == 0:
+                        time.sleep(2)
+            if response is None:
+                errors += 1
+                report.append(f"| {url.replace(ORIGIN, '')} | UNAVAILABLE | Inspection network timeout | - |")
+                continue
+            inspected += 1
             info = response.get("inspectionResult", {}).get("indexStatusResult", {})
             verdict = info.get("verdict", "UNKNOWN")
             coverage = info.get("coverageState", "No coverage information")
             crawl = info.get("lastCrawlTime", "None reported")
             print(f"{url}: {verdict} / {coverage} / {crawl}")
             report.append(f"| {url.replace(ORIGIN, '')} | {verdict} | {coverage.replace('|','/')} | {crawl} |")
+        report.append(f"\nRead-only inspections: {inspected} succeeded, {errors} temporarily unavailable.")
+        summary(report)
+        if targets and inspected == 0:
+            raise RuntimeError("All read-only URL inspections failed (network timeout)")
+        return
     summary(report)
 
 
