@@ -24,6 +24,10 @@ FEED_URL = ORIGIN + "/blog-guide/rss.xml"
 SCOPE = "https://www.googleapis.com/auth/webmasters"
 NAMESPACE = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
 PRIORITY = (
+    # Pilot first: inspect all three even if legacy URL monitoring is slow.
+    "/blog-guide/daiso-purple-sim/",
+    "/blog-guide/lg-onechip-number/",
+    "/blog-guide/kt-396-vs-459-data/",
     "/선불폰-개통방법/",
     "/선불폰-개통/",
     "/선불폰-셀프개통/",
@@ -31,10 +35,6 @@ PRIORITY = (
     "/v4-1/topic/network-activation/",
     "/v4-1/topic/sim-buy-where/",
     "/v4-1/topic/weekend-activation/",
-    # The separate donatele mirror-style pilot; URL inspection is read-only.
-    "/blog-guide/daiso-purple-sim/",
-    "/blog-guide/lg-onechip-number/",
-    "/blog-guide/kt-396-vs-459-data/",
 )
 
 
@@ -119,7 +119,7 @@ def get_token():
     return credentials.token
 
 
-def google_api(url, token, method="GET", payload=None):
+def google_api(url, token, method="GET", payload=None, timeout=30):
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8") if payload is not None else None
     req = urllib.request.Request(
         url, data=body, method=method, headers={
@@ -128,7 +128,7 @@ def google_api(url, token, method="GET", payload=None):
         }
     )
     try:
-        with urllib.request.urlopen(req, timeout=30) as response:
+        with urllib.request.urlopen(req, timeout=timeout) as response:
             data = response.read()
             print("GSC API " + method + " HTTP " + str(response.status))
             return json.loads(data) if data else {}
@@ -180,6 +180,7 @@ def main():
                         "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
                         token, method="POST",
                         payload={"inspectionUrl": url, "siteUrl": SITE, "languageCode": "ko-KR"},
+                        timeout=12,
                     )
                     break
                 except (TimeoutError, urllib.error.URLError) as exc:
