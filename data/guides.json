@@ -742,6 +742,38 @@
       "cat": "esim",
       "kw": "eSIM EID IMEI 확인 아이폰 갤럭시",
       "ill": "esim"
+    },
+    {
+      "href": "/blog-guide/",
+      "title": "네이버 블로그 연계 독립 안내 3편",
+      "desc": "다이소 유심·LG 원칩·K망 요금제 비교를 각각의 안내 글로 확인합니다.",
+      "cat": "check",
+      "kw": "네이버 블로그 선불폰 유심 요금제 안내",
+      "ill": "sim"
+    },
+    {
+      "href": "/blog-guide/daiso-purple-sim/",
+      "title": "다이소 유심 L망 호환 확인",
+      "desc": "보라색 포장만 보지 말고 실제 제품명과 품번, L망 호환 조건을 확인하세요.",
+      "cat": "sim",
+      "kw": "다이소 보라색 유심 고고비 L망 개통",
+      "ill": "sim"
+    },
+    {
+      "href": "/blog-guide/lg-onechip-number/",
+      "title": "LG 모두의 원칩 번호 입력",
+      "desc": "모델코드 5자리와 일련번호 8자리를 구별해 입력합니다.",
+      "cat": "sim",
+      "kw": "모두의 원칩 모델코드 일련번호 입력",
+      "ill": "sim"
+    },
+    {
+      "href": "/blog-guide/kt-396-vs-459-data/",
+      "title": "KT 선불폰 396·459 데이터 비교",
+      "desc": "월 6,300원과 기본 데이터 10GB 차이를 기준으로 선택하세요.",
+      "cat": "plan",
+      "kw": "KT K396 K459 요금제 차이 데이터",
+      "ill": "coins"
     }
   ],
   "asks": [
