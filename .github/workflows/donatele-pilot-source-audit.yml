@@ -1,0 +1,25 @@
+name: Donatele pilot original RSS content audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/donatele_pilot_source_audit.py
+      - .github/workflows/donatele-pilot-source-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read public RSS content of three pilot posts
+        run: python3 scripts/donatele_pilot_source_audit.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: donatele-pilot-original-rss
+          path: /tmp/donatele-pilot-source-audit.json
+          retention-days: 3
