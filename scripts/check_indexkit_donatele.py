@@ -69,6 +69,16 @@ def main():
     assert page.count("<!-- C_TREATMENT_LINK_START -->") == 1
     assert page.count("<!-- C_TREATMENT_LINK_END -->") == 1
 
+    # Separate post-guide pilot, outside the 5:5 experiment.
+    # Each pilot URL may appear ONLY in its designated independent guide.
+    pilot = {
+        "https://m.blog.naver.com/donatele/224461969164": "blog-guide/daiso-purple-sim/index.html",
+        "https://m.blog.naver.com/donatele/224455417391": "blog-guide/lg-onechip-number/index.html",
+        "https://m.blog.naver.com/donatele/224461955165": "blog-guide/kt-396-vs-459-data/index.html",
+    }
+    assert not (set(pilot) & set(urls)), "Pilot overlaps treatment"
+    assert not ({digest(url) for url in pilot} & controls), "Pilot overlaps control"
+
     # Scan every served HTML and JSON file for any accidental reference to the five controls.
     # The exact control URLs remain outside this public repository; their hashes are enough
     # for catching direct Naver links in output. Static RSS remains ntelecom59 until a later
@@ -86,7 +96,11 @@ def main():
             if normalized:
                 donatele.add(normalized)
                 assert digest(normalized) not in controls, f"CONTROL LINK LEAKED: {file}"
-    assert donatele == set(urls), f"Unexpected donatele URL in public files: {donatele - set(urls)}"
+                if normalized in pilot:
+                    rel = file.relative_to(ROOT).as_posix()
+                    assert rel == pilot[normalized], f"Pilot URL outside designated page: {file}"
+    permitted = set(urls) | set(pilot)
+    assert donatele == permitted, f"Unexpected or missing donatele URL: {donatele ^ permitted}"
     print(f"IndexKit C PASS: 5 treatment links / 5 hashed controls / {scanned} HTML-JSON-XML files scanned")
     print("Baseline Google index status: unverified (never infer no-index from missing public search result).")
 
