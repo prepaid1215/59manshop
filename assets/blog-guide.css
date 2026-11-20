@@ -1,0 +1,43 @@
+/* 59man.shop independent reading notes, 2026-11-20 */
+.bg-pages{background:#f6f8fc}
+.bg-main{max-width:840px;padding:23px 18px 100px}
+.bg-crumb{font-size:12px;color:#65758e;margin:6px 0 20px}
+.bg-crumb a{color:#526d9c}
+.bg-hero{padding:24px 21px 22px;background:linear-gradient(130deg,#edf4ff,#fff);border:1px solid #d8e4fa;border-radius:22px;margin-bottom:21px}
+.bg-kicker{font-size:12px;font-weight:800;color:#175cd3;letter-spacing:.03em;margin:0 0 10px}
+.bg-hero h1{font-size:clamp(25px,5.5vw,36px);line-height:1.32;letter-spacing:-.045em;margin:0 0 13px;color:#172b49}
+.bg-hero p{font-size:15px;line-height:1.82;color:#44526a;margin:0}
+.bg-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:15px 0 0;font-size:12px;color:#65758e}
+.bg-article{padding:20px 24px;background:#fff;border:1px solid #e2e8f2;border-radius:20px;box-shadow:0 8px 26px #12294a0b}
+.bg-article h2{font-size:22px;line-height:1.4;margin:28px 0 12px;color:#132c56}
+.bg-article h2:first-child{margin-top:2px}
+.bg-article p,.bg-article li{font-size:16px;line-height:1.95;color:#394960;word-break:keep-all}
+.bg-article p{margin:0 0 14px}
+.bg-article ul{margin:10px 0 20px}
+.bg-article strong{color:#143a78}
+.bg-figure{margin:0 0 22px;overflow:hidden;border-radius:16px;background:#f7faff;text-align:center;border:1px solid #e5eaf3}
+.bg-figure img{display:block;width:100%;max-height:360px;object-fit:contain;margin:auto}
+.bg-figure figcaption{font-size:12px;color:#667085;padding:8px 16px;background:white}
+.bg-note{margin:18px 0;padding:14px 16px;background:#f4f7fc;border-left:3px solid #7397d0;font-size:13px;color:#526781;line-height:1.7}
+.bg-faq{margin-top:28px}
+.bg-faq details{border:1px solid #e1e7f1;border-radius:12px;padding:13px 15px;margin:10px 0;background:#fbfcff}
+.bg-faq summary{cursor:pointer;font-size:15px;font-weight:750;line-height:1.6;color:#183b73}
+.bg-faq p{margin:11px 0 0;font-size:15px;line-height:1.8}
+.bg-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.bg-btn{display:flex;align-items:center;justify-content:center;min-height:48px;padding:13px 14px;text-align:center;font-size:14px;font-weight:750;line-height:1.4;border:1px solid #b8cff4;border-radius:11px;background:#fff;color:#175cd3}
+.bg-btn-primary{color:#fff;background:#175cd3;border-color:#175cd3}
+.bg-original{margin:26px 0 0;padding:20px;background:#f6f9ff;border:1px solid #dce7f8;border-radius:15px}
+.bg-original h2{font-size:19px;margin:0 0 10px}
+.bg-original p{font-size:14px}
+.bg-original a{font-weight:750;text-decoration:underline;text-underline-offset:4px}
+.bg-list{display:grid;gap:16px;margin-top:20px}
+.bg-card{display:block;background:#fff;border:1px solid #e0e8f3;border-radius:17px;padding:20px;color:#263a5a;box-shadow:0 3px 14px #1031610c}
+.bg-card:hover{border-color:#91b1ee;text-decoration:none}
+.bg-card b{display:block;font-size:19px;line-height:1.45;margin:8px 0;color:#17345d}
+.bg-card p{margin:0 0 12px;color:#576781;font-size:14px;line-height:1.7}
+.bg-card em{font-size:13px;font-style:normal;color:#175cd3;font-weight:750}
+.bg-chip{display:inline-flex;background:#e9f1ff;padding:4px 9px;border-radius:99px;color:#175cd3;font-size:12px;font-weight:700}
+.bg-related{padding:20px;margin-top:18px;background:#fff;border:1px solid #e0e8f3;border-radius:16px}
+.bg-related h2{margin:0 0 11px;font-size:18px}
+.bg-related a{display:block;margin:8px 0;font-size:14px}
+@media(max-width:560px){.bg-main{padding:17px 13px 110px}.bg-hero{padding:21px 17px}.bg-article{padding:16px 17px}.bg-article h2{font-size:21px}.bg-article p,.bg-article li{font-size:15px}.bg-buttons{grid-template-columns:1fr}.bg-figure img{max-height:290px}}
