@@ -3,6 +3,11 @@
   "feed": "https://rss.blog.naver.com/ntelecom59.xml",
   "posts": [
     {
+      "title": "SKT 발신정지예정 문자 왔다면? 미납선불폰으로 기존 휴대폰 계속 쓸 수 있을까",
+      "url": "https://m.blog.naver.com/ntelecom59/224486092676",
+      "date": "2026-11-21"
+    },
+    {
       "title": "앤텔레콤 태블릿회원번호 잘못 넣으면 유심이 묶인다? 재신청 전 확인할 것",
       "url": "https://m.blog.naver.com/ntelecom59/224484801898",
       "date": "2026-11-20"
@@ -295,11 +300,6 @@
     {
       "title": "KT바로유심 편의점에서 샀는데 개통은? 태블릿소유자회원번호 2893496",
       "url": "https://m.blog.naver.com/ntelecom59/224470603130",
-      "date": "2026-11-09"
-    },
-    {
-      "title": "휴대폰 발신정지됐을 때, 기존 번호를 선불유심으로 사용할 수 있을까?",
-      "url": "https://m.blog.naver.com/ntelecom59/224470518646",
       "date": "2026-11-09"
     }
   ]
